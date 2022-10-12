@@ -1,0 +1,24 @@
+[
+    {
+        "nombre": "A. Montaner",
+        "type": "07:00 a 15:00",
+        "comentario": "Que tal bitches"
+    },
+    {
+        "nombre": "C. Veira",
+        "type": "Libre"
+    },
+    {
+        "nombre": "D. Troncoso",
+        "type": "23:00 a 07:00"
+    },
+    {
+        "nombre": "R. Zavala",
+        "type": "15:00 a 23:00"
+    },
+    {
+        "nombre": "R. Zuñiga",
+        "type": "07:00 a 15:00"
+    }
+    
+]

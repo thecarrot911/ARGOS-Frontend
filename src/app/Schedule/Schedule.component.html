@@ -1,3 +1,17 @@
-<p>
-  Schedule works!
-</p>
+<h3>Horario Trabajadores</h3>
+
+<!-- <div class="schedule-item" *ngFor="let schedule of scheduleWorkers | async">
+  <span> {{ schedule.nombre }} </span>
+  <span> {{ schedule.type }} </span>
+</div> -->
+
+
+<div class="parent">
+  <div class="schedule-item" *ngFor="let schedule of scheduleWorkers | async">
+    <div class="parent2">
+      <span class="colorblanco"> {{ schedule.nombre }} </span>
+      <span class="colorblanco"> {{ schedule.type }} </span>
+    </div>
+  </div>
+</div>
+

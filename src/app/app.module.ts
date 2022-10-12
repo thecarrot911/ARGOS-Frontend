@@ -6,19 +6,24 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { ScheduleComponent } from './Schedule/Schedule.component';
 import { NavbarsComponent } from './Navbars/Navbars.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [			
     AppComponent,
       TopBarComponent,
       ScheduleComponent,
-      NavbarsComponent
+      NavbarsComponent,
    ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
-      { path: '', component: ScheduleComponent },
+      { path: 'schedule', component: ScheduleComponent },
     ]),
   ],
   providers: [],

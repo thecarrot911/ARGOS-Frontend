@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HorarioService } from '../services/horario.service';
 
 @Component({
   selector: 'app-Schedule',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ScheduleComponent implements OnInit {
 
-  constructor() { }
+  scheduleWorkers: any;
+
+  constructor(
+    private horarioService: HorarioService,
+  ) { 
+
+   }
 
   ngOnInit() {
+    this.scheduleWorkers = this.horarioService.getScheduleWorkers();
   }
+
+  /* Realizar transformación de JSON */
+  transformarTurno(){
+
+  }
+
 
 }

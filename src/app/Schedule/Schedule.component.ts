@@ -10,20 +10,15 @@ export class ScheduleComponent implements OnInit {
 
   scheduleWorkers: any;
 
+
   constructor(
     private horarioService: HorarioService,
   ) { 
-
+ 
    }
 
   ngOnInit() {
     this.scheduleWorkers = this.horarioService.getScheduleWorkers();
   }
-
-  /* Realizar transformación de JSON */
-  transformarTurno(){
-
-  }
-
 
 }

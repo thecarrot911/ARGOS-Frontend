@@ -6,10 +6,29 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HorarioService {
 
-
   getScheduleWorkers(){
-    return this.http.get('assets/schedule.json');
+    this.http.get('assets/schedule.json').subscribe(data =>{
+    return data;
+    });
+    
+ 
   }
+
+
+
+
+  /* async getScheduleWorkers(){
+    const response = await fetch('assets/schedulecopy.json');
+    const json = await response.json()
+ 
+    console.log(json.planificacion)
+    
+    json.planificacion.forEach((elemento: any) => {
+      console.log(elemento)
+    }) 
+  } */
+
+
 
 constructor(
   private http: HttpClient

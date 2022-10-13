@@ -1,24 +1,26 @@
-[
-    {
-        "nombre": "A. Montaner",
-        "type": "07:00 a 15:00",
-        "comentario": "Que tal bitches"
-    },
-    {
-        "nombre": "C. Veira",
-        "type": "Libre"
-    },
-    {
-        "nombre": "D. Troncoso",
-        "type": "23:00 a 07:00"
-    },
-    {
-        "nombre": "R. Zavala",
-        "type": "15:00 a 23:00"
-    },
-    {
-        "nombre": "R. Zuñiga",
-        "type": "07:00 a 15:00"
-    }
-    
-]
+
+{
+    "planificacion": [
+      {
+        "empleado-1": 2,
+        "empleado-2": 1,
+        "empleado-3": 2,
+        "empleado-4": 2,
+        "empleado-5": 0
+      },
+      {
+        "empleado-1": 1,
+        "empleado-2": 2,
+        "empleado-3": 2,
+        "empleado-4": 0,
+        "empleado-5": 2
+      },
+      {
+        "empleado-1": 0,
+        "empleado-2": 1,
+        "empleado-3": 2,
+        "empleado-4": 2,
+        "empleado-5": 2
+      }
+    ]
+  }

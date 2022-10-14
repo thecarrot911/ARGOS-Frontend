@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class HorarioService {
 
   getScheduleWorkers(){
-    return this.http.get('/assets/schedule.json');
+    return this.http.get('http://localhost:10975/itinerario_de_vuelo/generar-planificacion-semanal');
   }
 
 

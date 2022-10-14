@@ -7,11 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class HorarioService {
 
   getScheduleWorkers(){
-    this.http.get('assets/schedule.json').subscribe(data =>{
-    return data;
-    });
-    
- 
+    return this.http.get('/assets/schedule.json');
   }
 
 

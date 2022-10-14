@@ -1,14 +1,23 @@
 [
-    {
-      "type": "Overnight",
-      "price": 25.99
-    },
-    {
-      "type": "2-Day",
-      "price": 9.99
-    },
-    {
-      "type": "Postal",
-      "price": 2.99
-    }
-  ]
+  {
+    "empleado_1": 2,
+    "empleado_2": 1,
+    "empleado_3": 2,
+    "empleado_4": 2,
+    "empleado_5": 0
+  },
+  {
+    "empleado_1": 2,
+    "empleado_2": 1,
+    "empleado_3": 2,
+    "empleado_4": 2,
+    "empleado_5": 0
+  },
+  {
+    "empleado_1": 2,
+    "empleado_2": 1,
+    "empleado_3": 2,
+    "empleado_4": 2,
+    "empleado_5": 0
+  }
+]

@@ -7,8 +7,46 @@
  <div class="bg-gray-500 text-white">
   Horario trabajadores
  </div>
- 
- 
+
+ <div class="container">
+  <div class="inline-block " *ngFor="let schedule of scheduleWorkers | async"> <!-- Solución inline-block para columnas -->
+    <div class="grid grid-cols-2 gap-2">
+        <div class=" py-2 m-2">Trabajador</div>
+        <div class=" py-2 m-2">Turno</div>
+
+        <div class="bg-slate-300 py-2 m-2">A. Montaner</div>
+        <div class="bg-slate-400" *ngIf="schedule.empleado_1 === 0"> {{ "Libre "}} </div>
+        <div class="bg-slate-500" *ngIf="schedule.empleado_1 === 1"> {{ "07:00 a 15:00" }}</div>
+        <div class="bg-slate-600" *ngIf="schedule.empleado_1 === 2">{{ "15:00 a 23:00" }}</div>
+        <div class="bg-slate-400" *ngIf="schedule.empleado_1 === 3">  {{ "23:00 a 07:00" }}</div>
+
+        <div class="bg-slate-300 py-2 m-2">C. Veira</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_2 == 0"> {{ "Libre" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_2 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_2 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_2 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div class="bg-slate-300 py-2 m-2">D. Troncoso</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_3 == 0"> {{ "Libre" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_3 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_3 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_3 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div class="bg-slate-300 py-2 m-2">R. Zavala</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_4 == 0"> {{ "Libre" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_4 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_4 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_4 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div class="bg-slate-300 py-2 m-2">R. Zuñiga</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_5 == 0"> {{ "Libre" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_5 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_5 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div class="bg-slate-300 py-2 m-2" *ngIf="schedule.empleado_5 == 3"> {{ "23:00 a 07:00" }}</div>
+      </div>
+  </div>
+</div>
+
 
  <div class=" container mx-auto px-4 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600" *ngFor="let schedule of scheduleWorkers | async" >
   <div class="grid grid-cols-2 gap-1" >

@@ -3,8 +3,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true, /* Agregada */
+    "allowSyntheticDefaultImports": true, /* Agregada */
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,

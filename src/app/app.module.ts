@@ -9,13 +9,15 @@ import { NavbarsComponent } from './Navbars/Navbars.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActualizacionesComponent } from './Actualizaciones/Actualizaciones.component';
 
 @NgModule({
-  declarations: [			
+  declarations: [				
     AppComponent,
       TopBarComponent,
       ScheduleComponent,
       NavbarsComponent,
+      ActualizacionesComponent
    ],
   imports: [
     BrowserModule,

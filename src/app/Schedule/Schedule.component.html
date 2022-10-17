@@ -1,62 +1,136 @@
 <!--
   0: no trabaja;
-  1: turno 1; 07:00 hrs a 15:00 hrs
-  2 turno 2; 15:00 hrs a 23:00 hrs
-  3 turno 3; 23:00 hrs a 07:00 hrs
+  1: turno 1; 07:00  a 15:00 
+  2 turno 2; 15:00  a 23:00 
+  3 turno 3; 23:00  a 07:00 
  -->
+ <div class="bg-gray-500 text-white">
+  Horario trabajadores
+ </div>
  
-<nav class="navbar bg-light">
-  <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">Horario trabajadores</span>
+ 
+
+ <div class=" container mx-auto px-4 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600" *ngFor="let schedule of scheduleWorkers | async" >
+  <div class="grid grid-cols-2 gap-1" >
+    <div class="grid grid-cols-5">
+      <div class="grid grid-cols-2 border-2 border-black rounded-md w-52 mt-2 bg-gradient-to-r from-rose-100 to-teal-100">
+        <div>Nombre</div>
+        <div>Turno</div>
+
+        <div>A. Montaner</div>
+        <div *ngIf="schedule.empleado_1 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_1 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_1 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_1 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>C. Veira</div>
+        <div *ngIf="schedule.empleado_2 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_2 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_2 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_2 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>D. Troncoso</div>
+        <div *ngIf="schedule.empleado_3 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_3 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_3 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_3 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>R. Zavala</div>
+        <div *ngIf="schedule.empleado_4 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_4 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_4 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_4 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>R. Zuñiga</div>
+        <div *ngIf="schedule.empleado_5 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_5 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_5 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_5 == 3"> {{ "23:00 a 07:00" }}</div>
+      </div>
+      
+      <div class="grid grid-cols-2 border-2 border-black rounded w-52 ml-16 mt-2 bg-gradient-to-r from-rose-100 to-teal-100">
+        <div>Nombre</div>
+        <div>Turno</div>
+
+        <div>A. Montaner</div>
+        <div *ngIf="schedule.empleado_1 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_1 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_1 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_1 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>C. Veira</div>
+        <div *ngIf="schedule.empleado_2 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_2 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_2 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_2 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>D. Troncoso</div>
+        <div *ngIf="schedule.empleado_3 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_3 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_3 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_3 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>R. Zavala</div>
+        <div *ngIf="schedule.empleado_4 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_4 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_4 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_4 == 3"> {{ "23:00 a 07:00" }}</div>
+
+        <div>R. Zuñiga</div>
+        <div *ngIf="schedule.empleado_5 == 0"> {{ "Libre" }}</div>
+        <div *ngIf="schedule.empleado_5 == 1"> {{ "07:00 a 15:00" }}</div>
+        <div *ngIf="schedule.empleado_5 == 2"> {{ "15:00 a 23:00" }}</div>
+        <div *ngIf="schedule.empleado_5 == 3"> {{ "23:00 a 07:00" }}</div>
+      </div>
+      <div class="grid grid-cols-2 border-2 border-black rounded w-52 ml-32 mt-2 bg-gradient-to-r from-rose-100 to-teal-100">
+        <div>Nombre</div>
+        <div>Turno</div>
+        <div>A. Montaner</div>
+        <div>07:00 a 15:00</div>
+        <div>C. Veira</div>
+        <div>07:00 a 15:00</div>
+        <div>D. Troncoso</div>
+        <div>07:00 a 15:00</div>
+        <div>R. Zavala</div>
+        <div>07:00 a 15:00</div>
+        <div>R. Zuñiga</div>
+        <div>07:00 a 15:00</div>
+      </div>
+      <div class="grid grid-cols-2 border-2 border-black rounded w-52 ml-48 mt-2 bg-gradient-to-r from-rose-100 to-teal-100">
+        <div>Nombre</div>
+        <div>Turno</div>
+        <div>A. Montaner</div>
+        <div>07:00 a 15:00</div>
+        <div>C. Veira</div>
+        <div>07:00 a 15:00</div>
+        <div>D. Troncoso</div>
+        <div>07:00 a 15:00</div>
+        <div>R. Zavala</div>
+        <div>07:00 a 15:00</div>
+        <div>R. Zuñiga</div>
+        <div>07:00 a 15:00</div>
+      </div>
+      <div class="grid grid-cols-2 border-2 border-black rounded w-52 ml-64 mt-2 bg-gradient-to-r from-rose-100 to-teal-100">
+        <div>Nombre</div>
+        <div>Turno</div>
+        <div>A. Montaner</div>
+        <div>07:00 a 15:00</div>
+        <div>C. Veira</div>
+        <div>07:00 a 15:00</div>
+        <div>D. Troncoso</div>
+        <div>07:00 a 15:00</div>
+        <div>R. Zavala</div>
+        <div>07:00 a 15:00</div>
+        <div>R. Zuñiga</div>
+        <div>07:00 a 15:00</div>
+      </div>
+    </div>
+  <app-Actualizaciones></app-Actualizaciones>
   </div>
-</nav>
-
-
-<div style="display: flex; flex-wrap: wrap" class="row" *ngFor="let schedule of scheduleWorkers | async">
-  <div class="column">
-    <table style="float: left">
-      <tr>
-        <th>Nombre</th>
-        <th>Turno</th>
-      </tr>
-      <tr>
-        <td>A. Montaner</td>
-        <td *ngIf="schedule.empleado_1 == 0"> {{ "No Trabaja" }} </td>
-        <td *ngIf="schedule.empleado_1 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_1 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_1 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
-      </tr>
-      <tr>
-        <td>C. Veira</td>
-        <td *ngIf="schedule.empleado_2 == 0"> {{ "No Trabaja" }} </td>
-        <td *ngIf="schedule.empleado_2 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_2 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_2 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
-      </tr>
-      <tr>
-        <td>D. Troncoso</td>
-        <td *ngIf="schedule.empleado_3 == 0"> {{ "No Trabaja" }} </td>
-        <td *ngIf="schedule.empleado_3 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_3 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_3 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
-      </tr>
-      <tr>
-        <td>R. Zavala</td>
-        <td *ngIf="schedule.empleado_4 == 0"> {{ "No Trabaja" }} </td>
-        <td *ngIf="schedule.empleado_4 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_4 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_4 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
-      </tr>
-      <tr>
-        <td>R. Zuñiga</td>
-        <td *ngIf="schedule.empleado_5 == 0"> {{ "No Trabaja" }} </td>
-        <td *ngIf="schedule.empleado_5 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_5 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-        <td *ngIf="schedule.empleado_5 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
-      </tr>
-    </table>
-  </div>  
 </div>
+
+
+
 
 
 
@@ -68,37 +142,37 @@
     <tr>
       <td>A. Montaner:</td>
       <td *ngIf="schedule.empleado_1 == 0"> {{ "No Trabaja" }} </td>
-      <td *ngIf="schedule.empleado_1 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_1 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_1 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
+      <td *ngIf="schedule.empleado_1 == 1"> {{ "07:00  a 15:00 " }} </td>
+      <td *ngIf="schedule.empleado_1 == 2"> {{ "15:00  a 23:00 " }} </td>
+      <td *ngIf="schedule.empleado_1 == 3"> {{ "23:00  a 07:00 " }} </td>
     </tr>
     <tr>
       <td>C. Veira:</td>
       <td *ngIf="schedule.empleado_2 == 0"> {{ "No Trabaja" }} </td>
-      <td *ngIf="schedule.empleado_2 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_2 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_2 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
+      <td *ngIf="schedule.empleado_2 == 1"> {{ "07:00  a 15:00 " }} </td>
+      <td *ngIf="schedule.empleado_2 == 2"> {{ "15:00  a 23:00 " }} </td>
+      <td *ngIf="schedule.empleado_2 == 3"> {{ "23:00  a 07:00 " }} </td>
     </tr>
     <tr>
       <td>D. Troncoso:</td>
       <td *ngIf="schedule.empleado_3 == 0"> {{ "No Trabaja" }} </td>
-      <td *ngIf="schedule.empleado_3 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_3 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_3 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
+      <td *ngIf="schedule.empleado_3 == 1"> {{ "07:00  a 15:00 " }} </td>
+      <td *ngIf="schedule.empleado_3 == 2"> {{ "15:00  a 23:00 " }} </td>
+      <td *ngIf="schedule.empleado_3 == 3"> {{ "23:00  a 07:00 " }} </td>
     </tr>
     <tr>
       <td>R. Zavala:</td>
       <td *ngIf="schedule.empleado_4 == 0"> {{ "No Trabaja" }} </td>
-      <td *ngIf="schedule.empleado_4 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_4 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_4 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
+      <td *ngIf="schedule.empleado_4 == 1"> {{ "07:00  a 15:00 " }} </td>
+      <td *ngIf="schedule.empleado_4 == 2"> {{ "15:00  a 23:00 " }} </td>
+      <td *ngIf="schedule.empleado_4 == 3"> {{ "23:00  a 07:00 " }} </td>
     </tr>
     <tr>
       <td>R. Zuñiga:</td>
       <td *ngIf="schedule.empleado_5 == 0"> {{ "No Trabaja" }} </td>
-      <td *ngIf="schedule.empleado_5 == 1"> {{ "07:00 hrs a 15:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_5 == 2"> {{ "15:00 hrs a 23:00 hrs" }} </td>
-      <td *ngIf="schedule.empleado_5 == 3"> {{ "23:00 hrs a 07:00 hrs" }} </td>
+      <td *ngIf="schedule.empleado_5 == 1"> {{ "07:00  a 15:00 " }} </td>
+      <td *ngIf="schedule.empleado_5 == 2"> {{ "15:00  a 23:00 " }} </td>
+      <td *ngIf="schedule.empleado_5 == 3"> {{ "23:00  a 07:00 " }} </td>
     </tr>
 
     <span></span>

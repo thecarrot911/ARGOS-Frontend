@@ -10,14 +10,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActualizacionesComponent } from './Actualizaciones/Actualizaciones.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [				
+  declarations: [					
     AppComponent,
       TopBarComponent,
       ScheduleComponent,
       NavbarsComponent,
-      ActualizacionesComponent
+      ActualizacionesComponent,
+      FooterComponent
    ],
   imports: [
     BrowserModule,

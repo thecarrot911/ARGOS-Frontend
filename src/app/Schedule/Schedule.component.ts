@@ -10,6 +10,15 @@ export class ScheduleComponent implements OnInit {
 
   scheduleWorkers: any;
 
+  public dias:any = [
+    'Lunes',
+    'Martes',
+    'Miércoles',
+    'Jueves',
+    'Viernes',
+    'Sábado',
+    'Domingo',
+  ]
 
   constructor(
     private horarioService: HorarioService,
@@ -19,6 +28,10 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit() {
     this.scheduleWorkers = this.horarioService.getScheduleWorkers();
+
+    for(let i = 1; i<=this.scheduleWorkers; i++){
+      console.log(i);
+    }
   }
 
 }

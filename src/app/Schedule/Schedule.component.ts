@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-Schedule',
@@ -9,29 +10,31 @@ import { HorarioService } from '../services/horario.service';
 export class ScheduleComponent implements OnInit {
 
   scheduleWorkers: any;
-
-  public dias:any = [
-    'Lunes',
-    'Martes',
-    'Miércoles',
-    'Jueves',
-    'Viernes',
-    'Sábado',
-    'Domingo',
-  ]
+  indice: any;
+  items: any;
+  checkoutForm: any; /* Almacenar el modelo del formulario */
 
   constructor(
     private horarioService: HorarioService,
+    private formBuilder: FormBuilder
   ) { 
+
+    this.checkoutForm = this.formBuilder.group({
+      anio: '',
+      mes: '',
+    });
  
    }
 
   ngOnInit() {
+    this.items = this.horarioService.getItems();
     this.scheduleWorkers = this.horarioService.getScheduleWorkers();
+  }
 
-    for(let i = 1; i<=this.scheduleWorkers; i++){
-      console.log(i);
-    }
+  onSubmit(calendarData: any){
+    this.items = this.horarioService.clearData();
+    this.checkoutForm.reset();
+    console.warn('Datos enviados', calendarData);
   }
 
 }

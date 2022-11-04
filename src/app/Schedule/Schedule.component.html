@@ -4,10 +4,33 @@
   2 turno 2; 15:00  a 23:00 
   3 turno 3; 23:00  a 07:00 
  -->
+
+ <div>Inserte el año y mes que desea generar el horario</div>
+
+ <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+  <div>
+    <label for="anio" >
+      Año
+    </label>
+    <input id="anio" type="text" formControlName="anio" placeholder="2022" class="border-2 border-rose-500">
+  </div>
+
+  <div>
+    <label for="mes">
+      Mes
+    </label>
+    <input id="mes" type="text" formControlName="mes" placeholder="10" class="border-2 border-rose-500">
+  </div>
+
+  <button class="button rounded-full bg-red-400 ml-24" type="submit">Enviar</button>
+
+ </form>
+
  <!-- Code block starts -->
 <div class="my-6 lg:my-4 container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300">
   <div>
-      <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario trabajadores</h4>
+      <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario empleados</h4>
       <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
 <!--           <li class="flex items-center mr-4">
               <div class="mr-1">

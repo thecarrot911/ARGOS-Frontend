@@ -1,23 +1,22 @@
 [
   {
-    "empleado_1": 2,
-    "empleado_2": 1,
-    "empleado_3": 2,
-    "empleado_4": 2,
-    "empleado_5": 0
+      "empleado_1":[{
+          "nombre":"A. MONTANER",
+          "turno" :"Libre"
+      }],
+      "empleado_2":[{
+          "nombre":"A. MONTANER",
+          "turno":"15:00 a 23:00"
+      }]
   },
   {
-    "empleado_1": 2,
-    "empleado_2": 1,
-    "empleado_3": 2,
-    "empleado_4": 2,
-    "empleado_5": 0
-  },
-  {
-    "empleado_1": 2,
-    "empleado_2": 1,
-    "empleado_3": 2,
-    "empleado_4": 2,
-    "empleado_5": 0
+      "empleado_1":[{
+          "nombre":"A. MONTANER",
+          "turno" :"Libre"
+      }],
+      "empleado_2":[{
+          "nombre":"A. MONTANER",
+          "turno":"15:00 a 23:00"
+      }]
   }
 ]

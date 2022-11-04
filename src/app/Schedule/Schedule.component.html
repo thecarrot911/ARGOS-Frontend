@@ -5,27 +5,7 @@
   3 turno 3; 23:00  a 07:00 
  -->
 
- <div>Inserte el año y mes que desea generar el horario</div>
-
- <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
-
-  <div>
-    <label for="anio" >
-      Año
-    </label>
-    <input id="anio" type="text" formControlName="anio" placeholder="2022" class="border-2 border-rose-500">
-  </div>
-
-  <div>
-    <label for="mes">
-      Mes
-    </label>
-    <input id="mes" type="text" formControlName="mes" placeholder="10" class="border-2 border-rose-500">
-  </div>
-
-  <button class="button rounded-full bg-red-400 ml-24" type="submit">Enviar</button>
-
- </form>
+ 
 
  <!-- Code block starts -->
 <div class="my-6 lg:my-4 container px-6 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300">
@@ -59,20 +39,45 @@
                       <line x1="3" y1="21" x2="21" y2="21" />
                   </svg>
               </div>
-              <span>Generado: Martes 18 Octubre, 2022</span>
+              <span>-</span>
           </li>
       </ul>
   </div>
    <div class="mt-6 md:mt-0">
-      <button class="mr-3 bg-gray-200 white:bg-slate-600 focus:outline-none transition duration-150 ease-in-out rounded hover:bg-gray-300 text-white white:hover:bg-gray-300 dark:text-indigo-400 px-5 py-2 text-sm">Buscar</button>
-      <button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" routerLink="/">Agregar Actualización</button>
+      <button class="mr-3 bg-gray-200 white:bg-slate-600 focus:outline-none transition duration-150 ease-in-out rounded hover:bg-gray-300 text-white white:hover:bg-gray-300 dark:text-indigo-400 px-5 py-2 text-sm">-</button>
+      <button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" routerLink="/agregaractualizacion">Agregar Actualización</button>
   </div>
   <!-- Code block ends -->
 </div>
 
 
 
-<div class="flex items-center justify-between w-full ">
+
+
+<div>Inserte el año y mes que desea generar el horario</div>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
+
+    <div>
+      <label for="anio" >
+        Año
+      </label>
+      <input id="anio" type="text" formControlName="anio" placeholder="2022" class="border-2 border-rose-500">
+    </div>
+
+    <div>
+      <label for="mes">
+        Mes
+      </label>
+      <input id="mes" type="text" formControlName="mes" placeholder="10" class="border-2 border-rose-500">
+    </div>
+
+  <button class="button rounded-full bg-red-400 ml-24" type="submit">Enviar</button>
+
+ </form>
+
+
+<!-- <div class="flex items-center justify-between w-full ">
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow">
     <div class="w-full lg:w-2/3 h-64 white:bg-gray-500">
       <div class="inline-block bg-white h-80 w-52" *ngFor="let schedule of scheduleWorkers | async">
@@ -110,7 +115,7 @@
               <span class="inline-flex items-center justify-center px-2 py-0.5 ml-5 text-xs font-medium" >07:00 a 15:00</span>
               </a>
             </li>
-          </ul>
+          </ul> -->
           
          <!--  <div>A. Montaner</div>
           
@@ -143,7 +148,7 @@
           <div class="" *ngIf="schedule.empleado_5 == 2"> {{ "15:00 a 23:00" }}</div>
           <div class="" *ngIf="schedule.empleado_5 == 3"> {{ "23:00 a 07:00" }}</div>
  -->
-</div>
+<!-- </div>
         </div>
       </div>
     </div>
@@ -151,7 +156,7 @@
       <app-Actualizaciones></app-Actualizaciones>
     </div>
   </div>
-
+ -->
 
 
 

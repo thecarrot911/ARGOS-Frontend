@@ -11,15 +11,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActualizacionesComponent } from './Actualizaciones/Actualizaciones.component';
 import { FooterComponent } from './footer/footer.component';
+import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
+import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
 
 @NgModule({
-  declarations: [					
+  declarations: [							
     AppComponent,
       TopBarComponent,
       ScheduleComponent,
       NavbarsComponent,
       ActualizacionesComponent,
-      FooterComponent
+      FooterComponent,
+      AgregarActualizacionComponent,
+      ItinerarioAvionesComponent
    ],
   imports: [
     BrowserModule,
@@ -28,6 +32,8 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
       { path: 'schedule', component: ScheduleComponent },
+      { path: 'agregaractualizacion', component: AgregarActualizacionComponent},
+      { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
     ]),
   ],
   providers: [],

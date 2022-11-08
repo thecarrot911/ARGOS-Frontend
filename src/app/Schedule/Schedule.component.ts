@@ -3,6 +3,12 @@ import { HorarioService } from '../services/horario.service';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
+import { Observable } from 'rxjs';
+
+import { calendarData } from '../calendarData'; /* Interfaz */
+
+
+
 @Component({
   selector: 'app-Schedule',
   templateUrl: './Schedule.component.html',
@@ -15,6 +21,8 @@ export class ScheduleComponent implements OnInit {
   items: any;
   checkoutForm: any; /* Almacenar el modelo del formulario */
 
+  public generador: any; /* ONSUBMIT */
+
   constructor(
     private horarioService: HorarioService,
     private formBuilder: FormBuilder,
@@ -25,12 +33,21 @@ export class ScheduleComponent implements OnInit {
       anio: '',
       mes: '',
     });
+
+    this.generador={anio:'', mes:'', empleados:''};
  
    }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.items = this.horarioService.getItems();
-    this.scheduleWorkers = this.horarioService.getScheduleWorkers();
+    this.horarioService.getScheduleWorkers().subscribe(
+      response => {
+        console.log(response)
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
 /*   onSubmit(calendarData: any){
@@ -40,13 +57,36 @@ export class ScheduleComponent implements OnInit {
   } 
  */
 
-  onSubmit(calendarData: any){
+/*   onSubmit(calendarData: any){
   this.items = this.horarioService.clearData();
   this.checkoutForm.reset();
-  console.warn('Dtos porfin', calendarData);
+  console.warn('Datos', calendarData);
+
   this.http.post('http://localhost:10975/app/planificacion/generar_planificacion', calendarData)
   .subscribe((res) => {
     console.log(res);
   });
+  } */
+
+/*   onSubmit(calendardata: calendarData): void {
+    calendardata = calendardata.trim();
+    if (!calendardata) { return; }
+      this.horarioService.addSchedule(calendardata)
+      .subscribe(calendardata => {
+        this.calendardatas.push(calendardata);
+      }); 
+  } */
+
+  onSubmit(){
+   this.horarioService.addSchedule(this.generador)
+     .subscribe(
+      response => {
+        console.log(response)
+      },
+      error => {
+        console.log(error)
+      }
+     )
   }
+
 }

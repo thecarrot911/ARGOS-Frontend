@@ -1,6 +1,6 @@
 /* Interfaz de trabajadores */
 
-export interface generadorFecha {
+export interface calendarData {
     anio: number;
-    mes: string;
+    mes: number;
 }

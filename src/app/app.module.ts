@@ -8,7 +8,7 @@ import { ScheduleComponent } from './Schedule/Schedule.component';
 import { NavbarsComponent } from './Navbars/Navbars.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActualizacionesComponent } from './Actualizaciones/Actualizaciones.component';
 import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
@@ -28,6 +28,7 @@ import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-avio
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },

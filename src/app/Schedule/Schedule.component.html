@@ -53,8 +53,8 @@
 
 
 
-
-<div>Inserte el año y mes que desea generar el horario</div>
+<!-- FORMULARIO JAVIER -->
+<!-- <div>Inserte el año y mes que desea generar el horario</div>
 
   <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)">
 
@@ -74,7 +74,22 @@
 
   <button class="button rounded-full bg-red-400 ml-24" type="submit">Enviar</button>
 
- </form>
+ </form> -->
+
+Ingrese el año y mes en que desea el horario
+<form (ngSubmit)="onSubmit()" #planificacionForm="ngForm">
+  <br>
+  <label for="anio">año:</label><br>
+  <input type="text" name="anio" #anio="ngModel" [(ngModel)]="generador.anio" class="border-2 border-rose-500"><br>
+
+  <label for="mes">mes:</label><br>
+  <input type="text" name="mes" #mes="ngModel" [(ngModel)]="generador.mes" class="border-2 border-rose-500"><br>
+
+  <label for="mes">cantidad de empleados:</label><br>
+  <input type="text" name="mes" #mes="ngModel" [(ngModel)]="generador.empleados" class="border-2 border-rose-500"><br>
+  <br>
+  <input type="submit" value="Submit" class="border-2 border-rose-500">
+</form> 
 
 
 <!-- <div class="flex items-center justify-between w-full ">

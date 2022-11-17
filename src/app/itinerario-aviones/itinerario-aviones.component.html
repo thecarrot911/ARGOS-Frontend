@@ -1,113 +1,88 @@
-<form (ngSubmit)="generarInfo2()" #infoForm="ngForm">
+<form (ngSubmit)="enviarDatosJSON()" #infoForm="ngForm">
   <div class="antialiased text-gray-900 px-6">
     <div class="max-w-wl mx-auto py-12 md:max-w-2xl"> <!-- md:max-w-6xl mueve de izq a der -->
       <h2 class="text-2xl font-sans">Generador de horario</h2>
       <p class="mt-2 text-lg text-gray-500">Por favor, ingrese los datos solicitados:</p>
       <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
         <div class="grid grid-cols-1 gap-6">
+
+          <label class="block">
+            <span class="text-gray-700">Ingrese el año</span>
+            <input type="text" placeholder="2022" name="anio" #anio="ngModel" [(ngModel)]="tiempo.anio"
+            class="form-input mt-1 block w-full">
+          </label>
+          
+
           <label class="block">
             <span class="text-gray-700">Ingrese el mes</span>
-            <input type="month" class="form-input mt-1 block w-full">
-          </label>
-
-
-          <!-- ------------------------------------------- -->
-
-          <!-- PRUEBAS -->
-          <label class="block">
-            <div>
-              <span class="text-gray-700">Agregar choques de horario</span>
-
-              <div class="input-group">
-                <input type="text"
-                class="form-input mt-1 block w-full"
-                [(ngModel)]="nuevoJuego"
-                name="nuevoJuego">
-                  <button class="bg-gray-300" type="button" (click)="agregarJuego()">agregar Juego</button>
-              </div>
-            </div>
-          </label>
-
-          <label class="block">
-            <span class="text-gray-700">Choques de horario</span>
-            <input type="text" *ngFor="let juego of persona.favoritos; let i = index"
-            [(ngModel)]="juego.nombre" name="favorito_{{i}}"
+            <input type="text" placeholder="11" name="mes" #mes="ngModel" [(ngModel)]="tiempo.mes"
             class="form-input mt-1 block w-full">
+          </label>
+<!-- 
+          <input type="text" *ngFor="let juego of persona.favoritos; let i = index"
+          [(ngModel)]="juego.nombre" name="favorito_{{i}}" -->
 
+          <label class="block">
+            <span class="text-gray-700">Empleados</span>
+            <input type="text" *ngFor = "let empleado of tiempo.empleados; let i = index"
+            name="nombre_{{i}}" #mes="ngModel" [(ngModel)]="tiempo.empleados[i].nombre"
+            class="form-input mt-1 block w-full disabled:bg-slate-100"
+            disabled>
           </label>
 
-
-<!-- ----------------------------------------------------------------------- -->
-
-
-          <fieldset class="block">
-            <legend class="text-gray-700">Seleccione los empleados del mes</legend>
-            <div class="mt-2">
-              <div>
-                <label class="inline-flex items-center">
-                  <input class="form-checkbox" type="checkbox" checked>
-                  <span class="ml-2">A. Montaner</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input class="form-checkbox" type="checkbox" checked>
-                  <span class="ml-2">C. Veira</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input class="form-checkbox" type="checkbox" checked>
-                  <span class="ml-2">D. Troncoso</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input class="form-checkbox" type="checkbox" checked>
-                  <span class="ml-2">R. Zavala</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input class="form-checkbox" type="checkbox" checked>
-                  <span class="ml-2">R. Zuñiga</span>
-                </label>
-              </div>
-            </div>
-          </fieldset>
-
-          <label class="block"></label>
-          <label class="block"></label>
         </div>
 
         <div class="grid grid-cols-1 gap-6">
 
-          <label class="block">
-            <span class="text-gray-700">Seleccione el día del choque de horario</span>
-            <input type="number" placeholder="Día 1 a Día 31" class="form-input mt-1 block w-full">
+            <label class="block">
+              <span class="text-gray-700" for="dia">Seleccione el día del choque de horario</span>
+              <input type="number" min="1" max="31" id="dia" name="dia" [(ngModel)]="tiempo.turnos_choques[0].dia"
+              placeholder="Día 1 a Día 31" class="form-input mt-1 block w-full">
           </label>
 
-          <fieldset class="block">
+          <label class="block">
+            <span class="text-gray-700">Seleccione la cantidad de aviones que llegan</span>
+            <input type="text"
+            [(ngModel)]="tiempo.turnos_choques[0].aviones"
+            #aviones="ngModel"
+            name="aviones"
+            id="aviones"
+            class="form-input mt-1 block w-full disabled:bg-slate-100"
+            disabled>
+          </label>
+
+          <fieldset>
             <legend class="text-gray-700">Seleccione el turno donde hay choque</legend>
             <div>
               <label class="inline-flex items-center">
-                <input class="form-radio" type="radio" checked name="radio-direct" value="1">
+                <input [(ngModel)]="tiempo.turnos_choques[0].turno"
+                class="form-radio" type="radio" checked name="radio-direct" value="1">
                 <span class="ml-2">07:00 a 15:00 hrs</span>
               </label>
             </div>
             <div>
               <label class="inline-flex items-center">
-                <input class="form-radio" type="radio" checked name="radio-direct" value="2">
+                <input [(ngModel)]="tiempo.turnos_choques[0].turno"
+                class="form-radio" type="radio" checked name="radio-direct" value="2">
                 <span class="ml-2">15:00 a 23:00 hrs</span>
               </label>
             </div>
             <div>
               <label class="inline-flex items-center">
-                <input class="form-radio" type="radio" checked name="radio-direct" value="3">
+                <input [(ngModel)]="tiempo.turnos_choques[0].turno"
+                class="form-radio" type="radio" checked name="radio-direct" value="3">
                 <span class="ml-2">23:00 a 07:00 hrs</span>
               </label>
             </div>
           </fieldset>
+
+          <button class="bg-red-400 text-white py-2 px-4 rounded"
+            type="button"
+            (click)="agregarChoque()">
+            Agregar <br> Choque
+          </button>
+
+
           
 <!--           <label class="block">
             <span class="text-gray-700">Seleccione la cantidad de aviones que llegan</span>
@@ -115,33 +90,41 @@
           </label> -->
 
           <!-- prueba  AGREGAR SOLO AVIONES -->
-          <label class="block">
-            <div class="form-group">
-            <span class="text-gray-700">Seleccione la cantidad de aviones que llegan</span>
+<!--           <span>Tiempo</span>
+          <pre> {{ tiempo | json }}</pre> -->
 
-              <input type="text"
+<!--           <label class="block">
+            <div class="form-group">
+            <span class="text-gray-700">Seleccione la cantidad de aviones que llegan</span> -->
+
+           <!--  <input type="text" *ngFor="let juego of persona.favoritos; let i = index"
+            [(ngModel)]="juego.nombre" name="favorito_{{i}}" -->
+
+  <!--             <input type="text"
               placeholder="2"
-              [(ngModel)]="nuevoChoque"
+              [(ngModel)]="tiempo.turnos_choques[0].dia"
               #aviones="ngModel"
               name="aviones"
               id="aviones"
               class="form-input mt-1 block w-full form-control">
-            </div>
+            </div> -->
 
-            <div class="form-group">
+<!--             <div class="form-group">
               <span class="text-gray-700">turno</span>
               <input type="text" 
-              [(ngModel)]="nuevoChoque"
+              [(ngModel)]="tiempo.turnos_choques[0].turno"
+              name="turno"
+              id="turno"
               class="form-input mt-1 block w-full form-control">
-            </div>
+            </div> -->
               
-              <button class="bg-slate-300"
+ <!--              <button class="bg-slate-300"
                 type="button"
                 (click)="agregarChoque()">
                 Agregar Choque
               </button>
 
-          </label>
+          </label> -->
 
 <!--           <label class="block">
             <input class="form-input mt-1 block w-full"
@@ -158,23 +141,16 @@
   </div>
 </form>
 
+<span> Tiempo </span>
+<pre>{{tiempo | json }}</pre>
+
  <span>Persona</span>
 <pre> {{ persona | json }} </pre>
 
-<span>Tiempo</span>
+<!-- <span>Tiempo</span>
 <pre> {{ tiempo | json }}</pre>
+ -->
 
-
-
-
-<h2>Template: </h2>
-
-<div class="flex">
-  <form>
-      <label class="bg-slate-300 px-2 py-1 rounded-full">Fecha: </label>
-      <input type="month">
-  </form>
-</div>
 
 <div class="flex flex-row">
 <div class="basis-1/4">

@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 interface Tiempo {
-  year: string;
-  month: string;
+  anio: string;
+  mes: string;
   empleados: Empleado[];
   turnos_choques: Turno_Choque[];
 }
@@ -52,14 +52,17 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   /* Cap 245 */
   tiempo: Tiempo = {
-    year: '2022',
-    month: '10',
+    anio: '2022',
+    mes: '',
     empleados: [
       { nombre: 'A. Montaner' },
-      { nombre: 'C. Veira' }
+      { nombre: 'C. Veira' },
+      { nombre: 'D. Troncoso' },
+      { nombre: 'R. Zavala' },
+      { nombre: 'R. Zuñiga' }
     ],
     turnos_choques: [
-      { dia: '5', aviones: '2', turno: '1' }
+      { dia: '', aviones: '2', turno: '' }
     ]
   }
 
@@ -131,8 +134,9 @@ export class ItinerarioAvionesComponent implements OnInit {
 
 /* PRUEBA */
 
-  generarInfo2(){
+  enviarDatosJSON(){
     console.log('Formulario posteado')
+    console.log(this.tiempo)
   }
 
   agregarJuego(){
@@ -147,12 +151,13 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   agregarChoque(){
     const newChoque: Turno_Choque = {
-      dia: this.nuevoChoque,
-      aviones: this.nuevoChoque,
-      turno: this.nuevoChoque
+      dia: this.tiempo.turnos_choques[0].dia,
+      aviones: this.tiempo.turnos_choques[0].aviones,
+      turno: this.tiempo.turnos_choques[0].turno
     }
-
     this.tiempo.turnos_choques.push({ ...newChoque});
+    console.log(newChoque)
+    this.tiempo.turnos_choques[0].dia = '';
   }
 
 

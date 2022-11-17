@@ -39,15 +39,16 @@ export class ScheduleComponent implements OnInit {
    }
 
   ngOnInit(): void {
+     this.scheduleWorkers = this.horarioService.getScheduleWorkers();
     this.items = this.horarioService.getItems();
-    this.horarioService.getScheduleWorkers().subscribe(
+/*     this.horarioService.getScheduleWorkers().subscribe(
       response => {
         console.log(response)
       },
       error => {
         console.log(error);
       }
-    );
+    ); */
   }
 
 /*   onSubmit(calendarData: any){

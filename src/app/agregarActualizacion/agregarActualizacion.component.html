@@ -1,3 +1,46 @@
-<p>
-  agregarActualizacion works!
-</p>
+<div class="w-full max-w-ws">
+      <form class="grid justify-items-center bg-white shadow-md rounded px-8 pt-7 pb-8 mb-4" #actualizacionForm="ngForm" (ngSubmit)="onSubmit()">
+
+        
+        <h1 class="text-2xl">Crear Actualización</h1>
+
+        <label for="tipo_permiso">Tipo de Permiso: </label>
+        <input type="search" list="tipo_permiso" name="tipo_permiso" #tipo_permiso="ngModel" [(ngModel)]="actualizacion.tipo_permiso" 
+        class="bg-[#DCDAD5] border border-blue-400 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        <datalist id="tipo_permiso">
+          <option value="Permiso">
+          <option value="Cambio de turno">
+          <option value="Comodín">
+          <option value="Urgencia">
+          <option value="Otro">
+        </datalist><br>
+
+        <label for="empleado">Empleado: </label>
+        <input type="search" list="empleado" name="empleado" #empleado="ngModel" [(ngModel)]="actualizacion.empleado" 
+        class="bg-[#DCDAD5] border border-blue-400 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        <datalist id="empleado">
+          <option value="A. Montaner" >
+          <option value="C. Veira">
+          <option value="D. Troncoso">
+          <option value="R. Zavala">
+          <option value="R. Zuñiga">
+          <option value="A. Baltolú">
+        </datalist><br>
+        
+        <label for="descripcion">Descripción: </label>
+        <input type="text" name="descripcion" #descripcion="ngModel" [(ngModel)]="actualizacion.descripcion" 
+        class="bg-[#DCDAD5] border border-blue-400 rounded-md focus:ring-blue-500 focus:border-blue-500 shadow-lg h-20">
+
+        <br>
+
+        <label for="fecha">Fecha: </label>
+        <input type="date" name="fecha" #fecha="ngModel" [(ngModel)]="actualizacion.fecha"
+        class="bg-[#DCDAD5] border border-blue-400 rounded-md focus:ring-red-500 focus:border-red-500 shadow-lg h-20">
+
+        <br>
+
+        <button type="submit" value="Guardar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
+
+    </form>
+
+</div>

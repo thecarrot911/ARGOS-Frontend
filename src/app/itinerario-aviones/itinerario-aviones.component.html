@@ -1,15 +1,194 @@
+<form (ngSubmit)="generarInfo2()" #infoForm="ngForm">
+  <div class="antialiased text-gray-900 px-6">
+    <div class="max-w-wl mx-auto py-12 md:max-w-2xl"> <!-- md:max-w-6xl mueve de izq a der -->
+      <h2 class="text-2xl font-sans">Generador de horario</h2>
+      <p class="mt-2 text-lg text-gray-500">Por favor, ingrese los datos solicitados:</p>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div class="grid grid-cols-1 gap-6">
+          <label class="block">
+            <span class="text-gray-700">Ingrese el mes</span>
+            <input type="month" class="form-input mt-1 block w-full">
+          </label>
+
+
+          <!-- ------------------------------------------- -->
+
+          <!-- PRUEBAS -->
+          <label class="block">
+            <div>
+              <span class="text-gray-700">Agregar choques de horario</span>
+
+              <div class="input-group">
+                <input type="text"
+                class="form-input mt-1 block w-full"
+                [(ngModel)]="nuevoJuego"
+                name="nuevoJuego">
+                  <button class="bg-gray-300" type="button" (click)="agregarJuego()">agregar Juego</button>
+              </div>
+            </div>
+          </label>
+
+          <label class="block">
+            <span class="text-gray-700">Choques de horario</span>
+            <input type="text" *ngFor="let juego of persona.favoritos; let i = index"
+            [(ngModel)]="juego.nombre" name="favorito_{{i}}"
+            class="form-input mt-1 block w-full">
+
+          </label>
+
+
+<!-- ----------------------------------------------------------------------- -->
+
+
+          <fieldset class="block">
+            <legend class="text-gray-700">Seleccione los empleados del mes</legend>
+            <div class="mt-2">
+              <div>
+                <label class="inline-flex items-center">
+                  <input class="form-checkbox" type="checkbox" checked>
+                  <span class="ml-2">A. Montaner</span>
+                </label>
+              </div>
+              <div>
+                <label class="inline-flex items-center">
+                  <input class="form-checkbox" type="checkbox" checked>
+                  <span class="ml-2">C. Veira</span>
+                </label>
+              </div>
+              <div>
+                <label class="inline-flex items-center">
+                  <input class="form-checkbox" type="checkbox" checked>
+                  <span class="ml-2">D. Troncoso</span>
+                </label>
+              </div>
+              <div>
+                <label class="inline-flex items-center">
+                  <input class="form-checkbox" type="checkbox" checked>
+                  <span class="ml-2">R. Zavala</span>
+                </label>
+              </div>
+              <div>
+                <label class="inline-flex items-center">
+                  <input class="form-checkbox" type="checkbox" checked>
+                  <span class="ml-2">R. Zuñiga</span>
+                </label>
+              </div>
+            </div>
+          </fieldset>
+
+          <label class="block"></label>
+          <label class="block"></label>
+        </div>
+
+        <div class="grid grid-cols-1 gap-6">
+
+          <label class="block">
+            <span class="text-gray-700">Seleccione el día del choque de horario</span>
+            <input type="number" placeholder="Día 1 a Día 31" class="form-input mt-1 block w-full">
+          </label>
+
+          <fieldset class="block">
+            <legend class="text-gray-700">Seleccione el turno donde hay choque</legend>
+            <div>
+              <label class="inline-flex items-center">
+                <input class="form-radio" type="radio" checked name="radio-direct" value="1">
+                <span class="ml-2">07:00 a 15:00 hrs</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input class="form-radio" type="radio" checked name="radio-direct" value="2">
+                <span class="ml-2">15:00 a 23:00 hrs</span>
+              </label>
+            </div>
+            <div>
+              <label class="inline-flex items-center">
+                <input class="form-radio" type="radio" checked name="radio-direct" value="3">
+                <span class="ml-2">23:00 a 07:00 hrs</span>
+              </label>
+            </div>
+          </fieldset>
+          
+<!--           <label class="block">
+            <span class="text-gray-700">Seleccione la cantidad de aviones que llegan</span>
+            <input type="number" placeholder="2" class="form-input mt-1 block w-full">
+          </label> -->
+
+          <!-- prueba  AGREGAR SOLO AVIONES -->
+          <label class="block">
+            <div class="form-group">
+            <span class="text-gray-700">Seleccione la cantidad de aviones que llegan</span>
+
+              <input type="text"
+              placeholder="2"
+              [(ngModel)]="nuevoChoque"
+              #aviones="ngModel"
+              name="aviones"
+              id="aviones"
+              class="form-input mt-1 block w-full form-control">
+            </div>
+
+            <div class="form-group">
+              <span class="text-gray-700">turno</span>
+              <input type="text" 
+              [(ngModel)]="nuevoChoque"
+              class="form-input mt-1 block w-full form-control">
+            </div>
+              
+              <button class="bg-slate-300"
+                type="button"
+                (click)="agregarChoque()">
+                Agregar Choque
+              </button>
+
+          </label>
+
+<!--           <label class="block">
+            <input class="form-input mt-1 block w-full"
+            [(ngModel)]="nuevoChoque"
+            name="nuevoChoque">
+            <button type="button" (click)="agregarChoque()"
+            class="bg-red-400 text-white py-2 px-4 rounded">Guardar</button>
+          </label> -->
+
+          <input type="submit" value="Submit" class="bg-blue-500 text-white py-2 px-4 rounded">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+ <span>Persona</span>
+<pre> {{ persona | json }} </pre>
+
+<span>Tiempo</span>
+<pre> {{ tiempo | json }}</pre>
+
+
+
+
+<h2>Template: </h2>
+
+<div class="flex">
+  <form>
+      <label class="bg-slate-300 px-2 py-1 rounded-full">Fecha: </label>
+      <input type="month">
+  </form>
+</div>
+
 <div class="flex flex-row">
-<div class="basic-2/4">
+<div class="basis-1/4">
 <form (ngSubmit)="generarInfo()" #infoForm="ngForm" class="ml-5">
   <br>
 <!--   <label for="anio">Año:</label><br>
   <input type="year" value="2022-07" name="anio" #anio="ngModel" [(ngModel)]="info.anio" class="border-2 border-blue-400"><br> -->
 
   <label for="mes">Mes y Año:</label><br>
-  <input type="month" placeholder="7" name="mes" #mes="ngModel" [(ngModel)]="info.mes" class="border-2 border-blue-400"><br>
+  <input type="month" placeholder="7" name="mes" #mes="ngModel" [(ngModel)]="info.mes" class="bg-[#DCDAD5] border border-blue-400 rounded-md"><br>
 
-  <label for="empleados">Empleado 1:</label><br>
-  <input type="search" list="empleados" name="empleado_1" [(ngModel)]="info.empleado_1" #emp_1="ngModel" class="border-2 border-blue-400">
+  <label for="empleados" class="">Empleado 1:</label><br>
+  <input type="search" list="empleados" name="empleado_1" [(ngModel)]="info.empleado_1" #emp_1="ngModel"
+  class="bg-[#DCDAD5] border border-blue-400 rounded-md focus:ring-blue-500 focus:border-blue-500">
   <datalist id="empleados" >
     <option value="A. Montaner" >
     <option value="C. Veira">
@@ -19,7 +198,7 @@
   </datalist><br>
 
   <label for="empleados">Empleado 2:</label><br>
-  <input type="search" list="empleados" name="empleado_2" [(ngModel)]="info.empleado_2" #emp_2="ngModel" class="border-2 border-blue-400">
+  <input type="search" list="empleados" name="empleado_2" [(ngModel)]="info.empleado_2" #emp_2="ngModel" class="bg-[#DCDAD5] border border-blue-400 rounded-md">
   <datalist id="empleados">
     <option value="A. Montaner">
     <option value="C. Veira">
@@ -29,7 +208,7 @@
   </datalist><br>
 
   <label for="empleados">Empleado 3:</label><br>
-  <input type="search" list="empleados" name="empleado_3" [(ngModel)]="info.empleado_3" #emp_3="ngModel" class="border-2 border-blue-400">
+  <input type="search" list="empleados" name="empleado_3" [(ngModel)]="info.empleado_3" #emp_3="ngModel" class="bg-[#DCDAD5] border border-blue-400 rounded-md">
   <datalist id="empleados">
     <option value="A. Montaner">
     <option value="C. Veira">
@@ -39,7 +218,7 @@
   </datalist><br>
 
   <label for="empleados">Empleado 4:</label><br>
-  <input type="search" list="empleados" name="empleado_4" [(ngModel)]="info.empleado_4" #emp_4="ngModel" class="border-2 border-blue-400">
+  <input type="search" list="empleados" name="empleado_4" [(ngModel)]="info.empleado_4" #emp_4="ngModel" class="bg-[#DCDAD5] border border-blue-400 rounded-md">
   <datalist id="empleados">
     <option value="A. Montaner">
     <option value="C. Veira">
@@ -49,7 +228,7 @@
   </datalist><br>
 
   <label for="empleados">Empleado 5:</label><br>
-  <input type="search" list="empleados" name="empleado_5" [(ngModel)]="info.empleado_5" #emp_5="ngModel" class="border-2 border-blue-400">
+  <input type="search" list="empleados" name="empleado_5" [(ngModel)]="info.empleado_5" #emp_5="ngModel" class="bg-[#DCDAD5] border border-blue-400 rounded-md">
   <datalist id="empleados">
     <option value="A. Montaner">
     <option value="C. Veira">
@@ -58,21 +237,6 @@
     <option value="R. Zuñiga">
   </datalist><br>
 
-  <!-- <label for="empleado_1">Empleado 1:</label><br>
-  <input type="text" placeholder="A. Montaner" name="empleado_1" #emp_1="ngModel" [(ngModel)]="info.empleado_1" class="border-2 border-blue-400"><br>
-
-  <label for="empleado_2">Empleado 2:</label><br>
-  <input type="text" placeholder="C. Veira" name="empleado_2" #emp_1="ngModel" [(ngModel)]="info.empleado_2" class="border-2 border-blue-400"><br>
-
-  <label for="empleado_3">Empleado 3:</label><br>
-  <input type="text" placeholder="D. Troncoso" name="empleado_3" #emp_1="ngModel" [(ngModel)]="info.empleado_3" class="border-2 border-blue-400"><br>
-
-  <label for="empleado_4">Empleado 4:</label><br>
-  <input type="text" placeholder="R. Zavala" name="empleado_4" #emp_1="ngModel" [(ngModel)]="info.empleado_4" class="border-2 border-blue-400"><br>
-
-  <label for="empleado_5">Empleado 5:</label><br>
-  <input type="text" placeholder="R. Zuñiga" name="empleado_5" #emp_1="ngModel" [(ngModel)]="info.empleado_5" class="border-2 border-blue-400"><br>
-   -->
   <br>
   <input type="submit" value="Submit" class="border-2 border-rose-500 ml-14">
 
@@ -81,53 +245,16 @@
 <br>
 <br>
 
-<!--   <label for="mes">Mes</label><br>
-  <select id="mes" class="border-rose-500 text-black" >
-    <option name="enero" #mes="ngModel" [(ngModel)]="info.mes">Enero</option>
-    <option name="febrero" #mes="ngModel" [(ngModel)]="info.mes">Febrero</option>
-    <option name="marzo" #mes="ngModel" [(ngModel)]="info.mes">Marzo</option>
-    <option name="abril" #mes="ngModel" [(ngModel)]="info.mes">Abril</option>
-    <option name="mayo" #mes="ngModel" [(ngModel)]="info.mes">Mayo</option>
-    <option name="junio" #mes="ngModel" [(ngModel)]="info.mes">Junio</option>
-    <option name="julio" #mes="ngModel" [(ngModel)]="info.mes">Julio</option>
-    <option name="agosto" #mes="ngModel" [(ngModel)]="info.mes">Agosto</option>
-    <option name="septiembre" #mes="ngModel" [(ngModel)]="info.mes">Septiembre</option>
-    <option name="octubre" #mes="ngModel" [(ngModel)]="info.mes">Octubre</option>
-    <option name="noviembre" #mes="ngModel" [(ngModel)]="info.mes">Noviembre</option>
-    <option name="diciembre" #mes="ngModel" [(ngModel)]="info.mes">Diciembre</option>
-  </select>
-  <br>
-
-  <div class="flex items-center mb-4">
-    <input id="checkbox-1" #emp_1="ngModel" [(ngModel)]="info.empleado_1" type="checkbox" value="A. Montaner" class="w-4 h-4 text-blue-600  bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-    <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-black-300">A. Montaner</label>
-  </div>
-  <div class="flex items-center mb-4">
-    <input id="checkbox-1" #emp_1="ngModel" [(ngModel)]="info.empleado_1" type="checkbox" value="A. Montaner" class="w-4 h-4 text-blue-600  bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-    <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-black-300">C. Veira</label>
-  </div>
-  <div class="flex items-center mb-4">
-    <input id="checkbox-1" #emp_1="ngModel" [(ngModel)]="info.empleado_1" type="checkbox" value="A. Montaner" class="w-4 h-4 text-blue-600  bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-    <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-black-300">D. Troncoso</label>
-  </div>
-  <div class="flex items-center mb-4">
-    <input id="checkbox-1" #emp_1="ngModel" [(ngModel)]="info.empleado_1" type="checkbox" value="A. Montaner" class="w-4 h-4 text-blue-600  bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-    <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-black-300">R. Zavala</label>
-  </div>
-  <div class="flex items-center mb-4">
-    <input id="checkbox-1" #emp_1="ngModel" [(ngModel)]="info.empleado_1" type="checkbox" value="A. Montaner" class="w-4 h-4 text-blue-600  bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-    <label for="checkbox-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-black-300">R. Zuñiga</label>
-  </div> -->
-
-
 </form>
 </div>
-<div class="basis-2/4 ml-5">
-  <form (ngSubmit)="generarHorario()" #horarioForm="ngForm">
+
+<!-- <div class="basis-1/4">
+<form (ngSubmit)="sendChoqueItinerario()" #horarioForm="ngForm">
+
     <br>
 
     <label for="fecha">Fecha: </label><br>
-    <input type="date" name="fecha" value="08-11-2022" [(ngModel)]="generadorItinerario.fecha" #fecha="ngModel" class="border-2 border-yellow-200"><br>
+    <input type="date" name="fecha" value="08-11-2022" [(ngModel)]="generadorItinerario.fecha" #fecha="ngModel" class="bg-[#DCDAD5] border border-yellow-400 rounded-md"><br>
 
     <label for="horario_llegada">Horario llegada:</label><br>
     <input
@@ -135,13 +262,14 @@
     name="horario_llegada"
     #horariollegada="ngModel"
     [(ngModel)]="generadorItinerario.horario_llegada"
-    class="border-2 border-orange-600"><br>
+    class="bg-[#DCDAD5] border border-yellow-400 rounded-md"><br>
   
     <label for="horario_salida">Horario salida:</label><br>
-    <input type="time" placeholder="08:20" name="horario_salida" #horariosalida="ngModel" [(ngModel)]="generadorItinerario.horario_salida" class="border-2 border-orange-600"><br>
+    <input type="time" name="horario_salida" #horariosalida="ngModel" [(ngModel)]="generadorItinerario.horario_salida"
+    class="bg-[#DCDAD5] border border-yellow-400 rounded-md"><br>
   
     <label for="linea_aerea">línea aerea:</label><br>
-    <input type="search" list="lineasaereas" name="linea_aerea" [(ngModel)]="generadorItinerario.linea_aerea" #lineaaerea="ngModel" class="border-2 border-orange-400">
+    <input type="search" list="lineasaereas" name="linea_aerea" [(ngModel)]="generadorItinerario.linea_aerea" #lineaaerea="ngModel" class="bg-[#DCDAD5] border border-yellow-400 rounded-md">
     <datalist id="lineasaereas">
       <option value="LATAM">
       <option value="JET SMART">
@@ -149,7 +277,7 @@
     </datalist><br>
   
     <label for="tipo_avion">Tipo avión:</label><br>
-    <input type="search" list="tipo_avion" name="tipo_avion" #tipoavion="ngModel" [(ngModel)]="generadorItinerario.tipo_avion" class="border-2 border-orange-600"><br>
+    <input type="search" list="tipo_avion" name="tipo_avion" #tipoavion="ngModel" [(ngModel)]="generadorItinerario.tipo_avion" class="bg-[#DCDAD5] border border-yellow-400 rounded-md"><br>
     <datalist id="tipo_avion">
       <option value="LA 183">
       <option value="LA 185">
@@ -170,7 +298,7 @@
     </datalist>
 
     <label for="destino">Destino:</label><br>
-    <input type="search" list="destinos" name="destino" #destino="ngModel" [(ngModel)]="generadorItinerario.destino" class="border-2 border-orange-600"><br>
+    <input type="search" list="destinos" name="destino" #destino="ngModel" [(ngModel)]="generadorItinerario.destino" class="bg-[#DCDAD5] border border-yellow-400 rounded-md"><br>
     <datalist id="destinos">
       <option value="SCL">
       <option value="IQQ">
@@ -178,7 +306,10 @@
     </datalist>
 
     <br>
-    <input type="submit" value="Enviar" class="border-2 border-rose-500 ml-14">
+  
+    <input type="submit" value="Enviar" class="bg-blue-500 ml-14 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+
+    
   </form>
-</div>
+</div> -->
 </div>

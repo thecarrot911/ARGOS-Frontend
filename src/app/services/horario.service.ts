@@ -6,6 +6,7 @@ import { catchError, retry } from 'rxjs/operators'; /* a */
 import { calendarData } from '../calendarData';
 import { itinerarioData} from '../itinerarioData';
 import { InfoData } from '../infoData';
+import { Actualizacion } from '../actualizacion';
 
 /* const httpOptions = {
   headers: new HttpHeaders({
@@ -27,11 +28,12 @@ export class HorarioService {
   items = [];
 
 /*   getScheduleWorkers(){
-    return this.http.get('http://localhost:10975/itinerario_de_vuelo/generar-planificacion-semanal');
+    return this.http.get('/assets/schedule.json');
   } */
 
+
   getScheduleWorkers(){
-    return this.http.get('http://localhost:10975/app/planificacion/mostrar_ultima_planificacion?id_planificacion=42') /* get */
+    return this.http.get('http://localhost:10975/app/planificacion/generar_planificacion');
   }
 
   getItems(){
@@ -56,10 +58,20 @@ export class HorarioService {
     return this.http.post<itinerarioData>(this.dataUrl, itinerariodata,{headers: headers});
   }
 
-  genInfo(infotdata: InfoData): Observable<InfoData> {
-    let params = JSON.stringify(infotdata);
+  genInfo(infodata: InfoData): Observable<InfoData> {
+    let params = JSON.stringify(infodata);
     let headers = new HttpHeaders().set('Content-type','application/json');
-    return this.http.post<InfoData>(this.dataUrl, infotdata,{headers: headers});
+    return this.http.post<InfoData>(this.dataUrl, infodata,{headers: headers});
+  }
+
+
+
+  url_actualizacion =  'http://localhost:10975/app/actualizacion/crear_actualizacion';
+  /* agregarActualización Component */
+  guardarActualizacion(actualizacion: Actualizacion):Observable<Actualizacion>{
+    let params = JSON.stringify(actualizacion);
+    let headers = new HttpHeaders().set('Content-Type', 'applicacion/json');
+    return this.http.post<Actualizacion>(this.url_actualizacion, params, {headers: headers})
   }
 
 }

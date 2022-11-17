@@ -13,6 +13,7 @@ import { ActualizacionesComponent } from './Actualizaciones/Actualizaciones.comp
 import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
+import { ActualizacionService } from './services/actualizacion.service';
 
 @NgModule({
   declarations: [							
@@ -37,7 +38,7 @@ import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-avio
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
     ]),
   ],
-  providers: [],
+  providers: [ActualizacionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

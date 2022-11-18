@@ -31,6 +31,7 @@ export class AgregarActualizacionComponent implements OnInit {
   }
 
   onSubmit(){
+    console.log(this.actualizacion)
     this.horarioService.guardarActualizacion(this.actualizacion)
       .subscribe(
        response => {

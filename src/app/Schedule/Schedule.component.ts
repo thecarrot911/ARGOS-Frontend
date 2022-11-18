@@ -39,8 +39,8 @@ export class ScheduleComponent implements OnInit {
    }
 
   ngOnInit(): void {
-     this.scheduleWorkers = this.horarioService.getScheduleWorkers();
-    this.items = this.horarioService.getItems();
+/*      this.scheduleWorkers = this.horarioService.getScheduleWorkers();
+    this.items = this.horarioService.getItems(); */
 /*     this.horarioService.getScheduleWorkers().subscribe(
       response => {
         console.log(response)
@@ -78,7 +78,7 @@ export class ScheduleComponent implements OnInit {
       }); 
   } */
 
-  onSubmit(){
+  /* onSubmit(){
    this.horarioService.addSchedule(this.generador)
      .subscribe(
       response => {
@@ -89,5 +89,5 @@ export class ScheduleComponent implements OnInit {
       }
      )
   }
-
+ */
 }

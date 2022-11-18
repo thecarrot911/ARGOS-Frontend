@@ -41,7 +41,7 @@
           </label>
 
           <label class="block">
-            <span class="text-gray-700">Seleccione la cantidad de aviones que llegan</span>
+            <span class="text-gray-700">Empleados que se necesita para ese turno</span>
             <input type="text"
             [(ngModel)]="tiempo.turnos_choques[0].aviones"
             #aviones="ngModel"
@@ -154,7 +154,8 @@
 
 <div class="flex flex-row">
 <div class="basis-1/4">
-<form (ngSubmit)="generarInfo()" #infoForm="ngForm" class="ml-5">
+<!-- <form (ngSubmit)="generarInfo()" #infoForm="ngForm" class="ml-5"> -->
+<form class="ml-5">
   <br>
 <!--   <label for="anio">Año:</label><br>
   <input type="year" value="2022-07" name="anio" #anio="ngModel" [(ngModel)]="info.anio" class="border-2 border-blue-400"><br> -->

@@ -7,6 +7,7 @@ import { calendarData } from '../calendarData';
 import { itinerarioData} from '../itinerarioData';
 import { InfoData } from '../infoData';
 import { Actualizacion } from '../actualizacion';
+import { Tiempo } from '../tiempo';
 
 /* const httpOptions = {
   headers: new HttpHeaders({
@@ -32,10 +33,10 @@ export class HorarioService {
   } */
 
 
-  getScheduleWorkers(){
-    return this.http.get('http://localhost:10975/app/planificacion/generar_planificacion');
+/*   getScheduleWorkers(){
+    return console.log('hola');
   }
-
+ */
   getItems(){
     return this.items;
   }
@@ -74,4 +75,9 @@ export class HorarioService {
     return this.http.post<Actualizacion>(this.url_actualizacion, params, {headers: headers})
   }
 
+
+  /* Itinerario de aviones Choques*/ 
+  generarHorario(tiempo: Tiempo): Observable<Tiempo>{
+    return this.http.post<Tiempo>(this.dataUrl, tiempo)
+  }
 }

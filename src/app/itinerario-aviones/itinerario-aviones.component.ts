@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 
-interface Tiempo {
+export interface Tiempo {
   anio: string;
   mes: string;
   empleados: Empleado[];
@@ -22,6 +22,7 @@ interface Turno_Choque{
   aviones: string;
   turno: string;
 }
+
 
 /* Prueba */
 
@@ -119,7 +120,7 @@ export class ItinerarioAvionesComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendChoqueItinerario(){
+/*   sendChoqueItinerario(){
     this.horarioService.genHorario(this.generadorItinerario)
       .subscribe(
         response => {
@@ -129,14 +130,22 @@ export class ItinerarioAvionesComponent implements OnInit {
           console.log(error)
         }
       )
-  }
+  } */
 
-
-/* PRUEBA */
 
   enviarDatosJSON(){
     console.log('Formulario posteado')
     console.log(this.tiempo)
+    this.horarioService.generarHorario(this.tiempo)
+    .subscribe(
+      response => {
+        console.log(response)
+      },
+      error => {
+        console.log('ERROR -->')
+        console.log(error)
+      }
+    )
   }
 
   agregarJuego(){
@@ -162,7 +171,7 @@ export class ItinerarioAvionesComponent implements OnInit {
 
 
     /* Empleados, mes, año */
-  generarInfo(){
+/*   generarInfo(){
     console.log(this.info)
     this.horarioService.genInfo(this.info)
       .subscribe(
@@ -174,6 +183,6 @@ export class ItinerarioAvionesComponent implements OnInit {
           console.log(error)
         }
       )
-  }
+  } */
 
 }

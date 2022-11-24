@@ -1,219 +1,28 @@
 [
-    {
-      "empleado_1": 0,
-      "empleado_2": 1,
-      "empleado_3": 2,
-      "empleado_4": 0,
-      "empleado_5": 3
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 0,
-      "empleado_3": 3,
-      "empleado_4": 0,
-      "empleado_5": 2
-    },
-    {
-      "empleado_1": 3,
-      "empleado_2": 2,
-      "empleado_3": 0,
-      "empleado_4": 0,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 3,
-      "empleado_2": 0,
-      "empleado_3": 2,
-      "empleado_4": 0,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 1,
-      "empleado_3": 0,
-      "empleado_4": 3,
-      "empleado_5": 2
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 0,
-      "empleado_3": 3,
-      "empleado_4": 0,
-      "empleado_5": 2
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 2,
-      "empleado_3": 1,
-      "empleado_4": 0,
-      "empleado_5": 3
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 1,
-      "empleado_3": 3,
-      "empleado_4": 0,
-      "empleado_5": 2
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 3,
-      "empleado_3": 2,
-      "empleado_4": 0,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 2,
-      "empleado_2": 1,
-      "empleado_3": 0,
-      "empleado_4": 0,
-      "empleado_5": 3
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 0,
-      "empleado_3": 0,
-      "empleado_4": 2,
-      "empleado_5": 3
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 1,
-      "empleado_3": 0,
-      "empleado_4": 2,
-      "empleado_5": 3
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 2,
-      "empleado_3": 0,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 2,
-      "empleado_2": 0,
-      "empleado_3": 1,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 2,
-      "empleado_3": 1,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 1,
-      "empleado_3": 3,
-      "empleado_4": 2,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 2,
-      "empleado_2": 1,
-      "empleado_3": 0,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 2,
-      "empleado_2": 0,
-      "empleado_3": 1,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 2,
-      "empleado_3": 0,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 2,
-      "empleado_3": 3,
-      "empleado_4": 1,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 0,
-      "empleado_3": 2,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 2,
-      "empleado_2": 0,
-      "empleado_3": 1,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 2,
-      "empleado_2": 3,
-      "empleado_3": 0,
-      "empleado_4": 1,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 0,
-      "empleado_3": 2,
-      "empleado_4": 3,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 0,
-      "empleado_3": 3,
-      "empleado_4": 2,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 0,
-      "empleado_3": 2,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 3,
-      "empleado_2": 2,
-      "empleado_3": 0,
-      "empleado_4": 0,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 3,
-      "empleado_2": 2,
-      "empleado_3": 0,
-      "empleado_4": 0,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 1,
-      "empleado_2": 0,
-      "empleado_3": 2,
-      "empleado_4": 3,
-      "empleado_5": 0
-    },
-    {
-      "empleado_1": 2,
-      "empleado_2": 3,
-      "empleado_3": 0,
-      "empleado_4": 0,
-      "empleado_5": 1
-    },
-    {
-      "empleado_1": 0,
-      "empleado_2": 0,
-      "empleado_3": 2,
-      "empleado_4": 3,
-      "empleado_5": 1
-    }
-  ]
+  {
+    "dia_semana": "Martes",
+    "numero_dia": 1,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "A. MONTANER"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "R. ZUÑIGA"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "C. VEIRA"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "R. ZAVALA"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "D. TRONCOSO"
+      }
+    ]
+  }
+]

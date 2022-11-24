@@ -16,33 +16,8 @@
       <ul class="hidden md:flex flex-auto space-x-2">
         <li (click)="isToggle = 1" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 1 ? 'text-white bg-indigo-600' : 'text-gray-600 border border-white bg-gray-50')" [routerLink]="['/']">Home</li>
         <li (click)="isToggle = 2" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 2 ? 'text-white bg-indigo-600' : 'text-gray-600 border border-white bg-gray-50')" routerLink="/schedule">Horario</li>
-        <li (click)="isToggle = 3" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 3 ? 'text-white bg-indigo-600' : 'text-gray-600 border border-white bg-gray-50')">-</li>
-        <li (click)="isToggle = 4" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 4 ? 'text-white bg-indigo-600' : 'text-gray-600 border border-white bg-gray-50')">-</li>
         <li (click)="isToggle = 5" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 5 ? 'text-white bg-indigo-600' : 'text-gray-600 border border-white bg-gray-50')" routerLink="/itinerario-aviones">Generar Horario</li>
-       
       </ul>
     </nav>
   </div>
 </div>
-
-
-<!-- <div class="container">
-
-    <div class="h-12 bg-[#94a3b8] text-white">
-      <div class="flex justify-between">
-        <div>
-          <a [routerLink]="['/']">
-            <img
-            src="assets/images/waki-solar-logo-02.png"
-            alt="Logo Waki Labs"
-            width="140"
-            height="100"
-            >
-          </a>
-        </div>
-        <div class="h-full">
-          <button class="border-2 border-stone-50 rounded text-black mt-2 mr-2" routerLink="/schedule">Generar Horario</button>
-       </div>
-      </div>
-    </div>
-</div> -->

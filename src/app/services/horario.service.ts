@@ -9,13 +9,6 @@ import { InfoData } from '../infoData';
 import { Actualizacion } from '../actualizacion';
 import { Tiempo } from '../tiempo';
 
-/* const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    Authorization: 'my-auth-token'
-  })
-}; */
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,9 +21,10 @@ export class HorarioService {
 
   items = [];
 
-/*   getScheduleWorkers(){
+  getHorarios(){
+/*     return console.log("Función --> getHorarios"); */
     return this.http.get('/assets/schedule.json');
-  } */
+  } 
 
 
 /*   getScheduleWorkers(){
@@ -46,7 +40,7 @@ export class HorarioService {
     return this.items;
   }
 
-/** POST: add a schedule(año-mes) to the database */
+/** POST: add a schedule(año-mes) to the backend */
   addSchedule(calendardata: calendarData): Observable<calendarData> {
     let params = JSON.stringify(calendardata);
     let headers = new HttpHeaders().set('Content-type','application/json');
@@ -78,6 +72,6 @@ export class HorarioService {
 
   /* Itinerario de aviones Choques*/ 
   generarHorario(tiempo: Tiempo): Observable<Tiempo>{
-    return this.http.post<Tiempo>(this.dataUrl, tiempo)
+    return this.http.post<Tiempo>(this.dataUrl, tiempo);
   }
 }

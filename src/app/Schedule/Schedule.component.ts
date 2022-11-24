@@ -16,7 +16,7 @@ import { calendarData } from '../calendarData'; /* Interfaz */
 })
 export class ScheduleComponent implements OnInit {
 
-  scheduleWorkers: any;
+  horarios: any;
   indice: any;
   items: any;
   checkoutForm: any; /* Almacenar el modelo del formulario */
@@ -34,13 +34,17 @@ export class ScheduleComponent implements OnInit {
       mes: '',
     });
 
-    this.generador={anio:'', mes:'', empleados:''};
+    this.generador={
+      anio:'',
+       mes:'',
+       empleados:''};
  
    }
 
   ngOnInit(): void {
-/*      this.scheduleWorkers = this.horarioService.getScheduleWorkers();
-    this.items = this.horarioService.getItems(); */
+    this.horarios = this.horarioService.getHorarios();
+/*     this.items = this.horarioService.getItems(); */
+
 /*     this.horarioService.getScheduleWorkers().subscribe(
       response => {
         console.log(response)
@@ -51,12 +55,6 @@ export class ScheduleComponent implements OnInit {
     ); */
   }
 
-/*   onSubmit(calendarData: any){
-    this.items = this.horarioService.clearData();
-    this.checkoutForm.reset();
-    console.warn('Datos enviados', calendarData);
-  } 
- */
 
 /*   onSubmit(calendarData: any){
   this.items = this.horarioService.clearData();
@@ -78,7 +76,7 @@ export class ScheduleComponent implements OnInit {
       }); 
   } */
 
-  /* onSubmit(){
+/*  onSubmit(){
    this.horarioService.addSchedule(this.generador)
      .subscribe(
       response => {
@@ -88,6 +86,6 @@ export class ScheduleComponent implements OnInit {
         console.log(error)
       }
      )
-  }
- */
+  } */
+ 
 }

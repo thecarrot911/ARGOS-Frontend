@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
+import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
 import { Observable } from 'rxjs';
-
 import { calendarData } from '../calendarData'; /* Interfaz */
-
+import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-aviones.component';
 
 
 @Component({
@@ -15,6 +14,8 @@ import { calendarData } from '../calendarData'; /* Interfaz */
   styleUrls: ['./Schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
+
+  public ayuda: any;
 
   horarios: any;
   indice: any;
@@ -29,21 +30,20 @@ export class ScheduleComponent implements OnInit {
     private http: HttpClient,
   ) { 
 
-    this.checkoutForm = this.formBuilder.group({
-      anio: '',
-      mes: '',
-    });
-
-    this.generador={
-      anio:'',
-       mes:'',
-       empleados:''};
- 
    }
 
   ngOnInit(): void {
-    this.horarios = this.horarioService.getHorarios();
-/*     this.items = this.horarioService.getItems(); */
+     this.horarios = this.horarioService.getHorarios(); 
+
+/*     this.horarios = this.horarioService.getHorarios().
+      subscribe(
+        response => {
+          console.log('xddddd')
+        },
+        error =>{
+          console.log('OH NO ITS BROKEN');
+        }
+      ) */
 
 /*     this.horarioService.getScheduleWorkers().subscribe(
       response => {
@@ -54,6 +54,9 @@ export class ScheduleComponent implements OnInit {
       }
     ); */
   }
+
+  
+
 
 
 /*   onSubmit(calendarData: any){
@@ -87,5 +90,7 @@ export class ScheduleComponent implements OnInit {
       }
      )
   } */
- 
+
 }
+
+

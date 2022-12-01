@@ -1,28 +1,992 @@
 [
   {
+    "dia_semana": "Lunes",
+    "numero_dia": 31,
+    "empleados": [
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
     "dia_semana": "Martes",
     "numero_dia": 1,
     "empleados": [
       {
-        "turno": "23:00 a 07:00",
-        "nombre": "A. MONTANER"
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
       },
       {
         "turno": "07:00 a 15:00",
-        "nombre": "R. ZUÑIGA"
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
       },
       {
         "turno": "15:00 a 23:00",
-        "nombre": "C. VEIRA"
+        "nombre": "undefined"
       },
       {
-        "turno": "07:00 a 15:00",
-        "nombre": "R. ZAVALA"
-      },
-      {
-        "turno": "07:00 a 15:00",
-        "nombre": "D. TRONCOSO"
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
       }
-    ]
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Miercoles",
+    "numero_dia": 2,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Jueves",
+    "numero_dia": 3,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Viernes",
+    "numero_dia": 4,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Sabado",
+    "numero_dia": 5,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Domingo",
+    "numero_dia": 6,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": [
+      {
+        "turno_itinerario": 2,
+        "falta": 1
+      }
+    ],
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Lunes",
+    "numero_dia": 7,
+    "empleados": [
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Martes",
+    "numero_dia": 8,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Miercoles",
+    "numero_dia": 9,
+    "empleados": [
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Jueves",
+    "numero_dia": 10,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Viernes",
+    "numero_dia": 11,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Sabado",
+    "numero_dia": 12,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Domingo",
+    "numero_dia": 13,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 2
+  },
+  {
+    "dia_semana": "Lunes",
+    "numero_dia": 14,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Martes",
+    "numero_dia": 15,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Miercoles",
+    "numero_dia": 16,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Jueves",
+    "numero_dia": 17,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Viernes",
+    "numero_dia": 18,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Sabado",
+    "numero_dia": 19,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Domingo",
+    "numero_dia": 20,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 3
+  },
+  {
+    "dia_semana": "Lunes",
+    "numero_dia": 21,
+    "empleados": [
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Martes",
+    "numero_dia": 22,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Miercoles",
+    "numero_dia": 23,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Jueves",
+    "numero_dia": 24,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Viernes",
+    "numero_dia": 25,
+    "empleados": [
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Sabado",
+    "numero_dia": 26,
+    "empleados": [
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Domingo",
+    "numero_dia": 27,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Lunes",
+    "numero_dia": 28,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Martes",
+    "numero_dia": 1,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Miercoles",
+    "numero_dia": 2,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Jueves",
+    "numero_dia": 3,
+    "empleados": [
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Viernes",
+    "numero_dia": 4,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Sabado",
+    "numero_dia": 5,
+    "empleados": [
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": 0,
+    "comodin": 0
+  },
+  {
+    "dia_semana": "Domingo",
+    "numero_dia": 6,
+    "empleados": [
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "15:00 a 23:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "Libre",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "07:00 a 15:00",
+        "nombre": "undefined"
+      },
+      {
+        "turno": "23:00 a 07:00",
+        "nombre": "undefined"
+      }
+    ],
+    "itinerario": [
+      {
+        "turno_itinerario": 2,
+        "falta": 1
+      }
+    ],
+    "comodin": 0
   }
 ]

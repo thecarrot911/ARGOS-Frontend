@@ -2,7 +2,7 @@ export interface Tiempo {
     anio: string;
     mes: string;
     empleados: Empleado[];
-    turnos_choques: Turno_Choque[];
+    itinerario: Turno_Choque[];
 }
 
 interface Empleado {

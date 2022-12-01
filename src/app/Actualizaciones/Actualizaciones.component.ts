@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HorarioService } from '../services/horario.service';
+import { AgregarActualizacionComponent } from '../agregarActualizacion/agregarActualizacion.component';
+import { Actualizacion } from '../actualizacion';
 
 @Component({
   selector: 'app-Actualizaciones',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActualizacionesComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+    actualizaciones: Actualizacion[] = [];
+  public actualizacion: Actualizacion;
+  
+  constructor(
+    private horarioService: HorarioService
+  ) {
+    this.actualizacion = new Actualizacion('', '','','',null);
   }
 
+  ngOnInit(): void {
+    this.getActualizacionesVistas();
+  }
+
+  getActualizacionesVistas(): void{
+    this.horarioService.getActualizacionesVistas()
+      .subscribe(actualizaciones => this.actualizaciones = actualizaciones)
+  }
 }

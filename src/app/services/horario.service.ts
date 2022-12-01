@@ -1,18 +1,21 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; /* a */
 import { HttpParams } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs'; /* a */
+import { Observable, of, throwError } from 'rxjs'; /* a */
 import { catchError, retry } from 'rxjs/operators'; /* a */
 import { calendarData } from '../calendarData';
 import { itinerarioData} from '../itinerarioData';
 import { InfoData } from '../infoData';
 import { Actualizacion } from '../actualizacion';
 import { Tiempo } from '../tiempo';
+import { ACTUALIZACIONES } from '../mock-actualizaciones';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HorarioService {
+
+  @Output() disparador: EventEmitter<any> = new EventEmitter();
 
   dataUrl= 'http://localhost:10975/app/planificacion/generar_planificacion'; /* BackendUrl para enviar añoo y mes*/
 
@@ -64,14 +67,30 @@ export class HorarioService {
   url_actualizacion =  'http://localhost:10975/app/actualizacion/crear_actualizacion';
   /* agregarActualización Component */
   guardarActualizacion(actualizacion: Actualizacion):Observable<Actualizacion>{
-    let params = JSON.stringify(actualizacion);
-    let headers = new HttpHeaders().set('Content-Type', 'applicacion/json');
-    return this.http.post<Actualizacion>(this.url_actualizacion, params, {headers: headers})
+/*     let params = JSON.stringify(actualizacion);
+    let headers = new HttpHeaders().set('Content-Type', 'applicacion/json'); */
+    return this.http.post<Actualizacion>(this.url_actualizacion, actualizacion)
   }
 
 
   /* Itinerario de aviones Choques*/ 
   generarHorario(tiempo: Tiempo): Observable<Tiempo>{
     return this.http.post<Tiempo>(this.dataUrl, tiempo);
+  }
+
+  /* Recibir horario final */
+  getHorario(): Observable<Tiempo[]>{
+    return this.http.get<Tiempo[]>(this.dataUrl)
+  }
+
+
+
+
+  getActualizacionesVistas(): Observable<Actualizacion[]>{
+    return this.http.get<Actualizacion[]>(this.dataUrl) /* INSERTAR URL PARA GET */
+  }
+
+  addActualizacionVista(actualizacion: Actualizacion): Observable<Actualizacion>{
+    return this.http.post<Actualizacion>(this.dataUrl, actualizacion) /* Cambiar URL PARA POST */
   }
 }

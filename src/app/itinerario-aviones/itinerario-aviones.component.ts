@@ -10,7 +10,7 @@ export interface Tiempo {
   anio: string;
   mes: string;
   empleados: Empleado[];
-  turnos_choques: Turno_Choque[];
+  itinerario: Turno_Choque[];
 }
 
 interface Empleado {
@@ -19,8 +19,8 @@ interface Empleado {
 
 interface Turno_Choque{
   dia: string;
-  aviones: string;
   turno: string;
+  aviones: string;
 }
 
 
@@ -51,19 +51,20 @@ interface Favorito {
 })
 export class ItinerarioAvionesComponent implements OnInit {
 
+  public ayuda: any;
   /* Cap 245 */
   tiempo: Tiempo = {
     anio: '2022',
     mes: '',
     empleados: [
-      { nombre: 'A. Montaner' },
-      { nombre: 'C. Veira' },
-      { nombre: 'D. Troncoso' },
-      { nombre: 'R. Zavala' },
-      { nombre: 'R. Zuñiga' }
+      { nombre: 'A. MONTANER' },
+      { nombre: 'C. VEIRA' },
+      { nombre: 'D. TRONCOSO' },
+      { nombre: 'R. ZAVALA' },
+      { nombre: 'R. ZUÑIGA' }
     ],
-    turnos_choques: [
-      { dia: '', aviones: '2', turno: '' }
+    itinerario: [
+      { dia: '', turno: '', aviones: '' }
     ]
   }
 
@@ -120,26 +121,15 @@ export class ItinerarioAvionesComponent implements OnInit {
   ngOnInit() {
   }
 
-/*   sendChoqueItinerario(){
-    this.horarioService.genHorario(this.generadorItinerario)
-      .subscribe(
-        response => {
-          console.log(response)
-        },
-        error => {
-          console.log(error)
-        }
-      )
-  } */
-
-
   enviarDatosJSON(){
     console.log('Formulario posteado')
     console.log(this.tiempo)
     this.horarioService.generarHorario(this.tiempo)
     .subscribe(
       response => {
+        console.log('abajo response XD')
         console.log(response)
+      
       },
       error => {
         console.log('ERROR -->')
@@ -160,13 +150,13 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   agregarChoque(){
     const newChoque: Turno_Choque = {
-      dia: this.tiempo.turnos_choques[0].dia,
-      aviones: this.tiempo.turnos_choques[0].aviones,
-      turno: this.tiempo.turnos_choques[0].turno
+      dia: this.tiempo.itinerario[0].dia,
+      aviones: this.tiempo.itinerario[0].aviones,
+      turno: this.tiempo.itinerario[0].turno
     }
-    this.tiempo.turnos_choques.push({ ...newChoque});
+    this.tiempo.itinerario.push({ ...newChoque});
     console.log(newChoque)
-    this.tiempo.turnos_choques[0].dia = '';
+    this.tiempo.itinerario[0].dia = '';
   }
 
 

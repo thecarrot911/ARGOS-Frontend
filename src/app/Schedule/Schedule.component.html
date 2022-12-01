@@ -53,73 +53,60 @@
   <!-- Code block ends -->
 </div>
 
-<div class="antialiased text-gray-900 px-6">
-  <div class="max-w-wl py-12 md:max-w-2xl">
-    <h2 class="text-2xl font-sans">Prueba</h2>
-    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-      <div class="grid gird-cols-1 gap-6" *ngFor="let horario of horarios | async; let indice = index">
-        <label class="block">
-          <span>ACA: {{horario.empleados[0].turno}}</span>
-        </label>
-      </div>
-    </div>
-</div>
-</div>
+<!-- <div class="antialiased text-gray-900 px-6">
+  <div>
+    <ul>
+      <li *ngFor="let horario of horarios | async; let indice = index">
+        A. Montaner {{horario.empleados[0].turno}} <br>
+        C. Veira{{horario.empleados[1].turno}} <br>
+        D. Troncoso{{horario.empleados[2].turno}} <br>
+        R. Zuñiga{{horario.empleados[3].turno}} <br>
+        R. Zavala{{horario.empleados[4].turno}} <br> <br>
+      </li>
+    </ul>
+  </div>
+</div> -->
 
 
 
 
 
 
-<div class="flex items-center justify-between w-full ">
+<div class="flex items-center justify-between w-full">
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow">
     <div class="w-full lg:w-2/3 h-64 white:bg-gray-500">
       <div class="inline-block bg-white h-80 w-52" *ngFor="let schedule of horarios | async; let indice = index" >
-          <h5 class="mb-1 text-base font-semibold text-gray-400 md:text-xl white:text-white ml-3 px-2">Día {{indice+1}}</h5>
-          <p class="text-sm font-normal text-gray-500 white:text-gray-400 px-5">Octubre</p>
+          <h5 class="mb-1 text-base font-semibold text-gray-400 md:text-xl white:text-white ml-3 px-2">{{schedule.dia_semana}} {{schedule.numero_dia}} </h5>
+          <p class="text-sm font-normal text-gray-500 white:text-gray-400 px-5">MES</p>
         <div class="container mx-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-rows-5 w-48">
           <ul class="my-2 space-y-2">
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
-              <span class="flex-1 ml-3 whitespace-nowrap ">A. Montaner </span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.dia_semana}}</span>
-
+              <span class="flex-1 ml-3 whitespace-nowrap ">A. Montaner</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[0].turno}}</span>
               </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">C. Veira</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_2 == 0">Libre</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_2 == 1">07:00 a 15:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_2 == 2">15:00 a 23:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_2 == 3">23:00 a 07:00</span>
-              </a>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[1].turno}}</span>              </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">D. Troncoso</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_3 == 0">Libre</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_3 == 1">07:00 a 15:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_3 == 2">15:00 a 23:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_3 == 3">23:00 a 07:00</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[2].turno}}</span>
               </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">R. Zavala</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_4 == 0">Libre</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_4 == 1">07:00 a 15:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_4 == 2">15:00 a 23:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_4 == 3">23:00 a 07:00</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[3].turno}}</span>
               </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">R. Zuñiga</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_5 == 0">Libre</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_5 == 1">07:00 a 15:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_5 == 2">15:00 a 23:00</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium" *ngIf="schedule.empleado_5 == 3">23:00 a 07:00</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[4].turno}}</span>
               </a>
             </li>
           </ul> 

@@ -9,31 +9,29 @@ import { InfoData } from '../infoData';
 import { Actualizacion } from '../actualizacion';
 import { Tiempo } from '../tiempo';
 import { ACTUALIZACIONES } from '../mock-actualizaciones';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HorarioService {
 
-  @Output() disparador: EventEmitter<any> = new EventEmitter();
-
-  dataUrl= 'http://localhost:10975/app/planificacion/generar_planificacion'; /* BackendUrl para enviar añoo y mes*/
+  dataUrl= 'http://localhost:10975/app/planificacion/generar_planificacion';
+  urlUltimaPlanificacion = 'http://localhost:10975/app/planificacion/mostrar_ultima';
 
   constructor(
     private http: HttpClient){}
 
   items = [];
 
-  getHorarios(){
-/*     return console.log("Función --> getHorarios"); */
-    return this.http.get('/assets/schedule.json');
+/*   getHorarios(){
+    return this.http.get('http://localhost:10975/app/planificacion/mostrar_ultima')
+  }  */
+
+   getHorarios(): Observable<any>{
+    return this.http.get('http://localhost:10975/app/planificacion/mostrar_ultima')
   } 
 
-
-/*   getScheduleWorkers(){
-    return console.log('hola');
-  }
- */
   getItems(){
     return this.items;
   }
@@ -78,7 +76,7 @@ export class HorarioService {
     return this.http.post<Tiempo>(this.dataUrl, tiempo);
   }
 
-  /* Recibir horario final */
+  /* Recibir último horario */
   getHorario(): Observable<Tiempo[]>{
     return this.http.get<Tiempo[]>(this.dataUrl)
   }

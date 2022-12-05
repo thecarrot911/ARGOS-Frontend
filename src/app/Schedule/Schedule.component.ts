@@ -15,12 +15,17 @@ import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-avi
 })
 export class ScheduleComponent implements OnInit {
 
-  public ayuda: any;
+  estado = new Promise((resolve, reject) => {
+    setTimeout(() =>{
+      resolve(this.calendario);
+    }, 5000);
+  })
 
-  horarios: any;
-  indice: any;
-  items: any;
-  checkoutForm: any; /* Almacenar el modelo del formulario */
+  pruebas: any;
+  public horarios: any = [];
+  capturarHorario: any;
+  tiempos: Tiempo[] = [];
+
 
   public generador: any; /* ONSUBMIT */
 
@@ -29,67 +34,37 @@ export class ScheduleComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
   ) { 
-
    }
 
+   public calendario: any;
+
   ngOnInit(): void {
-     this.horarios = this.horarioService.getHorarios(); 
 
-/*     this.horarios = this.horarioService.getHorarios().
-      subscribe(
-        response => {
-          console.log('xddddd')
-        },
-        error =>{
-          console.log('OH NO ITS BROKEN');
-        }
-      ) */
+    this.cargarData();
+    /* this.horarios = this.horarioService.getHorarios(); */
 
-/*     this.horarioService.getScheduleWorkers().subscribe(
-      response => {
-        console.log(response)
-      },
-      error => {
-        console.log(error);
+/*     this.horarios = this.horarioService.getHorarios()
+    .subscribe(
+      response =>{
+        this.horarios = response.data
+        this.calendario = response
+        console.log(this.horarios)
       }
-    ); */
+    ) */
+
   }
-
-  
-
-
-
-/*   onSubmit(calendarData: any){
-  this.items = this.horarioService.clearData();
-  this.checkoutForm.reset();
-  console.warn('Datos', calendarData);
-
-  this.http.post('http://localhost:10975/app/planificacion/generar_planificacion', calendarData)
-  .subscribe((res) => {
-    console.log(res);
-  });
-  } */
-
-/*   onSubmit(calendardata: calendarData): void {
-    calendardata = calendardata.trim();
-    if (!calendardata) { return; }
-      this.horarioService.addSchedule(calendardata)
-      .subscribe(calendardata => {
-        this.calendardatas.push(calendardata);
-      }); 
-  } */
-
-/*  onSubmit(){
-   this.horarioService.addSchedule(this.generador)
-     .subscribe(
-      response => {
-        console.log(response)
-      },
-      error => {
-        console.log(error)
+  public cargarData(){
+    this.horarioService.getHorarios()
+    .subscribe(
+      response =>{
+        this.horarios = response.data
+        console.log(this.horarios)
       }
-     )
-  } */
+    )
+/*   console.log(this.calendario) */
+}
+
+
 
 }
 

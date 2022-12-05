@@ -25,7 +25,7 @@ export class AgregarActualizacionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient
   ) { 
-    this.actualizacion = new Actualizacion('', '','','',null);
+    this.actualizacion = new Actualizacion('','','',null);
   }
 
   ngOnInit(): void {
@@ -33,7 +33,6 @@ export class AgregarActualizacionComponent implements OnInit {
 
 
   enviarActualizacion(){
-    console.log(this.actualizacion)
     this.horarioService.guardarActualizacion(this.actualizacion)
       .subscribe(
        response => {

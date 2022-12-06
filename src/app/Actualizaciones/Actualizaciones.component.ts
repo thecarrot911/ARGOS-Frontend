@@ -16,7 +16,7 @@ export class ActualizacionesComponent implements OnInit {
   constructor(
     private horarioService: HorarioService
   ) {
-    this.actualizacion = new Actualizacion('','','',null);
+    this.actualizacion = new Actualizacion('','','', '', 2);
   }
 
   ngOnInit(): void {

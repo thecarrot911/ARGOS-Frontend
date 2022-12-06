@@ -58,7 +58,7 @@ xd
 <!-- <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pt-6 gap-8">
   <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24">
     AA
-    <div class="inline-block bg-white h-80" *ngFor="let horario of calendario | async; let indice = index">
+    <div class="inline-block bg-white h-80" *ngFor="let horario of horarios | async; let indice = index">
       <h1>A:{{horario.mes}} xd</h1>
     </div>
   </div>
@@ -66,18 +66,27 @@ xd
 
 
 <!-- <ol>
-  <li class="bg-red-500" *ngFor="let horario of calendario | async">{{horario.planificacion_id}}</li>
+  <li class="bg-red-500" *ngFor="let horario of horarios">
+    horario.msg
+  </li>
 </ol> -->
 
-<div class="my-2 bg-red-300">
-  {{estado | async}}
-</div>
 
-<tbody *ngFor="let horario of horarios">
+
+<!-- <tbody *ngFor="let horario of horarios | async">
   <tr>
-    <td>{{horario.mes | json}}</td>
+    <td>{{horario.planificacion_id}} AA</td>
   </tr>
-  </tbody>
+  </tbody> -->
+
+<h1 class="bg-red-300" *ngFor="let horario of horarios.data.planificacion">
+  {{horario.dia_semana}}
+  <h2 class="bg-blue-300" *ngFor="let empleado of horario.empleados">
+    
+    xd {{empleado.nombre}}  {{empleado.turno}}
+  </h2>
+
+</h1>
 
 <span> horario </span>
 <pre>{{ horarios | json}}</pre>

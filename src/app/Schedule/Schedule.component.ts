@@ -6,6 +6,7 @@ import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
 import { Observable } from 'rxjs';
 import { calendarData } from '../calendarData'; /* Interfaz */
 import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-aviones.component';
+import { Calendario } from '../calendario';
 
 
 @Component({
@@ -15,15 +16,10 @@ import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-avi
 })
 export class ScheduleComponent implements OnInit {
 
-  estado = new Promise((resolve, reject) => {
-    setTimeout(() =>{
-      resolve(this.calendario);
-    }, 5000);
-  })
 
   pruebas: any;
-  public horarios: any = [];
-  capturarHorario: any;
+  horarios!: Calendario;
+
   tiempos: Tiempo[] = [];
 
 
@@ -33,34 +29,25 @@ export class ScheduleComponent implements OnInit {
     private horarioService: HorarioService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-  ) { 
-   }
-
-   public calendario: any;
+  ) {  
+       }
 
   ngOnInit(): void {
-
     this.cargarData();
-    /* this.horarios = this.horarioService.getHorarios(); */
-
-/*     this.horarios = this.horarioService.getHorarios()
-    .subscribe(
-      response =>{
-        this.horarios = response.data
-        this.calendario = response
-        console.log(this.horarios)
-      }
-    ) */
-
   }
-  public cargarData(){
+
+  cargarData(): void {
     this.horarioService.getHorarios()
     .subscribe(
       response =>{
-        this.horarios = response.data
+        this.horarios = response;
         console.log(this.horarios)
+      },
+      error =>{
+        console.log("error:C")
       }
     )
+ 
 /*   console.log(this.calendario) */
 }
 

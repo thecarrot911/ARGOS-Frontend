@@ -25,7 +25,7 @@ export class AgregarActualizacionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient
   ) { 
-    this.actualizacion = new Actualizacion('','','',null);
+    this.actualizacion = new Actualizacion('','','','', 143434);
   }
 
   ngOnInit(): void {

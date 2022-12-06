@@ -1,15 +1,16 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; /* a */
 import { HttpParams } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs'; /* a */
-import { catchError, retry } from 'rxjs/operators'; /* a */
+import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
+import { catchError, retry, tap } from 'rxjs/operators'; /* a */
 import { calendarData } from '../calendarData';
 import { itinerarioData} from '../itinerarioData';
 import { InfoData } from '../infoData';
 import { Actualizacion } from '../actualizacion';
 import { Tiempo } from '../tiempo';
 import { ACTUALIZACIONES } from '../mock-actualizaciones';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
+import { Calendario } from '../calendario';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +27,11 @@ export class HorarioService {
 
 /*   getHorarios(){
     return this.http.get('http://localhost:10975/app/planificacion/mostrar_ultima')
-  }  */
+  } */ 
 
-   getHorarios(): Observable<any>{
-    return this.http.get('http://localhost:10975/app/planificacion/mostrar_ultima')
-  } 
+   getHorarios(): Observable<Calendario>{
+    return this.http.get<Calendario>('http://localhost:10975/app/planificacion/mostrar_ultima')
+  }
 
   getItems(){
     return this.items;

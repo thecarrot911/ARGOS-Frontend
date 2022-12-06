@@ -48,7 +48,7 @@
   </div>
    <div class="mt-6 md:mt-0">
       <!-- <button class="mr-3 bg-gray-200 white:bg-slate-600 focus:outline-none transition duration-150 ease-in-out rounded hover:bg-gray-300 text-white white:hover:bg-gray-300 dark:text-indigo-400 px-5 py-2 text-sm">-</button> -->
-      <button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" [routerLink]="['/agregaractualizacion']">Agregar Actualización</button>
+      <button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización</button>
   </div>
   <!-- Code block ends -->
 </div>
@@ -86,7 +86,7 @@
 
           <div class="w-full lg:w-1/4 h-screen bg-blue-200">
             <div class="bg-blue-300 p-4 rounded-md col-end-6"> <!-- Actualizaciones -->
-              <h1 class="text-sm text-gray-700">Tipo de permiso: {{horarios.data.mes}}</h1>
+              <h1 class="text-sm text-gray-700">Tipo de permiso: </h1>
                 <h3 class="text-lg font-semibold text-gray-900 white:text-black">A. Montaner</h3>
               <p class="mb-4 text-base font-normal text-gray-500 white:text-gray-400">Solicita permiso para el día miércoles 28 de Septiembre.</p>
               <p class="text-gray-500">Fecha LUNES DICIEMBRE</p>

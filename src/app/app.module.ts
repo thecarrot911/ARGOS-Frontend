@@ -34,7 +34,7 @@ import { ActualizacionService } from './services/actualizacion.service';
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
       { path: 'schedule', component: ScheduleComponent },
-      { path: 'agregaractualizacion', component: AgregarActualizacionComponent},
+      { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent},
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
     ]),
   ],

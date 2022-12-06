@@ -16,6 +16,7 @@ import { Calendario } from '../calendario';
 })
 export class ScheduleComponent implements OnInit {
 
+  public planificacion_id!: number;
 
   pruebas: any;
   horarios!: Calendario;
@@ -41,6 +42,7 @@ export class ScheduleComponent implements OnInit {
     .subscribe(
       response =>{
         this.horarios = response;
+        this.planificacion_id = this.horarios.data.planificacion_id
         console.log(this.horarios)
       },
       error =>{
@@ -48,10 +50,7 @@ export class ScheduleComponent implements OnInit {
       }
     )
  
-/*   console.log(this.calendario) */
 }
-
-
 
 }
 

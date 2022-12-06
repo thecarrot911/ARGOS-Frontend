@@ -14,8 +14,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AgregarActualizacionComponent implements OnInit {
 
+  public planificacion_id! : number;
+  public sub!: any;
+
   actualizaciones: Actualizacion[] = [];
-  actualizacion: Actualizacion;
+  actualizacion!: Actualizacion;
   public status!: string;
 
   constructor(
@@ -25,10 +28,14 @@ export class AgregarActualizacionComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient
   ) { 
-    this.actualizacion = new Actualizacion('','','','', 143434);
+    
   }
 
   ngOnInit(): void {
+      this.sub = this.route.params.subscribe(params => {
+      this.planificacion_id = params['planificacion_id'];
+      });
+    this.actualizacion = new Actualizacion('','','','',this.planificacion_id);
   }
 
 
@@ -44,13 +51,6 @@ export class AgregarActualizacionComponent implements OnInit {
       )
    }
 
-   addActualizacionVista(tipo_permiso: string): void{
-    tipo_permiso = tipo_permiso.trim();
-    console.log('addActualizacion')
-    this.horarioService.addActualizacionVista({tipo_permiso} as Actualizacion)
-      .subscribe(actualizacion => {
-        this.actualizaciones.push(actualizacion);
-      });
-   }
+   
 
 }

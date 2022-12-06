@@ -16,15 +16,11 @@ export class ActualizacionesComponent implements OnInit {
   constructor(
     private horarioService: HorarioService
   ) {
-    this.actualizacion = new Actualizacion('','','', '', 2);
+    this.actualizacion = new Actualizacion('','','', '', 0);
   }
 
   ngOnInit(): void {
-    this.getActualizacionesVistas();
+
   }
 
-  getActualizacionesVistas(): void{
-    this.horarioService.getActualizacionesVistas()
-      .subscribe(actualizaciones => this.actualizaciones = actualizaciones)
-  }
 }

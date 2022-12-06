@@ -86,11 +86,14 @@
 
           <div class="w-full lg:w-1/4 h-screen bg-blue-200">
             <div class="bg-blue-300 p-4 rounded-md col-end-6"> <!-- Actualizaciones -->
-              <h1 class="text-sm text-gray-700">Tipo de permiso: </h1>
+              <ng-container *ngFor="let empleado of horarios.data.actualizacion">
+              <h1 class="text-sm text-gray-700">{{empleado.tipo_permiso}}</h1>
                 <h3 class="text-lg font-semibold text-gray-900 white:text-black">A. Montaner</h3>
               <p class="mb-4 text-base font-normal text-gray-500 white:text-gray-400">Solicita permiso para el día miércoles 28 de Septiembre.</p>
               <p class="text-gray-500">Fecha LUNES DICIEMBRE</p>
+            </ng-container>
             </div> 
+
           </div>
   </div>
 </div>

@@ -66,32 +66,40 @@
 </div> -->
 
 <div class="container mx-auto">
-  <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow">
-    
-        <div class="w-full lg:w-5/6 h-screen bg-red-200">
-          <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto bg-yellow-200">
+  <div class="bg-gradient-to-r from-rose-100 to-teal-100 p-4 col-span-full rounded-md hover:text-lg">{{horarios.data.mes}}, {{horarios.data.anio}}</div>
+  <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow pt-6">
+        <div class="w-full lg:w-5/6 h-screen">
+          <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto  rounded-md">
             <ng-container *ngFor="let horario of horarios.data.planificacion">
               
-            <div class="grid grid-cols-1 gap-2 bg-green-200">
-              {{horario.dia_semana}}
-              {{horario.numero_dia}} <br>
+            <div class="grid grid-cols-1 gap-2 bg-gradient-to-b from-black via-slate-600 to-black rounded-md m-2 text-white">
+              <div class="m-3">{{horario.dia_semana}} {{horario.numero_dia}}</div>
               <ng-container *ngFor="let empleado of horario.empleados">
-                {{empleado.nombre}} {{empleado.turno}}
+                <div class="flex justify-between m-3"> 
+                <div>{{empleado.nombre}}</div>
+                <div>{{empleado.turno}}</div>
+              </div>
               </ng-container>
+              
             </div>
             </ng-container>
 
           </div>
         </div>
 
-          <div class="w-full lg:w-1/4 h-screen bg-blue-200">
-            <div class="bg-blue-300 p-4 rounded-md col-end-6"> <!-- Actualizaciones -->
-              <ng-container *ngFor="let empleado of horarios.data.actualizacion">
-              <h1 class="text-sm text-gray-700">{{empleado.tipo_permiso}}</h1>
-                <h3 class="text-lg font-semibold text-gray-900 white:text-black">A. Montaner</h3>
-              <p class="mb-4 text-base font-normal text-gray-500 white:text-gray-400">Solicita permiso para el día miércoles 28 de Septiembre.</p>
-              <p class="text-gray-500">Fecha LUNES DICIEMBRE</p>
-            </ng-container>
+          <div class="w-full lg:w-1/4 h-screen bg-gradient-to-r from-white via-orange-300 to-white ">
+            <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md"> <!-- Actualizaciones -->
+                <h1 class="italic text-lg font-light hover:text-white m-3">Actualizaciones</h1>
+                <ng-container *ngFor="let empleado of horarios.data.actualizacion">
+                  <div class="space-y-10 m-3">
+
+                      <p class="text-sm text-gray-700 leading-6">{{empleado.tipo_permiso}} asdf</p>
+                      <p class="text-sm text-gray-900">{{empleado.empleado}}</p>
+                      <p class="text-sm">{{empleado.descripcion}}</p>
+                      <p class="text-gray-500">{{empleado.fecha}}</p>
+
+                  </div> 
+                </ng-container>
             </div> 
 
           </div>
@@ -147,9 +155,8 @@
 grid-flow-row
 y auto-rows-auto para igualar el tamaño que haga el calendario e igualarlo al de actualizaciones -->
 
-<br><br>
 
-<div class="container mx-auto text-3xl font-sans">
+<!-- <div class="container mx-auto text-3xl font-sans">
   <div class="flex gap-3 justify-end">
     <div class="bg-yellow-200">A</div>
     <div class="bg-yellow-200">B</div>
@@ -158,7 +165,7 @@ y auto-rows-auto para igualar el tamaño que haga el calendario e igualarlo al d
     <div class="bg-yellow-200">E</div>
     <div class="bg-yellow-200 grid justify-items-end">f</div>
   </div>
-</div>
+</div> -->
 
 
 

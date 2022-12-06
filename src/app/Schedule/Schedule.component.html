@@ -54,7 +54,8 @@
 </div>
 
 
-xd
+
+
 <!-- <div class="container mx-auto grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pt-6 gap-8">
   <div class="rounded border-gray-300 dark:border-gray-700 border-dashed border-2 h-24">
     AA
@@ -64,32 +65,123 @@ xd
   </div>
 </div> -->
 
+<div class="container mx-auto">
+  <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow">
+    
+        <div class="w-full lg:w-5/6 h-screen bg-red-200">
+          <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto bg-yellow-200">
+            <ng-container *ngFor="let horario of horarios.data.planificacion">
+              
+            <div class="grid grid-cols-1 gap-2 bg-green-200">
+              {{horario.dia_semana}}
+              {{horario.numero_dia}} <br>
+              <ng-container *ngFor="let empleado of horario.empleados">
+                {{empleado.nombre}} {{empleado.turno}}
+              </ng-container>
+            </div>
+            </ng-container>
 
-<!-- <ol>
-  <li class="bg-red-500" *ngFor="let horario of horarios">
-    horario.msg
-  </li>
-</ol> -->
+          </div>
+        </div>
+
+          <div class="w-full lg:w-1/4 h-screen bg-blue-200">
+            <div class="bg-blue-300 p-4 rounded-md col-end-6"> <!-- Actualizaciones -->
+              <h1 class="text-sm text-gray-700">Tipo de permiso: {{horarios.data.mes}}</h1>
+                <h3 class="text-lg font-semibold text-gray-900 white:text-black">A. Montaner</h3>
+              <p class="mb-4 text-base font-normal text-gray-500 white:text-gray-400">Solicita permiso para el día miércoles 28 de Septiembre.</p>
+              <p class="text-gray-500">Fecha LUNES DICIEMBRE</p>
+            </div> 
+          </div>
+  </div>
+</div>
+
+<!-- <div class="container mx-auto">
+  <div class="flex flex-col">
+  <div class="h-screen bg-red-200">B </div>
+  <div class="bg-green-200 h-full w-4/5">A  A a A aA </div>
+</div>
+</div> -->
+
+<!-- <div class="container mx-auto text-1xl font-extralight">
+  <div class="bg-yellow-200 p-4 col-span-full rounded-md">{{horarios.data.mes}} {{horarios.data.anio}}</div>
+
+
+  <div class="grid grid-cols-2 gap-4 grid-flow-row auto-rows-auto bg-sky-200"> 
+    <div class="grid grid-cols-1 gap-6">
+
+      <ng-container *ngFor="let horario of horarios.data.planificacion">
+      
+        <div class="bg-green-300 p-4 rounded-md ">
+          <div>
+            {{horario.dia_semana}} {{horario.numero_dia}}
+          </div>
+          <ng-container *ngFor="let empleado of horario.empleados">
+            <div class="bg-red-200 rounded-full gap-4 ">
+              <div>
+                {{empleado.nombre}} {{empleado.turno}}
+              </div>
+            </div>
+           </ng-container> 
+      </div>
+ 
+    </ng-container>
+    
+  </div>
+  
+    <div class="grid grid-cols-1 gap-6">
+      <div class="bg-blue-300 p-4 rounded-md col-end-6">
+        <h1 class="text-sm text-gray-700">Tipo de permiso: {{horarios.data.mes}}</h1>
+          <h3 class="text-lg font-semibold text-gray-900 white:text-black">A. Montaner</h3>
+        <p class="mb-4 text-base font-normal text-gray-500 white:text-gray-400">Solicita permiso para el día miércoles 28 de Septiembre.</p>
+        <p class="text-gray-500">Fecha LUNES DICIEMBRE</p>
+       </div> 
+      </div>
+  </div>
+</div> -->
+
+
+<!-- Necesito las columnas
+grid-flow-row
+y auto-rows-auto para igualar el tamaño que haga el calendario e igualarlo al de actualizaciones -->
+
+<br><br>
+
+<div class="container mx-auto text-3xl font-sans">
+  <div class="flex gap-3 justify-end">
+    <div class="bg-yellow-200">A</div>
+    <div class="bg-yellow-200">B</div>
+    <div class="bg-yellow-200">C</div>
+    <div class="bg-yellow-200">D</div>
+    <div class="bg-yellow-200">E</div>
+    <div class="bg-yellow-200 grid justify-items-end">f</div>
+  </div>
+</div>
 
 
 
-<!-- <tbody *ngFor="let horario of horarios | async">
-  <tr>
-    <td>{{horario.planificacion_id}} AA</td>
-  </tr>
-  </tbody> -->
+<!-- <div class="flex items-center justify-between w-full">
+  <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow">
+      <div class="w-full lg:w-2/3 h-64 dark:bg-gray-200"></div>
+      <div class="w-full lg:w-1/3 h-24 dark:border-gray-500 lg:h-64 border-t lg:border-t-0 lg:border-r lg:border-l lg:rounded-r dark:bg-gray-700 bg-gray-100"></div>
+  </div>
+</div> -->
 
-<h1 class="bg-red-300" *ngFor="let horario of horarios.data.planificacion">
+
+<!-- s s s s s -->
+<!-- <h1 class="bg-red-300" *ngFor="let horario of horarios.data.planificacion">
   {{horario.dia_semana}}
   <h2 class="bg-blue-300" *ngFor="let empleado of horario.empleados">
-    
+
     xd {{empleado.nombre}}  {{empleado.turno}}
   </h2>
+</h1> -->
 
-</h1>
 
-<span> horario </span>
-<pre>{{ horarios | json}}</pre>
+<!-- ssss s ss s  -->
+<!-- <span> horario </span>
+<pre>{{ horarios | json}}</pre> -->
+
+
 
 
 
@@ -97,7 +189,7 @@ xd
 <!-- <div class="flex items-center justify-between w-full">
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow">
     <div class="w-full lg:w-2/3 h-64 white:bg-gray-500">
-      <div class="inline-block bg-white h-80 w-52" *ngFor="let schedule of calendario | async; let indice = index" >
+      <div class="inline-block bg-white h-80 w-52" *ngFor="let horario of horarios.data.planificacion; let indice = index" >
           <h5 class="mb-1 text-base font-semibold text-gray-400 md:text-xl white:text-white ml-3 px-2"> </h5>
           <p class="text-sm font-normal text-gray-500 white:text-gray-400 px-5">{{indice}}</p>
         <div class="container mx-auto sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 grid-rows-5 w-48">
@@ -105,30 +197,30 @@ xd
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-700 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap ">A. Montaner</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[0].turno}}</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{horario.empleados[0].turno}}</span>
               </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">C. Veira</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[1].turno}}</span>              </a>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{horario.empleados[1].turno}}</span>              </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">D. Troncoso</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[2].turno}}</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{horario.empleados[2].turno}}</span>
               </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">R. Zavala</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[3].turno}}</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{horario.empleados[3].turno}}</span>
               </a>
             </li>
             <li>
               <a href="#" class="flex items-center text-base font-bold text-gray-900 bg-gray-50 rounded-lg hover:bg-gray-100 group hover:shadow dark:bg-[#555971] dark:hover:bg-gray-500 dark:text-white">
               <span class="flex-1 ml-3 whitespace-nowrap">R. Zuñiga</span>
-              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{schedule.empleados[4].turno}}</span>
+              <span class="inline-flex items-center justify-center px-1 py-0.5 text-xs font-medium">{{horario.empleados[4].turno}}</span>
               </a>
             </li>
           </ul> 
@@ -138,5 +230,20 @@ xd
     </div>
     <div class="w-full lg:w-1/3 h-auto white:border-gray-500 lg:h-64 border-t lg:border-t-0 lg:border-r lg:border-l lg:rounded-r black:bg-gray-200 bg-gray-200">
       <app-Actualizaciones></app-Actualizaciones>
+    </div>
+  </div> -->
+
+<!--   <div class="container mx-auto text-1xl font-extralight">
+    <div class="grid grid-cols-3 gap-4 grid-flow-row auto-rows-auto">
+      
+        <div class="bg-yellow-200 p-4 col-span-full">Diciembre, 2022</div>
+        <ng-container *ngFor="let horario of horarios.data.planificacion">
+        <div class="bg-green-300 p-4 col-span-2">
+          {{horario.dia_semana}} {{horario.numero_dia}}
+        </div> 
+        <div class="bg-blue-300 p-4"> 
+          
+        </div> 
+      </ng-container>
     </div>
   </div> -->

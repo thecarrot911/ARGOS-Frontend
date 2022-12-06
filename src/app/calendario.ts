@@ -7,7 +7,7 @@ export interface Calendario {
 interface Data {
     planificacion_id: number;
     mes: string;
-    año: string;
+    anio: string;
     planificacion: Planificacion[];
     actualizacion: Actualizacion[];
 }

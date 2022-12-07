@@ -32,7 +32,7 @@
                       <polyline points="14 7 21 7 21 14" />
                   </svg>
               </div>
-              <span> Waki Labs</span>
+              <span>ARIACA</span>
           </li>
            <li class="flex items-center mt-4 md:mt-0">
               <div class="mr-1">
@@ -73,10 +73,10 @@
               <div class="m-3 flex justify-between">
                 <div>{{horario.dia_semana}} {{horario.numero_dia}}</div>
                 <ng-container *ngIf="horario.comodin == '23:00 a 07:00'">
-                  <span class="flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex rounded-full bg-red-400 opacity-75 ">Se necesitan un comodín para el turno: {{horario.comodin}}</span>
+<!--                   <span class="flex h-3 w-3">
+                    <span class="animate-ping absolute inline-flex rounded-full bg-red-400 opacity-75 ">{{horario.comodin}}</span>
                     <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                  </span>
+                  </span> -->
                 </ng-container>
                 <ng-container *ngIf="horario.comodin == '07:00 a 15:00'"></ng-container>
                 <ng-container *ngIf="horario.comodin == '15:00 a 23:00'"></ng-container>

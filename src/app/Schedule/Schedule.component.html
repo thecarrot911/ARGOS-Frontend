@@ -34,7 +34,7 @@
               </div>
               <span> Trending</span>
           </li> -->
-<!--           <li class="flex items-center mt-4 md:mt-0">
+           <li class="flex items-center mt-4 md:mt-0">
               <div class="mr-1">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" />
@@ -43,7 +43,7 @@
                   </svg>
               </div>
               <span>-</span>
-          </li> -->
+          </li> 
       </ul>
   </div>
    <div class="mt-6 md:mt-0">
@@ -64,8 +64,12 @@
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white shadow pt-6">
         <div class="w-full lg:w-5/6 h-screen">
           <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto  rounded-md">
-            <ng-container *ngFor="let horario of horarios.data.planificacion">
-              
+            <ng-container *ngFor="let horario of horarios.data.planificacion | paginate:{
+              id: 'first',
+              itemsPerPage: tableSizeCalendario,
+              currentPage: paginationCalendario,
+              totalItems: countCalendario}; let ix = index">
+    
             <div class="grid grid-cols-1 gap-2 bg-[#7E8091] rounded-md m-2 text-white">
               <div class="m-3">{{horario.dia_semana}} {{horario.numero_dia}}</div>
               <ng-container *ngFor="let empleado of horario.empleados">
@@ -74,19 +78,30 @@
                 <div>{{empleado.turno}}</div>
               </div>
               </ng-container>
-              
             </div>
+            
+
             </ng-container>
 
           </div>
+          <div class="mx-auto m-4">
+          <pagination-controls
+          id="first"
+          previousLabel="Prev"
+          nextLabel="Next"
+          (pageChange)="paginationCalendario = $event"
+          >
+          </pagination-controls>
+        </div>
         </div>
 
           <div class="w-full lg:w-1/4 h-screen">
             <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
                 <h1 class="italic text-lg font-light hover:text-white m-3">Actualizaciones</h1>
                   <ng-container *ngFor="let empleado of horarios.data.actualizacion.reverse() | paginate:{
+                    id: 'second',
                     itemsPerPage: tableSize,
-                    currentPage: page,
+                    currentPage: paginationActualizaciones,
                     totalItems: count}; let i = index">
                     <div class="m-3">
                         <p class="text-sm text-red-700 leading-6">{{empleado.tipo_permiso}}</p>
@@ -96,12 +111,12 @@
                     </div> 
                   </ng-container>
                   <pagination-controls
+                  id="second"
                   previousLabel="Prev"
                   nextLabel="Next"
-                  (pageChange)="onPagination($event)">
+                  (pageChange)="paginationActualizaciones = $event">
                   </pagination-controls>
             </div> 
-
           </div>
   </div>
 </div>

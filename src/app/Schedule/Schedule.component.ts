@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { calendarData } from '../calendarData'; /* Interfaz */
 import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-aviones.component';
 import { Calendario } from '../calendario';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 
 @Component({
@@ -24,9 +25,15 @@ export class ScheduleComponent implements OnInit {
   public generador: any; /* ONSUBMIT */
 
   page: number = 1;
+  pageCalendario: number = 1;
+  paginationCalendario = 1;
+  paginationActualizaciones = 1;
   count: number = 0;
+  countCalendario: number = 0;
   tableSize: number = 4;
+  tableSizeCalendario: number = 7;
   tableSizes: any = [5, 10, 15, 20]
+  tableSizesCalendario: any = [5, 10, 15, 20]
 
   constructor(
     private horarioService: HorarioService,
@@ -48,19 +55,31 @@ export class ScheduleComponent implements OnInit {
         console.log(this.horarios)
       },
       error =>{
-        console.log("error:C")
+        console.log(error)
       }
     )
   }  
+
 
   onPagination(event: any){
     this.page = event;
     this.cargarData();
   }
 
-  onDiseñoTabla(event: any): void{
+  onPaginationCalendario(event: any){
+    this.pageCalendario = event;
+    this.cargarData();
+  }
+
+  onDisenoTabla(event: any): void{
     this.tableSize = event.target.value;
     this.page = 1;
+    this.cargarData();
+  }
+
+  onDisenoTabla2(event: any): void{
+    this.tableSizeCalendario = event.target.value;
+    this.pageCalendario = 1;
     this.cargarData();
   }
 

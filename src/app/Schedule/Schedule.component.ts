@@ -9,6 +9,11 @@ import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-avi
 import { Calendario } from '../calendario';
 import { ChangeDetectionStrategy } from '@angular/core';
 
+import { DatePipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
 
 @Component({
   selector: 'app-Schedule',
@@ -35,16 +40,24 @@ export class ScheduleComponent implements OnInit {
   tableSizes: any = [5, 10, 15, 20]
   tableSizesCalendario: any = [5, 10, 15, 20]
 
+  CurrentDate = new Date();
+  latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
+  today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y' )
+
+
   constructor(
     private horarioService: HorarioService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
+    private datePipe: DatePipe
   ) {  
        }
 
   ngOnInit(): void {
     this.cargarData();
   }
+
+  
 
   cargarData(): void {
     this.horarioService.getHorarios()

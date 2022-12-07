@@ -8,12 +8,13 @@
 
           <label class="block">
             <span class="text-gray-700">Tipo de permiso</span>
-            <select class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50" id="permiso" name="tipo_permiso" #tipo_permiso="ngModel" [(ngModel)]="actualizacion.tipo_permiso">
-              <option>Permiso</option>
-              <option>Cambio de Turno</option>
-              <option>Comodín</option>
-              <option>Urgencia</option>
-              <option>Otro</option>
+            <select
+            class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50" id="permiso" name="tipo_permiso" #tipo_permiso="ngModel" [(ngModel)]="actualizacion.tipo_permiso">
+              <option value="Permiso">Permiso</option>
+              <option value="Cambio de Turno">Cambio de Turno</option>
+              <option value="Comodín">Comodín</option>
+              <option value="Urgencia">Urgencia</option>
+              <option value="Otro">Otro</option>
             </select>
             <span class="text-rose-500" *ngIf="tipo_permiso && tipo_permiso.valid && tipo_permiso.touched">Este campo es requerido.</span>
           </label>

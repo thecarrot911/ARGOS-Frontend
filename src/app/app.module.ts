@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -15,6 +15,7 @@ import { AgregarActualizacionComponent } from './agregarActualizacion/agregarAct
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
 import { ActualizacionService } from './services/actualizacion.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [							
@@ -33,6 +34,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    DatePipe,
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
       { path: 'schedule', component: ScheduleComponent },
@@ -40,7 +42,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
     ]),
   ],
-  providers: [ActualizacionService],
+  providers: [ActualizacionService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

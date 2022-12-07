@@ -1,5 +1,5 @@
 
-<form (ngSubmit)="enviarDatosJSON()" #infoForm="ngForm">
+<form (ngSubmit)="enviarDatosJSON()" #itinerarioForm="ngForm">
   <div class="antialiased text-gray-900 px-6">
     <div class="max-w-wl mx-auto py-12 md:max-w-2xl"> <!-- md:max-w-6xl mueve de izq a der -->
       <h2 class="text-2xl font-sans">Generador de horario</h2>
@@ -10,21 +10,24 @@
           <label class="block">
             <span class="text-gray-700">Ingrese el año</span>
             <input type="text" placeholder="2022" name="anio" #anio="ngModel" [(ngModel)]="tiempo.anio"
-            class="form-input mt-1 block w-full">
+            class="form-input mt-1 block w-full rounded-md">
+            <span class="text-rose-500" *ngIf="anio && anio.valid && anio.touched">Este campo es requerido.</span>
           </label>
           
 
           <label class="block">
             <span class="text-gray-700">Ingrese el mes</span>
             <input type="number" placeholder="11" name="mes" #mes="ngModel" [(ngModel)]="tiempo.mes"
-            class="form-input mt-1 block w-full">
+            class="form-input mt-1 block w-full rounded-md">
+            <span class="text-rose-500" *ngIf="mes && mes.valid && mes.touched">Este campo es requerido.</span>
+
           </label>
 
           <label class="block">
             <span class="text-gray-700">Empleados</span>
             <input type="text" *ngFor = "let empleado of tiempo.empleados; let i = index"
             name="nombre_{{i}}" #mes="ngModel" [(ngModel)]="tiempo.empleados[i].nombre"
-            class="form-input mt-1 block w-full disabled:bg-slate-100"
+            class="form-input mt-1 block w-full disabled:bg-slate-100 rounded-md"
             disabled>
           </label>
 
@@ -35,20 +38,22 @@
             <label class="block">
               <span class="text-gray-700" for="dia">Seleccione el día del choque de horario</span>
               <input type="number" min="1" max="31" id="dia" name="dia" [(ngModel)]="tiempo.itinerario[0].dia"
-              placeholder="1 < x < 31" class="form-input mt-1 block w-full"
+              placeholder="25" class="form-input mt-1 block w-full rounded-md"
               >
+              
           </label>
 
           <label class="block">
             <span class="text-gray-700">Empleados que se necesita para ese turno</span>
             <input type="number"
-            placeholder="> 2"
+            placeholder="2"
             [(ngModel)]="tiempo.itinerario[0].aviones"
             #aviones="ngModel"
             name="aviones"
             id="aviones"
-            class="form-input mt-1 block w-full disabled:bg-slate-100"
+            class="form-input mt-1 block w-full disabled:bg-slate-100 rounded-md"
             >
+            <span class="text-rose-500" *ngIf="turno_choque_aviones && turno_choque_aviones.valid && turno_choque_aviones.touched">Este campo es requerido.</span>
           </label>
 
           <fieldset>
@@ -79,8 +84,9 @@
           <button class="bg-green-400 text-white py-2 px-4 rounded"
             type="button"
             (click)="agregarChoque()">
-            Agregar Choque
+            Agregar Itinerario 
           </button>
+          
 
           <input type="submit" value="Enviar itinerario" class="bg-blue-500 text-white py-2 px-4 rounded ">
         </div>
@@ -89,8 +95,8 @@
   </div>
 </form>
 
-<span> Tiempo </span>
+<!-- <span> Tiempo </span>
 <pre>{{tiempo | json }}</pre>
 
  <span>Persona</span>
-<pre> {{ persona | json }} </pre>
+<pre> {{ persona | json }} </pre> -->

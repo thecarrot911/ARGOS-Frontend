@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -54,7 +54,7 @@ export class ItinerarioAvionesComponent implements OnInit {
   public ayuda: any;
   /* Cap 245 */
   tiempo: Tiempo = {
-    anio: '2022',
+    anio: '',
     mes: '',
     empleados: [
       { nombre: 'A. MONTANER' },
@@ -84,12 +84,46 @@ export class ItinerarioAvionesComponent implements OnInit {
     private horarioService: HorarioService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private formsMOdule: FormsModule,
+    private formsModule: FormsModule,
   ) {
    }
 
+  itinerarioForm= new FormGroup({
+    anio: new FormControl('',[Validators.required]),
+    mes: new FormControl('',[Validators.required]),
+    empleados_nombre: new FormControl('',[Validators.required]),
+    turno_choque_dia: new FormControl('',[Validators.required]),
+    turno_choque_aviones: new FormControl('',[Validators.required]),
+    turno_choque_turno: new FormControl('',[Validators.required]),
+  })
+
+  get anio(){
+    return this.itinerarioForm.get('anio')
+  }
+  get mes(){
+    return this.itinerarioForm.get('mes')
+  }
+
+  get turno_choque_dia(){
+    return this.itinerarioForm.get('turno_choque_dia')
+  }
+  get turno_choque_aviones(){
+    return this.itinerarioForm.get('turno_choque_aviones')
+  }
+  get turno_choque_turno(){
+    return this.itinerarioForm.get('turno_choque_turno')
+  }
+
+
+
+
+
   ngOnInit() {
   }
+
+
+
+
 
   enviarDatosJSON(){
     console.log('Formulario posteado')
@@ -117,6 +151,9 @@ export class ItinerarioAvionesComponent implements OnInit {
     this.tiempo.itinerario.push({ ...newChoque});
     console.log(newChoque)
     this.tiempo.itinerario[0].dia = '';
+    this.tiempo.itinerario[0].aviones = '';
+    this.tiempo.itinerario[0].turno = ''
+    alert('Itinerario registrado')
   }
 
 }

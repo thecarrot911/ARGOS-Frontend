@@ -4,6 +4,8 @@ import { HorarioService } from '../services/horario.service';
 import { Actualizacion } from '../actualizacion';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'app-agregarActualizacion',
@@ -27,12 +29,13 @@ export class AgregarActualizacionComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private http: HttpClient,
+    private datePipe: DatePipe
   ) { 
     
   }
 
   actualizacionForm = new FormGroup({
-    tipo_permiso: new FormControl('', [Validators.required]),
+    tipo_permiso: new FormControl('', [Validators.required, Validators.minLength(3)]),
     descripcion: new FormControl('', [Validators.required]),
     empleado: new FormControl('', [Validators.required]),
     fecha: new FormControl('', [Validators.required]),
@@ -58,10 +61,11 @@ export class AgregarActualizacionComponent implements OnInit {
       this.sub = this.route.params.subscribe(params => {
       this.planificacion_id = params['planificacion_id'];
       });
-    this.actualizacion = new Actualizacion('','','',this.CurrentDate, this.planificacion_id);
+    this.actualizacion = new Actualizacion('','','',this.latest_date, this.planificacion_id);
   }
 
   CurrentDate = new Date();
+  latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
 
 
   enviarActualizacion(){

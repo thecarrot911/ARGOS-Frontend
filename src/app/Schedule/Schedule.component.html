@@ -72,7 +72,7 @@
           <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto  rounded-md">
             <ng-container *ngFor="let horario of horarios.data.planificacion">
               
-            <div class="grid grid-cols-1 gap-2 bg-gradient-to-b from-black via-slate-600 to-black rounded-md m-2 text-white">
+            <div class="grid grid-cols-1 gap-2 bg-[#7E8091] rounded-md m-2 text-white">
               <div class="m-3">{{horario.dia_semana}} {{horario.numero_dia}}</div>
               <ng-container *ngFor="let empleado of horario.empleados">
                 <div class="flex justify-between m-3"> 
@@ -88,15 +88,14 @@
         </div>
 
           <div class="w-full lg:w-1/4 h-screen bg-gradient-to-r from-white via-orange-300 to-white ">
-            <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md"> <!-- Actualizaciones -->
+            <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
                 <h1 class="italic text-lg font-light hover:text-white m-3">Actualizaciones</h1>
-                <ng-container *ngFor="let empleado of horarios.data.actualizacion">
-                  <div class="space-y-10 m-3">
-
-                      <p class="text-sm text-gray-700 leading-6">{{empleado.tipo_permiso}} asdf</p>
-                      <p class="text-sm text-gray-900">{{empleado.empleado}}</p>
+                <ng-container *ngFor="let empleado of horarios.data.actualizacion.reverse()">
+                  <div class="m-3">
+                      <p class="text-sm text-red-700 leading-6">{{empleado.tipo_permiso}}</p>
+                      <p class="text-base text-blue-900">{{empleado.empleado}}</p>
                       <p class="text-sm">{{empleado.descripcion}}</p>
-                      <p class="text-gray-500">{{empleado.fecha}}</p>
+                      <p class="text-gray-500">{{empleado.fecha | date}}</p>
 
                   </div> 
                 </ng-container>

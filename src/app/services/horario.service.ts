@@ -4,7 +4,7 @@ import { HttpParams } from '@angular/common/http';
 import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
 import { catchError, retry, tap } from 'rxjs/operators'; /* a */
 import { calendarData } from '../calendarData';
-import { itinerarioData} from '../itinerarioData';
+/* import { itinerarioData} from '../itinerarioData'; */
 
 import { Actualizacion } from '../actualizacion';
 import { Tiempo } from '../tiempo';
@@ -49,12 +49,12 @@ export class HorarioService {
     this.items = [];
     return this.items;
   }
-  
+/*   
   genHorario(itinerariodata: itinerarioData): Observable<itinerarioData> {
     let params = JSON.stringify(itinerariodata);
     let headers = new HttpHeaders().set('Content-type','application/json');
     return this.http.post<itinerarioData>(this.dataUrl, itinerariodata,{headers: headers});
-  }
+  } */
 
 
 

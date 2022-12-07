@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
 import { Actualizacion } from '../actualizacion';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -26,17 +26,42 @@ export class AgregarActualizacionComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private http: HttpClient,
   ) { 
     
   }
 
+  actualizacionForm = new FormGroup({
+    tipo_permiso: new FormControl('', [Validators.required]),
+    descripcion: new FormControl('', [Validators.required]),
+    empleado: new FormControl('', [Validators.required]),
+    fecha: new FormControl('', [Validators.required]),
+  })
+
+  get tipo_permiso(){
+    return this.actualizacionForm.get('tipo_permiso')
+  }
+
+  get empleado(){
+    return this.actualizacionForm.get('empleado')
+  }
+
+  get descripcion(){
+    return this.actualizacionForm.get('descripcion')
+  }
+
+  get fecha(){
+    return this.actualizacionForm.get('fecha')
+  }
+  
   ngOnInit(): void {
       this.sub = this.route.params.subscribe(params => {
       this.planificacion_id = params['planificacion_id'];
       });
-    this.actualizacion = new Actualizacion('','','','',this.planificacion_id);
+    this.actualizacion = new Actualizacion('','','',this.CurrentDate, this.planificacion_id);
   }
+
+  CurrentDate = new Date();
 
 
   enviarActualizacion(){

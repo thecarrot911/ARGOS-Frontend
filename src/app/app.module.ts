@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
 import { ActualizacionService } from './services/actualizacion.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [							
@@ -31,6 +32,7 @@ import { ActualizacionService } from './services/actualizacion.service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
       { path: 'schedule', component: ScheduleComponent },

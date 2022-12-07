@@ -15,6 +15,7 @@
               <option>Urgencia</option>
               <option>Otro</option>
             </select>
+            <span class="text-rose-500" *ngIf="tipo_permiso && tipo_permiso.valid && tipo_permiso.touched">Este campo es requerido.</span>
           </label>
 
           <label class="block">
@@ -26,20 +27,25 @@
               <option>R. Zavala</option>
               <option>R. Zuñiga</option>
             </select>
+            <span class="text-rose-500" *ngIf="empleado && empleado.valid && empleado.touched">Este campo es requerido.</span>
           </label>
 
+
+          
           <label class="block">
             <span class="text-gray-700">Descripción del permiso</span>
             <textarea class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50" rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel" [(ngModel)]="actualizacion.descripcion">
             </textarea>
+            <span class="text-rose-500" *ngIf="descripcion && descripcion.valid && descripcion.touched">Este campo es requerido.</span>
           </label>
 
           <label class="block">
-            <span class="text-gray-700">Fecha del permiso</span>
-            <input type="date" class="form-input mt-1 block w-full rounded-md" name="fecha" #fecha="ngModel" [(ngModel)]="actualizacion.fecha">
+            <span class="text-gray-700">Fecha del permiso: </span>
+           {{CurrentDate | date:'dd-MM-yyyy'}}
           </label>
 
-          <button type="submit" value="Guardar" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
+          <button type="submit" value="Guardar"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
 
         </div>
       </div>

@@ -16,15 +16,17 @@ import { Calendario } from '../calendario';
 })
 export class ScheduleComponent implements OnInit {
 
-  public planificacion_id!: number;
 
+  public planificacion_id!: number;
   pruebas: any;
   horarios!: Calendario;
-
   tiempos: Tiempo[] = [];
-
-
   public generador: any; /* ONSUBMIT */
+
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 4;
+  tableSizes: any = [5, 10, 15, 20]
 
   constructor(
     private horarioService: HorarioService,
@@ -49,8 +51,18 @@ export class ScheduleComponent implements OnInit {
         console.log("error:C")
       }
     )
- 
-}
+  }  
+
+  onPagination(event: any){
+    this.page = event;
+    this.cargarData();
+  }
+
+  onDiseñoTabla(event: any): void{
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.cargarData();
+  }
 
 }
 

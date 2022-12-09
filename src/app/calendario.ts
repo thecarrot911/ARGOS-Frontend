@@ -11,12 +11,16 @@ interface Data {
     planificacion: Planificacion[];
     actualizacion: Actualizacion[];
 }
-
 interface Planificacion {
   dia_semana: string;
   numero_dia: string;
   empleados: Empleados[];
   comodin: string;
+  itinerario: Itinerario[];
+}
+export interface Itinerario{
+  turno_itinerario: string;
+  falta: number;
 }
 
 interface Empleados{

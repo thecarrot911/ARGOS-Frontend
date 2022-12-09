@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Calendario } from '../calendario';
+
 
 export interface Tiempo {
   anio: string;
@@ -36,12 +39,6 @@ interface Favorito {
   nombre: string;
 }
 
-
-
-
-
-
-
 /* Prueba */
 
 @Component({
@@ -68,23 +65,15 @@ export class ItinerarioAvionesComponent implements OnInit {
     ]
   }
 
-  /* PRUEBA */
-  persona: Persona = {
-    nombre: 'Javier',
-    favoritos: [
-      { id: 1, nombre: 'Metal Gear Solid' },
-      { id: 2, nombre: 'Twisted Metal' },
-    ]
-  }
-
   nuevoChoque: string = '';
-
-
+  public loading = document.getElementById('loading');
   constructor(
     private horarioService: HorarioService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private formsModule: FormsModule,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {
    }
 
@@ -123,20 +112,25 @@ export class ItinerarioAvionesComponent implements OnInit {
 
 
 
-
+  esperandoJSON(){
+    console.log("hiden xD?")
+    this.loading = document.getElementById('loading');
+    if(this.loading != null){
+      this.loading.classList.remove('hidden')
+    }
+  }
 
   enviarDatosJSON(){
     console.log('Formulario posteado')
     console.log(this.tiempo)
+    this.esperandoJSON();
     this.horarioService.generarHorario(this.tiempo)
     .subscribe(
       response => {
-        console.log('abajo response XD')
         console.log(response)
-      
+        this.router.navigate(['/schedule'])
       },
       error => {
-        console.log('ERROR -->')
         console.log(error)
       }
     )

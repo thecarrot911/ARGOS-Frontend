@@ -8,47 +8,55 @@
 
 
 
- 
 
- <!-- Code block starts -->
-<div class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300">
+
+<!-- Code block starts -->
+<div
+  class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300">
   <div>
-      <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario empleados</h4>
-      <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
-           <li class="flex items-center mr-4">
-              <div class="mr-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paperclip" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
-                  </svg>
-              </div>
-              <span class="hover:text-blue-600">Planificación generada: {{horarios.data.mes}}</span>
-          </li>
-          <li class="flex items-center mr-4 mt-4 md:mt-0">
-              <div class="mr-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trending-up" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <polyline points="3 17 9 11 13 15 21 7" />
-                      <polyline points="14 7 21 7 21 14" />
-                  </svg>
-              </div>
-              <span>ARIACA</span>
-          </li>
-           <li class="flex items-center mt-4 md:mt-0">
-              <div class="mr-1">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3 -6h3l2 2h3l-2 -7h3z" transform="rotate(-15 12 12) translate(0 -1)" />
-                      <line x1="3" y1="21" x2="21" y2="21" />
-                  </svg>
-              </div>
-              <span class="hover:text-black">Hoy día es: {{today_is}}</span>
-          </li> 
-      </ul>
+    <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario empleados</h4>
+    <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
+      <li class="flex items-center mr-4">
+        <div class="mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paperclip" width="16" height="16"
+            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
+          </svg>
+        </div>
+        <span class="hover:text-blue-600">Planificación: {{horarios.data.mes}}</span>
+      </li>
+      <li class="flex items-center mr-4 mt-4 md:mt-0">
+        <div class="mr-1">
+          <svg class="icon icon-tabler icon-tabler-trending-up" width="16" height="16" fill="none" viewBox="0 0 24 24"
+            strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+          </svg>
+
+        </div>
+        <span>ARIACA</span>
+      </li>
+      <li class="flex items-center mt-4 md:mt-0">
+        <div class="mr-1">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure" width="16"
+            height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3 -6h3l2 2h3l-2 -7h3z" transform="rotate(-15 12 12) translate(0 -1)" />
+            <line x1="3" y1="21" x2="21" y2="21" />
+          </svg>
+        </div>
+        <span class="hover:text-black">Hoy día es: {{today_is}}</span>
+      </li>
+    </ul>
   </div>
-   <div class="mt-6 md:mt-0">
-      <!-- <button class="mr-3 bg-gray-200 white:bg-slate-600 focus:outline-none transition duration-150 ease-in-out rounded hover:bg-gray-300 text-white white:hover:bg-gray-300 dark:text-indigo-400 px-5 py-2 text-sm">-</button> -->
-      <button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización</button>
+  <div class="mt-6 md:mt-0">
+    <!-- <button class="mr-3 bg-gray-200 white:bg-slate-600 focus:outline-none transition duration-150 ease-in-out rounded hover:bg-gray-300 text-white white:hover:bg-gray-300 dark:text-indigo-400 px-5 py-2 text-sm">-</button> -->
+    <button
+      class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+      [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización</button>
   </div>
   <!-- Code block ends -->
 </div>
@@ -57,91 +65,88 @@
 <div class="container mx-auto">
   <div class="bg-gradient-to-r from-rose-100 to-teal-100 p-4 col-span-full rounded-md hover:text-lg content-center">
     <div class="flex items-center">
-      <svg class="h-10 w-10 text-red-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M18 15a6 6 0 1 1 -10.853 -3.529c1.926-2.338 4.763-3.327 3.848-8.47 2.355 1.761 5.84 5.38 2.022 9.406-1.136 1.091-.244 2.767 1.221 2.593.882-.105 2.023-.966 3.23-2.3.532.68.532 1.717.532 2.3z" />      </svg>
-      {{horarios.data.mes}}, {{horarios.data.anio}}
+      <svg class="h-10 w-10 text-red-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
+        className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round"
+          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
+      </svg>
+
+      <span>{{horarios.data.mes}}, {{horarios.data.anio}}</span>
     </div>
   </div>
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
-        <div class="w-full lg:w-5/6 h-screen">
-          <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto  rounded-md">
-            <ng-container *ngFor="let horario of horarios.data.planificacion | paginate:{
+    <div class="w-full lg:w-5/6 h-screen">
+      <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto  rounded-md ">
+        <ng-container *ngFor="let horario of horarios.data.planificacion | paginate:{
               id: 'first',
               itemsPerPage: tableSizeCalendario,
               currentPage: paginationCalendario,
               totalItems: countCalendario}; let ix = index">
-            <div class="grid grid-cols-1 gap-2 bg-[#7E8091] rounded-md m-2 text-white">
-              <div class="m-3 flex justify-between">
-                <div>{{horario.dia_semana}} {{horario.numero_dia}}</div>
-                <ng-container *ngIf="horario.comodin == '23:00 a 07:00'">
-<!--                   <span class="flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex rounded-full bg-red-400 opacity-75 ">{{horario.comodin}}</span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                  </span> -->
-                </ng-container>
-                <ng-container *ngIf="horario.comodin == '07:00 a 15:00'"></ng-container>
-                <ng-container *ngIf="horario.comodin == '15:00 a 23:00'"></ng-container>
-              </div>
-
-              <ng-container *ngFor="let empleado of horario.empleados">
-                <div class="flex justify-between m-3 text-xs"> 
-                    <ng-container *ngIf="horario.comodin == 'Libre'"> 
-                        <div class="">{{empleado.nombre}} </div>
-                        <div class="">{{empleado.turno}}</div>
-                    </ng-container>
-                    <ng-container *ngIf="horario.comodin == '23:00 a 07:00'"> 
-                        <div class="">{{empleado.nombre}} </div>
-                        <div class="justify-end">{{empleado.turno}}</div>
-                    </ng-container>
-
-
-
-
-                  <ng-container *ngIf="horario.comodin == '0'">
-                    <div>{{empleado.nombre}}</div>
-                    <div>{{empleado.turno}}</div>
-                  </ng-container>
-              </div>
+          <div class="grid grid-cols-1 gap-2 bg-[#7E8091] rounded-md m-2 text-white ">
+            <div class="m-3 place-content-center relative">
+              <ng-container *ngIf="horario.comodin != 'Libre'">
+                <div class="inline-block place-item-center">
+                  <svg width="20" height="20" fill="currentColor" class="bi bi-dice-1-fill" viewBox="0 0 16 16">
+                    <path
+                      d="M3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3zm5 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                  </svg>
+                </div>
               </ng-container>
+              <div class="inline-block">
+                {{horario.dia_semana}} {{horario.numero_dia}}
+              </div>
+              <div *ngIf="horario.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
+                <ng-container *ngFor="let itinerario of horario.itinerario">
+                  <hr>
+                  {{itinerario.falta}}
+                  {{itinerario.turno_itinerario}}
+                  <hr>
+                </ng-container>
+                <svg width="16" height="16" fill="currentColor" class="bi bi-airplane-fill" viewBox="0 0 16 16">
+                  <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
+                </svg>
+              </div>
             </div>
-            
 
+            <ng-container *ngFor="let empleado of horario.empleados">
+              <div class="flex justify-between m-3 text-xs">
+                <div class="">{{empleado.nombre}} </div>
+                <div class="">{{empleado.turno}}</div>
+              </div>
             </ng-container>
-
           </div>
-          <div class="mx-auto m-4">
-          <pagination-controls
-          id="first"
-          previousLabel="Prev"
-          nextLabel="Next"
-          (pageChange)="paginationCalendario = $event"
-          >
-          </pagination-controls>
-        </div>
-        </div>
 
-          <div class="w-full lg:w-1/4 h-screen">
-            <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
-                <h1 class="italic text-lg font-light hover:text-white m-3">Actualizaciones</h1>
-                  <ng-container *ngFor="let empleado of horarios.data.actualizacion.reverse() | paginate:{
+
+        </ng-container>
+
+      </div>
+      <div class="mx-auto m-4">
+        <pagination-controls id="first" previousLabel="Prev" nextLabel="Next"
+          (pageChange)="paginationCalendario = $event">
+        </pagination-controls>
+      </div>
+    </div>
+
+    <div class="w-full lg:w-1/4 h-screen">
+      <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
+        <h1 class="italic text-lg font-light hover:text-white m-3">Actualizaciones</h1>
+        <ng-container *ngFor="let empleado of horarios.data.actualizacion.reverse() | paginate:{
                     id: 'second',
                     itemsPerPage: tableSize,
                     currentPage: paginationActualizaciones,
                     totalItems: count}; let i = index">
-                    <div class="m-3">
-                        <p class="text-sm text-red-700 leading-6">{{empleado.tipo_permiso}}</p>
-                        <p class="text-base text-blue-900">{{empleado.empleado}}</p>
-                        <p class="text-sm">{{empleado.descripcion}}</p>
-                        <p class="text-gray-500">{{empleado.fecha | date}}</p>
-                    </div> 
-                  </ng-container>
-                  <pagination-controls
-                  id="second"
-                  previousLabel="Prev"
-                  nextLabel="Next"
-                  (pageChange)="paginationActualizaciones = $event">
-                  </pagination-controls>
-            </div> 
+          <div class="m-3">
+            <p class="text-sm text-red-700 leading-6">{{empleado.tipo_permiso}}</p>
+            <p class="text-base text-blue-900">{{empleado.empleado}}</p>
+            <p class="text-sm">{{empleado.descripcion}}</p>
+            <p class="text-gray-500">{{empleado.fecha | date}}</p>
           </div>
+        </ng-container>
+        <pagination-controls id="second" previousLabel="Prev" nextLabel="Next"
+          (pageChange)="paginationActualizaciones = $event">
+        </pagination-controls>
+      </div>
+    </div>
   </div>
 </div>
 

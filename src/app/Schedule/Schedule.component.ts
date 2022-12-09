@@ -6,7 +6,7 @@ import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
 import { Observable } from 'rxjs';
 import { calendarData } from '../calendarData'; /* Interfaz */
 import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-aviones.component';
-import { Calendario, Itinerario } from '../calendario';
+import { Calendario, Actualizacion ,Itinerario } from '../calendario';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 import { DatePipe } from '@angular/common';
@@ -22,6 +22,8 @@ import { registerLocaleData } from '@angular/common';
 })
 export class ScheduleComponent implements OnInit {
 
+
+  actualizaciones: Calendario[] = [];
 
   public planificacion_id!: number;
   public array_vacio: Array<Itinerario> = [];
@@ -57,6 +59,7 @@ export class ScheduleComponent implements OnInit {
   ngOnInit(): void {
     this.cargarData();
   }
+
   cargarData(): void {
     this.horarioService.getHorarios()
     .subscribe(
@@ -94,6 +97,9 @@ export class ScheduleComponent implements OnInit {
     this.cargarData();
   }
 
+  deleteActualizacion(actualizacion: Actualizacion): void{
+    this.horarioService.deleteActualizacionId(actualizacion.actualizacion_id).subscribe();
+  }
+
+
 }
-
-

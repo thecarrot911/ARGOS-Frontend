@@ -2,14 +2,13 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; /* a */
 import { HttpParams } from '@angular/common/http';
 import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
-import { catchError, retry, tap } from 'rxjs/operators'; /* a */
+import { catchError, retry, tap, map } from 'rxjs/operators'; /* a */
 import { calendarData } from '../calendarData';
 /* import { itinerarioData} from '../itinerarioData'; */
 
-import { Actualizacion } from '../actualizacion';
 import { Tiempo } from '../tiempo';
-
-import { Calendario } from '../calendario';
+import { AddActualizacion } from '../actualizacion';
+import { Calendario, Actualizacion } from '../calendario';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,11 @@ export class HorarioService {
 
   dataUrl= 'http://localhost:10975/app/planificacion/generar_planificacion';
   urlUltimaPlanificacion = 'http://localhost:10975/app/planificacion/mostrar_ultima';
+  deleteActualizacionURL = ''
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(
     private http: HttpClient){}
@@ -35,8 +39,8 @@ export class HorarioService {
 
     url_actualizacion =  'http://localhost:10975/app/actualizacion/crear_actualizacion';
     /* agregarActualización Component */
-    guardarActualizacion(actualizacion: Actualizacion):Observable<Actualizacion>{
-      return this.http.post<Actualizacion>(this.url_actualizacion, actualizacion)
+    guardarActualizacion(actualizacion: AddActualizacion):Observable<AddActualizacion>{
+      return this.http.post<AddActualizacion>(this.url_actualizacion, actualizacion)
     }
 
 
@@ -65,4 +69,11 @@ export class HorarioService {
   getHorario(): Observable<Tiempo[]>{
     return this.http.get<Tiempo[]>(this.dataUrl)
   }
+
+  deleteActualizacionId(planificacion_id: number): Observable<Actualizacion> {
+    /* const url = `${this.urlUltimaPlanificacion}/{planificacion_id}`; */
+    return this.http.delete<Actualizacion>('INSERTANDING URL ECHEVERRIA', this.httpOptions)
+  }
+
+
 }

@@ -28,7 +28,7 @@ interface Empleados{
   turno: string
 }
 
-interface Actualizacion{
+export interface Actualizacion{
   actualizacion_id: number,
   tipo_permiso: string,
   descripcion: string,

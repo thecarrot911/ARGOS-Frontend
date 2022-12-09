@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Calendario } from '../calendario';
 
 
+
 export interface Tiempo {
   anio: string;
   mes: string;
@@ -44,12 +45,13 @@ interface Favorito {
 @Component({
   selector: 'app-itinerario-aviones',
   templateUrl: './itinerario-aviones.component.html',
-  styleUrls: ['./itinerario-aviones.component.css']
+  styleUrls: ['./itinerario-aviones.component.css'],
 })
 export class ItinerarioAvionesComponent implements OnInit {
 
   public ayuda: any;
   /* Cap 245 */
+  
   tiempo: Tiempo = {
     anio: '',
     mes: '',
@@ -78,9 +80,10 @@ export class ItinerarioAvionesComponent implements OnInit {
    }
 
   itinerarioForm= new FormGroup({
-    anio: new FormControl('',[Validators.required]),
-    mes: new FormControl('',[Validators.required]),
-    empleados_nombre: new FormControl('',[Validators.required]),
+    /* PONER NOMBRE y agrupar */
+      anio: new FormControl('',[Validators.required, this.noPermitirEspacios, Validators.minLength(3)]),
+      mes: new FormControl('',[Validators.required, this.noPermitirEspacios]),
+      empleados_nombre: new FormControl('',[Validators.required]),
     turno_choque_dia: new FormControl('',[Validators.required]),
     turno_choque_aviones: new FormControl('',[Validators.required]),
     turno_choque_turno: new FormControl('',[Validators.required]),
@@ -103,6 +106,14 @@ export class ItinerarioAvionesComponent implements OnInit {
     return this.itinerarioForm.get('turno_choque_turno')
   }
 
+  noPermitirEspacios(control: FormControl){
+    if(control.value != null && control.value.indexOf(' ') != -1){
+      return {noPermitirEspacios: true}
+    }
+    console.log('hola')
+    return null;
+  }
+
 
 
 
@@ -113,7 +124,6 @@ export class ItinerarioAvionesComponent implements OnInit {
 
 
   esperandoJSON(){
-    console.log("hiden xD?")
     this.loading = document.getElementById('loading');
     if(this.loading != null){
       this.loading.classList.remove('hidden')
@@ -121,8 +131,6 @@ export class ItinerarioAvionesComponent implements OnInit {
   }
 
   enviarDatosJSON(){
-    console.log('Formulario posteado')
-    console.log(this.tiempo)
     this.esperandoJSON();
     this.horarioService.generarHorario(this.tiempo)
     .subscribe(

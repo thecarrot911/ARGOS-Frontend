@@ -8,13 +8,16 @@ import { ScheduleComponent } from './Schedule/Schedule.component';
 import { NavbarsComponent } from './Navbars/Navbars.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { ActualizacionesComponent } from './Actualizaciones/Actualizaciones.component';
 import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
-import { ActualizacionService } from './services/actualizacion.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+
+import { ValidationErrors } from '@angular/forms';
+
+/* Providers */
 import { DatePipe } from '@angular/common';
 
 @NgModule({
@@ -26,7 +29,7 @@ import { DatePipe } from '@angular/common';
       ActualizacionesComponent,
       FooterComponent,
       AgregarActualizacionComponent,
-      ItinerarioAvionesComponent
+      ItinerarioAvionesComponent,
    ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ import { DatePipe } from '@angular/common';
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
     ]),
   ],
-  providers: [ActualizacionService, DatePipe],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

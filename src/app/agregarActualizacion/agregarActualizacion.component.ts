@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
-import { Actualizacion } from '../actualizacion';
+import { AddActualizacion } from '../actualizacion';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
@@ -19,8 +19,8 @@ export class AgregarActualizacionComponent implements OnInit {
   public planificacion_id! : number;
   public sub!: any;
 
-  actualizaciones: Actualizacion[] = [];
-  actualizacion!: Actualizacion;
+  actualizaciones: AddActualizacion[] = [];
+  actualizacion!: AddActualizacion;
   public status!: string;
 
   constructor(
@@ -61,7 +61,7 @@ export class AgregarActualizacionComponent implements OnInit {
       this.sub = this.route.params.subscribe(params => {
       this.planificacion_id = params['planificacion_id'];
       });
-    this.actualizacion = new Actualizacion('','','',this.latest_date, this.planificacion_id);
+    this.actualizacion = new AddActualizacion('','','',this.latest_date, this.planificacion_id);
   }
 
   CurrentDate = new Date();
@@ -73,6 +73,7 @@ export class AgregarActualizacionComponent implements OnInit {
       .subscribe(
        response => {
          console.log(response)
+         this.router.navigate(['/schedule'])
        },
        error => {
          console.log(error)

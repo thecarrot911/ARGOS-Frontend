@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Calendario } from '../calendario';
 
-
+import Swal from 'sweetalert2';
 
 export interface Tiempo {
   anio: string;
@@ -81,7 +81,7 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   itinerarioForm= new FormGroup({
     /* PONER NOMBRE y agrupar */
-      anio: new FormControl('',[Validators.required, this.noPermitirEspacios, Validators.minLength(3)]),
+      anio: new FormControl('',[Validators.required, this.noPermitirEspacios]),
       mes: new FormControl('',[Validators.required, this.noPermitirEspacios]),
       empleados_nombre: new FormControl('',[Validators.required]),
     turno_choque_dia: new FormControl('',[Validators.required]),
@@ -154,8 +154,25 @@ export class ItinerarioAvionesComponent implements OnInit {
     console.log(newChoque)
     this.tiempo.itinerario[0].dia = '';
     this.tiempo.itinerario[0].aviones = '';
-    this.tiempo.itinerario[0].turno = ''
-    alert('Itinerario registrado')
+    this.tiempo.itinerario[0].turno = '';
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Itinerario registrado exitosamente'
+    })
   }
+
 
 }

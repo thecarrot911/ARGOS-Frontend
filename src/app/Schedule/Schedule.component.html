@@ -74,6 +74,8 @@
       <span>{{horarios.data.mes}}, {{horarios.data.anio}}</span>
     </div>
   </div>
+
+
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
     <div class="w-full lg:w-5/6 h-screen">
       <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto  rounded-md ">
@@ -82,7 +84,7 @@
               itemsPerPage: tableSizeCalendario,
               currentPage: paginationCalendario,
               totalItems: countCalendario}; let ix = index">
-          <div class="grid grid-cols-1 gap-2 bg-[#7E8091] rounded-md m-2 text-white ">
+          <div class="grid grid-cols-1 gap-2 bg-[#7E8091] shadow-2xl rounded-md m-2 text-white hover:bg-slate-600 hover:scale-110 hover:duration-300">
             <div class="m-3 place-content-center relative">
               <ng-container *ngIf="horario.comodin != 'Libre'">
                 <div class="inline-block place-item-center">
@@ -109,7 +111,7 @@
             </div>
 
             <ng-container *ngFor="let empleado of horario.empleados">
-              <div class="flex justify-between m-3 text-xs">
+              <div class="flex justify-between m-3 text-xs ">
                 <div class="">{{empleado.nombre}} </div>
                 <div class="">{{empleado.turno}}</div>
               </div>
@@ -130,7 +132,7 @@
     <div class="w-full lg:w-1/4 h-screen">
       <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
         <div class="flex">
-          <h1 class="italic text-lg font-light hover:text-white m-3">Actualizaciones</h1>
+          <h1 class="italic text-lg font-light hover:text-black m-3">Actualizaciones</h1>
           
         </div>
         <ul *ngFor="let empleado of horarios.data.actualizacion.reverse() | paginate:{
@@ -138,7 +140,7 @@
                     itemsPerPage: tableSize,
                     currentPage: paginationActualizaciones,
                     totalItems: count}; let i = index">
-            <li class="text-sm text-red-700 leading-6">id: {{empleado.actualizacion_id}} - {{empleado.tipo_permiso}}</li>
+            <li class="text-sm text-red-700 leading-6">{{empleado.tipo_permiso}}</li>
             <li class="text-base text-blue-900">{{empleado.empleado}}</li>
             <li class="text-sm">{{empleado.descripcion}}</li>
             <li class="text-gray-500">{{empleado.fecha | date}}</li>

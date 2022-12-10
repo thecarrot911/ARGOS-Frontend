@@ -14,7 +14,6 @@ import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-
 import { ValidationErrors } from '@angular/forms';
 
 /* Providers */

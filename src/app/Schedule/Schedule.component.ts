@@ -101,6 +101,7 @@ export class ScheduleComponent implements OnInit {
     this.horarioService.deleteActualizacionId(actualizacion)
     .subscribe(response => {
       console.log('deleteanding')
+      this.ngOnInit()
     },
     error=>{
       console.log(error)

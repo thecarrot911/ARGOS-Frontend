@@ -135,17 +135,17 @@
           <h1 class="italic text-lg font-light hover:text-black m-3">Actualizaciones</h1>
           
         </div>
-        <ul *ngFor="let empleado of horarios.data.actualizacion.reverse() | paginate:{
+        <div *ngFor="let empleado of horarios.data.actualizacion.reverse() | paginate:{
                     id: 'second',
                     itemsPerPage: tableSize,
                     currentPage: paginationActualizaciones,
                     totalItems: count}; let i = index">
-            <li class="text-sm text-red-700 leading-6">{{empleado.tipo_permiso}}</li>
-            <li class="text-base text-blue-900">{{empleado.empleado}}</li>
-            <li class="text-sm">{{empleado.descripcion}}</li>
-            <li class="text-gray-500">{{empleado.fecha | date}}</li>
+            <p class="text-sm text-red-700 leading-6">{{empleado.tipo_permiso}}</p>
+            <p class="text-base text-blue-900">{{empleado.empleado}}</p>
+            <p class="text-sm">{{empleado.descripcion}}</p>
+            <p class="text-gray-500">{{empleado.fecha | date}}</p>
           <button (click)="deleteActualizacion(empleado)" class="rounded-md border-red-500 bg-white p-1 text-xs">X</button>
-        </ul>
+        </div>
         <pagination-controls id="second" previousLabel="Prev" nextLabel="Next"
           (pageChange)="paginationActualizaciones = $event">
         </pagination-controls>

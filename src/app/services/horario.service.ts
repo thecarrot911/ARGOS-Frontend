@@ -17,7 +17,7 @@ export class HorarioService {
 
   dataUrl= 'http://localhost:10975/app/planificacion/generar_planificacion';
   urlUltimaPlanificacion = 'http://localhost:10975/app/planificacion/mostrar_ultima';
-  deleteActualizacionURL = ''
+  deleteActualizacionURL = 'http://localhost:10975/app/actualizacion/eliminar_actualizacion'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -70,9 +70,13 @@ export class HorarioService {
     return this.http.get<Tiempo[]>(this.dataUrl)
   }
 
-  deleteActualizacionId(planificacion_id: number): Observable<Actualizacion> {
+  deleteActualizacionId(actualizacion: Actualizacion): Observable<Actualizacion> {
+/*     let headers = new HttpHeaders().set('Content-Type', 'application/json'); 
+    return this.http.delete<Actualizacion>(this.deleteActualizacionURL+'/'+actualizacion.actualizacion_id,{headers: headers}); */
     /* const url = `${this.urlUltimaPlanificacion}/{planificacion_id}`; */
-    return this.http.delete<Actualizacion>('INSERTANDING URL ECHEVERRIA', this.httpOptions)
+/*     const url = `${this.deleteActualizacionURL}/${actualizacion.actualizacion_id}`;
+      console.log(url) */
+    return this.http.delete<Actualizacion>(this.deleteActualizacionURL+'/'+actualizacion.actualizacion_id, this.httpOptions)
   }
 
 

@@ -98,7 +98,13 @@ export class ScheduleComponent implements OnInit {
   }
 
   deleteActualizacion(actualizacion: Actualizacion): void{
-    this.horarioService.deleteActualizacionId(actualizacion.actualizacion_id).subscribe();
+    this.horarioService.deleteActualizacionId(actualizacion)
+    .subscribe(response => {
+      console.log('deleteanding')
+    },
+    error=>{
+      console.log(error)
+    }  );
   }
 
 

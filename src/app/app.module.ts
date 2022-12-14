@@ -15,6 +15,9 @@ import { AgregarActualizacionComponent } from './agregarActualizacion/agregarAct
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ValidationErrors } from '@angular/forms';
+import { MomentModule } from 'ngx-moment';
+import 'moment/locale/es';
+
 
 /* Providers */
 import { DatePipe } from '@angular/common';
@@ -37,6 +40,11 @@ import { DatePipe } from '@angular/common';
     ReactiveFormsModule,
     NgxPaginationModule,
     DatePipe,
+    MomentModule.forRoot({
+      relativeTimeThresholdOptions: {
+        'm': 59
+      }
+    }),
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
       { path: 'schedule', component: ScheduleComponent },

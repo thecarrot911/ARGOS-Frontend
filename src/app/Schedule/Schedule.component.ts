@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -106,6 +107,15 @@ export class ScheduleComponent implements OnInit {
     error=>{
       console.log(error)
     }  );
+  }
+
+  alertaItinerario(){
+    console.log(this.horarios.data.planificacion)
+    let falta = this.horarios.data.planificacion
+    Swal.fire({
+    title: 'Faltan: ' +falta+ 'xd',
+    text: 'hola que tal',
+    icon: 'warning',})
   }
 
 

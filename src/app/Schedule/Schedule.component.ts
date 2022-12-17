@@ -112,15 +112,21 @@ export class ScheduleComponent implements OnInit {
   }
 
   alertaItinerario(itinerario: Itinerario){
-    /* console.log(this.horarios.data.planificacion) */
-    /* Itinerario falta = this.horarios.data.planificacion[0].itinerario[0].turno_itinerario */
-    
-
-    
     Swal.fire({
     title: 'Alerta de encuentros de aviones',
     html: 'Empleados faltantes: ' +  + itinerario.falta + '<br>' + 'Turno del encuentro: ' + itinerario.turno_itinerario,
     icon: 'warning',})
+  }
+
+  alertaComodin(comodin: string){
+    Swal.fire({
+      title: 'Comodín',
+      text: 'Se necesita comodín en el turno: ' + comodin,
+      imageUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/emojis/49908/joker-emoji-clipart-xl.png',
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
   }
 
 

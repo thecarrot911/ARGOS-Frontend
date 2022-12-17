@@ -9,7 +9,6 @@ import { NavbarsComponent } from './Navbars/Navbars.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
-import { ActualizacionesComponent } from './Actualizaciones/Actualizaciones.component';
 import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
@@ -22,16 +21,18 @@ import 'moment/locale/es';
 /* Providers */
 import { DatePipe } from '@angular/common';
 
+import { EditarActualizacionComponent } from './editarActualizacion/editarActualizacion.component';
+
 @NgModule({
-  declarations: [							
+  declarations: [								
     AppComponent,
       TopBarComponent,
       ScheduleComponent,
       NavbarsComponent,
-      ActualizacionesComponent,
       FooterComponent,
       AgregarActualizacionComponent,
       ItinerarioAvionesComponent,
+      EditarActualizacionComponent
    ],
   imports: [
     BrowserModule,
@@ -50,6 +51,7 @@ import { DatePipe } from '@angular/common';
       { path: 'schedule', component: ScheduleComponent },
       { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent},
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
+      { path: 'editaractualizacion/:actualizacion_id', component: EditarActualizacionComponent}
     ]),
   ],
   providers: [DatePipe],

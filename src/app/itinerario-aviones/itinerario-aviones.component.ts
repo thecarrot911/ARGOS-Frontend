@@ -27,21 +27,6 @@ interface Turno_Choque{
   aviones: string;
 }
 
-
-/* Prueba */
-
-interface Persona {
-  nombre: string;
-  favoritos: Favorito []
-}
-
-interface Favorito {
-  id: number;
-  nombre: string;
-}
-
-/* Prueba */
-
 @Component({
   selector: 'app-itinerario-aviones',
   templateUrl: './itinerario-aviones.component.html',

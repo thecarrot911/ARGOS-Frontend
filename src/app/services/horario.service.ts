@@ -7,7 +7,7 @@ import { calendarData } from '../calendarData';
 /* import { itinerarioData} from '../itinerarioData'; */
 
 import { Tiempo } from '../tiempo';
-import { AddActualizacion } from '../actualizacion';
+import { AddActualizacion } from '../Addactualizacion';
 import { Calendario, Actualizacion } from '../calendario';
 
 @Injectable({
@@ -18,6 +18,7 @@ export class HorarioService {
   dataUrl= 'http://localhost:10975/app/planificacion/generar_planificacion';
   urlUltimaPlanificacion = 'http://localhost:10975/app/planificacion/mostrar_ultima';
   deleteActualizacionURL = 'http://localhost:10975/app/actualizacion/eliminar_actualizacion'
+  updateActualizacionURL = 'http://localhost:10975/app/actualizacion/modificar_actualizacion'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -76,7 +77,11 @@ export class HorarioService {
     /* const url = `${this.urlUltimaPlanificacion}/{planificacion_id}`; */
 /*     const url = `${this.deleteActualizacionURL}/${actualizacion.actualizacion_id}`;
       console.log(url) */
-    return this.http.delete<Actualizacion>(this.deleteActualizacionURL+'/'+actualizacion.actualizacion_id, this.httpOptions)
+    return this.http.delete<Actualizacion>(this.deleteActualizacionURL+'actualizacion/'+actualizacion.actualizacion_id, this.httpOptions)
+  }
+
+  updateActualizacionId(actualizacion: Actualizacion): Observable<Actualizacion>{
+    return this.http.put<Actualizacion>(this.updateActualizacionURL+'/'+actualizacion.actualizacion_id, this.httpOptions)
   }
 
 

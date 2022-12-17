@@ -15,6 +15,7 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import Swal from 'sweetalert2';
 import { createPopper } from '@popperjs/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -55,7 +56,8 @@ export class ScheduleComponent implements OnInit {
     private horarioService: HorarioService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private datePipe: DatePipe
+    private datePipe: DatePipe,
+    private router: Router
   ) {  
        }
 
@@ -100,20 +102,22 @@ export class ScheduleComponent implements OnInit {
     this.cargarData();
   }
 
-  deleteActualizacion(actualizacion: Actualizacion): void{
-    this.horarioService.deleteActualizacionId(actualizacion)
+  deleteActualizacion(actualizacion_id: Actualizacion): void{
+    this.horarioService.deleteActualizacionId(actualizacion_id)
     .subscribe(response => {
+      this.router.navigate(['/schedule'])
       console.log('deleteanding')
       this.ngOnInit();
     },
     error=>{
       console.log(error)
+      this.router.navigate(['/schedule'])
     }  );
   }
 
   alertaItinerario(itinerario: Itinerario){
     Swal.fire({
-    title: 'Alerta de encuentros de aviones',
+    title: 'Alerta encuentros de aviones',
     html: 'Empleados faltantes: ' +  + itinerario.falta + '<br>' + 'Turno del encuentro: ' + itinerario.turno_itinerario,
     icon: 'warning',})
   }
@@ -121,12 +125,16 @@ export class ScheduleComponent implements OnInit {
   alertaComodin(comodin: string){
     Swal.fire({
       title: 'Comodín',
-      text: 'Se necesita comodín en el turno: ' + comodin,
+      text: 'Se necesita comodín, turno: ' + comodin,
       imageUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/emojis/49908/joker-emoji-clipart-xl.png',
       imageWidth: 200,
       imageHeight: 200,
       imageAlt: 'Custom image',
     })
+  }
+
+  editarActualizacion(){
+
   }
 
 

@@ -72,7 +72,7 @@
               itemsPerPage: tableSizeCalendario,
               currentPage: paginationCalendario,
               totalItems: countCalendario}; let ix = index">
-          <div class="grid grid-cols-1 gap-2 bg-[#7E8091] shadow-2xl rounded-md m-2 text-white hover:bg-slate-600 hover:scale-110 hover:duration-300">
+          <div class="grid grid-cols-1 gap-2 bg-slate-600 shadow-2xl rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300">
             <div class="m-3 place-content-center relative">
               
                 <ng-container *ngIf="horario.comodin != 'Libre'">
@@ -91,12 +91,12 @@
                 <div>{{horario.dia_semana}} {{horario.numero_dia}}</div>
                   <div> 
                     <div *ngIf="horario.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
-                      
+                      <div class="flex justify-end gap-2">
                       <ng-container *ngFor="let itinerario of horario.itinerario">
 <!--                     {{itinerario.falta}}
                         {{itinerario.turno_itinerario}} -->
-                        <div class=""></div>
-                          <button class="inline-block" (click)="alertaItinerario(itinerario)">
+                        
+                          <button (click)="alertaItinerario(itinerario)">
                             <span class="flex relative h-7 w-7 top-0 right-0 -mt-1 -mr-1 ">
                               <svg width="16" height="16" fill="currentColor"
                                 class="bi bi-airplane-fill animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" viewBox="0 0 16 16">
@@ -107,10 +107,9 @@
                                 <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
                               </svg>
                             </span>
-                          </button>
-
-                          
+                          </button> 
                       </ng-container>
+                      </div>
                   </div>
                 </div>
               </div>

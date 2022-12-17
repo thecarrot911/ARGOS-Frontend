@@ -14,6 +14,7 @@ import { LOCALE_ID } from '@angular/core';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import Swal from 'sweetalert2';
+import { createPopper } from '@popperjs/core';
 
 
 @Component({
@@ -22,7 +23,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./Schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
-
+  dropdownPopoverShow = false;
+  
 
   actualizaciones: Calendario[] = [];
 

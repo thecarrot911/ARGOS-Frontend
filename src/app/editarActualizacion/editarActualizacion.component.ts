@@ -10,7 +10,7 @@ import { UpdateActualizacion } from '../updateActualizacion';
 
 @Component({
   selector: 'app-editarActualizacion',
-  templateUrl: '../agregarActualizacion/agregarActualizacion.component.html',
+  templateUrl: './editarActualizacion.component.html',
   styleUrls: ['./editarActualizacion.component.css']
 })
 export class EditarActualizacionComponent implements OnInit {
@@ -76,13 +76,14 @@ export class EditarActualizacionComponent implements OnInit {
         });
 
     this.actualizacion = new AddActualizacion('','','',this.latest_date, this.planificacion_id);
-    this.actualizacion_calendario = new UpdateActualizacion(this.actualizacion_id, '','', '', '', this.planificacion_id);
-    this.editarActualizacion();
+    this.actualizacion_calendario = new UpdateActualizacion(this.actualizacion_id, this.actualizacion.tipo_permiso, this.actualizacion.descripcion, this.actualizacion.empleado, this.actualizacion.fecha, this.planificacion_id);
   }
 
 
   enviarActualizacion(){
-    this.horarioService.updateActualizacionId(this.actualizacion_calendario)
+    /* this.actualizacion = new AddActualizacion('','','',this.latest_date, this.planificacion_id);
+    this.actualizacion_calendario = new UpdateActualizacion(this.actualizacion_id, this.actualizacion.tipo_permiso, this.actualizacion.descripcion, this.actualizacion.empleado, this.actualizacion.fecha, this.planificacion_id);
+     */this.horarioService.updateActualizacionId(this.actualizacion_calendario)
       .subscribe(
        response => {
          console.log(response)

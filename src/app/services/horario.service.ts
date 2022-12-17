@@ -81,7 +81,8 @@ export class HorarioService {
   }
 
   updateActualizacionId(actualizacion: Actualizacion): Observable<Actualizacion>{
-    return this.http.put<Actualizacion>(this.updateActualizacionURL+'/'+actualizacion.actualizacion_id, this.httpOptions)
+    let params = JSON.stringify(actualizacion);
+    return this.http.put<Actualizacion>(this.updateActualizacionURL+'/'+actualizacion.actualizacion_id, params, this.httpOptions)
   }
 
 

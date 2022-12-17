@@ -105,13 +105,11 @@ export class ScheduleComponent implements OnInit {
   deleteActualizacion(actualizacion_id: Actualizacion): void{
     this.horarioService.deleteActualizacionId(actualizacion_id)
     .subscribe(response => {
-      this.router.navigate(['/schedule'])
       console.log('deleteanding')
       this.ngOnInit();
     },
     error=>{
       console.log(error)
-      this.router.navigate(['/schedule'])
     }  );
   }
 

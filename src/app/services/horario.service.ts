@@ -77,7 +77,8 @@ export class HorarioService {
     /* const url = `${this.urlUltimaPlanificacion}/{planificacion_id}`; */
 /*     const url = `${this.deleteActualizacionURL}/${actualizacion.actualizacion_id}`;
       console.log(url) */
-    return this.http.delete<Actualizacion>(this.deleteActualizacionURL+'actualizacion/'+actualizacion.actualizacion_id, this.httpOptions)
+
+    return this.http.delete<Actualizacion>(this.deleteActualizacionURL+'/'+actualizacion.actualizacion_id, this.httpOptions)
   }
 
   updateActualizacionId(actualizacion: Actualizacion): Observable<Actualizacion>{

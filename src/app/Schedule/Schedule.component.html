@@ -64,19 +64,6 @@
 
 
 <div class="container mx-auto">
-<!--   <div class="bg-gradient-to-r from-rose-100 to-teal-100 p-4 col-span-full rounded-md hover:text-lg content-center">
-    <div class="flex items-center">
-      <svg class="h-10 w-10 text-red-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"
-        className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round"
-          d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
-      </svg>
-
-      <span>{{horarios.data.mes}}, {{horarios.data.anio}}</span>
-    </div>
-  </div> -->
-
-
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
     <div class="w-full lg:w-5/6 h-screen">
       <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
@@ -92,12 +79,6 @@
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
                 </span>
-                <div class="inline-block place-item-center ">
-                  <svg width="20" height="20" fill="currentColor" class="bi bi-dice-1-fill" viewBox="0 0 16 16">
-                    <path
-                      d="M3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3H3zm5 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
-                  </svg>
-                </div>
               </ng-container>
 
 
@@ -111,14 +92,25 @@
 
                     <ng-container *ngFor="let itinerario of horario.itinerario">
                       <button (click)="alertaItinerario(itinerario)">Alerta</button>
-                      <hr>
+<!--                       <hr>
                       {{itinerario.falta}}
                       {{itinerario.turno_itinerario}}
-                      <hr>
+                      <hr> -->
                     </ng-container>
+
+
+                    <!-- ALERTA ROJA JUNTAR CON AVION xd -->
+                    <!-- <span class="flex absolute h-3 w-3 top-0 right-0 -mt-1 -mr-1">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    </span> -->
+
+                    <!-- Avión -->
                     <svg width="16" height="16" fill="currentColor" class="bi bi-airplane-fill" viewBox="0 0 16 16">
                       <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
                     </svg>
+
+
                   </div>
                 </div>
                 

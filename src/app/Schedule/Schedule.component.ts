@@ -111,12 +111,13 @@ export class ScheduleComponent implements OnInit {
     }  );
   }
 
-  alertaItinerario(){
-    console.log(this.horarios.data.planificacion)
-    let falta = this.horarios.data.planificacion
+  alertaItinerario(itinerario: Itinerario){
+    /* console.log(this.horarios.data.planificacion) */
+    /* Itinerario falta = this.horarios.data.planificacion[0].itinerario[0].turno_itinerario */
+    
     Swal.fire({
-    title: 'Faltan: ' +falta+ 'xd',
-    text: 'hola que tal',
+    title: 'Alerta de encuentros de aviones',
+    text: 'Empleados faltantes: ' + itinerario.falta + '.                     '+ 'turno del encuentro ' + itinerario.turno_itinerario,
     icon: 'warning',})
   }
 

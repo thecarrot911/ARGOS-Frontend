@@ -107,8 +107,10 @@
                 <div>{{horario.dia_semana}} {{horario.numero_dia}}</div>
                 <div> 
                   <div *ngIf="horario.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
-                    <button (click)="alertaItinerario()">Alerta</button>
+                    
+
                     <ng-container *ngFor="let itinerario of horario.itinerario">
+                      <button (click)="alertaItinerario(itinerario)">Alerta</button>
                       <hr>
                       {{itinerario.falta}}
                       {{itinerario.turno_itinerario}}

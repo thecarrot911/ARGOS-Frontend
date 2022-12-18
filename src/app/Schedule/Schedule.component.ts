@@ -6,7 +6,7 @@ import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
 import { Observable } from 'rxjs';
 import { calendarData } from '../calendarData'; /* Interfaz */
 import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-aviones.component';
-import { Calendario, Actualizacion ,Itinerario } from '../calendario';
+import { Calendario, Actualizacion, Itinerario, Planificacion } from '../calendario';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 import { DatePipe } from '@angular/common';
@@ -30,7 +30,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ScheduleComponent implements OnInit {
   dropdownPopoverShow = false;
-  
+
 
   actualizaciones: Calendario[] = [];
 
@@ -55,7 +55,7 @@ export class ScheduleComponent implements OnInit {
 
   CurrentDate = new Date();
   latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
-  today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y' )
+  today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
 
 
   constructor(
@@ -64,8 +64,8 @@ export class ScheduleComponent implements OnInit {
     private http: HttpClient,
     private datePipe: DatePipe,
     private router: Router
-  ) {  
-       }
+  ) {
+  }
 
   ngOnInit(): void {
     this.cargarData();
@@ -73,62 +73,62 @@ export class ScheduleComponent implements OnInit {
 
   cargarData(): void {
     this.horarioService.getHorarios()
-    .subscribe(
-      response =>{
-        this.horarios = response;
-        this.global = this.horarios
-        this.planificacion_id = this.horarios.data.planificacion_id
-        console.log(this.horarios)
-      },
-      error =>{
-        console.log(error)
-      }
-    )
-  }  
+      .subscribe(
+        response => {
+          this.horarios = response;
+          this.global = this.horarios
+          this.planificacion_id = this.horarios.data.planificacion_id
+          console.log(this.horarios)
+        },
+        error => {
+          console.log(error)
+        }
+      )
+  }
 
 
-  onPagination(event: any){
+  onPagination(event: any) {
     this.page = event;
     this.cargarData();
   }
 
-  onPaginationCalendario(event: any){
+  onPaginationCalendario(event: any) {
     this.pageCalendario = event;
     this.cargarData();
   }
 
-  onDisenoTabla(event: any): void{
+  onDisenoTabla(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
     this.cargarData();
   }
 
-  onDisenoTabla2(event: any): void{
+  onDisenoTabla2(event: any): void {
     this.tableSizeCalendario = event.target.value;
     this.pageCalendario = 1;
     this.cargarData();
   }
 
-  deleteActualizacion(actualizacion_id: Actualizacion): void{
+  deleteActualizacion(actualizacion_id: Actualizacion): void {
     this.horarioService.deleteActualizacionId(actualizacion_id)
-    .subscribe(response => {
-      console.log('deleteanding')
-      this.router.navigate(['/'])
-      this.ngOnInit();
-    },
-    error=>{
-      console.log(error)
-    }  );
+      .subscribe(response => {
+        console.log('deleteanding')
+        this.ngOnInit();
+      },
+        error => {
+          console.log(error)
+        });
   }
 
-  alertaItinerario(itinerario: Itinerario){
+  alertaItinerario(itinerario: Itinerario) {
     Swal.fire({
-    title: 'Alerta encuentros de aviones',
-    html: 'Empleados faltantes: ' +  + itinerario.falta + '<br>' + 'Turno del encuentro: ' + itinerario.turno_itinerario,
-    icon: 'warning',})
+      title: 'Alerta encuentros de aviones',
+      html: 'Empleados faltantes: ' + + itinerario.falta + '<br>' + 'Turno del encuentro: ' + itinerario.turno_itinerario,
+      icon: 'warning',
+    })
   }
 
-  alertaComodin(comodin: string){
+  alertaComodin(comodin: string) {
     Swal.fire({
       title: 'Comodín',
       text: 'Se necesita comodín, turno: ' + comodin,
@@ -138,34 +138,77 @@ export class ScheduleComponent implements OnInit {
       imageAlt: 'Custom image',
     })
   }
-
-    crearPdf(){
-      let hola = this.horarios.data.planificacion;
-      const pdfDefinition: any = {
-        content: [
-          {
-            layout: {
-              fillColor: function (rowIndex, node, columnIndex) {
-                return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-              }
-            },
-            table: {
-              headerRows: 1,
-              body: [
-                [{text: 'Fecha', style: 'tableHeader'}, {text: 'A. Montaner', style: 'tableHeader'}, {text: 'C. Veira', style: 'tableHeader'},{text: 'D. Troncoso', style: 'tableHeader'},{text: 'R. Zavala', style: 'tableHeader'},{text: 'R. Zuñiga', style: 'tableHeader'}],
-                [hola[0].numero_dia, hola[0].empleados[0].turno, hola[0].empleados[1].turno, 'Sample value 4', 'Sample value 4', 'Sample value 4'],
-                [hola[0].numero_dia+1, hola[0].empleados[1].turno, 'Sample value 3', 'Sample value 4', 'Sample value 4', 'Sample value 4'],
-              ]
-            },
-          }
-        ]
-      }
-
-      console.log('descargate xd')
-
-      pdfMake.createPdf(pdfDefinition).open();
-
+  GeneradorTablas(planificacion:Planificacion[], number:any):Planificacion[]{
+    let body = new Array();
+    let tableHeader = new Array();
+    let tableHeaderDia = { text: 'Día', style: 'tableHeader' };
+    let tableHeaderFecha = { text: 'Fecha', style: 'tableHeader' };
+    tableHeader.push(tableHeaderDia);
+    tableHeader.push(tableHeaderFecha);
+    for (let i = 0; i < planificacion[0].empleados.length; i++) {
+      tableHeader.push({ text: planificacion[0].empleados[i].nombre, style: 'tableHeader' })
     }
+    body.push(tableHeader);
+    console.log(planificacion[number])
+    for(let j = number;j<(number+7);j++){
+      console.log(planificacion[number].dia_semana)
+      body.push(
+        [
+          planificacion[j].dia_semana,
+          planificacion[j].numero_dia,
+          planificacion[j].empleados[0].turno,
+          planificacion[j].empleados[1].turno,
+          planificacion[j].empleados[2].turno,
+          planificacion[j].empleados[3].turno,
+          planificacion[j].empleados[4].turno
+        ]
+      )
+    }
+    return body;
+  }
+
+  GeneradorContenidoPDF(planificacion: Planificacion[]): any[] {
+    let content = new Array();
+    let indiceSemana = 1
+    for(let k=0;k<planificacion.length;k=k+7){
+      if(k==0){
+        content.push(['Semana '+(indiceSemana)+' :'+'\n',{style: 'tableExample',table: {body: this.GeneradorTablas(planificacion,k)}}])
+      }
+      else{
+        content.push(['\n'+'Semana '+(indiceSemana)+' :'+'\n',{style: 'tableExample',table: {body: this.GeneradorTablas(planificacion,k)}}])
+      }
+      indiceSemana = indiceSemana + 1;
+    }
+    return content;
+  }
+
+  crearPdf() {
+    let planificacion = this.horarios.data.planificacion;
+    let bodyPlanificacion = this.GeneradorContenidoPDF(planificacion);
+
+    const pdfDefinition: any = {
+      content: bodyPlanificacion
+      /*['\n Semana 1: '+'\n',{style: 'tableExample',table: {body: bodyPlanificacion}},
+        '\n Semana 2: '+'\n',{style: 'tableExample',table: {body: bodyPlanificacion2}}]*/
+      /*content: [
+        {
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+            }
+          },
+          table: {
+            headerRows: 1,
+            body: bodyPlanificacion
+
+          },
+        }
+      ]*/
+    }
+
+    pdfMake.createPdf(pdfDefinition).open();
+
+  }
 
 
 }

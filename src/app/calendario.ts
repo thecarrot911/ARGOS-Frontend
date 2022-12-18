@@ -11,7 +11,7 @@ interface Data {
     planificacion: Planificacion[];
     actualizacion: Actualizacion[];
 }
-interface Planificacion {
+export interface Planificacion {
   dia_semana: string;
   numero_dia: string;
   empleados: Empleados[];

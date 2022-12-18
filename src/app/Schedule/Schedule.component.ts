@@ -17,6 +17,11 @@ import Swal from 'sweetalert2';
 import { createPopper } from '@popperjs/core';
 import { Router } from '@angular/router';
 
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 
 @Component({
   selector: 'app-Schedule',
@@ -35,6 +40,7 @@ export class ScheduleComponent implements OnInit {
   horarios!: Calendario;
   tiempos: Tiempo[] = [];
   public generador: any; /* ONSUBMIT */
+  public global: any;
 
   page: number = 1;
   pageCalendario: number = 1;
@@ -70,6 +76,7 @@ export class ScheduleComponent implements OnInit {
     .subscribe(
       response =>{
         this.horarios = response;
+        this.global = this.horarios
         this.planificacion_id = this.horarios.data.planificacion_id
         console.log(this.horarios)
       },
@@ -106,6 +113,7 @@ export class ScheduleComponent implements OnInit {
     this.horarioService.deleteActualizacionId(actualizacion_id)
     .subscribe(response => {
       console.log('deleteanding')
+      this.router.navigate(['/'])
       this.ngOnInit();
     },
     error=>{
@@ -131,9 +139,33 @@ export class ScheduleComponent implements OnInit {
     })
   }
 
-  editarActualizacion(){
+    crearPdf(){
+      let hola = this.horarios.data.planificacion;
+      const pdfDefinition: any = {
+        content: [
+          {
+            layout: {
+              fillColor: function (rowIndex, node, columnIndex) {
+                return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+              }
+            },
+            table: {
+              headerRows: 1,
+              body: [
+                [{text: 'Fecha', style: 'tableHeader'}, {text: 'A. Montaner', style: 'tableHeader'}, {text: 'C. Veira', style: 'tableHeader'},{text: 'D. Troncoso', style: 'tableHeader'},{text: 'R. Zavala', style: 'tableHeader'},{text: 'R. Zuñiga', style: 'tableHeader'}],
+                [hola[0].numero_dia, hola[0].empleados[0].turno, hola[0].empleados[1].turno, 'Sample value 4', 'Sample value 4', 'Sample value 4'],
+                [hola[0].numero_dia+1, hola[0].empleados[1].turno, 'Sample value 3', 'Sample value 4', 'Sample value 4', 'Sample value 4'],
+              ]
+            },
+          }
+        ]
+      }
 
-  }
+      console.log('descargate xd')
+
+      pdfMake.createPdf(pdfDefinition).open();
+
+    }
 
 
 }

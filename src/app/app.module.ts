@@ -22,9 +22,10 @@ import 'moment/locale/es';
 import { DatePipe } from '@angular/common';
 
 import { EditarActualizacionComponent } from './editarActualizacion/editarActualizacion.component';
+import { PdfCalendarioComponent } from './pdf-calendario/pdf-calendario.component';
 
 @NgModule({
-  declarations: [								
+  declarations: [									
     AppComponent,
       TopBarComponent,
       ScheduleComponent,
@@ -32,7 +33,8 @@ import { EditarActualizacionComponent } from './editarActualizacion/editarActual
       FooterComponent,
       AgregarActualizacionComponent,
       ItinerarioAvionesComponent,
-      EditarActualizacionComponent
+      EditarActualizacionComponent,
+      PdfCalendarioComponent
    ],
   imports: [
     BrowserModule,

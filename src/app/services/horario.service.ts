@@ -86,5 +86,9 @@ export class HorarioService {
     return this.http.put<Actualizacion>(this.updateActualizacionURL+'/'+actualizacion.actualizacion_id, params, this.httpOptions)
   }
 
+  searchSchedules(searchString):Observable<Calendario> {
+    return this.http.get<Calendario>('http://localhost:10975/app/planificacion/mostrar_ultima'+'search/'+searchString) /* Cambiar url a mostrar todas las planificaciones */
+  }
+
 
 }

@@ -23,9 +23,11 @@ import { DatePipe } from '@angular/common';
 
 import { EditarActualizacionComponent } from './editarActualizacion/editarActualizacion.component';
 import { PdfCalendarioComponent } from './pdf-calendario/pdf-calendario.component';
+import { AllSchedulesComponent } from './allSchedules/allSchedules.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
-  declarations: [									
+  declarations: [										
     AppComponent,
       TopBarComponent,
       ScheduleComponent,
@@ -34,7 +36,8 @@ import { PdfCalendarioComponent } from './pdf-calendario/pdf-calendario.componen
       AgregarActualizacionComponent,
       ItinerarioAvionesComponent,
       EditarActualizacionComponent,
-      PdfCalendarioComponent
+      PdfCalendarioComponent,
+      AllSchedulesComponent
    ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { PdfCalendarioComponent } from './pdf-calendario/pdf-calendario.componen
     ReactiveFormsModule,
     NgxPaginationModule,
     DatePipe,
+    FullCalendarModule,
     MomentModule.forRoot({
       relativeTimeThresholdOptions: {
         'm': 59
@@ -53,7 +57,8 @@ import { PdfCalendarioComponent } from './pdf-calendario/pdf-calendario.componen
       { path: 'schedule', component: ScheduleComponent },
       { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent},
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
-      { path: 'editaractualizacion/:actualizacion_id', component: EditarActualizacionComponent}
+      { path: 'editaractualizacion/:actualizacion_id', component: EditarActualizacionComponent},
+      { path: 'allschedules', component: AllSchedulesComponent}
     ]),
   ],
   providers: [DatePipe],

@@ -6,7 +6,7 @@ import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
 import { Observable } from 'rxjs';
 import { calendarData } from '../calendarData'; /* Interfaz */
 import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-aviones.component';
-import { Calendario, Actualizacion, Itinerario, Planificacion } from '../calendario';
+import { Calendario, Actualizacion, Itinerario, Planificacion, Data } from '../calendario';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 import { DatePipe } from '@angular/common';
@@ -138,7 +138,7 @@ export class ScheduleComponent implements OnInit {
       imageAlt: 'Custom image',
     })
   }
-  GeneradorTablas(planificacion:Planificacion[], number:any):Planificacion[]{
+  GeneradorTablasPlanificacion(planificacion: Planificacion[], number: any): Planificacion[] {
     let body = new Array();
     let tableHeader = new Array();
     let tableHeaderDia = { text: 'Día', style: 'tableHeader' };
@@ -149,61 +149,79 @@ export class ScheduleComponent implements OnInit {
       tableHeader.push({ text: planificacion[0].empleados[i].nombre, style: 'tableHeader' })
     }
     body.push(tableHeader);
-    console.log(planificacion[number])
-    for(let j = number;j<(number+7);j++){
-      console.log(planificacion[number].dia_semana)
-      body.push(
-        [
-          planificacion[j].dia_semana,
-          planificacion[j].numero_dia,
-          planificacion[j].empleados[0].turno,
-          planificacion[j].empleados[1].turno,
-          planificacion[j].empleados[2].turno,
-          planificacion[j].empleados[3].turno,
-          planificacion[j].empleados[4].turno
-        ]
-      )
+    for (let j = number; j < (number + 7); j++) {
+      let array = []
+      array.push(planificacion[j].dia_semana)
+      array.push(planificacion[j].numero_dia)
+      for(let k = 0;k<planificacion[j].empleados.length;k++){
+        if(planificacion[j].comodin != 'Libre' && planificacion[j].empleados[k].turno == 'Libre'){
+          array.push(planificacion[j].comodin+'COMODIN')
+        }else{
+          array.push(planificacion[j].empleados[k].turno)
+        }
+      }
+      body.push(array)
     }
     return body;
   }
+  GeneradorTablaActualizaciones(actualizacion: Actualizacion[]): any[] {
+    let body = new Array();
+    let tableHeader = new Array();
 
-  GeneradorContenidoPDF(planificacion: Planificacion[]): any[] {
+    let tableHeaderDia = { text: 'Tipo de Permiso', style: 'tableHeader' };
+    let tableHeaderEmpleado = { text: 'Empleado', style: 'tableHeader' };
+    let tableHeaderDescripcion = { text: 'Descripción', style: 'tableHeader' };
+    let tableHeaderFecha = { text: 'Fecha', style: 'tableHeader' };
+
+    tableHeader.push(tableHeaderDia);
+    tableHeader.push(tableHeaderEmpleado);
+    tableHeader.push(tableHeaderDescripcion);
+    tableHeader.push(tableHeaderFecha);
+
+    body.push(tableHeader);
+
+    for (let i = 0; i < actualizacion.length; i++) {
+      body.push([
+        actualizacion[i].tipo_permiso,
+        actualizacion[i].empleado,
+        actualizacion[i].descripcion,
+        actualizacion[i].fecha
+      ])
+    }
+
+
+    return body;
+  }
+
+  GeneradorContenidoPDF(data: Data): any[] {
+    let planificacion = data.planificacion
+    let actualizacion = data.actualizacion
+
     let content = new Array();
     let indiceSemana = 1
-    for(let k=0;k<planificacion.length;k=k+7){
-      if(k==0){
-        content.push(['Semana '+(indiceSemana)+' :'+'\n',{style: 'tableExample',table: {body: this.GeneradorTablas(planificacion,k)}}])
+    for (let k = 0; k < planificacion.length; k = k + 7) {
+      if (k == 0) {
+        content.push(['Semana ' + (indiceSemana) + '\n', { style: 'tableExample', table: { body: this.GeneradorTablasPlanificacion(planificacion, k)  } }])
       }
-      else{
-        content.push(['\n'+'Semana '+(indiceSemana)+' :'+'\n',{style: 'tableExample',table: {body: this.GeneradorTablas(planificacion,k)}}])
+      else {
+        content.push(['\n' + 'Semana ' + (indiceSemana) + '\n', { style: 'tableExample', table: { body: this.GeneradorTablasPlanificacion(planificacion, k)  } }])
       }
       indiceSemana = indiceSemana + 1;
+    }
+    if(actualizacion.length>0){
+      content.push(['\n\n\n' + 'Actualizaciones', { style: 'tableExample', table: { body: this.GeneradorTablaActualizaciones(actualizacion), headerRows: 1,
+        widths: [ '*', 'auto', 100, '*' ],} }])
     }
     return content;
   }
 
+
   crearPdf() {
-    let planificacion = this.horarios.data.planificacion;
-    let bodyPlanificacion = this.GeneradorContenidoPDF(planificacion);
+    let data = this.horarios.data;
+    let bodyPlanificacion = this.GeneradorContenidoPDF(data);
 
     const pdfDefinition: any = {
       content: bodyPlanificacion
-      /*['\n Semana 1: '+'\n',{style: 'tableExample',table: {body: bodyPlanificacion}},
-        '\n Semana 2: '+'\n',{style: 'tableExample',table: {body: bodyPlanificacion2}}]*/
-      /*content: [
-        {
-          layout: {
-            fillColor: function (rowIndex, node, columnIndex) {
-              return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-            }
-          },
-          table: {
-            headerRows: 1,
-            body: bodyPlanificacion
-
-          },
-        }
-      ]*/
     }
 
     pdfMake.createPdf(pdfDefinition).open();

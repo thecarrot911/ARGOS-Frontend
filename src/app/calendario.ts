@@ -4,7 +4,7 @@ export interface Calendario {
     data: Data,
   }
 
-interface Data {
+export interface Data {
     planificacion_id: number;
     mes: string;
     anio: string;

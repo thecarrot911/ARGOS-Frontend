@@ -4,6 +4,12 @@ export interface Calendario {
     data: Data,
   }
 
+export interface CalendarioAnual{
+  error: boolean,
+  msg: string,
+  data: Data[],
+}
+
 export interface Data {
     planificacion_id: number;
     mes: string;

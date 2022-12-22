@@ -8,7 +8,7 @@
       <select class="m-3 p-2 border-2 border-slate-400 rounded-lg w-28">
         <option>Enero</option>
         <option>Febrero</option>
-        <option>Marzzo</option>
+        <option>Marzo</option>
         <option>Abril</option>
         <option>Mayo</option>
         <option>Junio</option>
@@ -20,7 +20,23 @@
         <option>Diciembre</option>
       </select>
 
-
-
+<div>
+<h2>Get Request using params (https://jsonplaceholder.typicode.com/posts)</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>UserId</th>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let lista of listaCalendarios">
+      <td>{{lista.data}}</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 
 </div>

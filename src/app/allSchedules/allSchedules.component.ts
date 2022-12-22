@@ -3,6 +3,7 @@ import { HorarioService } from '../services/horario.service';
 import { Calendario, CalendarioAnual } from '../calendario';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { AllSchedulesService } from '../services/allSchedules.service';
+import { Calendarioanual, Data } from '../calendarioanual';
 
 import { Posts } from '../posts';
 
@@ -18,7 +19,7 @@ export class AllSchedulesComponent implements OnInit {
 
   listaPosts: Posts[];
 
-  listaCalendarios: any;
+  listaCalendarios: Data[];
 
 
   constructor(
@@ -36,7 +37,7 @@ export class AllSchedulesComponent implements OnInit {
       {
         console.log(response)
         /* this.listaPosts = response; */
-        this.listaCalendarios = response;
+        this.listaCalendarios = response.data;
       }
     )
 

@@ -14,7 +14,7 @@ constructor(
 ) { }
 
 getSchedulesByParameter(): Observable<Calendarioanual>{
-  let params1 = new HttpParams().set('anio', "2024");
+  let params1 = new HttpParams().set('anio', '2024');
   return this.httpclient.get<Calendarioanual>("http://localhost:10975/app/planificacion/mostrar_planificacion_anual", {params: params1})
 }
 

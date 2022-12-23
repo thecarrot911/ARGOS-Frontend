@@ -141,42 +141,98 @@ export class ScheduleComponent implements OnInit {
   GeneradorTablasPlanificacion(planificacion: Planificacion[], number: any): Planificacion[] {
     let body = new Array();
     let tableHeader = new Array();
-    let tableHeaderDia = { text: 'Día', style: 'tableHeader' };
-    let tableHeaderFecha = { text: 'Fecha', style: 'tableHeader' };
+    let tableHeaderDia = {
+                          text: 'Día',
+                          style: 'tableHeader',
+                          color: 'black',
+                          fillColor: '#dddddd'
+                          };
+    let tableHeaderFecha = {
+                            text: 'Fecha',
+                            style: 'tableHeader',
+                            color: 'black',
+                            fillColor: '#dddddd'
+                          };
     tableHeader.push(tableHeaderDia);
     tableHeader.push(tableHeaderFecha);
     for (let i = 0; i < planificacion[0].empleados.length; i++) {
-      tableHeader.push({ text: planificacion[0].empleados[i].nombre, style: 'tableHeader' })
+      tableHeader.push
+      ({
+        text: planificacion[0].empleados[i].nombre,
+        style: 'tableHeader',
+        fillColor: '#dddddd',
+        fontSize: 10
+      })
     }
     body.push(tableHeader);
     for (let j = number; j < (number + 7); j++) {
       let array = []
-      array.push(planificacion[j].dia_semana)
-      array.push(planificacion[j].numero_dia)
+      array.push({
+        text: planificacion[j].dia_semana,
+        fillColor: '#CECCE8',
+        fontSize: 10
+      })
+      array.push({
+        text: planificacion[j].numero_dia,
+        fillColor: '#CECCE8',
+        fontSize: 10
+      })
       for(let k = 0;k<planificacion[j].empleados.length;k++){
         if(planificacion[j].comodin != 'Libre' && planificacion[j].empleados[k].turno == 'Libre'){
-          array.push(planificacion[j].comodin+'COMODIN')
+          array.push({
+            text: planificacion[j].comodin+' COMODIN',
+            fillColor: '#F7E4DF',
+            fontSize: 10,
+            decoration: 'underline'
+          })
         }else{
-          array.push(planificacion[j].empleados[k].turno)
+          array.push({
+            text: planificacion[j].empleados[k].turno,
+            fillColor: '#EBF2FA',
+            fontSize: 10,
+            characterSpacing: '1',
+            widths: ['20', '20', '20', '20', '30']
+          })
         }
       }
       body.push(array)
     }
     return body;
   }
+  
   GeneradorTablaActualizaciones(actualizacion: Actualizacion[]): any[] {
     let body = new Array();
     let tableHeader = new Array();
 
-    let tableHeaderDia = { text: 'Tipo de Permiso', style: 'tableHeader' };
-    let tableHeaderEmpleado = { text: 'Empleado', style: 'tableHeader' };
-    let tableHeaderDescripcion = { text: 'Descripción', style: 'tableHeader' };
-    let tableHeaderFecha = { text: 'Fecha', style: 'tableHeader' };
+    let tableHeaderDia = {
+      text: 'Tipo de Permiso', style: 'tableHeader'
+    };
+    let tableHeaderEmpleado = {
+      text: 'Empleado', style: 'tableHeader'
+    };
+    let tableHeaderDescripcion = {
+      text: 'Descripción', style: 'tableHeader'
+    };
+    let tableHeaderFecha = {
+      text: 'Fecha', style: 'tableHeader'
+  };
 
-    tableHeader.push(tableHeaderDia);
-    tableHeader.push(tableHeaderEmpleado);
-    tableHeader.push(tableHeaderDescripcion);
-    tableHeader.push(tableHeaderFecha);
+    tableHeader.push({
+      text: tableHeaderDia,
+      fillColor: '#dddddd'
+    });
+    tableHeader.push({
+      text: tableHeaderEmpleado,
+      fillColor: '#dddddd'
+    });
+    tableHeader.push({
+      text: tableHeaderDescripcion,
+      fillColor: '#dddddd'
+    });
+    tableHeader.push({
+      text: tableHeaderFecha,
+      fillColor: '#dddddd'
+    });
 
     body.push(tableHeader);
 
@@ -185,7 +241,7 @@ export class ScheduleComponent implements OnInit {
         actualizacion[i].tipo_permiso,
         actualizacion[i].empleado,
         actualizacion[i].descripcion,
-        actualizacion[i].fecha
+        actualizacion[i].fecha.format("MM-DD-YYYY")
       ])
     }
 
@@ -197,11 +253,20 @@ export class ScheduleComponent implements OnInit {
     let planificacion = data.planificacion
     let actualizacion = data.actualizacion
 
+
     let content = new Array();
     let indiceSemana = 1
     for (let k = 0; k < planificacion.length; k = k + 7) {
       if (k == 0) {
-        content.push(['Semana ' + (indiceSemana) + '\n', { style: 'tableExample', table: { body: this.GeneradorTablasPlanificacion(planificacion, k)  } }])
+        content.push(
+        ['Semana ' + (indiceSemana) + '\n',
+          { style: '',
+          table:
+            { 
+              body: this.GeneradorTablasPlanificacion(planificacion, k),
+            }
+          }
+        ])
       }
       else {
         content.push(['\n' + 'Semana ' + (indiceSemana) + '\n', { style: 'tableExample', table: { body: this.GeneradorTablasPlanificacion(planificacion, k)  } }])
@@ -209,7 +274,9 @@ export class ScheduleComponent implements OnInit {
       indiceSemana = indiceSemana + 1;
     }
     if(actualizacion.length>0){
-      content.push(['\n\n\n' + 'Actualizaciones', { style: 'tableExample', table: { body: this.GeneradorTablaActualizaciones(actualizacion), headerRows: 1,
+      content.push(['\n\n\n' + 'Actualizaciones',
+      { style: 'tableExample',
+      table: { body: this.GeneradorTablaActualizaciones(actualizacion), headerRows: 1,
         widths: [ '*', 'auto', 100, '*' ],} }])
     }
     return content;

@@ -1,24 +1,15 @@
 <div class="container mx-auto my-6 flex flex-row items-start bg-slate-500 rounded-lg">
-    <select class="m-3 p-2 border-2 border-slate-400 rounded-lg w-20">
+  <form>
+    <select class="m-3 p-2 border-2 border-slate-400 rounded-lg w-20"
+    >
         <option>2022</option>
         <option>2023</option>
         <option>2024</option>
         <option>2025</option>
       </select>
-      <select class="m-3 p-2 border-2 border-slate-400 rounded-lg w-28">
-        <option>Enero</option>
-        <option>Febrero</option>
-        <option>Marzo</option>
-        <option>Abril</option>
-        <option>Mayo</option>
-        <option>Junio</option>
-        <option>Julio</option>
-        <option>Agosto</option>
-        <option>Septiembre</option>
-        <option>Octubre</option>
-        <option>Noviembre</option>
-        <option>Diciembre</option>
-      </select>
+      <button (click)="buscarCalendarios()">Buscar</button>
+  </form>
+
 
 <div>
 <h2>Get Request using params (https://jsonplaceholder.typicode.com/posts)</h2>
@@ -39,4 +30,134 @@
 </table>
 </div>
 
+<div class="container mx-auto">
+  <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
+    <div class="w-full lg:w-5/6 h-screen">
+      <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
+        <ng-container *ngFor="let horario of listaCalendarios | paginate:{
+              id: 'first',
+              itemsPerPage: tableSizeCalendario,
+              currentPage: paginationCalendario,
+              totalItems: countCalendario}; let ix = index">
+          <div class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
+            <div class="m-3 place-content-center relative">
+              
+                <ng-container *ngIf="horario.planificacion[0].comodin != 'Libre'">
+                  <div class="flex justify-between">
+                  <button (click)="alertaComodin(horario.planificacion[0].comodin)">
+                    <span class="flex absolute h-7 w-7 top-0 right-0 -mt-1 -mr-1">
+                      <img
+                      src="assets/images/icons8-joker-48.png"
+                      alt="Logo Argos"
+                      width="140"
+                      height="100"
+                      >
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-md bg-yellow-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                    </span>
+                    </button>
+                   </div>
+                </ng-container>
+
+
+              <div class="flex justify-between">
+                <div>{{horario.planificacion[0].dia_semana}} {{horario.planificacion[0].numero_dia}}</div>
+                  <!-- <div> 
+                    <div *ngIf="horario.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
+                      <div class="flex justify-end gap-2">
+                      <ng-container *ngFor="let itinerario of horario.itinerario">
+
+                     
+                          <button (click)="alertaItinerario(itinerario)">
+                            <span class="flex relative h-7 w-7 top-0 right-0 -mt-1 -mr-1 ">
+                              <svg width="16" height="16" fill="currentColor"
+                                class="bi bi-airplane-fill animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" viewBox="0 0 16 16">
+                                <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
+                              </svg>
+                              <svg width="16" height="16" fill="currentColor"
+                              class="bi bi-airplane-fill relative inline-flex rounded-full h-7 w-full bg-red-500" viewBox="0 0 16 16">
+                                <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
+                              </svg>
+                            </span>
+                          </button> 
+                      </ng-container>
+                      </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+
+            <ng-container *ngFor="let empleado of horario.planificacion[0].empleados">
+              <div class="flex justify-between m-3 text-xs ">
+                <div class="">{{empleado.nombre}} </div>
+                <div class="">{{empleado.turno}}</div>
+              </div>
+            </ng-container>
+          </div>
+
+
+
+        </ng-container>
+
+      </div>
+      <div class="mx-auto m-4">
+        <pagination-controls id="first" previousLabel="Prev" nextLabel="Next"
+          (pageChange)="paginationCalendario = $event">
+        </pagination-controls>
+      </div>
+    </div>
+
+    <div class="w-full lg:w-1/4 h-screen">
+      <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
+        <div class="flex">
+          <h1 class="italic text-lg font-semibold hover:text-black m-1">Actualizaciones</h1>
+          
+        </div>
+        <div *ngFor="let empleado of listaCalendarios[0].actualizacion.reverse() | paginate:{
+                    id: 'second',
+                    itemsPerPage: tableSize,
+                    currentPage: paginationActualizaciones,
+                    totalItems: count}; let i = index">
+                    <hr>
+            <p class="text-sm font-bold text-red-700 leading-6">{{empleado.tipo_permiso}}</p>
+            <p class="text-base font-bold text-blue-900">{{empleado.empleado}}</p>
+            <p class="text-sm hover:font-semibold">{{empleado.descripcion}}</p>
+            <hr>
+        </div>
+        <pagination-controls id="second" previousLabel="Prev" nextLabel="Next"
+          (pageChange)="paginationActualizaciones = $event">
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
 </div>
+
+
+<div class="flex flex-row">
+  <h2>Get Request using params</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Año</th>
+        <th>Mes</th>
+        <th>planificacion_id</th>
+        <th>Planificacion</th>
+        <th>Empleados</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lista of listaCalendarios">
+        <td>{{lista.anio}}</td>
+        <td>{{lista.mes}}</td>
+        <td>{{lista.planificacion_id}}</td>
+        <ng-container *ngFor="let lista2 of lista.planificacion">
+          <td>{{lista2.dia_semana}}</td>
+          <ng-container *ngFor="let lista3 of lista2.empleados">
+          <td>{{lista3.nombre}}</td>
+        </ng-container>
+      </ng-container>
+
+      </tr>
+    </tbody>
+  </table>
+  </div>

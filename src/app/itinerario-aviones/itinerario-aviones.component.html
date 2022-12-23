@@ -106,21 +106,23 @@
             
 
             <button
-            class="bg-green-400 text-white py-2 px-4 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-green-500 duration-300"
+            class="bg-[#d6caab] text-white py-2 px-4 rounded transition ease-in-out delay-150
+            hover:-translate-y-1 hover:scale-110 hover:bg-[#e0cd9f] duration-200"
             type="button" (click)="agregarChoque()">
               Agregar Itinerario
             </button>
 
             <input *ngIf="itinerarioForm.invalid" [disabled]="itinerarioForm.invalid"
             type="submit" value="Enviar itinerario"
-            class="bg-blue-200 text-white py-2 px-4 rounded">
+            class="bg-slate-200 text-white py-2 px-4 rounded">
             
 
             <input *ngIf="itinerarioForm.valid"
             type="submit" value="Enviar itinerario"
-            class="bg-blue-500 text-white py-2 px-4 rounded">
+            class="bg-slate-600 text-white py-2 px-4 rounded">
 
           </div>
+
         </div>
       </div>
     </div>

@@ -140,6 +140,7 @@ export class ScheduleComponent implements OnInit {
   }
   GeneradorTablasPlanificacion(planificacion: Planificacion[], number: any): Planificacion[] {
     let body = new Array();
+   
     let tableHeader = new Array();
     let tableHeaderDia = {
                           text: 'Día',
@@ -202,6 +203,7 @@ export class ScheduleComponent implements OnInit {
   
   GeneradorTablaActualizaciones(actualizacion: Actualizacion[]): any[] {
     let body = new Array();
+
     let tableHeader = new Array();
 
     let tableHeaderDia = {
@@ -235,13 +237,13 @@ export class ScheduleComponent implements OnInit {
     });
 
     body.push(tableHeader);
-
+    console.log(body)
     for (let i = 0; i < actualizacion.length; i++) {
       body.push([
         actualizacion[i].tipo_permiso,
         actualizacion[i].empleado,
-        actualizacion[i].descripcion,
-        actualizacion[i].fecha.format("MM-DD-YYYY")
+        actualizacion[i].descripcion
+        //actualizacion[i].fecha.format("MM-DD-YYYY")
       ])
     }
 
@@ -253,8 +255,14 @@ export class ScheduleComponent implements OnInit {
     let planificacion = data.planificacion
     let actualizacion = data.actualizacion
 
-
     let content = new Array();
+
+    let tituloEmpresa = {text: 'Ariaca',style: 'header' }
+    content.push(tituloEmpresa);
+
+    let tituloPlanificacion = {text: 'Planificación de '+this.horarios.data.mes+' del '+this.horarios.data.anio ,style: 'header'}
+    content.push(tituloPlanificacion);
+
     let indiceSemana = 1
     for (let k = 0; k < planificacion.length; k = k + 7) {
       if (k == 0) {

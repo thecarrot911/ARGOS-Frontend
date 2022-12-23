@@ -112,7 +112,6 @@ export class ScheduleComponent implements OnInit {
   deleteActualizacion(actualizacion_id: Actualizacion): void {
     this.horarioService.deleteActualizacionId(actualizacion_id)
       .subscribe(response => {
-        console.log('deleteanding')
         this.ngOnInit();
       },
         error => {
@@ -166,7 +165,15 @@ export class ScheduleComponent implements OnInit {
       })
     }
     body.push(tableHeader);
-    for (let j = number; j < (number + 7); j++) {
+    
+    let diaSemana;
+    if(number + 7 <= planificacion.length){
+      diaSemana = 7
+    }
+    else{
+      diaSemana = (planificacion.length - number)
+    }
+    for (let j = number; j < (number + diaSemana); j++) {
       let array = []
       array.push({
         text: planificacion[j].dia_semana,
@@ -237,7 +244,6 @@ export class ScheduleComponent implements OnInit {
     });
 
     body.push(tableHeader);
-    console.log(body)
     for (let i = 0; i < actualizacion.length; i++) {
       body.push([
         actualizacion[i].tipo_permiso,

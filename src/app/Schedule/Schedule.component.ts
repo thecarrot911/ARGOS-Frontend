@@ -170,17 +170,7 @@ export class ScheduleComponent implements OnInit {
       })
     }
     body.push(tableHeader);
-    
-    let diasRestantes = planificacion.length
-    let controlDias = 7
-    for (let j = number; j < (number + controlDias); j++) {
-      if(diasRestantes-7>=0){
-        diasRestantes = diasRestantes - 7
-        controlDias = 7
-      }
-      else{
-        controlDias = diasRestantes;
-      }
+    for (let j = number; j < (number + 7); j++) {
       let array = []
 
       array.push({
@@ -252,7 +242,6 @@ export class ScheduleComponent implements OnInit {
     });
 
     body.push(tableHeader);
-    console.log(body)
     for (let i = 0; i < actualizacion.length; i++) {
       body.push([
         actualizacion[i].tipo_permiso,
@@ -261,7 +250,6 @@ export class ScheduleComponent implements OnInit {
         actualizacion[i].fecha
       ])
     }
-
 
     return body;
   }

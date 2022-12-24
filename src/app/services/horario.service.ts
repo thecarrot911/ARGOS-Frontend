@@ -6,7 +6,7 @@ import { catchError, retry, tap, map } from 'rxjs/operators'; /* a */
 import { calendarData } from '../calendarData';
 /* import { itinerarioData} from '../itinerarioData'; */
 
-import { Tiempo } from '../tiempo';
+import { PlanificacionData, Tiempo } from '../tiempo';
 import { AddActualizacion } from '../Addactualizacion';
 import { Calendario, Actualizacion } from '../calendario';
 
@@ -34,8 +34,8 @@ export class HorarioService {
   }
 
     /* Itinerario de aviones Choques*/  /* siuuuuu */
-    generarHorario(tiempo: Tiempo): Observable<Tiempo>{
-      return this.http.post<Tiempo>(this.dataUrl, tiempo);
+    generarHorario(tiempo: Tiempo): Observable<PlanificacionData>{
+      return this.http.post<PlanificacionData>(this.dataUrl, tiempo);
     }
 
     url_actualizacion =  'http://localhost:10975/app/actualizacion/crear_actualizacion';

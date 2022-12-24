@@ -79,6 +79,9 @@ export class ScheduleComponent implements OnInit {
           this.global = this.horarios
           this.planificacion_id = this.horarios.data.planificacion_id
           console.log(this.horarios)
+          
+
+    
         },
         error => {
           console.log(error)
@@ -113,6 +116,7 @@ export class ScheduleComponent implements OnInit {
     this.horarioService.deleteActualizacionId(actualizacion_id)
       .subscribe(response => {
         console.log('deleteanding')
+        window.location.reload();
         this.ngOnInit();
       },
         error => {
@@ -166,8 +170,19 @@ export class ScheduleComponent implements OnInit {
       })
     }
     body.push(tableHeader);
-    for (let j = number; j < (number + 7); j++) {
+    
+    let diasRestantes = planificacion.length
+    let controlDias = 7
+    for (let j = number; j < (number + controlDias); j++) {
+      if(diasRestantes-7>=0){
+        diasRestantes = diasRestantes - 7
+        controlDias = 7
+      }
+      else{
+        controlDias = diasRestantes;
+      }
       let array = []
+
       array.push({
         text: planificacion[j].dia_semana,
         fillColor: '#CECCE8',
@@ -242,8 +257,8 @@ export class ScheduleComponent implements OnInit {
       body.push([
         actualizacion[i].tipo_permiso,
         actualizacion[i].empleado,
-        actualizacion[i].descripcion
-        //actualizacion[i].fecha.format("MM-DD-YYYY")
+        actualizacion[i].descripcion,
+        actualizacion[i].fecha
       ])
     }
 

@@ -40,7 +40,7 @@ export class AgregarActualizacionComponent implements OnInit {
     tipo_permiso: new FormControl('', [Validators.required, Validators.minLength(3)]),
     descripcion: new FormControl('', [Validators.required]),
     empleado: new FormControl('', [Validators.required]),
-    fecha: new FormControl('', [Validators.required]),
+    fecha: new FormControl(''),
   })
 
   get tipo_permiso(){
@@ -56,7 +56,9 @@ export class AgregarActualizacionComponent implements OnInit {
   }
 
   get fecha(){
+    console.log(this.fecha)
     return this.actualizacionForm.get('fecha')
+    
   }
   
   ngOnInit(): void {
@@ -74,7 +76,7 @@ export class AgregarActualizacionComponent implements OnInit {
     this.horarioService.guardarActualizacion(this.actualizacion)
       .subscribe(
        response => {
-         console.log(response)
+         console.log(response.fecha)
          this.router.navigate(['/schedule'])
        },
        error => {

@@ -37,14 +37,15 @@
           
           <label class="block">
             <span class="text-gray-700">Descripción del permiso</span>
-            <textarea required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50" rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel" [(ngModel)]="actualizacion.descripcion">
+            <textarea required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50" rows="3" style="height: 78px;"
+            name="descripcion" #descripcion="ngModel" [(ngModel)]="actualizacion.descripcion">
             </textarea>
             <span class="text-rose-500" *ngIf="descripcion.invalid && descripcion.touched">Este campo es requerido.</span>
           </label>
 
           <label class="block">
             <span class="text-gray-700">Fecha del permiso: </span>
-           {{CurrentDate | date:'dd-MM-yyyy'}}
+            {{latest_date | date}}
           </label>
 
           <button type="submit" value="Guardar"
@@ -56,5 +57,5 @@
   </div>
 </form>
 
-<!-- <span> Tiempo </span>
-<pre>{{actualizacion | json }}</pre> -->
+<span> Tiempo </span>
+<pre>{{actualizacion | json }}</pre>

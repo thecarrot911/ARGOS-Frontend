@@ -32,13 +32,15 @@ export class AllSchedulesComponent implements OnInit {
   count: number = 0;
   countCalendario: number = 0;
   tableSize: number = 4;
-  tableSizeCalendario: number = 7;
+  tableSizeCalendario: number = 1;
   tableSizes: any = [5, 10, 15, 20]
   tableSizesCalendario: any = [5, 10, 15, 20]
 
   CurrentDate = new Date();
   latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
   today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
+
+  public array_vacio: Array<Itinerario> = [];
 
 
   constructor(

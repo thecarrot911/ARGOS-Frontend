@@ -1,3 +1,9 @@
+export interface PlanificacionData{
+  msg: string;
+  error: boolean;
+  tiempo: Tiempo;
+}
+
 export interface Tiempo {
     anio: string;
     mes: string;

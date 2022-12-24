@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Calendario } from '../calendario';
+import { PlanificacionData } from '../tiempo';
 
 import Swal from 'sweetalert2';
 
@@ -36,7 +37,7 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   public ayuda: any;
   /* Cap 245 */
-  
+
   tiempo: Tiempo = {
     anio: '',
     mes: '',
@@ -95,7 +96,6 @@ export class ItinerarioAvionesComponent implements OnInit {
     if(control.value != null && control.value.indexOf(' ') != -1){
       return {noPermitirEspacios: true}
     }
-    console.log('hola')
     return null;
   }
 
@@ -120,8 +120,21 @@ export class ItinerarioAvionesComponent implements OnInit {
     this.horarioService.generarHorario(this.tiempo)
     .subscribe(
       response => {
-        console.log(response)
-        this.router.navigate(['/schedule'])
+        if(response.error){
+          console.log(response.msg)
+          console.log('hay error')
+          this.loading.classList.add('hidden')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: response.msg
+          })
+        }
+        else{
+          console.log('no hay error')
+          this.router.navigate(['/schedule'])
+        }
+
       },
       error => {
         console.log(error)

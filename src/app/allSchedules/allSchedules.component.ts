@@ -32,7 +32,7 @@ export class AllSchedulesComponent implements OnInit {
   count: number = 0;
   countCalendario: number = 0;
   tableSize: number = 4;
-  tableSizeCalendario: number = 2;
+  tableSizeCalendario: number = 1;
   tableSizes: any = [5, 10, 15, 20]
   tableSizesCalendario: any = [5, 10, 15, 20]
 

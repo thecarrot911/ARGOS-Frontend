@@ -81,9 +81,7 @@ export class EditarActualizacionComponent implements OnInit {
 
 
   enviarActualizacion(){
-    /* this.actualizacion = new AddActualizacion('','','',this.latest_date, this.planificacion_id);
-    this.actualizacion_calendario = new UpdateActualizacion(this.actualizacion_id, this.actualizacion.tipo_permiso, this.actualizacion.descripcion, this.actualizacion.empleado, this.actualizacion.fecha, this.planificacion_id);
-     */this.horarioService.updateActualizacionId(this.actualizacion_calendario)
+      this.horarioService.updateActualizacionId(this.actualizacion_calendario)
       .subscribe(
        response => {
          console.log(response)
@@ -93,10 +91,6 @@ export class EditarActualizacionComponent implements OnInit {
          console.log(error)
        }
       )
-   }
-
-   editarActualizacion(){
-
    }
 
 }

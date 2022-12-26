@@ -52,7 +52,7 @@ export class AllSchedulesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.buscarCalendarios();
+    /* this.buscarCalendarios(); */
   }
 
   buscarCalendarios(){
@@ -61,11 +61,22 @@ export class AllSchedulesComponent implements OnInit {
       response =>
       {
         console.log(response)
-        /* this.listaPosts = response; */
         this.listaCalendarios = response.data;
       }
     )
-    console.log('ngof')
+  }
+
+  buscarCalendarioPrueba(anio: string){
+    this.allSchedules.getSchedulesByParameter2(anio)
+    .subscribe(
+      response => {
+        console.log(response)
+        this.listaCalendarios = response.data
+      },
+      error =>{
+        console.log(error)
+      }
+    )
   }
 
   onPagination(event: any) {

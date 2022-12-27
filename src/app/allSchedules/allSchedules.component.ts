@@ -67,7 +67,7 @@ export class AllSchedulesComponent implements OnInit {
   }
 
   buscarCalendarioPrueba(anio: string){
-    if(anio=='2022' || anio == '2023' || anio == '2024' || anio == '2025'){
+    
       this.allSchedules.getSchedulesByParameter2(anio)
       .subscribe(
         response => {
@@ -78,14 +78,6 @@ export class AllSchedulesComponent implements OnInit {
           console.log(error)
         }
       )
-    }
-    else{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Por favor, ingrese un año entre el 2022 y 2025',
-      })
-    }
 
   }
 

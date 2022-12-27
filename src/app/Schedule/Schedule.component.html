@@ -145,14 +145,14 @@
             <div class="flex justify-start gap-3">
               <p class="text-gray-500">{{empleado.fecha | date }}</p>
               <!-- <p class="text-gray-500">{{empleado.fecha | amLocale: 'es' | amTimeAgo }}</p> -->
-              <a (click)="deleteActualizacion(empleado)"
+              <button type="button" title="delete actualizacion" (click)="deleteActualizacion(empleado)"
                 class="rounded-md border-2 border-red-300 p-1 text-xs w-6 h-6 hover:bg-red-400">
                 <img
                 src="assets/images/delete.png"
                 alt="Logo Argos"
                 width="140"
                 height="100"
-                ></a>
+                ></button>
 
               <a [routerLink]="['/editaractualizacion/', empleado.actualizacion_id]"
                 class="rounded-md border-2 border-yellow-300 p-1 text-xs w-6 h-6 hover:bg-yellow-400">

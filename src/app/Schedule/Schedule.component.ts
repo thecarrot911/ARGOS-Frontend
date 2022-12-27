@@ -38,6 +38,9 @@ export class ScheduleComponent implements OnInit {
   public array_vacio: Array<Itinerario> = [];
   pruebas: any;
   horarios!: Calendario;
+
+  public prueba1: number;
+
   tiempos: Tiempo[] = [];
   public generador: any; /* ONSUBMIT */
   public global: any;
@@ -77,6 +80,7 @@ export class ScheduleComponent implements OnInit {
         response => {
           this.horarios = response;
           this.global = this.horarios
+          /* this.prueba1 = this.horarios.data.mes */
           this.planificacion_id = this.horarios.data.planificacion_id
           console.log(this.horarios)
           
@@ -115,7 +119,6 @@ export class ScheduleComponent implements OnInit {
   deleteActualizacion(actualizacion_id: Actualizacion): void {
     this.horarioService.deleteActualizacionId(actualizacion_id)
       .subscribe(response => {
-        console.log('deleteanding')
         this.ngOnInit();
       },
         error => {

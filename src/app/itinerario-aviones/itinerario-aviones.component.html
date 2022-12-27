@@ -21,11 +21,11 @@
 
   <form (ngSubmit)="enviarDatosJSON()" #itinerarioForm="ngForm" appIdentityRevealed>
     <div class="antialiased text-gray-900 px-6">
-      <div class="max-w-wl mx-auto py-12 md:max-w-2xl">
+      <div class="max-w-wl mx-auto py-12 md:max-w-5xl">
         <!-- md:max-w-6xl mueve de izq a der -->
         <h2 class="text-2xl font-sans">Generador de horario</h2>
         <p class="mt-2 text-lg text-gray-500">Por favor, ingrese los datos solicitados:</p>
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
           <div class="grid grid-cols-1 gap-6">
 
             <label class="block">
@@ -120,8 +120,42 @@
             <input *ngIf="itinerarioForm.valid"
             type="submit" value="Enviar itinerario"
             class="bg-slate-600 text-white py-2 px-4 rounded">
-
           </div>
+
+          <div class="grid grid-cols-1 gap-6">
+            <div class="BLOCK">
+              <h1 class="font-mono text-lg tracking-normal">Itinerarios registrados</h1>
+              <ng-container *ngFor="let itinerario of tiempo.itinerario; let i = index">
+                <div class="flex justify-between gap-y-10">
+                  <div class="flex justify-between gap-x-1">
+                    <div class="text-sm ">Día encuentro: </div>
+                    <input class="text-sm w-3 "
+                    [(ngModel)]="itinerario.dia" name="itinerario.dia_{{i}}">
+                  </div>
+                  <div class="flex justify-between gap-x-1">
+                    <div class="text-sm">Empleados: </div>
+                    <input class="text-sm w-3"
+                    [(ngModel)]="itinerario.aviones" name="itinerario.aviones_{{i}}">
+                  </div>
+                  <div class="flex justify-between gap-x-1">
+                    <div class="text-sm">Turno: </div>
+                    <input class="text-sm w-3"
+                    [(ngModel)]="itinerario.turno" name="itinerario.turno_{{i}}">
+                  </div>
+                  <button class=" rounded-md" (click)="eliminarItinerario(i)">
+                    <img
+                      src="assets/images/delete.png"
+                      alt="Logo Argos"
+                      width="20"
+                      height="20"
+                      >
+                  </button>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+
 
         </div>
       </div>
@@ -130,7 +164,4 @@
 </div>
 
 <!-- <span> Tiempo </span>
-<pre>{{tiempo | json }}</pre>
-
- <span>Persona</span>
-<pre> {{ persona | json }} </pre> -->
+<pre>{{tiempo | json }}</pre> -->

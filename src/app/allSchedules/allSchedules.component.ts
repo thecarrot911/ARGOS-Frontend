@@ -67,16 +67,26 @@ export class AllSchedulesComponent implements OnInit {
   }
 
   buscarCalendarioPrueba(anio: string){
-    this.allSchedules.getSchedulesByParameter2(anio)
-    .subscribe(
-      response => {
-        console.log(response)
-        this.listaCalendarios = response.data
-      },
-      error =>{
-        console.log(error)
-      }
-    )
+    if(anio=='2022' || anio == '2023' || anio == '2024' || anio == '2025'){
+      this.allSchedules.getSchedulesByParameter2(anio)
+      .subscribe(
+        response => {
+          console.log(response)
+          this.listaCalendarios = response.data
+        },
+        error =>{
+          console.log(error)
+        }
+      )
+    }
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Por favor, ingrese un año entre el 2022 y 2025',
+      })
+    }
+
   }
 
   onPagination(event: any) {

@@ -26,6 +26,7 @@ interface Turno_Choque{
   dia: string;
   turno: string;
   aviones: string;
+  id: number;
 }
 
 @Component({
@@ -38,6 +39,8 @@ export class ItinerarioAvionesComponent implements OnInit {
   public ayuda: any;
   /* Cap 245 */
 
+  nuevoItinerario: string = '';
+
   tiempo: Tiempo = {
     anio: '',
     mes: '',
@@ -49,7 +52,7 @@ export class ItinerarioAvionesComponent implements OnInit {
       { nombre: 'R. ZUÑIGA' }
     ],
     itinerario: [
-      { dia: '', turno: '', aviones: '' }
+      { dia: '', turno: '', aviones: '', id: 1}
     ]
   }
 
@@ -143,16 +146,24 @@ export class ItinerarioAvionesComponent implements OnInit {
   }
 
   agregarChoque(){
+    
     const newChoque: Turno_Choque = {
+
       dia: this.tiempo.itinerario[0].dia,
       aviones: this.tiempo.itinerario[0].aviones,
-      turno: this.tiempo.itinerario[0].turno
+      turno: this.tiempo.itinerario[0].turno,
+      id: this.tiempo.itinerario.length + 1
     }
-    this.tiempo.itinerario.push({ ...newChoque});
-    console.log(newChoque)
-    this.tiempo.itinerario[0].dia = '';
-    this.tiempo.itinerario[0].aviones = '';
-    this.tiempo.itinerario[0].turno = '';
+
+    if(this.tiempo.itinerario[0].dia != '' && this.tiempo.itinerario[0].dia != null && this.tiempo.itinerario[0].aviones != '' && this.tiempo.itinerario[0].aviones != null && this.tiempo.itinerario[0].turno != ''){
+    
+      this.tiempo.itinerario.push({ ...newChoque});
+      console.log(newChoque)
+      this.tiempo.itinerario[0].dia = '';
+      this.tiempo.itinerario[0].aviones = '';
+      this.tiempo.itinerario[0].turno = '';
+    
+    
 
     const Toast = Swal.mixin({
       toast: true,
@@ -170,6 +181,19 @@ export class ItinerarioAvionesComponent implements OnInit {
       icon: 'success',
       title: 'Itinerario registrado exitosamente'
     })
+  }
+    else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes rellenar los datos!',
+      })
+    }
+  }
+
+  eliminarItinerario(index: number ){
+    this.tiempo.itinerario.splice(index, 1);
+    this.router.navigate(['/itinerario-aviones'])
   }
 
 

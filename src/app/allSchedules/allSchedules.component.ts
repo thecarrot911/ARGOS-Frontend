@@ -8,8 +8,6 @@ import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { Itinerario } from '../calendario';
 
-import { Posts } from '../posts';
-
 @Component({
   selector: 'app-allSchedules',
   templateUrl: './allSchedules.component.html',
@@ -20,8 +18,6 @@ export class AllSchedulesComponent implements OnInit {
   public calendarios! : Calendario;
   searchString : any;
   searchAnio: any;
-
-  listaPosts: Posts[];
 
   listaCalendarios: Data[];
 

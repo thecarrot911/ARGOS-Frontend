@@ -4,7 +4,6 @@ import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
 import { Observable } from 'rxjs';
-import { calendarData } from '../calendarData'; /* Interfaz */
 import { ItinerarioAvionesComponent } from '../itinerario-aviones/itinerario-aviones.component';
 import { Calendario, Actualizacion, Itinerario, Planificacion, Data } from '../calendario';
 import { ChangeDetectionStrategy } from '@angular/core';

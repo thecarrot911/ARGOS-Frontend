@@ -3,9 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'; /* a */
 import { HttpParams } from '@angular/common/http';
 import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
 import { catchError, retry, tap, map } from 'rxjs/operators'; /* a */
-import { calendarData } from '../calendarData';
-/* import { itinerarioData} from '../itinerarioData'; */
-
 import { PlanificacionData, Tiempo } from '../tiempo';
 import { AddActualizacion } from '../Addactualizacion';
 import { Calendario, Actualizacion } from '../calendario';

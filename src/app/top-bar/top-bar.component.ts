@@ -15,8 +15,7 @@ export class TopBarComponent implements OnInit {
   }
   
   selected: string = "Collections";
-  isToggle: number;
-/*   isToggle: number = 1; */
+  isToggle: number = 1;
 
 
   constructor() { }

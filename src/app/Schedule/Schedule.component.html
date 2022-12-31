@@ -1,5 +1,4 @@
-<div
-  class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300">
+<div class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300">
   <div>
     <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario empleados</h4>
     <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
@@ -12,7 +11,7 @@
             <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
           </svg>
         </div>
-        <span class="hover:text-blue-600 text-bold">Planificación de {{horarios.data.mes}} del {{horarios.data.anio}}</span>
+        <span class="hover:text-blue-600 text-bold">Planificación de {{horariosData?.mes}} del {{horariosData?.anio}}</span>
       </li>
       <li class="flex items-center mr-4 mt-4 md:mt-0">
         <div class="mr-1">
@@ -23,7 +22,7 @@
           </svg>
 
         </div>
-        <span>ARIACA</span>
+        <span class="hover:text-black text-bold">ARIACA</span>
       </li>
       <li class="flex items-center mt-4 md:mt-0">
         <div class="mr-1">
@@ -35,35 +34,30 @@
             <line x1="3" y1="21" x2="21" y2="21" />
           </svg>
         </div>
-        <span class="hover:text-black text-bold">Hoy día es: {{today_is | amDateFormat:'LL'}}</span>
+        <span class="hover:text-black text-bold">Hoy día es: {{today_is | date}}</span>
       </li>
     </ul>
   </div>
   <div class="mt-6 md:mt-0">
-    <button (click)="crearPdf()"
-    class="mr-3 bg-slate-600 white:bg-slate-600 focus:outline-none transition duration-150 ease-in-out rounded
-    hover:bg-indigo-600 text-white white:hover:bg-indigo-600 px-5 py-2 text-sm">PDF</button>
+    <app-pdf-calendario></app-pdf-calendario>
     <button
       class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50"
       [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización</button>
   </div>
-  <!-- Code block ends -->
 </div>
-
-
 
 <div class="container mx-auto">
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
     <div class="w-full lg:w-5/6 h-screen">
       <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
-        <ng-container *ngFor="let horario of horarios.data.planificacion | paginate:{
+        <ng-container *ngFor="let horario of horariosPlanificacion | paginate:{
               id: 'first',
               itemsPerPage: tableSizeCalendario,
               currentPage: paginationCalendario,
               totalItems: countCalendario}; let ix = index">
           <div class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
-            <div class="m-3 place-content-center relative">
-              
+            <div class="m-3 place-content-center relative flex">
+               
                 <ng-container *ngIf="horario.comodin != 'Libre'">
                   <div class="flex justify-between">
                   <button (click)="alertaComodin(horario.comodin)">
@@ -83,18 +77,16 @@
 
 
               <div class="flex justify-between">
-                <div>{{horario.dia_semana}} {{horario.numero_dia}}</div>
-                  <div> 
+                <div class="flex flex-col gap-1">
+                  <div>{{horario.dia_semana}} {{horario.numero_dia}}</div>
+                  <div class="flex justify-center">
                     <div *ngIf="horario.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
-                      <div class="flex justify-end gap-2">
+                      <div class="flex justify-end gap-1">
                       <ng-container *ngFor="let itinerario of horario.itinerario">
-<!--                     {{itinerario.falta}}
-                        {{itinerario.turno_itinerario}} -->
-                        
                           <button (click)="alertaItinerario(itinerario)">
                             <span class="flex relative h-7 w-7 top-0 right-0 -mt-1 -mr-1 ">
                               <svg width="16" height="16" fill="currentColor"
-                                class="bi bi-airplane-fill animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" viewBox="0 0 16 16">
+                                class="bi bi-airplane-fill animate-ping visited:animate-none absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" viewBox="0 0 16 16">
                                 <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
                               </svg>
                               <svg width="16" height="16" fill="currentColor"
@@ -104,14 +96,15 @@
                             </span>
                           </button> 
                       </ng-container>
-                      </div>
+                    </div>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
 
             <ng-container *ngFor="let empleado of horario.empleados">
-              <div class="flex justify-between m-3 text-xs ">
+              <div class="flex justify-between m-2 text-xs ">
                 <div class="">{{empleado.nombre}} </div>
                 <div class="">{{empleado.turno}}</div>
               </div>
@@ -133,7 +126,7 @@
           <h1 class="italic text-lg font-semibold hover:text-black m-1">Actualizaciones</h1>
           
         </div>
-        <div *ngFor="let empleado of horarios.data.actualizacion.reverse() | paginate:{
+        <div *ngFor="let empleado of horariosActualizacion.reverse() | paginate:{
                     id: 'second',
                     itemsPerPage: tableSize,
                     currentPage: paginationActualizaciones,
@@ -144,7 +137,6 @@
             <p class="text-sm hover:font-semibold">{{empleado.descripcion}}</p>
             <div class="flex justify-start gap-3">
               <p class="text-gray-500">{{empleado.fecha | date }}</p>
-              <!-- <p class="text-gray-500">{{empleado.fecha | amLocale: 'es' | amTimeAgo }}</p> -->
               <button type="button" title="delete actualizacion" (click)="deleteActualizacion(empleado)"
                 class="rounded-md border-2 border-red-300 p-1 text-xs w-6 h-6 hover:bg-red-400">
                 <img
@@ -175,17 +167,5 @@
 </div>
 
 
-
-<!-- s s s s s -->
-<!-- <h1 class="bg-red-300" *ngFor="let horario of horarios.data.planificacion">
-  {{horario.dia_semana}}
-  <h2 class="bg-blue-300" *ngFor="let empleado of horario.empleados">
-
-    xd {{empleado.nombre}}  {{empleado.turno}}
-  </h2>
-</h1> -->
-
-
-<!-- ssss s ss s  -->
 <!-- <span> horario </span>
 <pre>{{ horarios | json}}</pre> -->

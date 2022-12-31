@@ -39,7 +39,6 @@ export class EditarActualizacionComponent implements OnInit {
     private http: HttpClient,
     private datePipe: DatePipe
   ) {
-    this.is_edit = true;
     this.titulo_pagina = 'Editar Actualización'
   }
 

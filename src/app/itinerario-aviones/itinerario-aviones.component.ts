@@ -37,7 +37,6 @@ interface Turno_Choque{
 export class ItinerarioAvionesComponent implements OnInit {
 
   public ayuda: any;
-  /* Cap 245 */
 
   nuevoItinerario: string = '';
 
@@ -69,10 +68,9 @@ export class ItinerarioAvionesComponent implements OnInit {
    }
 
   itinerarioForm= new FormGroup({
-    /* PONER NOMBRE y agrupar */
-      anio: new FormControl('',[Validators.required, this.noPermitirEspacios]),
-      mes: new FormControl('',[Validators.required, this.noPermitirEspacios]),
-      empleados_nombre: new FormControl('',[Validators.required]),
+    anio: new FormControl('',[Validators.required, this.noPermitirEspacios]),
+    mes: new FormControl('',[Validators.required, this.noPermitirEspacios]),
+    empleados_nombre: new FormControl('',[Validators.required]),
     turno_choque_dia: new FormControl('',[Validators.required]),
     turno_choque_aviones: new FormControl('',[Validators.required]),
     turno_choque_turno: new FormControl('',[Validators.required]),
@@ -101,10 +99,6 @@ export class ItinerarioAvionesComponent implements OnInit {
     }
     return null;
   }
-
-
-
-
 
   ngOnInit() {
   }
@@ -162,8 +156,6 @@ export class ItinerarioAvionesComponent implements OnInit {
       this.tiempo.itinerario[0].dia = '';
       this.tiempo.itinerario[0].aviones = '';
       this.tiempo.itinerario[0].turno = '';
-    
-    
 
     const Toast = Swal.mixin({
       toast: true,
@@ -195,6 +187,5 @@ export class ItinerarioAvionesComponent implements OnInit {
     this.tiempo.itinerario.splice(index, 1);
     this.router.navigate(['/itinerario-aviones'])
   }
-
 
 }

@@ -9,18 +9,15 @@ import { Calendarioanual } from '../calendarioanual';
 })
 export class AllSchedulesService {
 
+planificacion_anual = 'http://localhost:10975/app/planificacion/mostrar_planificacion_anual';
+
 constructor(
   private httpclient: HttpClient
 ) { }
 
-getSchedulesByParameter(): Observable<Calendarioanual>{
-  let params1 = new HttpParams().set('anio', '2028');
-  return this.httpclient.get<Calendarioanual>("http://localhost:10975/app/planificacion/mostrar_planificacion_anual", {params: params1})
-}
-
-getSchedulesByParameter2(anio: string): Observable<Calendarioanual>{
-  let params1 = new HttpParams().set('anio', anio);
-  return this.httpclient.get<Calendarioanual>("http://localhost:10975/app/planificacion/mostrar_planificacion_anual", {params: params1})
-}
+  getSchedulesByParameter(anio: string): Observable<Calendarioanual>{
+    let params1 = new HttpParams().set('anio', anio);
+    return this.httpclient.get<Calendarioanual>(this.planificacion_anual, {params: params1})
+  }
 
 }

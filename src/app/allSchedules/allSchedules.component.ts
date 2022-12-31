@@ -19,17 +19,12 @@ export class AllSchedulesComponent implements OnInit {
   searchString : any;
   searchAnio: any;
 
-  listaCalendarios: Data[];
+  listaCalendarios: Data[] = [];
 
-  page: number = 1;
   pageCalendario: number = 1;
   paginationCalendario = 1;
-  paginationActualizaciones = 1;
-  count: number = 0;
   countCalendario: number = 0;
-  tableSize: number = 4;
   tableSizeCalendario: number = 1;
-  tableSizes: any = [5, 10, 15, 20]
   tableSizesCalendario: any = [5, 10, 15, 20]
 
   CurrentDate = new Date();
@@ -37,7 +32,6 @@ export class AllSchedulesComponent implements OnInit {
   today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
 
   public array_vacio: Array<Itinerario> = [];
-
 
   constructor(
     private horarioService: HorarioService,
@@ -48,23 +42,11 @@ export class AllSchedulesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    /* this.buscarCalendarios(); */
+
   }
 
-  buscarCalendarios(){
-    this.allSchedules.getSchedulesByParameter()
-    .subscribe(
-      response =>
-      {
-        console.log(response)
-        this.listaCalendarios = response.data;
-      }
-    )
-  }
-
-  buscarCalendarioPrueba(anio: string){
-    
-      this.allSchedules.getSchedulesByParameter2(anio)
+  buscarCalendarios(anio: string){
+      this.allSchedules.getSchedulesByParameter(anio)
       .subscribe(
         response => {
           console.log(response)
@@ -77,26 +59,15 @@ export class AllSchedulesComponent implements OnInit {
 
   }
 
-  onPagination(event: any) {
-    this.page = event;
-    this.buscarCalendarios();
-  }
-
-  onPaginationCalendario(event: any) {
+  onPaginationCalendario(event: any, anio: string) {
     this.pageCalendario = event;
-    this.buscarCalendarios();
+    this.buscarCalendarios(anio);
   }
 
-  onDisenoTabla(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.buscarCalendarios();
-  }
-
-  onDisenoTabla2(event: any): void {
+  onDisenoTabla(event: any, anio: string): void {
     this.tableSizeCalendario = event.target.value;
     this.pageCalendario = 1;
-    this.buscarCalendarios();
+    this.buscarCalendarios(anio);
   }
 
   alertaComodin(comodin: string) {

@@ -1,0 +1,44 @@
+export interface Calendario {
+    error: boolean,
+    msg: string,
+    data: Data,
+  }
+
+export interface CalendarioAnual{
+  error: boolean,
+  msg: string,
+  data: Data[],
+}
+
+export interface Data {
+    planificacion_id: number;
+    mes: string;
+    anio: string;
+    planificacion: Planificacion[];
+    actualizacion: Actualizacion[];
+}
+export interface Planificacion {
+  dia_semana: string;
+  numero_dia: string;
+  empleados: Empleados[];
+  comodin: string;
+  itinerario: Itinerario[];
+}
+export interface Itinerario{
+  turno_itinerario: string;
+  falta: number;
+}
+
+export interface Empleados{
+  nombre: string,
+  turno: string
+}
+
+export interface Actualizacion{
+  actualizacion_id: number,
+  tipo_permiso: string,
+  descripcion: string,
+  empleado: string,
+  fecha: string,
+  planificacion_id: number
+}

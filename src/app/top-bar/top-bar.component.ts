@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TopBarComponent implements OnInit {
 
   selector: boolean = false;
+  
 
   selectorDropdown() {
     this.selector = !this.selector;
@@ -15,6 +16,7 @@ export class TopBarComponent implements OnInit {
   
   selected: string = "Collections";
   isToggle: number = 1;
+
 
   constructor() { }
 

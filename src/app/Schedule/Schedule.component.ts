@@ -2,11 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
+import { Calendario, Actualizacion, Itinerario, Planificacion, Data } from '../calendario';
+import { ChangeDetectionStrategy } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
+import { LOCALE_ID } from '@angular/core';
+import localeEs from '@angular/common/locales/es';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
-import { calendarData } from '../calendarData'; /* Interfaz */
-
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
@@ -15,78 +23,135 @@ import { calendarData } from '../calendarData'; /* Interfaz */
   styleUrls: ['./Schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
+  dropdownPopoverShow = false;
 
-  scheduleWorkers: any;
-  indice: any;
-  items: any;
-  checkoutForm: any; /* Almacenar el modelo del formulario */
+  actualizaciones: Calendario[] = [];
 
+  public planificacion_id!: number;
+  public array_vacio: Array<Itinerario> = [];
+  pruebas: any;
+
+  horarios: Calendario;
+  horariosData: Data;
+  horariosPlanificacion: Planificacion[] = [];
+  horariosActualizacion: Actualizacion[] = [];
+
+
+  public prueba1: number;
+
+  tiempos: Tiempo[] = [];
   public generador: any; /* ONSUBMIT */
+  public global: any;
+
+  page: number = 1;
+  pageCalendario: number = 1;
+  paginationCalendario = 1;
+  paginationActualizaciones = 1;
+  count: number = 0;
+  countCalendario: number = 0;
+  tableSize: number = 4;
+  tableSizeCalendario: number = 7;
+  tableSizes: any = [5, 10, 15, 20]
+  tableSizesCalendario: any = [5, 10, 15, 20]
+
+  CurrentDate = new Date();
+  latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
+  today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
+  
+  today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
+
 
   constructor(
     private horarioService: HorarioService,
     private formBuilder: FormBuilder,
     private http: HttpClient,
-  ) { 
-
-    this.checkoutForm = this.formBuilder.group({
-      anio: '',
-      mes: '',
-    });
-
-    this.generador={anio:'', mes:'', empleados:''};
- 
-   }
-
-  ngOnInit(): void {
-    this.items = this.horarioService.getItems();
-    this.horarioService.getScheduleWorkers().subscribe(
-      response => {
-        console.log(response)
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    private datePipe: DatePipe,
+    private router: Router
+  ) {
   }
 
-/*   onSubmit(calendarData: any){
-    this.items = this.horarioService.clearData();
-    this.checkoutForm.reset();
-    console.warn('Datos enviados', calendarData);
-  } 
- */
+  ngOnInit(): void {
+    this.cargarData();
+  }
 
-/*   onSubmit(calendarData: any){
-  this.items = this.horarioService.clearData();
-  this.checkoutForm.reset();
-  console.warn('Datos', calendarData);
+  cargarData(): void {
+    this.horarioService.getHorarios()
+      .subscribe(
+        response => {
+          this.horarios = response;
+          this.horariosData = this.horarios.data
+          this.horariosPlanificacion = this.horariosData.planificacion;
+          this.horariosActualizacion = this.horariosData.actualizacion;
 
-  this.http.post('http://localhost:10975/app/planificacion/generar_planificacion', calendarData)
-  .subscribe((res) => {
-    console.log(res);
-  });
-  } */
+          this.global = this.horarios;
+          this.planificacion_id = this.horarios.data.planificacion_id;     
+        },
+        error => {
+          console.log(error)
+        }
+      )
+  }
 
-/*   onSubmit(calendardata: calendarData): void {
-    calendardata = calendardata.trim();
-    if (!calendardata) { return; }
-      this.horarioService.addSchedule(calendardata)
-      .subscribe(calendardata => {
-        this.calendardatas.push(calendardata);
-      }); 
-  } */
 
-  onSubmit(){
-   this.horarioService.addSchedule(this.generador)
-     .subscribe(
-      response => {
-        console.log(response)
+  onPagination(event: any) {
+    this.page = event;
+    this.cargarData();
+  }
+
+  onPaginationCalendario(event: any) {
+    this.pageCalendario = event;
+    this.cargarData();
+  }
+
+  onDisenoTabla(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.cargarData();
+  }
+
+  onDisenoTabla2(event: any): void {
+    this.tableSizeCalendario = event.target.value;
+    this.pageCalendario = 1;
+    this.cargarData();
+  }
+
+  deleteActualizacion(actualizacion_id: Actualizacion): void {
+    this.horarioService.deleteActualizacionId(actualizacion_id)
+      .subscribe(response => {
+        this.ngOnInit();
       },
-      error => {
-        console.log(error)
-      }
-     )
+        error => {
+          console.log(error)
+        });
+  }
+
+  deleteScheduleById(planificacion: Data): void{ 
+    this.horarioService.deletePlanificacionId(planificacion)
+    .subscribe(response => {
+      this.ngOnInit();
+    },
+    error =>{
+      console.log(error)
+    })
+  }
+
+  alertaItinerario(itinerario: Itinerario) {
+    Swal.fire({
+      title: 'Alerta encuentros de aviones',
+      html: 'Empleados faltantes: ' + + itinerario.falta + '<br>' + 'Turno del encuentro: ' + itinerario.turno_itinerario,
+      icon: 'warning',
+    })
+  }
+
+  alertaComodin(comodin: string) {
+    Swal.fire({
+      title: 'Comodín',
+      text: 'Se necesita comodín, turno: ' + comodin,
+      imageUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/emojis/49908/joker-emoji-clipart-xl.png',
+      imageWidth: 200,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
+    })
   }
 
 }

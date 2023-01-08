@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { ActualizacionesComponent } from './Actualizaciones.component';
+import { PdfCalendarioComponent } from './pdf-calendario.component';
 
-describe('ActualizacionesComponent', () => {
-  let component: ActualizacionesComponent;
-  let fixture: ComponentFixture<ActualizacionesComponent>;
+describe('PdfCalendarioComponent', () => {
+  let component: PdfCalendarioComponent;
+  let fixture: ComponentFixture<PdfCalendarioComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActualizacionesComponent ]
+      declarations: [ PdfCalendarioComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActualizacionesComponent);
+    fixture = TestBed.createComponent(PdfCalendarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

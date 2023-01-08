@@ -29,7 +29,7 @@ export interface Itinerario{
   falta: number;
 }
 
-interface Empleados{
+export interface Empleados{
   nombre: string,
   turno: string
 }

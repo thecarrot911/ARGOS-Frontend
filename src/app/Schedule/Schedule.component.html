@@ -1,4 +1,4 @@
-<div class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300">
+<div class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300 p-8">
   <div>
     <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario empleados</h4>
     <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
@@ -34,7 +34,7 @@
             <line x1="3" y1="21" x2="21" y2="21" />
           </svg>
         </div>
-        <span class="hover:text-black text-bold">Hoy día es: {{today_is | date}}</span>
+        <span class="hover:text-black text-bold">Hoy día es: {{today_is_chile}}</span>
       </li>
     </ul>
   </div>
@@ -42,11 +42,22 @@
     <app-pdf-calendario></app-pdf-calendario>
     <button
       class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50"
-      [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización</button>
+      [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización
+    </button>
+    <button class="m-3 transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-2 py-2 text-sm shadow-lg shadow-cyan-500/50"
+    (click)="deleteScheduleById(horariosData)">
+    <img
+    class="text-white"
+    src="assets/images/icons8-remove-50.png"
+    alt="Logo Argos"
+    width="20"
+    height="20"
+    >
+    </button>
   </div>
 </div>
 
-<div class="container mx-auto">
+<div class="container mx-auto px-10">
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
     <div class="w-full lg:w-5/6 h-screen">
       <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
@@ -55,7 +66,8 @@
               itemsPerPage: tableSizeCalendario,
               currentPage: paginationCalendario,
               totalItems: countCalendario}; let ix = index">
-          <div class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
+          <div class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50
+          ">
             <div class="m-3 place-content-center relative flex">
                
                 <ng-container *ngIf="horario.comodin != 'Libre'">
@@ -121,7 +133,8 @@
     </div>
 
     <div class="w-full lg:w-1/4 h-screen">
-      <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
+      <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md
+      ">
         <div class="flex">
           <h1 class="italic text-lg font-semibold hover:text-black m-1">Actualizaciones</h1>
           

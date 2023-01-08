@@ -24,11 +24,9 @@
             <span class="text-gray-700">Empleado solicitante</span>
             <select required
              class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50" name="empleado" #empleado="ngModel" [(ngModel)]="actualizacion.empleado">
-              <option>A. Montaner</option>
-              <option>C. Veira</option>
-              <option>D. Troncoso</option>
-              <option>R. Zavala</option>
-              <option>R. Zuñiga</option>
+             <ng-container *ngFor="let empleado of horariosEmpleados; let i = index">
+              <option value="{{empleado.nombre}}">{{empleado.nombre}}</option>
+             </ng-container>
             </select>
             <span class="text-rose-500" *ngIf="empleado.invalid && empleado.touched">Este campo es requerido.</span>
           </label>

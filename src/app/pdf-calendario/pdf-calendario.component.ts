@@ -60,7 +60,8 @@ export class PdfCalendarioComponent implements OnInit {
         text: planificacion[0].empleados[i].nombre,
         style: 'tableHeader',
         fillColor: '#dddddd',
-        fontSize: 10
+        fontSize: 10,
+        italics: true
       })
     }
     body.push(tableHeader);
@@ -79,12 +80,14 @@ export class PdfCalendarioComponent implements OnInit {
       array.push({
         text: planificacion[j].dia_semana,
         fillColor: '#CECCE8',
-        fontSize: 10
+        fontSize: 10,
+        italics: true
       })
       array.push({
         text: planificacion[j].numero_dia,
         fillColor: '#CECCE8',
-        fontSize: 10
+        fontSize: 10,
+        italics: true
       })
       for(let k = 0;k<planificacion[j].empleados.length;k++){
         if(planificacion[j].comodin != 'Libre' && planificacion[j].empleados[k].turno == 'Libre'){
@@ -92,14 +95,15 @@ export class PdfCalendarioComponent implements OnInit {
             text: planificacion[j].comodin+' COMODIN',
             fillColor: '#F7E4DF',
             fontSize: 10,
-            decoration: 'underline'
+            decoration: 'underline',
+            italics: true
           })
         }else{
           array.push({
             text: planificacion[j].empleados[k].turno,
             fillColor: '#EBF2FA',
             fontSize: 10,
-            characterSpacing: '1',
+            characterSpacing: '0',
             widths: ['20', '20', '20', '20', '30']
           })
         }

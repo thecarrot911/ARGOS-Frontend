@@ -6,6 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import { Calendario, Data, Planificacion, Actualizacion, Empleados} from '../calendario';
 
 
 @Component({
@@ -17,6 +18,12 @@ import { Observable } from 'rxjs';
 
 
 export class AgregarActualizacionComponent implements OnInit {
+
+  horarios: Calendario;
+  horariosData: Data;
+  horariosPlanificacion: Planificacion[] = [];
+  horariosActualizacion: Actualizacion[] = [];
+  horariosEmpleados: Empleados[] = [];
 
   planificacion_id! : number;
   sub!: any;
@@ -62,6 +69,7 @@ export class AgregarActualizacionComponent implements OnInit {
   }
   
   ngOnInit(): void {
+      this.cargarData();
       this.sub = this.route.params.subscribe(params => {
       this.planificacion_id = params['planificacion_id'];
       });
@@ -80,5 +88,26 @@ export class AgregarActualizacionComponent implements OnInit {
        }
       )
    }
+
+   cargarData(): void {
+    this.horarioService.getHorarios()
+      .subscribe(
+        response => {
+          this.horarios = response;
+          this.horariosData = this.horarios.data
+          this.horariosPlanificacion = this.horariosData.planificacion;
+          this.horariosActualizacion = this.horariosData.actualizacion;
+          this.horariosEmpleados = this.horariosPlanificacion[0].empleados;
+          console.log(this.horarios)
+          console.log(this.horariosEmpleados)
+
+          this.planificacion_id = this.horarios.data.planificacion_id;     
+        },
+        error => {
+          console.log(error)
+        }
+      )
+  }
+   
 
 }

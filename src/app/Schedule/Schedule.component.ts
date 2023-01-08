@@ -57,6 +57,8 @@ export class ScheduleComponent implements OnInit {
   CurrentDate = new Date();
   latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
   today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
+  
+  today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
 
 
   constructor(
@@ -121,6 +123,16 @@ export class ScheduleComponent implements OnInit {
         error => {
           console.log(error)
         });
+  }
+
+  deleteScheduleById(planificacion: Data): void{ 
+    this.horarioService.deletePlanificacionId(planificacion)
+    .subscribe(response => {
+      this.ngOnInit();
+    },
+    error =>{
+      console.log(error)
+    })
   }
 
   alertaItinerario(itinerario: Itinerario) {

@@ -1,7 +1,7 @@
 <div class="2xl:container 2xl:mx-auto">
   <div class="bg-white rounded shadow-lg py-5 px-7">
     <nav class="flex justify-between">
-      <div class="flex items-center space-x-3 lg:pr-16 pr-6">
+      <div class="flex items-center lg:pr-16 pr-6">
         <a [routerLink]="['/']">
         <img
         src="assets/images/ARGOS.png"
@@ -14,7 +14,7 @@
       </div>
 
       <ul class="hidden md:flex flex-auto space-x-2">
-        <li (click)="isToggle = 1" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 1 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" [routerLink]="['/']">Home</li>
+        <li class="" (click)="isToggle = 1" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 1 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" [routerLink]="['/']">Home</li>
         <li (click)="isToggle = 2" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 2 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" [routerLink]="['/itinerario-aviones']">Generar Horario</li>
         <li (click)="isToggle = 3" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 3 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" [routerLink]="['/schedule']">Horario</li>
         <li (click)="isToggle = 4" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 4 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" [routerLink]="['/allschedules']">Calendario anual</li>

@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
+import { AllEmpleadosComponent } from './all-empleados/all-empleados.component';
+
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ValidationErrors } from '@angular/forms';
 import { MomentModule } from 'ngx-moment';
@@ -37,7 +39,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
       ItinerarioAvionesComponent,
       EditarActualizacionComponent,
       PdfCalendarioComponent,
-      AllSchedulesComponent
+      AllSchedulesComponent,
+      AllEmpleadosComponent
    ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
       { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent},
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
       { path: 'editaractualizacion/:actualizacion_id', component: EditarActualizacionComponent},
-      { path: 'allschedules', component: AllSchedulesComponent}
+      { path: 'allschedules', component: AllSchedulesComponent},
+      { path: 'allEmpleados', component: AllEmpleadosComponent}
     ]),
   ],
   providers: [DatePipe],

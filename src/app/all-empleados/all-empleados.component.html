@@ -1,0 +1,58 @@
+<div
+    class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300 p-8">
+    <div>
+        <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Empleados</h4>
+        <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
+            <li class="flex items-center mr-4">
+                <div class="mr-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paperclip" width="16"
+                        height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path
+                            d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
+                    </svg>
+                </div>
+                <span class="hover:text-blue-600 text-bold">Lista de Empleados</span>
+            </li>
+            <li class="flex items-center mr-4 mt-4 md:mt-0">
+                <div class="mr-1">
+                    <svg class="icon icon-tabler icon-tabler-trending-up" width="16" height="16" fill="none"
+                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round"
+                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+
+                </div>
+                <span class="hover:text-black text-bold">ARIACA</span>
+            </li>
+            <li class="flex items-center mt-4 md:mt-0">
+                <div class="mr-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure"
+                        width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3 -6h3l2 2h3l-2 -7h3z"
+                            transform="rotate(-15 12 12) translate(0 -1)" />
+                        <line x1="3" y1="21" x2="21" y2="21" />
+                    </svg>
+                </div>
+                <!--
+                <span class="hover:text-black text-bold">Hoy día es: {{today_is_chile}}</span>-->
+            </li>
+        </ul>
+    </div>
+    <!--
+    <div class="mt-6 md:mt-0">
+        <app-pdf-calendario></app-pdf-calendario>
+        <button
+            class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50"
+            [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización
+        </button>
+        <button
+            class="m-3 transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-2 py-2 text-sm shadow-lg shadow-cyan-500/50"
+            (click)="deleteScheduleById(horariosData)">
+            <img class="text-white" src="assets/images/icons8-remove-50.png" alt="Logo Argos" width="20" height="20">
+        </button>
+    </div>-->
+</div>

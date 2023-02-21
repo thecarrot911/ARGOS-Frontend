@@ -27,21 +27,25 @@ import { EditarActualizacionComponent } from './editarActualizacion/editarActual
 import { PdfCalendarioComponent } from './pdf-calendario/pdf-calendario.component';
 import { AllSchedulesComponent } from './allSchedules/allSchedules.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { RegistrarEmpleadoComponent } from './registrar-empleado/registrar-empleado.component';
+import { CredencialComponent } from './credencial/credencial.component';
 
 @NgModule({
-  declarations: [										
+  declarations: [
     AppComponent,
-      TopBarComponent,
-      ScheduleComponent,
-      NavbarsComponent,
-      FooterComponent,
-      AgregarActualizacionComponent,
-      ItinerarioAvionesComponent,
-      EditarActualizacionComponent,
-      PdfCalendarioComponent,
-      AllSchedulesComponent,
-      AllEmpleadosComponent
-   ],
+    TopBarComponent,
+    ScheduleComponent,
+    NavbarsComponent,
+    FooterComponent,
+    AgregarActualizacionComponent,
+    ItinerarioAvionesComponent,
+    EditarActualizacionComponent,
+    PdfCalendarioComponent,
+    AllSchedulesComponent,
+    AllEmpleadosComponent,
+    RegistrarEmpleadoComponent,
+    CredencialComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -58,11 +62,13 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
       { path: 'schedule', component: ScheduleComponent },
-      { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent},
-      { path: 'itinerario-aviones', component: ItinerarioAvionesComponent},
-      { path: 'editaractualizacion/:actualizacion_id', component: EditarActualizacionComponent},
-      { path: 'allschedules', component: AllSchedulesComponent},
-      { path: 'allEmpleados', component: AllEmpleadosComponent}
+      { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent },
+      { path: 'itinerario-aviones', component: ItinerarioAvionesComponent },
+      { path: 'editaractualizacion/:actualizacion_id', component: EditarActualizacionComponent },
+      { path: 'allschedules', component: AllSchedulesComponent },
+      { path: 'allEmpleados', component: AllEmpleadosComponent },
+      { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },
+      { path: 'credencial/:rut', component: CredencialComponent}
     ]),
   ],
   providers: [DatePipe],

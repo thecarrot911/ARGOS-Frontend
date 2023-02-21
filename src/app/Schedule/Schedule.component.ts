@@ -56,7 +56,7 @@ export class ScheduleComponent implements OnInit {
 
   CurrentDate = new Date();
   latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
-  today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
+  today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y');
   
   today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
 

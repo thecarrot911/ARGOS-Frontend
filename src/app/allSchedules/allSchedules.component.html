@@ -1,4 +1,5 @@
-<div class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300 p-8">
+<div
+  class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300 p-8">
   <div>
     <div class="flex justify-between">
       <div>
@@ -20,8 +21,8 @@
           itemsPerPage: tableSizeCalendario,
           currentPage: paginationCalendario,
           totalItems: countCalendario}; let i = index">
-        <span class="hover:text-blue-600 text-bold">Planificación de {{data.mes}} del {{data.anio}}</span>
-        
+          <span class="hover:text-blue-600 text-bold">Planificación de {{data.mes}} del {{data.anio}}</span>
+
         </ng-container>
       </li>
       <li class="flex items-center mr-4 mt-4 md:mt-0">
@@ -51,17 +52,14 @@
   </div>
   <div class="mt-6 md:mt-0">
     <div class="flex justify-between gap-x-4">
-    <input type="number" min="2000" max="2080" name="search" [(ngModel)]="searchAnio" placeholder="Búsqueda por año"
-          class="form-input peer rounded-md">
-    <button (click)="buscarCalendarios(searchAnio)"
-      class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
-      text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50"
-      >Buscar calendario</button>
+      <input type="number" min="2000" max="2080" name="search" [(ngModel)]="searchAnio" placeholder="Búsqueda por año"
+        class="form-input peer rounded-md">
+      <button (click)="buscarCalendarios(searchAnio)" class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
+      text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">Buscar calendario</button>
       <button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
       text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">
         Eliminar Planificación
       </button>
-
     </div>
   </div>
 </div>
@@ -76,55 +74,56 @@
           currentPage: paginationCalendario,
           totalItems: countCalendario}; let i = index">
           <ng-container *ngFor="let planificacion of data.planificacion ">
-          <div class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
-            <div class="m-3 place-content-center relative flex justify-center">
-              
+            <div
+              class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
+              <div class="m-3 place-content-center relative flex justify-center">
+
                 <ng-container *ngIf="planificacion.comodin != 'Libre'">
                   <div class="flex justify-between">
-                  <button (click)="alertaComodin(planificacion.comodin)">
-                    <span class="flex absolute h-7 w-7 top-0 right-0 -mt-1 -mr-1">
-                      <img
-                      src="assets/images/icons8-joker-48.png"
-                      alt="Logo Argos"
-                      width="140"
-                      height="100"
-                      >
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-md bg-yellow-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
-                    </span>
+                    <button (click)="alertaComodin(planificacion.comodin)">
+                      <span class="flex absolute h-7 w-7 top-0 right-0 -mt-1 -mr-1">
+                        <img src="assets/images/icons8-joker-48.png" alt="Logo Argos" width="140" height="100">
+                        <span
+                          class="animate-ping absolute inline-flex h-full w-full rounded-md bg-yellow-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                      </span>
                     </button>
-                   </div>
+                  </div>
                 </ng-container>
 
-                
+
                 <div class="flex justify-between">
                   <div class="flex flex-col gap-1">
                     <div>{{planificacion.dia_semana}} {{planificacion.numero_dia}}</div>
                     <div class="flex justify-center">
                       <div *ngIf="planificacion.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
                         <div class="flex justify-end gap-1">
-                        <ng-container *ngFor="let itinerario of planificacion.itinerario">
+                          <ng-container *ngFor="let itinerario of planificacion.itinerario">
                             <button (click)="alertaItinerario(itinerario)">
                               <span class="flex relative h-7 w-7 top-0 right-0 -mt-1 -mr-1 ">
                                 <svg width="16" height="16" fill="currentColor"
-                                  class="bi bi-airplane-fill animate-ping visited:animate-none absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" viewBox="0 0 16 16">
-                                  <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
+                                  class="bi bi-airplane-fill animate-ping visited:animate-none absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"
+                                  viewBox="0 0 16 16">
+                                  <path
+                                    d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z" />
                                 </svg>
                                 <svg width="16" height="16" fill="currentColor"
-                                class="bi bi-airplane-fill relative inline-flex rounded-full h-7 w-full bg-red-500" viewBox="0 0 16 16">
-                                  <path d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z"/>
+                                  class="bi bi-airplane-fill relative inline-flex rounded-full h-7 w-full bg-red-500"
+                                  viewBox="0 0 16 16">
+                                  <path
+                                    d="M6.428 1.151C6.708.591 7.213 0 8 0s1.292.592 1.572 1.151C9.861 1.73 10 2.431 10 3v3.691l5.17 2.585a1.5 1.5 0 0 1 .83 1.342V12a.5.5 0 0 1-.582.493l-5.507-.918-.375 2.253 1.318 1.318A.5.5 0 0 1 10.5 16h-5a.5.5 0 0 1-.354-.854l1.319-1.318-.376-2.253-5.507.918A.5.5 0 0 1 0 12v-1.382a1.5 1.5 0 0 1 .83-1.342L6 6.691V3c0-.568.14-1.271.428-1.849Z" />
                                 </svg>
                               </span>
-                            </button> 
-                        </ng-container>
+                            </button>
+                          </ng-container>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                </div>
-                
-                
-              </div> 
+
+
+              </div>
 
               <ng-container *ngFor="let empleado of planificacion.empleados">
                 <div class="flex justify-between m-2 text-xs ">
@@ -134,7 +133,7 @@
               </ng-container>
             </div>
           </ng-container>
-        </ng-container> 
+        </ng-container>
       </div>
 
       <div class="mx-auto m-4">
@@ -152,14 +151,14 @@
       <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md">
         <div class="flex">
           <h1 class="italic text-lg font-semibold hover:text-black m-1">Actualizaciones</h1>
-          
+
         </div>
-        <ng-container  *ngFor="let data of listaCalendarios| paginate:{
+        <ng-container *ngFor="let data of listaCalendarios| paginate:{
           id: 'first',
           itemsPerPage: tableSizeCalendario,
           currentPage: paginationCalendario,
           totalItems: countCalendario}; let i = index">
-          <ng-container  *ngFor="let actualizacion of data.actualizacion">
+          <ng-container *ngFor="let actualizacion of data.actualizacion">
             <hr>
             <p class="text-sm font-bold text-red-700 leading-6">{{actualizacion.tipo_permiso}}</p>
             <p class="text-base font-bold text-blue-900">{{actualizacion.empleado}}</p>
@@ -168,8 +167,8 @@
             <hr>
           </ng-container>
         </ng-container>
-         <pagination-controls id="first" previousLabel="Prev" nextLabel="Next"
-        (pageChange)="paginationCalendario = $event">
+        <pagination-controls id="first" previousLabel="Prev" nextLabel="Next"
+          (pageChange)="paginationCalendario = $event">
         </pagination-controls>
       </div>
     </div>

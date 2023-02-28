@@ -118,8 +118,6 @@ export class ItinerarioAvionesComponent implements OnInit {
     .subscribe(
       response => {
         if(response.error){
-          console.log(response.msg)
-          console.log('hay error')
           this.loading.classList.add('hidden')
           Swal.fire({
             icon: 'error',

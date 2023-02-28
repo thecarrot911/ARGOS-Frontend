@@ -9,36 +9,41 @@
           <label class="block">
             <span class="text-gray-700">Tipo de permiso</span>
             <select required
-            class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
-            id="permiso" name="tipo_permiso" #tipo_permiso="ngModel" [(ngModel)]="actualizacion.tipo_permiso">
+              class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
+              id="permiso" name="tipo_permiso" #tipo_permiso="ngModel" [(ngModel)]="actualizacion.tipo_permiso">
               <option value="Permiso">Permiso</option>
               <option value="Cambio de Turno">Cambio de Turno</option>
               <option value="Comodín">Comodín</option>
               <option value="Urgencia">Urgencia</option>
               <option value="Otro">Otro</option>
             </select>
-            <span class="text-rose-500" *ngIf="tipo_permiso.invalid && tipo_permiso.touched">Este campo es requerido.</span>
+            <span class="text-rose-500" *ngIf="tipo_permiso.invalid && tipo_permiso.touched">Este campo es
+              requerido.</span>
           </label>
 
           <label class="block">
             <span class="text-gray-700">Empleado solicitante</span>
             <select required
-             class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50" name="empleado" #empleado="ngModel" [(ngModel)]="actualizacion.empleado">
-             <ng-container *ngFor="let empleado of horariosEmpleados; let i = index">
-              <option value="{{empleado.nombre}}">{{empleado.nombre}}</option>
-             </ng-container>
+              class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
+              name="empleado" #empleado="ngModel" [(ngModel)]="actualizacion.empleado">
+              <ng-container *ngFor="let empleado of horariosEmpleados; let i = index">
+                <option value="{{empleado.nombre}}">{{empleado.nombre}}</option>
+              </ng-container>
             </select>
             <span class="text-rose-500" *ngIf="empleado.invalid && empleado.touched">Este campo es requerido.</span>
           </label>
 
 
-          
+
           <label class="block">
             <span class="text-gray-700">Descripción del permiso</span>
-            <textarea required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50" rows="3" style="height: 78px;"
-            name="descripcion" #descripcion="ngModel" [(ngModel)]="actualizacion.descripcion">
+            <textarea required
+              class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
+              rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel"
+              [(ngModel)]="actualizacion.descripcion">
             </textarea>
-            <span class="text-rose-500" *ngIf="descripcion.invalid && descripcion.touched">Este campo es requerido.</span>
+            <span class="text-rose-500" *ngIf="descripcion.invalid && descripcion.touched">Este campo es
+              requerido.</span>
           </label>
 
           <label class="block">
@@ -47,7 +52,7 @@
           </label>
 
           <button type="submit" value="Guardar"
-          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
 
         </div>
       </div>

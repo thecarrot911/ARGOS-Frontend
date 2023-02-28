@@ -42,6 +42,7 @@ export class AllEmpleadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargaEmpleados();
+    console.log("xd")
   }
 
   // Funciones de Empleados

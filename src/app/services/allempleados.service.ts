@@ -17,12 +17,15 @@ export class AllempleadosService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  // Control Modals
+  modalCredencialVisible: boolean = false;
+  modalAddEmpleadoVisible: boolean = false;
+
   constructor(
     private http: HttpClient
   ) { }
 
   // Empleado
-
   MostrarEmpleados(): Observable<ListaEmpleados> {
     return this.http.get<ListaEmpleados>(this.urlEmpleados);
   }
@@ -36,7 +39,6 @@ export class AllempleadosService {
   }
 
   // Credenciales
-
   urlRegistrarCredencial = 'http://localhost:10975/app/credencial/registrar_credencial'
   urlMostrarCredencial = 'http://localhost:10975/app/credencial/mostrar_credencial'
   urlEliminarCredencial = 'http://localhost:10975/app/credencial/eliminar_credencial'

@@ -16,18 +16,14 @@ export class AllEmpleadosComponent implements OnInit {
 
   listaEmpleados: Empleado[];
 
+
   // Modal   
   public modalEmpleado = document.getElementById('modal_empleado');
-  public modalAgregarCredencial = document.getElementById('modal_AgregarCredencial');
-  public modalMostrarCredencial = document.getElementById('modal_MostrarCredencial');
-  public modalRenovarCredencial = document.getElementById('modal_RenovarCredencial');
+  public modalControlCredencial :boolean = false;
 
   // Variable para mostrar credenciales
   public cantidadCredenciales: number;
-  public modalCredencial = document.getElementById('modal_credencial');
-  public credencialEmpleado: Credencial[];
-
-  // Funciones emitidores de eventos
+  public credencialEmpleado: Credencial[] = [];
   
   // Formulario agregar empleados
   empleado: Empleado = {
@@ -40,9 +36,8 @@ export class AllEmpleadosComponent implements OnInit {
 
 
   constructor(
-    private empleadoService: AllempleadosService,
-    private router: Router
-
+    public empleadoService: AllempleadosService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -54,8 +49,6 @@ export class AllEmpleadosComponent implements OnInit {
     this.empleadoService.MostrarEmpleados().subscribe(
       response => {
         this.listaEmpleados = response.data;
-        console.log("-")
-        console.log(this.listaEmpleados)
       },
       error => {
         console.log(error);
@@ -83,8 +76,6 @@ export class AllEmpleadosComponent implements OnInit {
       }
     )
   }
-
-  
   mostrarRegistroEmpleado(): void{
     this.modalEmpleado = document.getElementById('modal_empleado');
     if (this.modalEmpleado != null){
@@ -105,40 +96,8 @@ export class AllEmpleadosComponent implements OnInit {
     };
   }
   // Funciones de Credenciales
-  mostrarModalCredencial(rut: string): void {
-    this.empleadoService.MostrarCredenciales(rut).subscribe(
-      response=>{
-        this.credencialEmpleado = response.data;
-        console.log(this.credencialEmpleado)
-      }, error=>{
-        console.log(error);
-      }
-    )
-    this.modalCredencial = document.getElementById('modal_credencial');
-    if (this.modalCredencial != null) {
-      this.modalCredencial.classList.remove('hidden');
-    }    /*
-    this.empleadoCredencial = credencial
-    this.cantidadCredenciales = this.empleadoCredencial.length
-    this.modalCredencial = document.getElementById('modal_credencial');
-    if (this.modalCredencial != null) {
-      this.modalCredencial.classList.remove('hidden');
-    }*/
-  }
-  
-  renovarModalCredencial(): void{
-
-  }
-
-  eliminarModalCredencial(event): void{
-    this.empleadoService.EliminarCredencial(event.credencial).subscribe(
-      respone=>{
-        this.ngOnInit();
-        
-      },
-      error => {
-        console.log(error)
-      }
-    )
+  mostrarCredencial(credencial: Credencial[]){
+    this.credencialEmpleado = credencial;
+    this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
   }
 }

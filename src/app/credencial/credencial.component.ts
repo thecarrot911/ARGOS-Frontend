@@ -23,15 +23,21 @@ export class CredencialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("credencial.component")
     console.log(this.empleadoCredencial)
-    console.log(this.cantidadCredenciales)
   }
   renovarCredencial(){
 
   }
-  eliminarCredencial(){
-
+  eliminarCredencial(credencial: Credencial){
+    this.empleadoService.EliminarCredencial(credencial).subscribe(
+      response=>{
+        this.empleadoService.reloadEvent.emit(true);
+        this.ngOnInit();
+      },
+      error=>{
+        console.log(error);
+      }
+    )
   }
   cerrarCredencial(){
     this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;

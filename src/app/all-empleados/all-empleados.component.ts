@@ -16,8 +16,7 @@ export class AllEmpleadosComponent implements OnInit {
 
   listaEmpleados: Empleado[];
 
-
-  // Modal   
+  // Modal
   public modalEmpleado = document.getElementById('modal_empleado');
   public modalControlCredencial :boolean = false;
 
@@ -42,7 +41,11 @@ export class AllEmpleadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargaEmpleados();
-    console.log("xd")
+    this.empleadoService.reloadEvent.subscribe((reload: boolean) =>{
+      if(reload){
+        this.cargaEmpleados();
+      }
+    })
   }
 
   // Funciones de Empleados
@@ -98,7 +101,8 @@ export class AllEmpleadosComponent implements OnInit {
   }
   // Funciones de Credenciales
   mostrarCredencial(credencial: Credencial[]){
-    this.credencialEmpleado = credencial;
+    //this.credencialEmpleado = credencial;
+    this.empleadoService.modalCredencialEmpleado = credencial;
     this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
   }
 }

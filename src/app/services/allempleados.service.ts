@@ -1,5 +1,5 @@
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial } from '../empleados';
 
@@ -17,9 +17,14 @@ export class AllempleadosService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  // EventEmitter
+  public reloadEvent: EventEmitter<boolean> = new EventEmitter();
+
+
   // Control Modals
   modalCredencialVisible: boolean = false;
   modalAddEmpleadoVisible: boolean = false;
+  modalCredencialEmpleado: Credencial[] = []
 
   constructor(
     private http: HttpClient
@@ -53,6 +58,7 @@ export class AllempleadosService {
   }
 
   EliminarCredencial(credencial: Credencial): Observable<Credencial>{
+    console.log(this.urlEliminarCredencial + '/' + credencial.credencial_id)
     return this.http.delete<Credencial>(this.urlEliminarCredencial + '/' + credencial.credencial_id, this.httpOptions);
   }
 

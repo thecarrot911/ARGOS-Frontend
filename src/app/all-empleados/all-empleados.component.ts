@@ -16,33 +16,16 @@ export class AllEmpleadosComponent implements OnInit {
 
   listaEmpleados: Empleado[];
 
-
-  // Modal   
-  public modalEmpleado = document.getElementById('modal_empleado');
-  public modalControlCredencial :boolean = false;
-
   // Variable para mostrar credenciales
   public cantidadCredenciales: number;
   public credencialEmpleado: Credencial[] = [];
   
-  // Formulario agregar empleados
-  empleado: Empleado = {
-    nombre_paterno: '',
-    nombre_materno: '',
-    apellido_paterno: '',
-    apellido_materno: '',
-    rut: ''
-  };
-
-
   constructor(
-    public empleadoService: AllempleadosService,
-    private router: Router,
+    public empleadoService: AllempleadosService
   ) { }
 
   ngOnInit(): void {
     this.cargaEmpleados();
-    console.log("xd")
   }
 
   // Funciones de Empleados
@@ -56,17 +39,7 @@ export class AllEmpleadosComponent implements OnInit {
       }
     )
   }
-  registrarEmpleado() {
-    this.empleadoService.RegistrarEmpleados(this.empleado).subscribe(
-      response => {
-        this.ngOnInit();
-        this.limpiarFormularioEmpleado();
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  }
+
   borrarEmpleado(empleado: Empleado): void {
     this.empleadoService.EliminarEmpleado(empleado).subscribe(
       response=>{
@@ -78,27 +51,15 @@ export class AllEmpleadosComponent implements OnInit {
     )
   }
   mostrarRegistroEmpleado(): void{
-    this.modalEmpleado = document.getElementById('modal_empleado');
-    if (this.modalEmpleado != null){
-      this.modalEmpleado.classList.remove('hidden')
-    }
-  }
-  cerrarModalEmpleado(): void{
-    this.limpiarFormularioEmpleado();
-  }
-  limpiarFormularioEmpleado() {
-    this.modalEmpleado.classList.add('hidden');
-    this.empleado = {
-      nombre_paterno: '',
-      nombre_materno: '',
-      apellido_paterno: '',
-      apellido_materno: '',
-      rut: ''
-    };
+    this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible
   }
   // Funciones de Credenciales
   mostrarCredencial(credencial: Credencial[]){
     this.credencialEmpleado = credencial;
     this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
+  }
+
+  eliminarCredencial(){
+    this.ngOnInit();
   }
 }

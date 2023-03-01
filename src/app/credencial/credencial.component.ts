@@ -13,6 +13,7 @@ export class CredencialComponent implements OnInit {
   @Input() empleadoCredencial: Credencial[];
   @Input() cantidadCredenciales: number;
   // Variables emitidas al componente [all-empleados]
+  @Output() reload = new EventEmitter();
 
   // Variables a mostrar en HTML [Credencial]
   public modalCredencial = document.getElementById('modal_credencial');
@@ -23,15 +24,22 @@ export class CredencialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("credencial.component")
-    console.log(this.empleadoCredencial)
-    console.log(this.cantidadCredenciales)
+
   }
+  
   renovarCredencial(){
 
   }
-  eliminarCredencial(){
-
+  eliminarCredencial(credencial: Credencial){
+    this.empleadoService.EliminarCredencial(credencial).subscribe(
+      response=>{
+        this.reload.emit()
+        this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
+      },
+      error=>{
+        console.log(error)
+      }
+    )
   }
   cerrarCredencial(){
     this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;

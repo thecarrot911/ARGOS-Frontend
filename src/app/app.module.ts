@@ -30,6 +30,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { RegistrarEmpleadoComponent } from './registrar-empleado/registrar-empleado.component';
 import { CredencialComponent } from './credencial/credencial.component';
 import { CredencialDirective } from './directives/credencial.directive';
+import { AddCredencialComponent } from './add-credencial/add-credencial.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { CredencialDirective } from './directives/credencial.directive';
     AllEmpleadosComponent,
     RegistrarEmpleadoComponent,
     CredencialComponent,
-    CredencialDirective
+    CredencialDirective,
+    AddCredencialComponent
   ],
   imports: [
     BrowserModule,

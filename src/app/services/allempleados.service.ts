@@ -8,32 +8,39 @@ import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial } from '../emp
 })
 export class AllempleadosService {
 
-  urlEmpleados = 'http://localhost:10975/app/empleado';
-  urlRegistrarEmpleado = 'http://localhost:10975/app/empleado/registrar_empleado';
-  urlEliminarEmpleado = 'http://localhost:10975/app/empleado/eliminar_empleado';
-  urlPerfilEmpleado = 'http://localhost:10975/app/empleado/perfil'
-  
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  // Control Modals
-  modalCredencialVisible: boolean = false;
+  // Modals de Empleado 
   modalAddEmpleadoVisible: boolean = false;
+  modalUpdateEmpleadoVisible: boolean = false;
+
+  // Modals de Credencial
+  modalCredencialVisible: boolean = false;
+  modalAddCredencialVisible : boolean = false;
+  modalUpdateCredencialVisible: boolean = false;
 
   constructor(
     private http: HttpClient
   ) { }
-
+ 
   // Empleado
+  urlEmpleados = 'http://localhost:10975/app/empleado';
+  urlRegistrarEmpleado = 'http://localhost:10975/app/empleado/registrar_empleado';
+  urlEliminarEmpleado = 'http://localhost:10975/app/empleado/eliminar_empleado';
+  urlModificarEmpleado = 'http://localhost:10975/app/empleado/modificar_empleado'
+
   MostrarEmpleados(): Observable<ListaEmpleados> {
     return this.http.get<ListaEmpleados>(this.urlEmpleados);
   }
-
   RegistrarEmpleados(empleado: Empleado): Observable<Empleado> {
     return this.http.post<Empleado>(this.urlRegistrarEmpleado, empleado);
   }
-
+  ModificarEmpleado(empleado: Empleado): Observable<Empleado>{
+    let params = JSON.stringify(empleado);
+    return this.http.put<Empleado>(this.urlModificarEmpleado, params, this.httpOptions);
+  }
   EliminarEmpleado(empleado: Empleado): Observable<Empleado> {
     return this.http.delete<Empleado>(this.urlEliminarEmpleado + '/' + empleado.rut, this.httpOptions);
   }
@@ -42,16 +49,19 @@ export class AllempleadosService {
   urlRegistrarCredencial = 'http://localhost:10975/app/credencial/registrar_credencial'
   urlMostrarCredencial = 'http://localhost:10975/app/credencial/mostrar_credencial'
   urlEliminarCredencial = 'http://localhost:10975/app/credencial/eliminar_credencial'
-
-  RegistrarCredencial(credencial: Credencial): Observable<Credencial>{
-    return this.http.post<Credencial>(this.urlRegistrarCredencial, credencial);
-  }
+  urlRenovarCredencial = 'http://localhost:10975/app/credencial/renovar_credencial'
 
   MostrarCredenciales(rut: string): Observable<EmpleadoCredencial>{
     let paramsCredencial  = new HttpParams().set('rut',rut)
     return this.http.get<EmpleadoCredencial>(this.urlMostrarCredencial, {params: paramsCredencial})
   }
-
+  RegistrarCredencial(credencial: Credencial): Observable<Credencial> {
+    return this.http.post<Credencial>(this.urlRegistrarCredencial, credencial);
+  }
+  RenovarCredencial(credencial: Credencial): Observable<Credencial>{
+    let params = JSON.stringify(credencial);
+    return this.http.put<Credencial>(this.urlRenovarCredencial, params, this.httpOptions);
+  }
   EliminarCredencial(credencial: Credencial): Observable<Credencial>{
     return this.http.delete<Credencial>(this.urlEliminarCredencial + '/' + credencial.credencial_id, this.httpOptions);
   }

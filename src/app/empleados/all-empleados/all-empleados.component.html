@@ -56,14 +56,6 @@
         </div>
     </div>
 </div>
-
-<ng-container *ngIf="empleadoService.modalAddEmpleadoVisible">
-    <app-add-credencial
-    (recargaPagina)="cargaEmpleados()"
-    >
-    </app-add-credencial>
-</ng-container>
-
 <div class="container mx-auto m-5 p-8">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -103,10 +95,7 @@
                                         <span>Credenciales</span>
                                     </div>
                                 </button>
-                                <!-- COMPONENT CREDENCIAL-->
-
-                                <!--CAMBIAR X MODIFICAR -->
-                                <button type="button" (click)="borrarEmpleado(empleado)" 
+                                <button type="button" (click)="mostrarModalModificarEmpleado(empleado)" 
                                     class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
                                     <div class="flex flex-row gap-x-2 mx-auto">
                                         <svg class="h-5 w-5 text-yellow-500" width="24" height="24" viewBox="0 0 24 24"
@@ -142,12 +131,34 @@
     </div>
 </div>
 
-<ng-container *ngIf="empleadoService.modalCredencialVisible">
-    <app-credencial 
-    *appCredencial="credencialEmpleado"
-    [empleadoCredencial]="credencialEmpleado"
-    [cantidadCredenciales]="credencialEmpleado.length"
-    (reload)="eliminarCredencial()"
+<!-- ACTUALIZAR EMPLEADO  -->
+<ng-container *ngIf="empleadoService.modalUpdateEmpleadoVisible"> 
+    <app-update-empleado
+    [updateEmpleado]="modificarEmpleado"
     >
+    </app-update-empleado>
+</ng-container>
+<!-- REGISTRAR EMPLEADO  -->
+<ng-container *ngIf="empleadoService.modalAddEmpleadoVisible">
+    <app-registrar-empleado>
+    </app-registrar-empleado>
+</ng-container>
+
+<!-- CREAR NUEVA CREDENCIAL  -->
+<ng-container *ngIf="empleadoService.modalAddCredencialVisible">
+    <app-add-credencial (recargaPagina)="cargaEmpleados()">
+    </app-add-credencial>
+</ng-container>
+
+<!-- RENOVAR CREDENCIAL -->
+<ng-container *ngIf="empleadoService.modalUpdateCredencialVisible">
+    <app-update-credencial>
+    </app-update-credencial>
+</ng-container>
+
+<!-- MOSTRAR CREDENCIALES -->
+<ng-container *ngIf="empleadoService.modalCredencialVisible">
+    <app-credencial *appCredencial="credencialEmpleado" [empleadoCredencial]="credencialEmpleado"
+        [cantidadCredenciales]="credencialEmpleado.length" (reload)="ngOnInit()">
     </app-credencial>
 </ng-container>

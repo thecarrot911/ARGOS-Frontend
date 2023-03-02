@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Empleado } from '../empleados';
-import { FormGroup } from '@angular/forms';
-import { AllempleadosService } from '../services/allempleados.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Empleado } from '../../empleados';
+import { Router} from '@angular/router';
+import { AllempleadosService } from 'src/app/services/allempleados.service';
 
 @Component({
   selector: 'app-registrar-empleado',
@@ -22,7 +21,6 @@ export class RegistrarEmpleadoComponent implements OnInit {
   constructor(
     private empleadoService: AllempleadosService,
     private router: Router,
-    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -32,13 +30,16 @@ export class RegistrarEmpleadoComponent implements OnInit {
   registrarEmpleado() {
     this.empleadoService.RegistrarEmpleados(this.empleado).subscribe(
       response => {
-        console.log(response);
         this.router.navigate(['/allEmpleados'])
       },
       error => {
         console.log(error);
       }
     )
+  }
+  
+  cerrar(): void{
+    this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible
   }
 
 }

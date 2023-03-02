@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AllempleadosService } from '../services/allempleados.service';
-import { Credencial, Empleado } from '../empleados';
+import { AllempleadosService } from '../../services/allempleados.service';
+import { Credencial, Empleado } from '../../empleados';
 import { Router } from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
 
@@ -20,6 +20,9 @@ export class AllEmpleadosComponent implements OnInit {
   public cantidadCredenciales: number;
   public credencialEmpleado: Credencial[] = [];
   
+  // Variable para modificar empleado
+  public modificarEmpleado: Empleado;
+  
   constructor(
     public empleadoService: AllempleadosService
   ) { }
@@ -28,7 +31,7 @@ export class AllEmpleadosComponent implements OnInit {
     this.cargaEmpleados();
   }
 
-  // Funciones de Empleados
+  // Mostrar los Empleados
   cargaEmpleados(): void {
     this.empleadoService.MostrarEmpleados().subscribe(
       response => {
@@ -39,7 +42,12 @@ export class AllEmpleadosComponent implements OnInit {
       }
     )
   }
-
+  // Modal para modificar empleado
+  mostrarModalModificarEmpleado(empleado: Empleado): void {
+    this.modificarEmpleado = empleado;
+    this.empleadoService.modalUpdateEmpleadoVisible = !this.empleadoService.modalUpdateEmpleadoVisible
+  }
+  // Borrar empleado
   borrarEmpleado(empleado: Empleado): void {
     this.empleadoService.EliminarEmpleado(empleado).subscribe(
       response=>{
@@ -50,16 +58,14 @@ export class AllEmpleadosComponent implements OnInit {
       }
     )
   }
+  // Modal para registrar empleado
   mostrarRegistroEmpleado(): void{
     this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible
   }
-  // Funciones de Credenciales
+  // Modal para mostrar las Credenciales 
   mostrarCredencial(credencial: Credencial[]){
     this.credencialEmpleado = credencial;
     this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
   }
 
-  eliminarCredencial(){
-    this.ngOnInit();
-  }
 }

@@ -41,5 +41,5 @@ export interface Credencial{
     tipo: string,
     numero: string,
     empleado_rut: string,
-    credencial_id: number
+    credencial_id?: number
 }

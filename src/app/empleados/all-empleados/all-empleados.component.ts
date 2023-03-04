@@ -28,11 +28,6 @@ export class AllEmpleadosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargaEmpleados();
-  }
-
-  // Mostrar los Empleados
-  cargaEmpleados(): void {
     this.empleadoService.MostrarEmpleados().subscribe(
       response => {
         this.listaEmpleados = response.data;
@@ -42,6 +37,11 @@ export class AllEmpleadosComponent implements OnInit {
       }
     )
   }
+
+  mostrarCredencialEliminar(){
+    this.ngOnInit();
+  }
+
   // Modal para modificar empleado
   mostrarModalModificarEmpleado(empleado: Empleado): void {
     this.modificarEmpleado = empleado;

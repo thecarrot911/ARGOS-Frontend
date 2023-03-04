@@ -11,10 +11,11 @@ export class UpdateEmpleado {
 
 export class RenovarCredencial {
       constructor(
-            public fecha_vencimiento: any,
-            public fecha_emision: any,
             public tipo: string,
             public numero: number,
-            public rut: string
-      ){}
+            public rut: string,
+            public fecha_vencimiento?: any,
+            public fecha_emision?: any
+      ){
+      }
 }

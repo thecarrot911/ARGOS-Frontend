@@ -138,27 +138,16 @@
     >
     </app-update-empleado>
 </ng-container>
+
 <!-- REGISTRAR EMPLEADO  -->
 <ng-container *ngIf="empleadoService.modalAddEmpleadoVisible">
     <app-registrar-empleado>
     </app-registrar-empleado>
 </ng-container>
 
-<!-- CREAR NUEVA CREDENCIAL  -->
-<ng-container *ngIf="empleadoService.modalAddCredencialVisible">
-    <app-add-credencial (recargaPagina)="cargaEmpleados()">
-    </app-add-credencial>
-</ng-container>
-
-<!-- RENOVAR CREDENCIAL -->
-<ng-container *ngIf="empleadoService.modalUpdateCredencialVisible">
-    <app-update-credencial>
-    </app-update-credencial>
-</ng-container>
-
 <!-- MOSTRAR CREDENCIALES -->
 <ng-container *ngIf="empleadoService.modalCredencialVisible">
     <app-credencial *appCredencial="credencialEmpleado" [empleadoCredencial]="credencialEmpleado"
-        [cantidadCredenciales]="credencialEmpleado.length" (reload)="ngOnInit()">
+        [cantidadCredenciales]="credencialEmpleado.length" (reload)="mostrarCredencialEliminar()">
     </app-credencial>
 </ng-container>

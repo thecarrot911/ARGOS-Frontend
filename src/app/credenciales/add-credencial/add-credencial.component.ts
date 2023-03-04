@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Credencial, Empleado } from '../../empleados';
 import { AllempleadosService } from '../../services/allempleados.service';
+import { FormGroup } from '@angular/forms';
+import { RenovarCredencial } from '../../updateEmpleado';
 
 @Component({
   selector: 'app-add-credencial',
@@ -19,21 +21,13 @@ export class AddCredencialComponent implements OnInit {
 
 
   // Formulario agregar credencial
-  credencial: Credencial = {
-    fecha_vencimiento: '',
-    fecha_emision: '',
+  renovarCredencial: RenovarCredencial = {
     tipo: '',
-    numero: '',
-    empleado_rut: ''
+    numero: 0,
+    rut: '',
+    fecha_vencimiento: '',
+    fecha_emision: ''
   }
-  // Borra el de abajo xd
-  empleado: Empleado = {
-    nombre_paterno: '',
-    nombre_materno: '',
-    apellido_paterno: '',
-    apellido_materno: '',
-    rut: ''
-  };
 
   ngOnInit(): void {
   }

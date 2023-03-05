@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Empleado } from '../../empleados';
 import { Router} from '@angular/router';
 import { AllempleadosService } from 'src/app/services/allempleados.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar-empleado',
@@ -9,6 +10,7 @@ import { AllempleadosService } from 'src/app/services/allempleados.service';
   styleUrls: ['./registrar-empleado.component.css']
 })
 export class RegistrarEmpleadoComponent implements OnInit {
+
 
   empleado: Empleado = {
     nombre_paterno: '',
@@ -23,6 +25,9 @@ export class RegistrarEmpleadoComponent implements OnInit {
     private router: Router,
   ) { }
 
+  // Variables emitidas al componente [all-empleados]
+  @Output() recargaPaginaEmpleado = new EventEmitter();
+
   ngOnInit(): void {
 
   }
@@ -30,10 +35,17 @@ export class RegistrarEmpleadoComponent implements OnInit {
   registrarEmpleado() {
     this.empleadoService.RegistrarEmpleados(this.empleado).subscribe(
       response => {
-        this.router.navigate(['/allEmpleados'])
+        this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible;
+        this.recargaPaginaEmpleado.emit();
+        Swal.fire({
+          icon: 'success',
+          title: response.msg,
+          showConfirmButton: false,
+          timer: 1500
+        })
       },
       error => {
-        console.log(error);
+        console.error(error);
       }
     )
   }

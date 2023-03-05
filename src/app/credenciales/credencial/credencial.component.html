@@ -44,8 +44,7 @@
                               </div>
                         </div>
                   </ng-container>
-                  
-                  <div *ngIf="cantidadCredenciales < 2" class="flex flex-row justify-center">
+                  <div *ngIf="empleadoCredencial.length < 2" class="flex flex-row justify-center">
                         <button type="button" (click)="agregarCredencial()" class="bg-blue-500 ">
                               Agregar Credencial
                         </button>
@@ -53,3 +52,17 @@
             </div>
       </div>
 </div>
+<!-- CREAR NUEVA CREDENCIAL  -->
+<ng-container *ngIf="empleadoService.modalAddCredencialVisible">
+      <app-add-credencial 
+      [rut]="rutEmpleadoAdd"
+      (recargaPagina)="recargarPaginaCredencial()">
+      
+      </app-add-credencial>
+</ng-container>
+
+<!-- RENOVAR CREDENCIAL -->
+<ng-container *ngIf="empleadoService.modalUpdateCredencialVisible">
+      <app-update-credencial>
+      </app-update-credencial>
+</ng-container>

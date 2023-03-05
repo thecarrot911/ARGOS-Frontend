@@ -1,23 +1,13 @@
 export interface ListaEmpleados {
     error: boolean,
     msg: string,
-    data: Empleado[] 
+    data: Empleado[]
 }
 
-export interface PerfilEmpleado{
+export interface EmpleadoData{
     error: boolean,
-    data: Perfil
-}
-
-export interface Perfil{
-    nombre_paterno: string,
-    nombre_materno: string,
-    apellido_paterno: string,
-    apellido_materno: string,
-    rut: string,
-    fecha_vencimiento: string,
-    fecha_emision: string,
-    tipo: string,
+    msg: string,
+    data: Empleado
 }
 
 export interface Empleado {
@@ -32,14 +22,14 @@ export interface Empleado {
 export interface EmpleadoCredencial{
     error: boolean,
     msg: string,
-    data: Credencial[]
+    data?: Credencial[]
 }
 
 export interface Credencial{
-    fecha_vencimiento: string,
-    fecha_emision: string,
+    fecha_vencimiento: any,
+    fecha_emision: any,
     tipo: string,
-    numero: string,
+    numero: number,
     empleado_rut: string,
     credencial_id?: number
 }

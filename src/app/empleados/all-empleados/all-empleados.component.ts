@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AllempleadosService } from '../../services/allempleados.service';
 import { Credencial, Empleado } from '../../empleados';
-import { Router } from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-all-empleados',
@@ -19,6 +18,7 @@ export class AllEmpleadosComponent implements OnInit {
   // Variable para mostrar credenciales
   public cantidadCredenciales: number;
   public credencialEmpleado: Credencial[] = [];
+  public rutEmpleadoSelecionado: string;
   
   // Variable para modificar empleado
   public modificarEmpleado: Empleado;
@@ -38,10 +38,6 @@ export class AllEmpleadosComponent implements OnInit {
     )
   }
 
-  mostrarCredencialEliminar(){
-    this.ngOnInit();
-  }
-
   // Modal para modificar empleado
   mostrarModalModificarEmpleado(empleado: Empleado): void {
     this.modificarEmpleado = empleado;
@@ -49,23 +45,42 @@ export class AllEmpleadosComponent implements OnInit {
   }
   // Borrar empleado
   borrarEmpleado(empleado: Empleado): void {
-    this.empleadoService.EliminarEmpleado(empleado).subscribe(
-      response=>{
-        this.ngOnInit();
-      },
-      error => {
-        console.log(error)
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Estas eliminando a "+empleado.nombre_materno+" "+empleado.apellido_paterno+" del sistema",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.empleadoService.EliminarEmpleado(empleado).subscribe(
+          response => {
+            Swal.fire(
+              'Eliminado!',
+              response.msg,
+              'success'
+            )
+            this.ngOnInit();
+          },
+          error => {
+            console.error(error)
+          }
+        )
       }
-    )
+    })
   }
   // Modal para registrar empleado
   mostrarRegistroEmpleado(): void{
     this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible
   }
+  
   // Modal para mostrar las Credenciales 
-  mostrarCredencial(credencial: Credencial[]){
+  mostrarCredencial(credencial: Credencial[] , rut: string){
     this.credencialEmpleado = credencial;
     this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
+    this.rutEmpleadoSelecionado = rut
   }
 
 }

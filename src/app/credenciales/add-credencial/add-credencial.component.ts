@@ -1,8 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { Credencial, Empleado } from '../../empleados';
 import { AllempleadosService } from '../../services/allempleados.service';
-import { FormGroup } from '@angular/forms';
-import { RenovarCredencial } from '../../updateEmpleado';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-credencial',
@@ -16,15 +15,19 @@ export class AddCredencialComponent implements OnInit {
   )
   {}
 
+  // Variables recibidas por el componente [all-empleados]
+  @Input() rut: string;
   // Variables emitidas al componente [all-empleados]
   @Output() recargaPagina = new EventEmitter();
 
+  
+  public numero: string;
 
   // Formulario agregar credencial
-  renovarCredencial: RenovarCredencial = {
+  credencial: Credencial = {
     tipo: '',
     numero: 0,
-    rut: '',
+    empleado_rut: '',
     fecha_vencimiento: '',
     fecha_emision: ''
   }
@@ -32,7 +35,24 @@ export class AddCredencialComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registrar(){
+  CrearCredencial(){
+    this.credencial.empleado_rut = this.rut;
+    this.credencial.numero = Number(this.numero);
+    this.empleadoService.RegistrarCredencial(this.credencial).subscribe(
+      response=>{
+        this.empleadoService.modalAddCredencialVisible = !this.empleadoService.modalAddCredencialVisible;
+        this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
+        this.recargaPagina.emit();
+        Swal.fire({
+          icon: 'success',
+          title: response.msg,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      },error =>{
+        console.error(error);
+      }
+    )
   }
   
   cerrar(){

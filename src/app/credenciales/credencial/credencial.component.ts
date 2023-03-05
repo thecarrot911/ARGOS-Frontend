@@ -12,28 +12,35 @@ export class CredencialComponent implements OnInit {
   // Variables recibidas por el componente [all-empleados]
   @Input() empleadoCredencial: Credencial[];
   @Input() cantidadCredenciales: number;
+  @Input() rutEmpleado: string;
   
   // Variables emitidas al componente [all-empleados]
   @Output() reload  = new EventEmitter();
   @Output() renovar = new EventEmitter();
+  @Output() recargarCredencial = new EventEmitter();
+
+  public rutEmpleadoAdd:  string
 
   constructor(
     public empleadoService: AllempleadosService
   ){
   }
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    this.rutEmpleadoAdd = this.rutEmpleado
   }
-  
+
+  recargarPaginaCredencial(){
+    this.recargarCredencial.emit();
+  }
 
   agregarCredencial(){
     this.empleadoService.modalAddCredencialVisible = !this.empleadoService.modalAddCredencialVisible;
-    this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
+
   }
 
   renovarCredencial(){
-    this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
     this.empleadoService.modalUpdateCredencialVisible = !this.empleadoService.modalUpdateCredencialVisible;
   }
 

@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial } from '../empleados';
+import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData } from '../empleados';
 
 @Injectable({
   providedIn: 'root'
@@ -34,18 +34,18 @@ export class AllempleadosService {
   MostrarEmpleados(): Observable<ListaEmpleados> {
     return this.http.get<ListaEmpleados>(this.urlEmpleados);
   }
-  RegistrarEmpleados(empleado: Empleado): Observable<Empleado> {
-    return this.http.post<Empleado>(this.urlRegistrarEmpleado, empleado);
+  RegistrarEmpleados(empleado: Empleado): Observable<EmpleadoData> {
+    return this.http.post<EmpleadoData>(this.urlRegistrarEmpleado, empleado);
   }
   ModificarEmpleado(empleado: Empleado): Observable<Empleado>{
     let params = JSON.stringify(empleado);
     return this.http.put<Empleado>(this.urlModificarEmpleado, params, this.httpOptions);
   }
-  EliminarEmpleado(empleado: Empleado): Observable<Empleado> {
-    return this.http.delete<Empleado>(this.urlEliminarEmpleado + '/' + empleado.rut, this.httpOptions);
+  EliminarEmpleado(empleado: Empleado): Observable<EmpleadoData> {
+    return this.http.delete<EmpleadoData>(this.urlEliminarEmpleado + '/' + empleado.rut, this.httpOptions);
   }
 
-  // Credenciales
+  // Credenciales 
   urlRegistrarCredencial = 'http://localhost:10975/app/credencial/registrar_credencial'
   urlMostrarCredencial = 'http://localhost:10975/app/credencial/mostrar_credencial'
   urlEliminarCredencial = 'http://localhost:10975/app/credencial/eliminar_credencial'
@@ -55,8 +55,8 @@ export class AllempleadosService {
     let paramsCredencial  = new HttpParams().set('rut',rut)
     return this.http.get<EmpleadoCredencial>(this.urlMostrarCredencial, {params: paramsCredencial})
   }
-  RegistrarCredencial(credencial: Credencial): Observable<Credencial> {
-    return this.http.post<Credencial>(this.urlRegistrarCredencial, credencial);
+  RegistrarCredencial(credencial: Credencial): Observable<EmpleadoCredencial> {
+    return this.http.post<EmpleadoCredencial>(this.urlRegistrarCredencial, credencial);
   }
   RenovarCredencial(credencial: Credencial): Observable<Credencial>{
     let params = JSON.stringify(credencial);

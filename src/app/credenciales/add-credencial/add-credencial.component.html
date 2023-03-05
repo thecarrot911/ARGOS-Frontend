@@ -4,7 +4,7 @@
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                   <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                         <h3 class="mx-auto text-xl font-semibold text-gray-900 dark:text-white">
-                              Nueva Credencial
+                              CREAR CREDENCIAL
                         </h3>
                         <button type="button" (click)="cerrar()"
                               class="top-0 right-0 px-2 absolute text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -17,7 +17,7 @@
                               </svg>
                         </button>
                   </div>
-                  <form (ngSubmit)="registrar()">
+                  <form (ngSubmit)="CrearCredencial()">
                         <div class="antialiased text-gray-900 px-8 ">
                               <div class="max-w-wl mx-auto pb-8 md:max-w-5xl borde">
                                     <p class="mt-4 text-lg text-gray-300">Por favor, ingrese los datos solicitados:</p>
@@ -26,7 +26,7 @@
                                                 <div class="mb-6">
                                                 <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                       TIPO DE CREDENCIAL</label>
-                                                <select id="countries" [(ngModel)]="renovarCredencial.tipo"
+                                                <select id="countries" name="tipo" [(ngModel)]="credencial.tipo"
                                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                       <option value="Acceso al aeropuerto">Acceso al aeropuerto</option>
                                                       <option value="Condución en el aeropuerto">Condución en el aeropuerto</option>
@@ -35,45 +35,22 @@
                                                 <div class="mb-6">
                                                       <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             NÚMERO DE CREDENCIAL</label>
-                                                      <input type="text" [(ngModel)]="renovarCredencial.numero"
+                                                      <input type="text" name="numero" [(ngModel)]="numero" 
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
                                                             required>
                                                 </div>
                                                 <div class="mb-6"> 
                                                       <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             FECHA DE EMISIÓN</label>
-                                                      <input type="date" [(ngModel)]="renovarCredencial.fecha_emision"
+                                                      <input type="date" name="fecha_emision" [(ngModel)]="credencial.fecha_emision"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                                 </div>
                                                 <div class="mb-6">
                                                       <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                             FECHA DE VENCIMIENTO</label>
-                                                      <input type="date" [(ngModel)]="renovarCredencial.fecha_vencimiento"
+                                                      <input type="date" name="fecha_vencimiento" [(ngModel)]="credencial.fecha_vencimiento"
                                                             class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
                                                 </div>
-
-                                                <!--
-                                                <div class="flex flex-row gap-6">
-                                                      <input class="basis-1/2 italic" type="text" name="nombre_paterno"
-                                                            placeholder="Primer Nombre"
-                                                            [(ngModel)]="empleado.nombre_paterno">
-                                                      <input class="basis-1/2 italic" type="text" name="nombre materno"
-                                                            placeholder="Segundo Nombre"
-                                                            [(ngModel)]="empleado.nombre_materno">
-                                                </div>
-                                                <div class="flex flex-row gap-6">
-                                                      <input class="basis-1/2 italic" type="text"
-                                                            name="apellido_paterno" placeholder="Primer Apellido"
-                                                            [(ngModel)]="empleado.apellido_paterno">
-                                                      <input class="basis-1/2 italic" type="text"
-                                                            name="apellido_materno" placeholder="Segundo Apellido"
-                                                            [(ngModel)]="empleado.apellido_materno">
-                                                </div>
-                                                <div class="flex flex-row gap-6">
-                                                      <input  class="basis-1/2 italic" type="date" name="nombre_paterno"
-                                                            placeholder="Primer Nombre">
-                                                </div>
-                                                -->
                                                 <div class="flex gap-6 mx-auto">
                                                       <button type="submit"
                                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

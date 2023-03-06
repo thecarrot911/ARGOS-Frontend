@@ -62,8 +62,8 @@ export class AllempleadosService {
     let params = JSON.stringify(credencial);
     return this.http.put<Credencial>(this.urlRenovarCredencial, params, this.httpOptions);
   }
-  EliminarCredencial(credencial: Credencial): Observable<Credencial>{
-    return this.http.delete<Credencial>(this.urlEliminarCredencial + '/' + credencial.credencial_id, this.httpOptions);
+  EliminarCredencial(credencial: Credencial): Observable<EmpleadoCredencial>{
+    return this.http.delete<EmpleadoCredencial>(this.urlEliminarCredencial + '/' + credencial.credencial_id, this.httpOptions);
   }
 
 

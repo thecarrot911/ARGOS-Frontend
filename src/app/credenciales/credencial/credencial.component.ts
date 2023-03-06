@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { AllempleadosService } from 'src/app/services/allempleados.service';
+import Swal from 'sweetalert2';
 import { Credencial } from '../../empleados';
 
 @Component({
@@ -45,15 +46,33 @@ export class CredencialComponent implements OnInit {
   }
 
   eliminarCredencial(credencial: Credencial){
-    this.empleadoService.EliminarCredencial(credencial).subscribe(
-      response=>{
-        this.reload.emit()
-        this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
-      },
-      error=>{
-        console.log(error)
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Estas eliminando la credencial de " + credencial.tipo + " del sistema",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, borralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.empleadoService.EliminarCredencial(credencial).subscribe(
+          response => {
+            Swal.fire(
+              'Eliminado!',
+              response.msg,
+              'success'
+            )
+            this.recargarCredencial.emit();
+            this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
+
+          },
+          error => {
+            console.error(error)
+          }
+        )
       }
-    )
+    })
   }
   
   cerrarCredencial(){

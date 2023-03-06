@@ -12,7 +12,15 @@ export class UpdateEmpleadoComponent implements OnInit {
   // Variables recibidas por el componente [all-empleados]
   @Input() updateEmpleado: Empleado; 
   
-  empleado: Empleado = {
+  // Variable boleanas de Empleados
+
+  public boolPrimerNombre: boolean = true;
+  public boolSegundoNombre: boolean = true;
+  public boolPrimerApellido : boolean = true;
+  public boolSegundoApellido: boolean = true;
+  public boolRut: boolean = true;
+
+  public empleado: Empleado = {
     nombre_paterno: '',
     nombre_materno: '',
     apellido_paterno: '',
@@ -26,15 +34,41 @@ export class UpdateEmpleadoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.empleado.nombre_paterno = this.updateEmpleado.nombre_paterno;
+    this.empleado.nombre_materno = this.updateEmpleado.nombre_materno;
+    this.empleado.apellido_paterno = this.updateEmpleado.apellido_paterno;
+    this.empleado.apellido_materno = this.updateEmpleado.apellido_materno;
+    this.empleado.rut = this.updateEmpleado.rut;
+  }
 
+  editPrimerNombre(){
+    this.boolPrimerNombre = !this.boolPrimerNombre;
+  }
+
+  editSegundoNombre(){
+    this.boolSegundoNombre = !this.boolSegundoNombre;
+  }
+
+  editPrimerApellido(){
+    this.boolPrimerApellido = !this.boolPrimerApellido
+  }
+  editSegundoApellido(){
+    this.boolSegundoApellido = !this.boolSegundoApellido
+  }
+
+  modificar(): void {
+    this.empleadoService.ModificarEmpleado(this.empleado).subscribe(
+      response => {
+
+      }, error => {
+
+      }
+    )
+    console.log(this.empleado)
   }
 
   cerrar(): void{
     this.empleadoService.modalUpdateEmpleadoVisible = !this.empleadoService.modalUpdateEmpleadoVisible 
-  }
-
-  modificar(): void{
-
   }
 
 }

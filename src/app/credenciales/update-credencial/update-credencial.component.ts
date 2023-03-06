@@ -29,8 +29,6 @@ export class UpdateCredencialComponent implements OnInit {
   }
 
   cerrar(){
-    console.log('cerrar renovar')
-
     this.empleadoService.modalUpdateCredencialVisible = !this.empleadoService.modalUpdateCredencialVisible
     this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
   }

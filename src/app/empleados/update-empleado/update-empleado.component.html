@@ -23,33 +23,91 @@
                                     <p class="mt-4 text-lg text-gray-300">Por favor, ingrese los datos solicitados:</p>
                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
                                           <div class="grid grid-cols-1 gap-6">
-                                                <div class="flex flex-row gap-6">
-                                                      <input class="basis-1/2 italic" type="text" name="nombre_paterno"
-                                                            placeholder="Primer Nombre"
-                                                            [(ngModel)]="empleado.nombre_paterno">
-                                                      <input class="basis-1/2 italic" type="text" name="nombre materno"
-                                                            placeholder="Segundo Nombre"
-                                                            [(ngModel)]="empleado.nombre_materno">
-                                                </div>
-                                                <div class="flex flex-row gap-6">
-                                                      <input class="basis-1/2 italic" type="text"
-                                                            name="apellido_paterno" placeholder="Primer Apellido"
-                                                            [(ngModel)]="empleado.apellido_paterno">
-                                                      <input class="basis-1/2 italic" type="text"
-                                                            name="apellido_materno" placeholder="Segundo Apellido"
-                                                            [(ngModel)]="empleado.apellido_materno">
-                                                </div>
-                                                <div class="flex flex-row gap-6">
-                                                      <div
-                                                            class="left-0 right-0 flex items-center  basis-1/2 text-gray-300 font-semibold ">
-                                                            <div class="mx-auto">
-                                                                  Ejemplo: 12.345.678 - 9
-                                                            </div>
-                                                      </div>
-                                                      <input class="basis-1/2 italic" type="text" name="rut"
-                                                            placeholder="RUT" [(ngModel)]="empleado.rut">
+                                                      <form class="relative w-full" (ngSubmit)="editPrimerNombre()" >
+                                                            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                  Primer Nombre</label>
+                                                            <div>
+                                                                  <input type="text"
+                                                                  class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
+                                                                  border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
+                                                                  dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                                                  name="nombre_paterno" placeholder={{empleado.nombre_paterno}} 
+                                                                  [(ngModel)]="empleado.nombre_paterno" [disabled]="boolPrimerNombre"  disabled>
 
-                                                </div>
+                                                            <button type="submit"
+                                                                  class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                                                                        </path>
+                                                                  </svg>
+                                                            </button>
+                                                            </div>
+                                                      </form>
+
+                                                      <form class="relative w-full" (ngSubmit)="editSegundoNombre()">
+                                                            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                  Segundo Nombre</label>
+                                                            <input type="text"
+                                                                  class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
+                                                                  border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
+                                                                  dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                                                  name="nombre_materno" placeholder={{empleado.nombre_materno}} 
+                                                                  [(ngModel)]="empleado.nombre_materno" [disabled]="boolSegundoNombre" disabled>
+                                                      
+                                                            <button type="submit" 
+                                                                  class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                                                                        </path>
+                                                                  </svg>
+                                                            </button>
+                                                      </form>
+
+                                                      <form class="relative w-full" (ngSubmit)="editPrimerApellido()">
+                                                            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                  Primer Apellido</label>
+                                                            <input type="text"
+                                                                  class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
+                                                                  border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
+                                                                  dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                                                  name="apellido_paterno" placeholder={{empleado.apellido_paterno}} 
+                                                                  [(ngModel)]="empleado.apellido_paterno" [disabled]="boolPrimerApellido" disabled>
+                                                      
+                                                            <button type="submit" (click)="editSegundoNombre()"
+                                                                  class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                                                                        </path>
+                                                                  </svg>
+                                                            </button>
+                                                      </form>
+
+                                                      <form class="relative w-full">
+                                                            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                                  Segundo Apellido</label>
+                                                            <input type="text"
+                                                                  class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
+                                                                  border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
+                                                                  dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                                                  name="apellido_materno" placeholder={{empleado.apellido_materno}} 
+                                                                  [(ngModel)]="empleado.apellido_materno" [disabled]="boolSegundoApellido" disabled>
+
+                                                            <button type="submit" (click)="editSegundoNombre()"
+                                                                  class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                                                  <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                                                        xmlns="http://www.w3.org/2000/svg">
+                                                                        <path
+                                                                              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                                                                        </path>
+                                                                  </svg>
+                                                            </button>
+                                                      </form>
+
                                                 <div class="flex gap-6 mx-auto">
                                                       <button type="submit"
                                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

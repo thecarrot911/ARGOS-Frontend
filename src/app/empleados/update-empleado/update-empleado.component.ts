@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Empleado } from 'src/app/empleados';
 import { AllempleadosService } from 'src/app/services/allempleados.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-update-empleado',
@@ -12,8 +13,9 @@ export class UpdateEmpleadoComponent implements OnInit {
   // Variables recibidas por el componente [all-empleados]
   @Input() updateEmpleado: Empleado; 
   
-  // Variable boleanas de Empleados
+  @Output() recargaEmpleadoPagina = new EventEmitter();
 
+  // Variable boleanas de Empleados
   public boolPrimerNombre: boolean = true;
   public boolSegundoNombre: boolean = true;
   public boolPrimerApellido : boolean = true;
@@ -57,14 +59,31 @@ export class UpdateEmpleadoComponent implements OnInit {
   }
 
   modificar(): void {
-    this.empleadoService.ModificarEmpleado(this.empleado).subscribe(
-      response => {
-
-      }, error => {
-
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "Estas modificando los datos del empleado",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, quiero modificarlo!'
+    }).then((result)=>{
+      if(result.isConfirmed){
+        this.empleadoService.ModificarEmpleado(this.empleado).subscribe(
+          response => {
+            Swal.fire(
+              '¡Modificado!',
+              response.msg,
+              'success'
+            )
+            this.recargaEmpleadoPagina.emit();
+            this.empleadoService.modalUpdateEmpleadoVisible = !this.empleadoService.modalUpdateEmpleadoVisible
+          }, error => {
+            console.error(error)
+          }
+        )
       }
-    )
-    console.log(this.empleado)
+    })
   }
 
   cerrar(): void{

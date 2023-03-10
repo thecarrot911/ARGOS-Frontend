@@ -37,12 +37,20 @@ export class RegistrarEmpleadoComponent implements OnInit {
       response => {
         this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible;
         this.recargaPaginaEmpleado.emit();
-        Swal.fire({
-          icon: 'success',
-          title: response.msg,
-          showConfirmButton: false,
-          timer: 1500
-        })
+        if(response.error){
+          Swal.fire({
+            icon: 'error',
+            title: 'Ha ocurrido un error',
+            text: response.msg
+          })
+        }else{
+          Swal.fire({
+            icon: 'success',
+            title: response.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
       },
       error => {
         console.error(error);

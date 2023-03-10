@@ -22,6 +22,8 @@ export class CredencialComponent implements OnInit {
 
   public rutEmpleadoAdd:  string
 
+  public credencialSeleccionado: Credencial;
+
   constructor(
     public empleadoService: AllempleadosService
   ){
@@ -41,7 +43,8 @@ export class CredencialComponent implements OnInit {
 
   }
 
-  renovarCredencial(){
+  renovarCredencial(credencial: Credencial){
+    this.credencialSeleccionado = credencial;
     this.empleadoService.modalUpdateCredencialVisible = !this.empleadoService.modalUpdateCredencialVisible;
   }
 
@@ -65,7 +68,7 @@ export class CredencialComponent implements OnInit {
             )
             this.recargarCredencial.emit();
             this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
-
+            this.empleadoService.ejecutarFuncion();
           },
           error => {
             console.error(error)

@@ -7,7 +7,7 @@ export interface ListaEmpleados {
 export interface EmpleadoData{
     error: boolean,
     msg: string,
-    data: Empleado
+    data?: Empleado
 }
 
 export interface Empleado {
@@ -31,5 +31,12 @@ export interface Credencial{
     tipo: string,
     numero: number,
     empleado_rut: string,
-    credencial_id?: number
+    credencial_id?: number,
+    vence?: boolean,
+    dias_restantes?: number
+}
+
+export interface VencimientoCredencial{
+    error: boolean,
+    data: boolean
 }

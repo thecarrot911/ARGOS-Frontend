@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AllempleadosService } from '../../services/allempleados.service';
 import { Credencial, Empleado } from '../../empleados';
 import Swal from 'sweetalert2';
+import { add, isAfter, isBefore, isWithinInterval } from 'date-fns';
+
 
 @Component({
   selector: 'app-all-empleados',
@@ -23,11 +25,22 @@ export class AllEmpleadosComponent implements OnInit {
   // Variable para modificar empleado
   public modificarEmpleado: Empleado;
   
+
+  // Fecha del día
+
+  public fecha1: any;
+  public fecha2: any;
+  public rangoUnMes: any;
+  public inicioRango: any;
+  public finRango: any;
+  public dentroDeRango: any;
+
   constructor(
     public empleadoService: AllempleadosService
   ) { }
 
   ngOnInit(): void {
+    this.empleadoService.ejecutarFuncion();
     this.empleadoService.MostrarEmpleados().subscribe(
       response => {
         this.listaEmpleados = response.data;
@@ -55,6 +68,7 @@ export class AllEmpleadosComponent implements OnInit {
       confirmButtonText: 'Si, borralo!'
     }).then((result) => {
       if (result.isConfirmed) {
+        
         this.empleadoService.EliminarEmpleado(empleado).subscribe(
           response => {
             Swal.fire(

@@ -43,13 +43,26 @@ export class AddCredencialComponent implements OnInit {
         this.empleadoService.modalAddCredencialVisible = !this.empleadoService.modalAddCredencialVisible;
         this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
         this.recargaPagina.emit();
-        Swal.fire({
-          icon: 'success',
-          title: response.msg,
-          showConfirmButton: false,
-          timer: 1500
-        })
+        if(response.error){
+          Swal.fire({
+            icon: 'error',
+            title: 'Ha ocurrido un error',
+            text: response.msg
+          })
+        }else{
+          Swal.fire({
+            icon: 'success',
+            title: response.msg,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
       },error =>{
+        Swal.fire({
+          icon: 'error',
+          title: 'Ha ocurrido un error',
+          text: error
+        })
         console.error(error);
       }
     )

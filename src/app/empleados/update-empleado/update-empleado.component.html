@@ -23,7 +23,7 @@
                                     <p class="mt-4 text-lg text-gray-300">Por favor, ingrese los datos solicitados:</p>
                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
                                           <div class="grid grid-cols-1 gap-6">
-                                                      <form class="relative w-full" (ngSubmit)="editPrimerNombre()" >
+                                                      <form class="relative w-full" >
                                                             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                                   Primer Nombre</label>
                                                             <div>
@@ -34,7 +34,7 @@
                                                                   name="nombre_paterno" placeholder={{empleado.nombre_paterno}} 
                                                                   [(ngModel)]="empleado.nombre_paterno" [disabled]="boolPrimerNombre"  disabled>
 
-                                                            <button type="submit"
+                                                            <button type="submit" (click)="editPrimerNombre()"
                                                                   class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                                         <path
@@ -45,7 +45,7 @@
                                                             </div>
                                                       </form>
 
-                                                      <form class="relative w-full" (ngSubmit)="editSegundoNombre()">
+                                                      <form class="relative w-full">
                                                             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                                   Segundo Nombre</label>
                                                             <input type="text"
@@ -55,7 +55,7 @@
                                                                   name="nombre_materno" placeholder={{empleado.nombre_materno}} 
                                                                   [(ngModel)]="empleado.nombre_materno" [disabled]="boolSegundoNombre" disabled>
                                                       
-                                                            <button type="submit" 
+                                                            <button type="submit" (click)="editSegundoNombre()"
                                                                   class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                                                         xmlns="http://www.w3.org/2000/svg">
@@ -66,7 +66,7 @@
                                                             </button>
                                                       </form>
 
-                                                      <form class="relative w-full" (ngSubmit)="editPrimerApellido()">
+                                                      <form class="relative w-full">
                                                             <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                                                                   Primer Apellido</label>
                                                             <input type="text"
@@ -76,7 +76,7 @@
                                                                   name="apellido_paterno" placeholder={{empleado.apellido_paterno}} 
                                                                   [(ngModel)]="empleado.apellido_paterno" [disabled]="boolPrimerApellido" disabled>
                                                       
-                                                            <button type="submit" (click)="editSegundoNombre()"
+                                                            <button type="submit" (click)="editPrimerApellido()"
                                                                   class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                                                         xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +97,7 @@
                                                                   name="apellido_materno" placeholder={{empleado.apellido_materno}} 
                                                                   [(ngModel)]="empleado.apellido_materno" [disabled]="boolSegundoApellido" disabled>
 
-                                                            <button type="submit" (click)="editSegundoNombre()"
+                                                            <button type="submit" (click)="editSegundoApellido()"
                                                                   class="absolute top-0 right-0 rounded-l-md p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                                   <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                                                         xmlns="http://www.w3.org/2000/svg">

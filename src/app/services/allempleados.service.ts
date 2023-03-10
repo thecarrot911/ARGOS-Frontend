@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData } from '../empleados';
+import { Observable, Subject } from 'rxjs';
+import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData, VencimientoCredencial } from '../empleados';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,9 @@ export class AllempleadosService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  // Control de imágen en el menú de navegación
+  vencimientoCredencial: boolean = false;
+
   // Modals de Empleado 
   modalAddEmpleadoVisible: boolean = false;
   modalUpdateEmpleadoVisible: boolean = false;
@@ -21,6 +24,16 @@ export class AllempleadosService {
   modalAddCredencialVisible : boolean = false;
   modalUpdateCredencialVisible: boolean = false;
 
+  // Probando función para emitir
+  private ejecutarFuncionSource = new Subject<void>();
+
+  ejecutarFuncion$ = this.ejecutarFuncionSource.asObservable();
+
+  ejecutarFuncion() {
+    this.ejecutarFuncionSource.next();
+  }
+
+
   constructor(
     private http: HttpClient
   ) { }
@@ -29,7 +42,7 @@ export class AllempleadosService {
   urlEmpleados = 'http://localhost:10975/app/empleado';
   urlRegistrarEmpleado = 'http://localhost:10975/app/empleado/registrar_empleado';
   urlEliminarEmpleado = 'http://localhost:10975/app/empleado/eliminar_empleado';
-  urlModificarEmpleado = 'http://localhost:10975/app/empleado/modificar_empleado'
+  urlModificarEmpleado = 'http://localhost:10975/app/empleado/modificar_empleado';
 
   MostrarEmpleados(): Observable<ListaEmpleados> {
     return this.http.get<ListaEmpleados>(this.urlEmpleados);
@@ -37,19 +50,20 @@ export class AllempleadosService {
   RegistrarEmpleados(empleado: Empleado): Observable<EmpleadoData> {
     return this.http.post<EmpleadoData>(this.urlRegistrarEmpleado, empleado);
   }
-  ModificarEmpleado(empleado: Empleado): Observable<Empleado>{
+  ModificarEmpleado(empleado: Empleado): Observable<EmpleadoData>{
     let params = JSON.stringify(empleado);
-    return this.http.put<Empleado>(this.urlModificarEmpleado, params, this.httpOptions);
+    return this.http.put<EmpleadoData>(this.urlModificarEmpleado + '/' + empleado.rut, params, this.httpOptions);
   }
   EliminarEmpleado(empleado: Empleado): Observable<EmpleadoData> {
     return this.http.delete<EmpleadoData>(this.urlEliminarEmpleado + '/' + empleado.rut, this.httpOptions);
   }
 
   // Credenciales 
-  urlRegistrarCredencial = 'http://localhost:10975/app/credencial/registrar_credencial'
-  urlMostrarCredencial = 'http://localhost:10975/app/credencial/mostrar_credencial'
-  urlEliminarCredencial = 'http://localhost:10975/app/credencial/eliminar_credencial'
-  urlRenovarCredencial = 'http://localhost:10975/app/credencial/renovar_credencial'
+  urlRegistrarCredencial = 'http://localhost:10975/app/credencial/registrar'
+  urlMostrarCredencial = 'http://localhost:10975/app/credencial/mostrar'
+  urlEliminarCredencial = 'http://localhost:10975/app/credencial/eliminar'
+  urlRenovarCredencial = 'http://localhost:10975/app/credencial/renovar'
+  urlFechaVencimientoCredencial = 'http://localhost:10975/app/credencial/vencidas'
 
   MostrarCredenciales(rut: string): Observable<EmpleadoCredencial>{
     let paramsCredencial  = new HttpParams().set('rut',rut)
@@ -58,13 +72,13 @@ export class AllempleadosService {
   RegistrarCredencial(credencial: Credencial): Observable<EmpleadoCredencial> {
     return this.http.post<EmpleadoCredencial>(this.urlRegistrarCredencial, credencial);
   }
-  RenovarCredencial(credencial: Credencial): Observable<Credencial>{
-    let params = JSON.stringify(credencial);
-    return this.http.put<Credencial>(this.urlRenovarCredencial, params, this.httpOptions);
+  RenovarCredencial(credencial: Credencial): Observable<EmpleadoCredencial>{
+    return this.http.post<EmpleadoCredencial>(this.urlRenovarCredencial, credencial);
   }
   EliminarCredencial(credencial: Credencial): Observable<EmpleadoCredencial>{
     return this.http.delete<EmpleadoCredencial>(this.urlEliminarCredencial + '/' + credencial.credencial_id, this.httpOptions);
   }
-
-
+  VencimientoCredencial(): Observable<VencimientoCredencial>{
+    return this.http.get<VencimientoCredencial>(this.urlFechaVencimientoCredencial);
+  }
 }

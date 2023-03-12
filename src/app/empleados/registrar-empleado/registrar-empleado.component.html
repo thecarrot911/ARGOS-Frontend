@@ -1,6 +1,6 @@
 <div data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-    class="fixed left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-    <div class="top-1/4 relative w-full h-full max-w-2xl md:h-auto mx-auto ">
+    class="fixed top-0 left-0 flex items-center justify-center w-full h-full">
+    <div class="relative w-full h-full max-w-2xl md:h-auto mx-auto">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                 <h3 class="mx-auto text-xl font-semibold text-gray-900 dark:text-white">
@@ -22,44 +22,59 @@
                     <div class="max-w-wl mx-auto pb-8 md:max-w-5xl borde">
                         <p class="mt-4 text-lg text-gray-300">Por favor, ingrese los datos solicitados:</p>
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
-                            <div class="grid grid-cols-1 gap-6">
-                                <div class="flex flex-row gap-6">
-                                    <input class="basis-1/2 italic" type="text" name="nombre_paterno"
-                                        placeholder="Primer Nombre" [(ngModel)]="empleado.nombre_paterno">
-                                    <input class="basis-1/2 italic" type="text" name="nombre materno"
-                                        placeholder="Segundo Nombre" [(ngModel)]="empleado.nombre_materno">
+                                <div class="relative z-0 w-full group">
+                                    <input type="text" name="nombre_paterno" [(ngModel)]="empleado.nombre_paterno"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" " required />
+                                    <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                        Nombre paterno</label>
                                 </div>
-                                <div class="flex flex-row gap-6">
-                                    <input class="basis-1/2 italic" type="text" name="apellido_paterno"
-                                        placeholder="Primer Apellido" [(ngModel)]="empleado.apellido_paterno">
-                                    <input class="basis-1/2 italic" type="text" name="apellido_materno"
-                                        placeholder="Segundo Apellido" [(ngModel)]="empleado.apellido_materno">
+                                <div class="relative z-0 w-full group">
+                                    <input type="text" name="nombre_materno" [(ngModel)]="empleado.nombre_materno"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" " required />
+                                    <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                        Nombre materno</label>
                                 </div>
-                                <div class="flex flex-row gap-6">
-                                    <div
-                                        class="left-0 right-0 flex items-center  basis-1/2 text-gray-300 font-semibold ">
-                                        <div class="mx-auto">
-                                            Ejemplo: 12.345.678 - 9
-                                        </div>
-                                    </div>
-                                    <input class="basis-1/2 italic" type="text" name="rut" placeholder="RUT"
-                                        [(ngModel)]="empleado.rut">
+                                <div class="relative z-0 w-full group">
+                                    <input type="text" name="apellido_paterno" [(ngModel)]="empleado.apellido_paterno"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" " required />
+                                    <label
+                                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                        Apellido paterno</label>
+                                </div>
+                                <div class="relative z-0 w-full group">
+                                    <input type="text" name="apellido_materno" [(ngModel)]="empleado.apellido_materno"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" " required />
+                                    <label
+                                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                        Apellido materno</label>
+                                </div>
+                                <div class="relative z-0 w-full group">
+                                    <input type="text" name="rut" [(ngModel)]="empleado.rut" (input)="formatoRut()" (blur)="formatoRut()"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" " required />
+                                    <div *ngIf="!boolInputRut" class="error">El RUT no es válido</div>
+                                    <label
+                                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                                        RUT (Ejemplo: 12.345.678 - 9)</label>
+                                </div>
 
-                                </div>
                                 <div class="flex gap-6 mx-auto">
                                     <button type="submit"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                        class="bg-indigo-500 hover:bg-indigo-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                                         Registrar
                                     </button>
                                     <button data-modal-hide="staticModal" type="button" (click)="cerrar()"
-                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                        class="focus:outline-none ml-3 bg-white-500 transition duration-150 text-indigo-500 ease-in-out hover:border-gray-400 hover:bg-white-300 border rounded px-8 py-2 text-sm">
                                         Cancelar
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </form>
         </div>
     </div>

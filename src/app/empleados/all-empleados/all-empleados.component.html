@@ -1,3 +1,4 @@
+
 <div
     class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300 p-8">
     <div>
@@ -56,90 +57,109 @@
         </div>
     </div>
 </div>
+
+<ng-container 
+*ngIf="empleadoService.modalCredencialVisible || empleadoService.modalAddEmpleadoVisible
+    || empleadoService.modalUpdateEmpleadoVisible || empleadoService.modalUpdateCredencialVisible ">
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-70"></div>
+</ng-container>
+
 <div class="container mx-auto m-5 p-8">
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <div class="overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Nombre de Empleados
+                    <th scope="col" class="px-6 py-3 text-center">
+                        Empleado
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3 text-center">
                         RUT
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        ACCIONES
+                    <th scope="col" class="px-6 py-3 text-center">
+                        VER CREDENCIAL
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        MODIFICAR EMPLEADO
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center">
+                        ELIMINAR EMPLEADO
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <ng-container *ngFor="let empleado of listaEmpleados">
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{empleado.nombre_paterno }} {{empleado.apellido_paterno}} {{empleado.apellido_materno}}
+                        <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white gap-x-6">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                        class="w-8 h-8">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-grow">
+                                    <div class="text-sm font-medium text-gray-900 dark:text-white">{{empleado.nombre_paterno }}
+                                        {{empleado.apellido_paterno}}</div>
+                                    <div class="text-sm text-gray-500">{{empleado.nombre_materno }}
+                                        {{empleado.apellido_materno}}</div>
+                                </div>
+                            </div>
                         </th>
-                        <td class="px-6 py-4">
-                            {{empleado.rut}}
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="grid gap-x-12 grid-cols-3">
-                                <div>
+                        <th class="px-6 py-2 text-center">
+                            <div class="text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">{{empleado.rut}}</div>
+                        </th>
+                        <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-500 flex">
+                            <button type="button" (click)="mostrarCredencial(empleado.credencial, empleado.rut)"
+                                class=" inline-flex items-center justify-center text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-red-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 ">
+                                <div class="flex flex-row gap-x-2 mx-auto">
+                                    <svg class="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                                        <line x1="1" y1="10" x2="23" y2="10" />
+                                    </svg>
+                                    <span class="align-middle">Credenciales</span>
                                     <ng-container *ngFor="let credencial of empleado.credencial">
                                         <ng-container *ngIf="credencial.vence">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="w-6 h-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                                stroke="currentColor" class="w-5 h-5 text-red-500 align-middle absolute right-0 top-0">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
                                             </svg>
                                         </ng-container>
                                     </ng-container>
-                                    <button type="button" (click)="mostrarCredencial(empleado.credencial, empleado.rut)"
-                                        class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
-                                        <div class="flex flex-row gap-x-2 mx-auto">
-                                            <svg class="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                                                <line x1="1" y1="10" x2="23" y2="10" />
-                                            </svg>
-                                            <span>Credenciales</span>
-                                        </div>
-                                    </button>
                                 </div>
-
-                                <div>
-                                    <button type="button" (click)="mostrarModalModificarEmpleado(empleado)" 
-                                    class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
-                                        <div class="flex flex-row gap-x-2 mx-auto">
-                                            <svg class="h-5 w-5 text-yellow-500" width="24" height="24" viewBox="0 0 24 24"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                                            </svg>
-                                            <span>Modificar</span>
-                                        </div>
-                                    </button>
+                            </button>
+                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-500">
+                                <button type="button" (click)="mostrarModalModificarEmpleado(empleado)" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none 
+                                        focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 
+                                        dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                    <div class="flex flex-row gap-x-2 mx-auto">
+                                        <svg class="h-5 w-5 text-yellow-500" width="24" height="24" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                        </svg>
+                                        <span>Modificar</span>
+                                    </div>
+                                </button>
+                        </td>
+                        <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-500">
+                            <button type="button" (click)="borrarEmpleado(empleado)"
+                                class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                <div class="flex flex-row gap-x-2 mx-auto">
+                                    <svg class="h-5 w-5 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="3 6 5 6 21 6" />
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                        <line x1="10" y1="11" x2="10" y2="17" />
+                                        <line x1="14" y1="11" x2="14" y2="17" />
+                                    </svg>
+                                    <span>Eliminar</span>
                                 </div>
-                                
-                                <div>
-                                    <button type="button" (click)="borrarEmpleado(empleado)"
-                                        class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 mr-2 mb-2">
-                                        <div class="flex flex-row gap-x-2 mx-auto">
-                                            <svg class="h-5 w-5 text-red-500" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                stroke-linejoin="round">
-                                                <polyline points="3 6 5 6 21 6" />
-                                                <path
-                                                    d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-                                                <line x1="10" y1="11" x2="10" y2="17" />
-                                                <line x1="14" y1="11" x2="14" y2="17" />
-                                            </svg>
-                                            <span>Eliminar</span>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
+                            </button>
                         </td>
                     </tr>
                 </ng-container>
@@ -161,9 +181,12 @@
 <ng-container *ngIf="empleadoService.modalAddEmpleadoVisible">
     <app-registrar-empleado
     (recargaPaginaEmpleado)="ngOnInit()"
+    class=""
     >
     </app-registrar-empleado>
 </ng-container>
+
+
 
 <!-- MOSTRAR CREDENCIALES -->
 <ng-container *ngIf="empleadoService.modalCredencialVisible">
@@ -175,4 +198,5 @@
     (reload)="ngOnInit()">
     </app-credencial>
 </ng-container>
+
 

@@ -1,9 +1,10 @@
 <div data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-      class="fixed left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+      class="fixed left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem) md:h-full ">
       <div class="top-1/4 relative w-full h-full max-w-2xl md:h-auto mx-auto">
             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                   <button type="button" (click)="cerrarCredencial()"
-                        class="top-0 right-0 px-2 absolute text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        class="top-0 right-0 px-2 absolute text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg 
+                        text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                         data-modal-hide="modal_credencial">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd"
@@ -59,6 +60,7 @@
             </div>
       </div>
 </div>
+
 <!-- CREAR NUEVA CREDENCIAL  -->
 <ng-container *ngIf="empleadoService.modalAddCredencialVisible">
       <app-add-credencial 

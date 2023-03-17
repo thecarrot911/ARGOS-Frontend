@@ -1,16 +1,15 @@
 <div data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-      class="fixed left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-      <div class="top-1/4 relative w-full h-full max-w-2xl md:h-auto mx-auto ">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                  <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                        <h3 class="mx-auto text-xl font-semibold text-gray-900 dark:text-white">
+      class="fixed top-0 left-0 flex items-center justify-center w-full h-full">
+      <div class="relative w-full h-full max-w-lg  md:h-auto mx-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-white-700">
+                  <div class="flex items-start justify-between p-5 rounded-t dark:border-gray-600">
+                        <h3 class="mx-auto text-xl font-semibold text-gray-900 bg-white">
                               RENOVAR CREDENCIAL
                         </h3>
                         <button type="button" (click)="cerrar()"
-                              class="top-0 right-0 px-2 absolute text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                              class="top-0 right-0 px-2  rounded-tr rounded-tr-lg absolute text-white bg-red-500 text-sm p-1.5 ml-auto inline-flex items-center hover:bg-red-600 hover:text-white "
                               data-modal-hide="modal_credencial">
-                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
                                           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                           clip-rule="evenodd"></path>
@@ -19,60 +18,56 @@
                   </div>
                   <form>
                         <div class="antialiased text-gray-900 px-8 ">
-                              <div class="max-w-wl mx-auto pb-8 md:max-w-5xl borde">
-                                    <p class="mt-4 text-lg text-gray-300">Por favor, ingrese los datos solicitados:</p>
+                              <div class="max-w-wl mx-auto pb-5 md:max-w-5xl borde">
+                                    <p class="text-lg text-gray-700">Por favor, ingrese los datos solicitados:</p>
                                     <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
-                                          <div class="grid grid-cols-1">
-                                                <div class="mb-6">
-
+                                          <div class="grid grid-cols-2 gap-4">
+                                                <div class="mb-2">
+                                                      <label for="countries" class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                                            TIPO DE CREDENCIAL</label>
                                                       <input type="text"
                                                             class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
                                                                   border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
                                                                   dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                                                             name="tipo" placeholder={{credencial.tipo}} [(ngModel)]="credencial.tipo" disabled>
                                                 </div>
-                                                <div class="mb-6">
+                                                <div class="mb-2">
+                                                      <label for="password" class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                                            NÚMERO DE CREDENCIAL</label>
                                                       <input type="text"
                                                             class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
                                                                   border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
                                                                   dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                                            name="numero" placeholder={{credencial.numero}} [(ngModel)]="credencial.numero" [disabled]="boolFormRenovar">
+                                                            name="numero" placeholder={{credencial.numero}} [(ngModel)]="credencial.numero">
                                                 </div>
-                                                <div class="mb-6">
-                                                      <input type="text"
-                                                            class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
-                                                                  border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
-                                                                  dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                                            name="empleado_rut" placeholder={{credencial.empleado_rut}} [(ngModel)]="credencial.empleado_rut" disabled>
-                                                </div>
-                                                <div class="mb-6">
+                                                <div class="mb-2">
+                                                      <label for="base-input" class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                                            FECHA DE EMISIÓN</label>
                                                       <input type="date"
                                                             class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
                                                                   border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
                                                                   dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                                            name="fecha_emision" placeholder={{credencial.fecha_emision}} [(ngModel)]="credencial.fecha_emision" [disabled]="boolFormRenovar">
+                                                            name="fecha_emision" placeholder={{credencial.fecha_emision}} [(ngModel)]="credencial.fecha_emision">
                                                 </div>
-                                                <div class="mb-6">
+                                                <div class="mb-2">
+                                                      <label for="base-input" class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                                            FECHA DE VENCIMIENTO</label>
                                                       <input type="date"
                                                             class="block rounded-lg p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-100 border-l-2 
                                                                   border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
                                                                   dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                                            name="fecha_vencimiento" placeholder={{credencial.fecha_vencimiento}} [(ngModel)]="credencial.fecha_vencimiento" [disabled]="boolFormRenovar">
+                                                            name="fecha_vencimiento" placeholder={{credencial.fecha_vencimiento}} [(ngModel)]="credencial.fecha_vencimiento">
                                                 </div>
-                                                <button (click)="editar()"
-                                                      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"> 
-                                                      Editar xD
-                                                </button>
 
-                                                <p>
-                                                <div class="flex gap-6 mx-auto">
+                                                <div class="grid grid-cols-1 gap-3 mt-3 mb-3">
                                                       <button type="submit" (click)="renovar()"
-                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                                            renovar
+                                                            class="bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full h-10">
+                                                            Renovar
                                                       </button>
-                                                      <button data-modal-hide="staticModal" type="button"
-                                                            (click)="cerrar()"
-                                                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                                                </div>
+                                                <div class="grid grid-cols-1 gap-3 mt-3 mb-3">
+                                                      <button data-modal-hide="staticModal" type="button" (click)="cerrar()"
+                                                            class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full h-10">
                                                             Cancelar
                                                       </button>
                                                 </div>

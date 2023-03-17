@@ -40,7 +40,6 @@ export class CredencialComponent implements OnInit {
 
   agregarCredencial(){
     this.empleadoService.modalAddCredencialVisible = !this.empleadoService.modalAddCredencialVisible;
-
   }
 
   renovarCredencial(credencial: Credencial){
@@ -68,7 +67,6 @@ export class CredencialComponent implements OnInit {
             )
             this.recargarCredencial.emit();
             this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
-            this.empleadoService.ejecutarFuncion();
           },
           error => {
             console.error(error)

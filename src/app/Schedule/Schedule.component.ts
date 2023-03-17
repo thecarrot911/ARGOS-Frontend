@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Tiempo } from '../itinerario-aviones/itinerario-aviones.component';
 import { Calendario, Actualizacion, Itinerario, Planificacion, Data } from '../calendario';
-import { ChangeDetectionStrategy } from '@angular/core';
-
 import { DatePipe } from '@angular/common';
-import { LOCALE_ID } from '@angular/core';
-import localeEs from '@angular/common/locales/es';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -39,7 +34,7 @@ export class ScheduleComponent implements OnInit {
 
   public prueba1: number;
 
-  tiempos: Tiempo[] = [];
+  tiempos: any[] = [];
   public generador: any; /* ONSUBMIT */
   public global: any;
 

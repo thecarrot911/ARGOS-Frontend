@@ -109,44 +109,50 @@
                         <th class="px-6 py-2 text-center">
                             <div class="text-sm font-medium text-gray-900 dark:text-white whitespace-nowrap">{{empleado.rut}}</div>
                         </th>
-                        <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-500 flex">
-                            <button type="button" (click)="mostrarCredencial(empleado.credencial, empleado.rut)"
-                                class=" inline-flex items-center justify-center text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-red-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700 ">
-                                <div class="flex flex-row gap-x-2 mx-auto">
-                                    <svg class="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                                        <line x1="1" y1="10" x2="23" y2="10" />
-                                    </svg>
-                                    <span class="align-middle">Credenciales</span>
-                                    <ng-container *ngFor="let credencial of empleado.credencial">
-                                        <ng-container *ngIf="credencial.vence">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                stroke="currentColor" class="w-5 h-5 text-red-500 align-middle absolute right-0 top-0">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                                            </svg>
+                        <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-500">
+                            <div class="flex justify-center">
+                                <button type="button" (click)="mostrarCredencial(empleado.credencial, empleado.rut)" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none 
+                                        focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 
+                                        dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700" style="position: relative;">
+                                    <div class="flex flex-row gap-x-2 mx-auto">
+                                        <svg class="h-5 w-5 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                                            <line x1="1" y1="10" x2="23" y2="10" />
+                                        </svg>
+                                        <span class="align-middle">Credenciales</span>
+                                        <ng-container *ngFor="let credencial of empleado.credencial">
+                                            <ng-container *ngIf="credencial.vence">
+                                                <span class="absolute top-0 right-0 -mt-1 -mr-1 flex h-3 w-3">
+                                                    <span
+                                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                                                </span>
+                                            </ng-container>
                                         </ng-container>
-                                    </ng-container>
-                                </div>
-                            </button>
+                                    </div>
+                                </button>
+                            </div>
                         </td>
                         <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-500">
+                            <div class="flex justify-center">
                                 <button type="button" (click)="mostrarModalModificarEmpleado(empleado)" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none 
-                                        focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 
-                                        dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
+                                    focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 
+                                    dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
                                     <div class="flex flex-row gap-x-2 mx-auto">
                                         <svg class="h-5 w-5 text-yellow-500" width="24" height="24" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round">
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                         </svg>
                                         <span>Modificar</span>
                                     </div>
                                 </button>
+                            </div>
                         </td>
                         <td class="px-6 py-2 whitespace-nowrap text-sm text-gray-500">
+                            <div class="flex justify-center">
                             <button type="button" (click)="borrarEmpleado(empleado)"
                                 class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center justify-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-gray-700">
                                 <div class="flex flex-row gap-x-2 mx-auto">
@@ -160,6 +166,7 @@
                                     <span>Eliminar</span>
                                 </div>
                             </button>
+                        </div>
                         </td>
                     </tr>
                 </ng-container>

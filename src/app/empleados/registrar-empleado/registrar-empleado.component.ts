@@ -3,7 +3,7 @@ import { Empleado } from '../../empleados';
 import { Router} from '@angular/router';
 import { AllempleadosService } from 'src/app/services/allempleados.service';
 import Swal from 'sweetalert2';
-import { validateRUT } from 'validar-rut'
+import { validateRUT, getCheckDigit } from 'validar-rut'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -39,30 +39,32 @@ export class RegistrarEmpleadoComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  formatoRut() {
+    // BUSCAR UNA FORMA DE DISTINGUIR LOS RUT QUE TEMRINA EN K O 0
+    if (this.empleado && this.empleado.rut) {
+      let rut = this.empleado.rut;
 
-  formatoRut(){
-    let rut = this.empleado.rut;
+      // Eliminar cualquier caracter que no sea un número o una letra "k" o "K"
+      rut = rut.replace(/[^0-9kK]/g, '');
 
-    // Eliminar cualquier caracter que no sea un número o una letra "k" o "K"
-    rut = rut.replace(/[^0-9kK]/g, '');
+      // Agregar puntos y guión de acuerdo al formato de RUT en Chile
+      rut = rut.replace(/^(\d{1,2})(\d{3})(\d{3})([0-9kK]{1})$/, '$1.$2.$3-$4');
 
-    // Agregar puntos y guión de acuerdo al formato de RUT en Chile
-    rut = rut.replace(/^(\d{1,2})(\d{3})(\d{3})([0-9kK]{1})$/, '$1.$2.$3-$4');
+      // Actualizar el valor del campo de entrada en la propiedad empleado.rut
 
-    // Actualizar el valor del campo de entrada en la propiedad empleado.rut
-    
-    this.boolInputRut = validateRUT(rut);
-    console.log(this.boolInputRut)
-    this.empleado.rut = rut;
+      this.boolInputRut = validateRUT(rut);
+      this.empleado.rut = rut;
+    }
   }
+
+
 
   
 
   registrarEmpleado() {
     this.empleadoService.RegistrarEmpleados(this.empleado).subscribe(
       response => {
-        this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible;
-        this.recargaPaginaEmpleado.emit();
+
         if(response.error){
           Swal.fire({
             icon: 'error',
@@ -77,6 +79,8 @@ export class RegistrarEmpleadoComponent implements OnInit {
             timer: 1500
           })
         }
+        this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible;
+        this.recargaPaginaEmpleado.emit();
       },
       error => {
         console.error(error);

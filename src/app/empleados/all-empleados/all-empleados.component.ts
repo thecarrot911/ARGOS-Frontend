@@ -40,10 +40,11 @@ export class AllEmpleadosComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.empleadoService.ejecutarFuncion();
     this.empleadoService.MostrarEmpleados().subscribe(
       response => {
         this.listaEmpleados = response.data;
+        //this.empleadoService.ejecutarFuncion();
+
       },
       error => {
         console.log(error);

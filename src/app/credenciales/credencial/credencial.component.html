@@ -1,61 +1,82 @@
 <div data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-      class="fixed left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem) md:h-full ">
-      <div class="top-1/4 relative w-full h-full max-w-2xl md:h-auto mx-auto">
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                  <button type="button" (click)="cerrarCredencial()"
-                        class="top-0 right-0 px-2 absolute text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg 
-                        text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                        data-modal-hide="modal_credencial">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                              <path fill-rule="evenodd"
+      class="fixed top-0 left-0 flex items-center justify-center w-full h-full">
+      <div class="relative w-full h-full max-w-lg  md:h-auto mx-auto">
+            <div class="relative bg-white rounded-lg shadow dark:bg-white-700">
+                  <div class="flex items-start justify-between rounded-t dark:border-gray-600 pt-4 pb-0 px-4">
+                        <h3 class="mx-auto text-xl font-semibold text-gray-900 bg-white">
+                              CREDENCIALES
+                        </h3>
+                        <button type="button" (click)="cerrarCredencial()"
+                              class="top-0 right-0 px-2  rounded-tr rounded-tr-lg absolute text-white bg-red-500 text-sm p-1.5 ml-auto inline-flex items-center hover:bg-red-600 hover:text-white "
+                              data-modal-hide="modal_credencial">
+                              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
                                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
                                     clip-rule="evenodd"></path>
-                        </svg>
-                  </button>
-                  <div *ngIf="cantidadCredenciales == 0">
-                        <div class="flex justify-center text-white">
-                              <h1>No hay credenciales registradas</h1>
-                        </div>
-                  </div>
-                  <ng-container *ngFor="let credencial of empleadoCredencial">
-                        <div class="flex flex-row justify-center text-white">
-                              <div class="basis-2/3 bg-red-400 m-3">
-                                    {{credencial.tipo}}
-                                    <br>
-                                    {{credencial.numero}}
-                                    <br>
-                                    {{credencial.empleado_rut}}
-                                    <br>
-                                    {{credencial.fecha_vencimiento}}
-                                    <br>
-                                    <ng-container *ngIf="credencial.vence && credencial.dias_restantes>=0">
-                                          {{credencial.dias_restantes}} dias
-                                          <h4>CREDENCIAL POR VENCER</h4>
-                                    </ng-container>
-                                    <ng-container *ngIf="credencial.dias_restantes < 0">
-                                          CREDENCIAL VENCIDA
-                                    </ng-container>
-                              </div>
-                              <div class="justify-center basis-1/3">
-                                    <div>
-                                          <button type="button" (click)="renovarCredencial(credencial)"
-                                                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-green-400 mr-2 mb-2">
-                                                Renovar
-                                          </button>
-                                    </div>
-                                    <div>
-                                          <button type="button" (click)="eliminarCredencial(credencial)"
-                                                class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:hover:bg-red-400 mr-2 mb-2">
-                                                Eliminar
-                                          </button>
-                                    </div>
-                              </div>
-                        </div>
-                  </ng-container>
-                  <div *ngIf="empleadoCredencial.length < 2" class="flex flex-row justify-center">
-                        <button type="button" (click)="agregarCredencial()" class="bg-blue-500 ">
-                              Agregar Credencial
+                              </svg>
                         </button>
+                  </div>
+                  <div class="antialiased text-gray-900 px-8 ">
+                        <div class="max-w-wl mx-auto pb-2 md:max-w-5xl borde">
+                              <div *ngIf="empleadoCredencial.length == 0">
+                                    <div class="flex justify-center text-black mt-4 mb-2">
+                                          <h1 class="text-sm text-center">NO HAY CREDENCIALES REGISTRADAS</h1>
+                                    </div>
+                              </div>
+
+                              <ng-container *ngFor="let credencial of empleadoCredencial">
+                                    <div class="grid grid-cols-10 gap-2 items-center mt-4 mb-2">
+                                          <div class="dark:bg-gray-800 text-white rounded-lg shadow-lg p-4 text-center col-span-7">
+                                                <h2 class="font-bold text-lg leading-tight mb-2">{{credencial.tipo}}</h2>
+                                                <div class="grid grid-cols-2 items-center">
+                                                      <div class="col-span-1">
+                                                            <p class="font-bold text-xs text-center">CÓDIGO:</p>
+                                                            <p class="font-bold text-xs text-center">EMISIÓN: </p>
+                                                            <p class="font-bold text-xs text-center">VENCIMIENTO: </p>
+
+                                                      </div>
+                                                      <div class="col-span-1">
+                                                            <p class="text-xs text-center">{{credencial.numero}}</p>
+                                                            <p class="text-xs text-center">{{credencial.fecha_emision}}</p>
+                                                            <p class="text-xs text-center">{{credencial.fecha_vencimiento}}</p>
+                                                      </div>
+                                                </div>
+                                                <h4 class="mt-2 font-bold text-red-500 text-sm text-center" *ngIf="credencial.vence && credencial.dias_restantes>=0">
+                                                      CREDENCIAL VENCE EN {{credencial.dias_restantes}} DÍAS
+                                                </h4>
+                                                <p class="mt-2 font-bold text-red-500 text-sm text-center" *ngIf="credencial.dias_restantes < 0">
+                                                      CREDENCIAL VENCIDA
+                                                </p>
+                                          </div>
+                                          <div class="flex justify-center col-span-3">
+                                                <div class="flex flex-col justify-center">
+
+                                                      <button type="button" (click)="renovarCredencial(credencial)"
+                                                            class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none 
+                                                            focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center 
+                                                            dark:focus:ring-gray-600 dark:bg-yellow-500 dark:text-white dark:hover:bg-yellow-600 mb-2">
+                                                            Renovar
+                                                      </button>
+                                                      <button type="button" (click)="eliminarCredencial(credencial)"
+                                                            class="text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-4 focus:outline-none 
+                                                            focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center 
+                                                            dark:focus:ring-gray-600 dark:bg-red-500 dark:text-white dark:hover:bg-red-600 mb-2">
+                                                            Eliminar
+                                                      </button>
+                                                </div>
+                                          </div>
+                                    </div>
+                              </ng-container>
+
+                              <div *ngIf="empleadoCredencial.length < 2" class="flex justify-center">
+                                    <div class="flex gap-6 mx-auto justify-center my-4 mx-4 my-2 md:my-4">
+                                          <button type="button" (click)="agregarCredencial()"
+                                                class="bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline h-10 text-center">
+                                                CREAR CREDENCIAL
+                                          </button>
+                                    </div>
+                              </div>
+                        </div>
                   </div>
             </div>
       </div>

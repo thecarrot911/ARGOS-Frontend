@@ -18,10 +18,6 @@ export class UpdateCredencialComponent implements OnInit {
 
   @Output() recargaCredencial = new EventEmitter()
 
-  // Variable boleanas de Credencial
-  public boolFormRenovar: boolean = true;
-
-
   public credencial: Credencial = {
     fecha_emision: '',
     fecha_vencimiento: '',
@@ -47,10 +43,6 @@ export class UpdateCredencialComponent implements OnInit {
     this.credencial.credencial_id = this.renovarCredencial.credencial_id
   }
 
-  editar(){
-    this.boolFormRenovar = !this.boolFormRenovar;
-  }
-
   renovar(): void {
     Swal.fire({
       title: '¿Estás seguro?',
@@ -64,10 +56,6 @@ export class UpdateCredencialComponent implements OnInit {
       if(result.isConfirmed){
         this.empleadoService.RenovarCredencial(this.credencial).subscribe(
           response =>{
-            this.empleadoService.modalUpdateCredencialVisible = !this.empleadoService.modalUpdateCredencialVisible
-            this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
-            this.recargaCredencial.emit();
-            this.empleadoService.ejecutarFuncion();
             if (response.error) {
               Swal.fire({
                 icon: 'error',
@@ -82,6 +70,11 @@ export class UpdateCredencialComponent implements OnInit {
                 timer: 1500
               })
             }
+            this.recargaCredencial.emit();
+            this.empleadoService.ejecutarFuncion();
+            this.empleadoService.modalUpdateCredencialVisible = !this.empleadoService.modalUpdateCredencialVisible
+            this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
+
           },error=>{
             Swal.fire({
               icon: 'error',

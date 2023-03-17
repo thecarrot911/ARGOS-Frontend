@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AllempleadosService } from '../services/allempleados.service';
-import { response } from 'express';
 
 @Component({
   selector: 'app-top-bar',

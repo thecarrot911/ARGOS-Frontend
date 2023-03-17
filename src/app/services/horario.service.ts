@@ -2,9 +2,10 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; /* a */
 import { HttpParams } from '@angular/common/http';
 import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
-import { PlanificacionData, Tiempo } from '../tiempo';
+import { GenerarPlanificacion } from '../generarPlanificacion';
 import { AddActualizacion } from '../Addactualizacion';
 import { Calendario, Actualizacion, Planificacion, Data } from '../calendario';
+import { EmpleadoData } from '../empleados';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class HorarioService {
     return this.http.get<Calendario>(this.urlUltimaPlanificacion)
   }
 
-  generarHorario(tiempo: Tiempo): Observable<PlanificacionData> {
-    return this.http.post<PlanificacionData>(this.dataUrl, tiempo);
+  generarHorario(tiempo: GenerarPlanificacion): Observable<any> {
+    return this.http.post<any>(this.dataUrl, tiempo);
   }
 
   guardarActualizacion(actualizacion: AddActualizacion): Observable<AddActualizacion> {
@@ -49,5 +50,4 @@ export class HorarioService {
   deletePlanificacionId(planificacion: Data): Observable<Data> {
     return this.http.delete<Data>(this.url_deletePlanificacionById + planificacion.planificacion_id, this.httpOptions)
   }
-
 }

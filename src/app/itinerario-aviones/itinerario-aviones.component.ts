@@ -1,33 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Calendario } from '../calendario';
-import { PlanificacionData } from '../tiempo';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AllempleadosService } from '../services/allempleados.service'
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-
-export interface Tiempo {
-  anio: string;
-  mes: string;
-  empleados: Empleado[];
-  itinerario: Turno_Choque[];
-}
-
-interface Empleado {
-  nombre: string;
-}
-
-interface Turno_Choque{
-  dia: string;
-  turno: string;
-  aviones: string;
-  id: number;
-}
+import { Empleado } from '../empleados';
+import { GenerarPlanificacion, Turno_Choque } from '../generarPlanificacion';
 
 @Component({
   selector: 'app-itinerario-aviones',
@@ -40,16 +18,10 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   nuevoItinerario: string = '';
 
-  tiempo: Tiempo = {
+  planificacion: GenerarPlanificacion = {
     anio: '',
     mes: '',
-    empleados: [
-      { nombre: 'A. MONTANER' },
-      { nombre: 'C. VEIRA' },
-      { nombre: 'D. TRONCOSO' },
-      { nombre: 'R. ZAVALA' },
-      { nombre: 'R. ZUÑIGA' }
-    ],
+    empleados: [],
     itinerario: [
       { dia: '', turno: '', aviones: '', id: 1}
     ]
@@ -57,15 +29,43 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   nuevoChoque: string = '';
   public loading = document.getElementById('loading');
+
+  public listaEmpleados: Empleado[];
+  public empleadoSeleccionado: Empleado[] = [];
+  public empleadosPlanificacion: Empleado[] = [];
+  public ngEmpleado: string;
+
   constructor(
     private horarioService: HorarioService,
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private formsModule: FormsModule,
-    private activatedRoute: ActivatedRoute,
     private router: Router,
+    private empleadoService: AllempleadosService,
+    
   ) {
    }
+
+  ngOnInit() {
+    this.empleadoService.MostrarEmpleados().subscribe(
+      response => {
+        this.listaEmpleados = response.data
+      }, error =>{
+        console.error(error)
+      }
+    )
+  }
+
+  AgregarEmpleado() {
+    const empleado = this.listaEmpleados.find((e) => e.rut === this.ngEmpleado);
+    this.empleadoSeleccionado.push(empleado);
+    this.planificacion.empleados.push(empleado);
+    this.listaEmpleados = this.listaEmpleados.filter(empleado => empleado.rut != this.ngEmpleado);
+  }
+
+  EliminarEmpleado(empleado: Empleado){
+    this.listaEmpleados.push(empleado);
+    this.empleadoSeleccionado = this.empleadoSeleccionado.filter(emp => emp.rut != empleado.rut);
+    this.planificacion.empleados.filter(emp => emp.rut != empleado.rut);
+  }
+
 
   itinerarioForm= new FormGroup({
     anio: new FormControl('',[Validators.required, this.noPermitirEspacios]),
@@ -100,11 +100,6 @@ export class ItinerarioAvionesComponent implements OnInit {
     return null;
   }
 
-  ngOnInit() {
-  }
-
-
-
   esperandoJSON(){
     this.loading = document.getElementById('loading');
     if(this.loading != null){
@@ -114,25 +109,13 @@ export class ItinerarioAvionesComponent implements OnInit {
 
   enviarDatosJSON(){
     this.esperandoJSON();
-    this.horarioService.generarHorario(this.tiempo)
+    this.horarioService.generarHorario(this.planificacion)
     .subscribe(
       response => {
-        if(response.error){
-          this.loading.classList.add('hidden')
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: response.msg
-          })
-        }
-        else{
-          console.log('no hay error')
-          this.router.navigate(['/schedule'])
-        }
-
+        console.log(response)
       },
       error => {
-        console.log(error)
+        console.error(error)
       }
     )
   }
@@ -141,19 +124,19 @@ export class ItinerarioAvionesComponent implements OnInit {
     
     const newChoque: Turno_Choque = {
 
-      dia: this.tiempo.itinerario[0].dia,
-      aviones: this.tiempo.itinerario[0].aviones,
-      turno: this.tiempo.itinerario[0].turno,
-      id: this.tiempo.itinerario.length + 1
+      dia: this.planificacion.itinerario[0].dia,
+      aviones: this.planificacion.itinerario[0].aviones,
+      turno: this.planificacion.itinerario[0].turno,
+      id: this.planificacion.itinerario.length + 1
     }
 
-    if(this.tiempo.itinerario[0].dia != '' && this.tiempo.itinerario[0].dia != null && this.tiempo.itinerario[0].aviones != '' && this.tiempo.itinerario[0].aviones != null && this.tiempo.itinerario[0].turno != ''){
+    if(this.planificacion.itinerario[0].dia != '' && this.planificacion.itinerario[0].dia != null && this.planificacion.itinerario[0].aviones != '' && this.planificacion.itinerario[0].aviones != null && this.planificacion.itinerario[0].turno != ''){
     
-      this.tiempo.itinerario.push({ ...newChoque});
+      this.planificacion.itinerario.push({ ...newChoque});
       console.log(newChoque)
-      this.tiempo.itinerario[0].dia = '';
-      this.tiempo.itinerario[0].aviones = '';
-      this.tiempo.itinerario[0].turno = '';
+      this.planificacion.itinerario[0].dia = '';
+      this.planificacion.itinerario[0].aviones = '';
+      this.planificacion.itinerario[0].turno = '';
 
     const Toast = Swal.mixin({
       toast: true,
@@ -182,7 +165,7 @@ export class ItinerarioAvionesComponent implements OnInit {
   }
 
   eliminarItinerario(index: number ){
-    this.tiempo.itinerario.splice(index, 1);
+    this.planificacion.itinerario.splice(index, 1);
     this.router.navigate(['/itinerario-aviones'])
   }
 

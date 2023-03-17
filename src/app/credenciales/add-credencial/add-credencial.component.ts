@@ -12,7 +12,7 @@ export class AddCredencialComponent implements OnInit {
 
   constructor(
     public empleadoService: AllempleadosService
-  )
+    )
   {}
 
   // Variables recibidas por el componente [all-empleados]
@@ -40,9 +40,6 @@ export class AddCredencialComponent implements OnInit {
     this.credencial.numero = Number(this.numero);
     this.empleadoService.RegistrarCredencial(this.credencial).subscribe(
       response=>{
-        this.empleadoService.modalAddCredencialVisible = !this.empleadoService.modalAddCredencialVisible;
-        this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
-        this.recargaPagina.emit();
         if(response.error){
           Swal.fire({
             icon: 'error',
@@ -57,6 +54,10 @@ export class AddCredencialComponent implements OnInit {
             timer: 1500
           })
         }
+        this.empleadoService.modalAddCredencialVisible = !this.empleadoService.modalAddCredencialVisible;
+        this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
+        this.recargaPagina.emit();
+
       },error =>{
         Swal.fire({
           icon: 'error',

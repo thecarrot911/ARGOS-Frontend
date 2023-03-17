@@ -1,13 +1,13 @@
 <div data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 flex items-center justify-center w-full h-full">
-    <div class="relative w-full h-full max-w-2xl md:h-auto mx-auto">
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                <h3 class="mx-auto text-xl font-semibold text-gray-900 dark:text-white">
+    <div class="relative w-full h-full max-w-lg  md:h-auto mx-auto">
+        <div class="relative bg-white rounded-lg shadow dark:bg-white-700">
+            <div class="flex items-start justify-between p-4 rounded-t dark:border-gray-600">
+                <h3 class="mx-auto text-xl font-semibold text-gray-900 bg-white">
                     REGISTRAR EMPLEADO
                 </h3>
                 <button type="button" (click)="cerrar()"
-                    class="top-0 right-0 px-2 absolute text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    class="top-0 right-0 px-2  rounded-tr rounded-tr-lg absolute text-white bg-red-500 text-sm p-1.5 ml-auto inline-flex items-center hover:bg-red-600 hover:text-white "
                     data-modal-hide="modal_credencial">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -17,60 +17,61 @@
                 </button>
             </div>
 
-            <form (ngSubmit)="registrarEmpleado()">
+            <form (ngSubmit)="registrarEmpleado()" >
                 <div class="antialiased text-gray-900 px-8 ">
-                    <div class="max-w-wl mx-auto pb-8 md:max-w-5xl borde">
-                        <p class="mt-4 text-lg text-gray-300">Por favor, ingrese los datos solicitados:</p>
+                    <div class="max-w-wl mx-auto pb-4 md:max-w-5xl borde">
+                        <p class="text-lg text-gray-700">Por favor, ingrese los datos solicitados:</p>
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
                                 <div class="relative z-0 w-full group">
-                                    <input type="text" name="nombre_paterno" [(ngModel)]="empleado.nombre_paterno"
-                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    <input type="text" name="nombre_paterno" [(ngModel)]="empleado.nombre_paterno" autocomplete="off"
+                                        class="block py-2.5 px-0 w-full text-sm text-black-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                         placeholder=" " required />
                                     <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                         Nombre paterno</label>
                                 </div>
                                 <div class="relative z-0 w-full group">
-                                    <input type="text" name="nombre_materno" [(ngModel)]="empleado.nombre_materno"
-                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    <input type="text" name="nombre_materno" [(ngModel)]="empleado.nombre_materno" autocomplete="off"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                         placeholder=" " required />
                                     <label class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                         Nombre materno</label>
                                 </div>
                                 <div class="relative z-0 w-full group">
-                                    <input type="text" name="apellido_paterno" [(ngModel)]="empleado.apellido_paterno"
-                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    <input type="text" name="apellido_paterno" [(ngModel)]="empleado.apellido_paterno" autocomplete="off"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                         placeholder=" " required />
                                     <label
                                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                         Apellido paterno</label>
                                 </div>
                                 <div class="relative z-0 w-full group">
-                                    <input type="text" name="apellido_materno" [(ngModel)]="empleado.apellido_materno"
-                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    <input type="text" name="apellido_materno" [(ngModel)]="empleado.apellido_materno" autocomplete="off"
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                         placeholder=" " required />
                                     <label
                                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                         Apellido materno</label>
                                 </div>
                                 <div class="relative z-0 w-full group">
-                                    <input type="text" name="rut" [(ngModel)]="empleado.rut" (input)="formatoRut()" (blur)="formatoRut()"
-                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                    <input type="text" name="rut" [(ngModel)]="empleado.rut" (input)="formatoRut()" autocomplete="off" 
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-400 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                                         placeholder=" " required />
                                     <div *ngIf="!boolInputRut" class="error">El RUT no es válido</div>
                                     <label
                                         class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                         RUT (Ejemplo: 12.345.678 - 9)</label>
                                 </div>
-
-                                <div class="flex gap-6 mx-auto">
-                                    <button type="submit"
-                                        class="bg-indigo-500 hover:bg-indigo-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                        Registrar
-                                    </button>
-                                    <button data-modal-hide="staticModal" type="button" (click)="cerrar()"
-                                        class="focus:outline-none ml-3 bg-white-500 transition duration-150 text-indigo-500 ease-in-out hover:border-gray-400 hover:bg-white-300 border rounded px-8 py-2 text-sm">
-                                        Cancelar
-                                    </button>
+                                <div class="flex justify-center">
+                                    <div class="flex gap-6 mx-auto w-full">
+                                        <button type="submit"
+                                            class="bg-slate-700 hover:bg-slate-800 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full h-10">
+                                            Registrar
+                                        </button>
+                                        <button data-modal-hide="staticModal" type="button" (click)="cerrar()"
+                                            class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full h-10">
+                                            Cancelar
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

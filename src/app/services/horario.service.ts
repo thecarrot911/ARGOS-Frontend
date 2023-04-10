@@ -6,14 +6,15 @@ import { GenerarPlanificacion } from '../generarPlanificacion';
 import { AddActualizacion } from '../Addactualizacion';
 import { Calendario, Actualizacion, Planificacion, Data } from '../calendario';
 import { EmpleadoData } from '../empleados';
+import { UltimaPlanificacion } from '../UltimaPlanificacion';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HorarioService {
 
-  dataUrl = 'http://localhost:10975/app/planificacion/generar_planificacion';
-  urlUltimaPlanificacion = 'http://localhost:10975/app/planificacion/mostrar_ultima';
+  dataUrl = 'http://localhost:10975/app/planificacion/generar';
+  urlUltimaPlanificacion = 'http://localhost:10975/app/planificacion';
   deleteActualizacionURL = 'http://localhost:10975/app/actualizacion/eliminar_actualizacion';
   updateActualizacionURL = 'http://localhost:10975/app/actualizacion/modificar_actualizacion';
   url_actualizacion = 'http://localhost:10975/app/actualizacion/crear_actualizacion';
@@ -26,8 +27,8 @@ export class HorarioService {
   constructor(
     private http: HttpClient) { }
 
-  getHorarios(): Observable<Calendario> {
-    return this.http.get<Calendario>(this.urlUltimaPlanificacion)
+  getHorarios(): Observable<UltimaPlanificacion> {
+    return this.http.get<UltimaPlanificacion>(this.urlUltimaPlanificacion)
   }
 
   generarHorario(tiempo: GenerarPlanificacion): Observable<any> {

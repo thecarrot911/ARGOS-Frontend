@@ -2,6 +2,8 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData, VencimientoCredencial } from '../empleados';
+import * as fileExtension from 'file-extension';
+
 
 @Injectable({
   providedIn: 'root'
@@ -48,14 +50,23 @@ export class AllempleadosService {
     return this.http.get<ListaEmpleados>(this.urlEmpleados);
   }
   RegistrarEmpleados(empleado: Empleado): Observable<EmpleadoData> {
-    return this.http.post<EmpleadoData>(this.urlRegistrarEmpleado, empleado);
+    
+    const formData = new FormData();
+    formData.append('imagen', empleado.imagen, empleado.rut + '.' + fileExtension(empleado.imagen.name))
+    formData.append('nombre_paterno',empleado.nombre_paterno)
+    formData.append('nombre_materno', empleado.nombre_materno)
+    formData.append('apellido_paterno', empleado.apellido_paterno)
+    formData.append('apellido_materno', empleado.apellido_materno)
+    formData.append('rut', empleado.rut)
+    return this.http.post<EmpleadoData>(this.urlRegistrarEmpleado, formData);
   }
   ModificarEmpleado(empleado: Empleado): Observable<EmpleadoData>{
     let params = JSON.stringify(empleado);
     return this.http.put<EmpleadoData>(this.urlModificarEmpleado + '/' + empleado.rut, params, this.httpOptions);
   }
   EliminarEmpleado(empleado: Empleado): Observable<EmpleadoData> {
-    return this.http.delete<EmpleadoData>(this.urlEliminarEmpleado + '/' + empleado.rut, this.httpOptions);
+    let queryRut = new HttpParams().set('rut', empleado.rut)
+    return this.http.put<EmpleadoData>(this.urlEliminarEmpleado, empleado ,{params: queryRut});
   }
 
   // Credenciales 

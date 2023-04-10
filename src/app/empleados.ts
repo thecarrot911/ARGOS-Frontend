@@ -16,6 +16,7 @@ export interface Empleado {
     apellido_paterno: string,
     apellido_materno: string,
     rut: string,
+    imagen?: any,
     credencial?: Credencial[]
 }
 

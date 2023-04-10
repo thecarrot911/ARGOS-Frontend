@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AllempleadosService } from '../../services/allempleados.service';
 import { Credencial, Empleado } from '../../empleados';
 import Swal from 'sweetalert2';
-import { add, isAfter, isBefore, isWithinInterval } from 'date-fns';
 
 
 @Component({
@@ -43,8 +42,7 @@ export class AllEmpleadosComponent implements OnInit {
     this.empleadoService.MostrarEmpleados().subscribe(
       response => {
         this.listaEmpleados = response.data;
-        //this.empleadoService.ejecutarFuncion();
-
+        console.log(this.listaEmpleados)
       },
       error => {
         console.log(error);
@@ -61,7 +59,7 @@ export class AllEmpleadosComponent implements OnInit {
   borrarEmpleado(empleado: Empleado): void {
     Swal.fire({
       title: '¿Estás seguro?',
-      text: "Estas eliminando a "+empleado.nombre_materno+" "+empleado.apellido_paterno+" del sistema",
+      text: "Estas eliminando a "+empleado.nombre_paterno+" "+empleado.apellido_paterno+" del sistema",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -86,6 +84,7 @@ export class AllEmpleadosComponent implements OnInit {
       }
     })
   }
+  
   // Modal para registrar empleado
   mostrarRegistroEmpleado(): void{
     this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible

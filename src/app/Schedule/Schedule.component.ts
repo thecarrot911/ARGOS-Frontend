@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { UltimaPlanificacion } from '../UltimaPlanificacion';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -55,6 +56,7 @@ export class ScheduleComponent implements OnInit {
   
   today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
 
+  public planificacion: UltimaPlanificacion;
 
   constructor(
     private horarioService: HorarioService,
@@ -73,13 +75,14 @@ export class ScheduleComponent implements OnInit {
     this.horarioService.getHorarios()
       .subscribe(
         response => {
-          this.horarios = response;
-          this.horariosData = this.horarios.data
-          this.horariosPlanificacion = this.horariosData.planificacion;
-          this.horariosActualizacion = this.horariosData.actualizacion;
+          console.log(response)
+          this.planificacion = response;
+          //this.horariosData = this.horarios.data
+          //this.horariosPlanificacion = this.horariosData.planificacion;
+          //this.horariosActualizacion = this.horariosData.actualizacion;
 
-          this.global = this.horarios;
-          this.planificacion_id = this.horarios.data.planificacion_id;     
+          //this.global = this.horarios;
+          //this.planificacion_id = this.horarios.data.planificacion_id;     
         },
         error => {
           console.log(error)

@@ -93,7 +93,7 @@ export class AgregarActualizacionComponent implements OnInit {
     this.horarioService.getHorarios()
       .subscribe(
         response => {
-          this.horarios = response;
+          //this.horarios = response;
           this.horariosData = this.horarios.data
           this.horariosPlanificacion = this.horariosData.planificacion;
           this.horariosActualizacion = this.horariosData.actualizacion;

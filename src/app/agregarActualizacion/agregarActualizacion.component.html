@@ -1,4 +1,29 @@
-<form #actualizacionForm="ngForm" (ngSubmit)="enviarActualizacion()">
+<div data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+    class="fixed top-0 left-0 flex items-center justify-center w-full h-full">
+    <div class="relative w-full h-full max-w-lg  md:h-auto mx-auto">
+        <div class="relative bg-white rounded-lg shadow dark:bg-white-700">
+            <div class="flex items-start justify-between rounded-t dark:border-gray-600 pt-4 pb-0 px-4">
+                <h3 class="mx-auto text-xl font-semibold text-gray-900 bg-white">
+                    CREDENCIALES
+                </h3>
+                <button type="button" (click)="Cerrar()"
+                    class="top-0 right-0 px-2  rounded-tr rounded-tr-lg absolute text-white bg-red-500 text-sm p-1.5 ml-auto inline-flex items-center hover:bg-red-600 hover:text-white "
+                    data-modal-hide="modal_credencial">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--<form #actualizacionForm="ngForm" (ngSubmit)="enviarActualizacion()">
   <div class="antialised text-gray-900 px-6">
     <div class="max-w-wl mx-auto py-12 md:max-w-2xl">
       <h2 class="text-2xl font-sans">{{titulo_pagina}}</h2>
@@ -59,6 +84,4 @@
     </div>
   </div>
 </form>
-
-<!-- <span> Tiempo </span>
-<pre>{{actualizacion | json }}</pre> -->
+-->

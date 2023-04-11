@@ -24,6 +24,9 @@ export class HorarioService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  // Modal de AgregarActualización
+  modalAddActualizacion: boolean = false;
+
   constructor(
     private http: HttpClient) { }
 

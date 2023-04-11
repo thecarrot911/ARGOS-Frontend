@@ -19,11 +19,11 @@ export class ItinerarioAvionesComponent implements OnInit {
   nuevoItinerario: string = '';
 
   planificacion: GenerarPlanificacion = {
-    anio: '',
-    mes: '',
+    anio: null,
+    mes: null,
     empleados: [],
     itinerario: [
-      { dia: '', turno: '', aviones: '', id: 1}
+      { dia: null, turno: null, aviones: null, id: 1}
     ]
   }
 
@@ -113,6 +113,7 @@ export class ItinerarioAvionesComponent implements OnInit {
     .subscribe(
       response => {
         console.log(response)
+        this.router.navigate(['schedule'])
       },
       error => {
         console.error(error)
@@ -130,13 +131,13 @@ export class ItinerarioAvionesComponent implements OnInit {
       id: this.planificacion.itinerario.length + 1
     }
 
-    if(this.planificacion.itinerario[0].dia != '' && this.planificacion.itinerario[0].dia != null && this.planificacion.itinerario[0].aviones != '' && this.planificacion.itinerario[0].aviones != null && this.planificacion.itinerario[0].turno != ''){
+    if(this.planificacion.itinerario[0].dia != null && this.planificacion.itinerario[0].dia != null && this.planificacion.itinerario[0].aviones != null && this.planificacion.itinerario[0].aviones != null && this.planificacion.itinerario[0].turno != null){
     
       this.planificacion.itinerario.push({ ...newChoque});
       console.log(newChoque)
-      this.planificacion.itinerario[0].dia = '';
-      this.planificacion.itinerario[0].aviones = '';
-      this.planificacion.itinerario[0].turno = '';
+      this.planificacion.itinerario[0].dia = null;
+      this.planificacion.itinerario[0].aviones = null;
+      this.planificacion.itinerario[0].turno = null;
 
     const Toast = Swal.mixin({
       toast: true,

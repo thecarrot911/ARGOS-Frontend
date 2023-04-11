@@ -1,64 +1,64 @@
 <div
   class="my-6 lg:my-4 container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300 p-8">
-  <div>
-    <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario empleados</h4>
-    <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
-      <li class="flex items-center mr-4">
-        <div class="mr-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paperclip" width="16" height="16"
-            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
-          </svg>
-        </div>
-        <span class="hover:text-blue-600 text-bold">Planificación de {{horariosData?.mes}} del
-          {{horariosData?.anio}}</span>
-      </li>
-      <li class="flex items-center mr-4 mt-4 md:mt-0">
-        <div class="mr-1">
-          <svg class="icon icon-tabler icon-tabler-trending-up" width="16" height="16" fill="none" viewBox="0 0 24 24"
-            strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-            <path strokeLinecap="round" strokeLinejoin="round"
-              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-          </svg>
+    <div>
+        <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Horario empleados</h4>
+        <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
+        <li class="flex items-center mr-4">
+            <div class="mr-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-paperclip" width="16" height="16"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
+            </svg>
+            </div>
+            <span class="hover:text-blue-600 text-bold">Planificación de {{planificacion.data.mes}} del
+            {{planificacion.data.anio}}</span>
+        </li>
+        <li class="flex items-center mr-4 mt-4 md:mt-0">
+            <div class="mr-1">
+            <svg class="icon icon-tabler icon-tabler-trending-up" width="16" height="16" fill="none" viewBox="0 0 24 24"
+                strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round"
+                d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>
 
-        </div>
-        <span class="hover:text-black text-bold">ARIACA</span>
-      </li>
-      <li class="flex items-center mt-4 md:mt-0">
-        <div class="mr-1">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure" width="16"
-            height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
-            stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3 -6h3l2 2h3l-2 -7h3z" transform="rotate(-15 12 12) translate(0 -1)" />
-            <line x1="3" y1="21" x2="21" y2="21" />
-          </svg>
-        </div>
-        <span class="hover:text-black text-bold">Hoy día es: {{today_is_chile}}</span>
-      </li>
-    </ul>
-  </div>
-  <div class="mt-6 md:mt-0">
-    <app-pdf-calendario></app-pdf-calendario>
-    <button
-      class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50"
-      [routerLink]="['/agregaractualizacion', planificacion_id]">Agregar Actualización
-    </button>
-    <button
-      class="m-3 transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-2 py-2 text-sm shadow-lg shadow-cyan-500/50"
-      (click)="deleteScheduleById(horariosData)">
-      <img class="text-white" src="assets/images/icons8-remove-50.png" alt="Logo Argos" width="20" height="20">
-    </button>
-  </div>
+            </div>
+            <span class="hover:text-black text-bold">ARIACA</span>
+        </li>
+        <li class="flex items-center mt-4 md:mt-0">
+            <div class="mr-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure" width="16"
+                height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3 -6h3l2 2h3l-2 -7h3z" transform="rotate(-15 12 12) translate(0 -1)" />
+                <line x1="3" y1="21" x2="21" y2="21" />
+            </svg>
+            </div>
+            <span class="hover:text-black text-bold">Hoy día es: {{today_is_chile}}</span>
+        </li>
+        </ul>
+    </div>
+    <div class="mt-6 md:mt-0">
+        <app-pdf-calendario></app-pdf-calendario>
+        <button (click)="MostrarModalActualizacion()"
+            class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 
+                    rounded text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">Agregar Actualización
+        </button>
+        <button
+            class="m-3 transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded text-white px-2 py-2 text-sm shadow-lg shadow-cyan-500/50"
+            (click)="deleteScheduleById(horariosData)">
+            <img class="text-white" src="assets/images/icons8-remove-50.png" alt="Logo Argos" width="20" height="20">
+        </button>
+    </div>
 </div>
 
 <div class="container mx-auto px-10">
   <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
     <div class="w-full lg:w-5/6 h-screen">
       <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
-        <ng-container *ngFor="let horario of horariosPlanificacion | paginate:{
+        <ng-container *ngFor="let dia of planificacion.data.planificacion | paginate:{
               id: 'first',
               itemsPerPage: tableSizeCalendario,
               currentPage: paginationCalendario,
@@ -67,7 +67,7 @@
           ">
             <div class="m-3 place-content-center relative flex">
 
-              <ng-container *ngIf="horario.comodin != 'Libre'">
+              <!--<ng-container *ngIf="horario.comodin != 'Libre'">
                 <div class="flex justify-between">
                   <button (click)="alertaComodin(horario.comodin)">
                     <span class="flex absolute h-7 w-7 top-0 right-0 -mt-1 -mr-1">
@@ -78,14 +78,14 @@
                     </span>
                   </button>
                 </div>
-              </ng-container>
+              </ng-container>-->
 
 
               <div class="flex justify-between">
                 <div class="flex flex-col gap-1">
-                  <div>{{horario.dia_semana}} {{horario.numero_dia}}</div>
+                  <div>{{dia.dia_semana}} {{dia.dia_numero}}</div>
                   <div class="flex justify-center">
-                    <div *ngIf="horario.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
+                    <!--<div *ngIf="horario.itinerario[0] != array_vacio[0]" class="inline-block place-item-center">
                       <div class="flex justify-end gap-1">
                         <ng-container *ngFor="let itinerario of horario.itinerario">
                           <button (click)="alertaItinerario(itinerario)">
@@ -106,16 +106,16 @@
                           </button>
                         </ng-container>
                       </div>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>
             </div>
 
-            <ng-container *ngFor="let empleado of horario.empleados">
+            <ng-container *ngFor="let empleado of dia.empleados">
               <div class="flex justify-between m-2 text-xs ">
-                <div class="">{{empleado.nombre}} </div>
-                <div class="">{{empleado.turno}}</div>
+                <div>{{empleado.nombre}} {{empleado.apellido}} {{empleado.rut}}</div>
+                <div>turno: {{empleado.turno}}</div>
               </div>
             </ng-container>
           </div>
@@ -123,7 +123,7 @@
         </ng-container>
       </div>
       <div class="mx-auto m-4">
-        <pagination-controls id="first" previousLabel="Prev" nextLabel="Next"
+        <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente"
           (pageChange)="paginationCalendario = $event">
         </pagination-controls>
       </div>
@@ -166,6 +166,14 @@
   </div>
 </div>
 
+<ng-container *ngIf="horarioService.modalAddActualizacion">
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-70" (click)="horarioService.modalAddActualizacion=!horarioService.modalAddActualizacion"></div>
+</ng-container> 
 
-<!-- <span> horario </span>
-<pre>{{ horarios | json}}</pre> -->
+<!-- ModalAddActualizacion -->
+<ng-container *ngIf="horarioService.modalAddActualizacion">
+    <app-agregarActualizacion
+    
+    >
+    </app-agregarActualizacion>
+</ng-container>

@@ -26,8 +26,8 @@ export class PdfCalendarioComponent implements OnInit {
       .subscribe(
         response => {
           //this.horarios = response;
-          this.global = this.horarios
-          this.planificacion_id = this.horarios.data.planificacion_id
+          //this.global = this.horarios
+          //this.planificacion_id = this.horarios.data.planificacion_id
           console.log(this.horarios)
         },
         error => {

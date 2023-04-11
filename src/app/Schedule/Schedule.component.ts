@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
-import { FormBuilder } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { Calendario, Actualizacion, Itinerario, Planificacion, Data } from '../calendario';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -14,87 +12,83 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
 @Component({
-  selector: 'app-Schedule',
-  templateUrl: './Schedule.component.html',
-  styleUrls: ['./Schedule.component.css']
+    selector: 'app-Schedule',
+    templateUrl: './Schedule.component.html',
+    styleUrls: ['./Schedule.component.css']
 })
 export class ScheduleComponent implements OnInit {
-  dropdownPopoverShow = false;
+    dropdownPopoverShow = false;
 
-  actualizaciones: Calendario[] = [];
+    actualizaciones: Calendario[] = [];
 
-  public planificacion_id!: number;
-  public array_vacio: Array<Itinerario> = [];
-  pruebas: any;
+    public planificacion_id!: number;
+    public array_vacio: Array<Itinerario> = [];
+    pruebas: any;
 
-  horarios: Calendario;
-  horariosData: Data;
-  horariosPlanificacion: Planificacion[] = [];
-  horariosActualizacion: Actualizacion[] = [];
-
-
-  public prueba1: number;
-
-  tiempos: any[] = [];
-  public generador: any; /* ONSUBMIT */
-  public global: any;
-
-  page: number = 1;
-  pageCalendario: number = 1;
-  paginationCalendario = 1;
-  paginationActualizaciones = 1;
-  count: number = 0;
-  countCalendario: number = 0;
-  tableSize: number = 4;
-  tableSizeCalendario: number = 7;
-  tableSizes: any = [5, 10, 15, 20]
-  tableSizesCalendario: any = [5, 10, 15, 20]
-
-  CurrentDate = new Date();
-  latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
-  today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y');
-  
-  today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
-
-  public planificacion: UltimaPlanificacion;
-
-  constructor(
-    private horarioService: HorarioService,
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private datePipe: DatePipe,
-    private router: Router
-  ) {
-  }
-
-  ngOnInit(): void {
-    this.cargarData();
-  }
-
-  cargarData(): void {
-    this.horarioService.getHorarios()
-      .subscribe(
-        response => {
-          console.log(response)
-          this.planificacion = response;
-          //this.horariosData = this.horarios.data
-          //this.horariosPlanificacion = this.horariosData.planificacion;
-          //this.horariosActualizacion = this.horariosData.actualizacion;
-
-          //this.global = this.horarios;
-          //this.planificacion_id = this.horarios.data.planificacion_id;     
-        },
-        error => {
-          console.log(error)
-        }
-      )
-  }
+    horarios: Calendario;
+    horariosData: Data;
+    horariosPlanificacion: Planificacion[] = [];
+    horariosActualizacion: Actualizacion[] = [];
 
 
-  onPagination(event: any) {
-    this.page = event;
-    this.cargarData();
-  }
+    public prueba1: number;
+
+    tiempos: any[] = [];
+    public generador: any; /* ONSUBMIT */
+    public global: any;
+
+    page: number = 1;
+    pageCalendario: number = 1;
+    paginationCalendario = 1;
+    paginationActualizaciones = 1;
+    count: number = 0;
+    countCalendario: number = 0;
+    tableSize: number = 4;
+    tableSizeCalendario: number = 7;
+    tableSizes: any = [5, 10, 15, 20]
+    tableSizesCalendario: any = [5, 10, 15, 20]
+
+    CurrentDate = new Date();
+    latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
+    today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y');
+
+    today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
+
+    public planificacion: UltimaPlanificacion;
+
+    constructor(
+        public horarioService: HorarioService,
+        private datePipe: DatePipe,
+        private router: Router
+    ) {
+    }
+
+    ngOnInit(): void {
+        this.cargarData();
+    }
+
+    cargarData(): void {
+        this.horarioService.getHorarios()
+        .subscribe(
+            response => {
+            console.log(response)
+            this.planificacion = response;
+            this.router.navigate(['/schedule'])
+            },
+            error => {
+            console.log(error)
+            }
+        )
+    }
+
+    MostrarModalActualizacion():void{
+        this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
+    }
+
+    onPagination(event: any) {
+        this.page = event;
+        this.cargarData();
+    }
 
   onPaginationCalendario(event: any) {
     this.pageCalendario = event;
@@ -123,7 +117,7 @@ export class ScheduleComponent implements OnInit {
         });
   }
 
-  deleteScheduleById(planificacion: Data): void{ 
+  deleteScheduleById(planificacion: Data): void{
     this.horarioService.deletePlanificacionId(planificacion)
     .subscribe(response => {
       this.ngOnInit();

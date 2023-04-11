@@ -1,10 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Empleado } from '../../empleados';
-import { Router} from '@angular/router';
 import { AllempleadosService } from 'src/app/services/allempleados.service';
 import Swal from 'sweetalert2';
 import { validateRUT, getCheckDigit } from 'validar-rut'
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -20,11 +19,12 @@ export class RegistrarEmpleadoComponent implements OnInit {
     nombre_materno: '',
     apellido_paterno: '',
     apellido_materno: '',
-    rut: ''
+    rut: '',
+    imagen: null
   };
 
-  public boolInputRut: boolean = true;
-
+  public boolInputRut: boolean = false;
+  public imageURL: File = undefined;
     
   formEmpleado: FormGroup;
 
@@ -48,18 +48,21 @@ export class RegistrarEmpleadoComponent implements OnInit {
       rut = rut.replace(/[^0-9kK]/g, '');
 
       // Agregar puntos y guión de acuerdo al formato de RUT en Chile
-      rut = rut.replace(/^(\d{1,2})(\d{3})(\d{3})([0-9kK]{1})$/, '$1.$2.$3-$4');
+      rut = rut.replace(/^(\d{1,2})(\d{3})(\d{3})([k|\d]{1})$/, '$1.$2.$3-$4');
+
 
       // Actualizar el valor del campo de entrada en la propiedad empleado.rut
-
-      this.boolInputRut = validateRUT(rut);
+      this.boolInputRut = !validateRUT(rut)
+      console.log(validateRUT(rut))
+      console.log(getCheckDigit(rut))
       this.empleado.rut = rut;
     }
+  };
+
+
+  onFileSelected(event: any){
+    this.empleado.imagen = event.target.files[0];
   }
-
-
-
-  
 
   registrarEmpleado() {
     this.empleadoService.RegistrarEmpleados(this.empleado).subscribe(
@@ -84,6 +87,11 @@ export class RegistrarEmpleadoComponent implements OnInit {
       },
       error => {
         console.error(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Ha ocurrido un error',
+          text: error.error.msg
+        })
       }
     )
   }

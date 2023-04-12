@@ -29,27 +29,25 @@
                                 <span class="text-gray-700">Tipo de permiso</span>
                                     <select required
                                         class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
-                                        id="permiso" name="tipo_permiso" #tipo_permiso="ngModel" [(ngModel)]="2">
-                                        <option value="Permiso">Permiso</option>
-                                        <option value="Cambio de Turno">Cambio de Turno</option>
-                                        <option value="Comodín">Comodín</option>
-                                        <option value="Urgencia">Urgencia</option>
-                                        <option value="Otro">Otro</option>
+                                        name="tipo_permiso">
+                                        <ng-container *ngFor="let tipo of ArrayTipo">
+                                            <option value="{{tipo.id}}">{{tipo.nombre}}</option>
+                                        </ng-container>
                                     </select>
                                 </label>
             
                                 <label class="block">
                                     <span class="text-gray-700">Empleado solicitante</span>
                                     <select required
-                                    class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
-                                    name="empleado" #empleado="ngModel" [(ngModel)]="asd">
+                                        class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
+                                        name="empleado">
 
-                                        <ng-container *ngFor="let empleado of ArrayEmpleados;">
+                                        <ng-container *ngFor="let empleado of ArrayEmpleados">
                                             <option value="{{empleado.rut}}">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
                                         </ng-container>
 
                                     </select>
-                                    <span class="text-rose-500" *ngIf="empleado.invalid && empleado.touched">Este campo es requerido.</span>
+                                    <!--<span class="text-rose-500" *ngIf="empleado.invalid && empleado.touched">Este campo es requerido.</span>-->
                                 </label>
             
             

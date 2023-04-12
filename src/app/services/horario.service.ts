@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'; /* a */
 import { HttpParams } from '@angular/common/http';
 import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
 import { GenerarPlanificacion } from '../generarPlanificacion';
-import { AddActualizacion } from '../Addactualizacion';
 import { Calendario, Actualizacion, Planificacion, Data } from '../calendario';
 import { EmpleadoData } from '../empleados';
 import { UltimaPlanificacion } from '../UltimaPlanificacion';
@@ -36,10 +35,6 @@ export class HorarioService {
 
   generarHorario(tiempo: GenerarPlanificacion): Observable<any> {
     return this.http.post<any>(this.dataUrl, tiempo);
-  }
-
-  guardarActualizacion(actualizacion: AddActualizacion): Observable<AddActualizacion> {
-    return this.http.post<AddActualizacion>(this.url_actualizacion, actualizacion)
   }
 
   deleteActualizacionId(actualizacion: Actualizacion): Observable<Actualizacion> {

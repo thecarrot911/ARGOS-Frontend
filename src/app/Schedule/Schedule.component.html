@@ -173,7 +173,6 @@
 <!-- ModalAddActualizacion -->
 <ng-container *ngIf="horarioService.modalAddActualizacion">
     <app-agregarActualizacion
-    
-    >
+    [planificacion_id]="planificacion.data.id">
     </app-agregarActualizacion>
 </ng-container>

@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
-import { AgregarActualizacionComponent } from './agregarActualizacion/agregarActualizacion.component';
+import { AgregarActualizacionComponent } from './actualizacion/agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
 import { AllEmpleadosComponent } from './empleados/all-empleados/all-empleados.component';
 
@@ -21,8 +21,6 @@ import 'moment/locale/es';
 
 /* Providers */
 import { DatePipe } from '@angular/common';
-
-import { EditarActualizacionComponent } from './editarActualizacion/editarActualizacion.component';
 import { PdfCalendarioComponent } from './pdf-calendario/pdf-calendario.component';
 import { AllSchedulesComponent } from './allSchedules/allSchedules.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -42,7 +40,6 @@ import { UpdateEmpleadoComponent } from './empleados/update-empleado/update-empl
     FooterComponent,
     AgregarActualizacionComponent,
     ItinerarioAvionesComponent,
-    EditarActualizacionComponent,
     PdfCalendarioComponent,
     AllSchedulesComponent,
     AllEmpleadosComponent,
@@ -71,7 +68,6 @@ import { UpdateEmpleadoComponent } from './empleados/update-empleado/update-empl
       { path: 'schedule', component: ScheduleComponent },
       { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent },
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent },
-      { path: 'editaractualizacion/:actualizacion_id', component: EditarActualizacionComponent },
       { path: 'allschedules', component: AllSchedulesComponent },
       { path: 'allEmpleados', component: AllEmpleadosComponent },
       { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },

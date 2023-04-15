@@ -4,11 +4,12 @@ export interface UltimaPlanificacion {
       data: Planificacion,
 }
 
-interface Planificacion{
+export interface Planificacion{
       anio: number,
       mes: string,
       id: number,
-      planificacion: Dia[]
+      planificacion: Dia[],
+      mostrar?: Boolean
 }
 
 interface Dia{

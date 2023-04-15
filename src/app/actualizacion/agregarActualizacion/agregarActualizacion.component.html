@@ -4,7 +4,7 @@
         <div class="relative bg-white rounded-lg shadow dark:bg-white-700">
             <div class="flex items-start justify-between rounded-t dark:border-gray-600 pt-4 pb-0 px-4">
                 <h3 class="mx-auto text-xl font-semibold text-gray-900 bg-white">
-                    CREDENCIALES
+                    CREAR ACTUALIZACIÓN
                 </h3>
                 <button type="button" (click)="Cerrar()"
                     class="top-0 right-0 px-2  rounded-tr rounded-tr-lg absolute text-white bg-red-500 text-sm p-1.5 ml-auto inline-flex items-center hover:bg-red-600 hover:text-white "
@@ -16,57 +16,70 @@
                     </svg>
                 </button>
             </div>
-            <form #actualizacionForm="ngForm" (ngSubmit)="enviarActualizacion()">
+            <form #actualizacionForm="ngForm" (ngSubmit)="EnviarActualizacion()">
                 <div class="antialised text-gray-900 px-6">
-                    <div class="max-w-wl mx-auto py-12 md:max-w-2xl">
-                        <h2 class="text-2xl font-sans">Agregar actualización</h2>
-                        <p class="mt-2 text-lg text-gray-500">Ingrese los datos solicitados</p>
-                        <div class="mt-8 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
-                            <div class="grid grid-cols-1 gap-6">
-                
-                                
+                    <div class="max-w-wl mx-auto pb-4 md:max-w-5xl borde">
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
+                            <div class="grid grid-cols-1 gap-2">
+                        
                                 <label class="block">
-                                <span class="text-gray-700">Tipo de permiso</span>
+                                    <span class="text-gray-700">Empleado solicitante</span>
+                                    <select required
+                                        class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
+                                        name="empleado" [(ngModel)]="actualizacion.rut" (ngModelChange)="FiltrandoSelect()">
+                                        <ng-container *ngFor="let empleado of ArrayEmpleadoSolicitante">
+                                            <option value="{{empleado.rut}}">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
+                                        </ng-container>
+                                    </select>
+                                </label>
+
+                                <label class="block">
+                                    <span class="text-gray-700">Descripción del permiso</span>
+                                    <textarea required
+                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
+                                        rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel"
+                                        [(ngModel)]="actualizacion.descripcion">
+                                                        </textarea>
+                                    <span class="text-rose-500" *ngIf="descripcion.invalid && descripcion.touched">Este campo es
+                                        requerido.</span>
+                                </label>
+
+
+                                <div>
+                                    <label for="base-input" class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                        FECHA DE INICIO</label>
+                                    <input type="date" name="fecha_inicio" [(ngModel)]="actualizacion.fecha_inicio"
+                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                </div>
+                                
+                                <div>
+                                    <label for="base-input" class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                        FECHA DE TERMINO</label>
+                                    <input type="date" name="fecha_termino" [(ngModel)]="actualizacion.fecha_termino"
+                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                </div>
+
+                                <label class="block">
+                                    <span class="text-gray-700">Tipo de permiso</span>
                                     <select required
                                         class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
-                                        name="tipo_permiso">
+                                        name="tipo_permiso" [(ngModel)]="actualizacion.tipo_id">
                                         <ng-container *ngFor="let tipo of ArrayTipo">
                                             <option value="{{tipo.id}}">{{tipo.nombre}}</option>
                                         </ng-container>
                                     </select>
                                 </label>
-            
+
                                 <label class="block">
-                                    <span class="text-gray-700">Empleado solicitante</span>
+                                    <span class="text-gray-700">Reemplazo</span>
                                     <select required
                                         class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
-                                        name="empleado">
-
-                                        <ng-container *ngFor="let empleado of ArrayEmpleados">
+                                        name="empleado" [(ngModel)]="actualizacion.reemplazo"  >
+                                        <ng-container *ngFor="let empleado of ArrayEmpleadoReemplazante">
                                             <option value="{{empleado.rut}}">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
                                         </ng-container>
-
                                     </select>
-                                    <!--<span class="text-rose-500" *ngIf="empleado.invalid && empleado.touched">Este campo es requerido.</span>-->
                                 </label>
-            
-            
-                      <!--
-                      <label class="block">
-                        <span class="text-gray-700">Descripción del permiso</span>
-                        <textarea required
-                          class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
-                          rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel"
-                          [(ngModel)]="actualizacion.descripcion">
-                        </textarea>
-                        <span class="text-rose-500" *ngIf="descripcion.invalid && descripcion.touched">Este campo es
-                          requerido.</span>
-                      </label>-->
-            
-                                <label class="block">
-                                    <span class="text-gray-700">Fecha del permiso: {{fecha}}</span>                                    
-                                </label>
-                    
                             <button type="submit" value="Guardar"
                                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
             

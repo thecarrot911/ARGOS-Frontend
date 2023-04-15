@@ -1,7 +1,13 @@
-export interface Respuesta{
+export interface RespuestaTipo{
     error: boolean,
     message: string,
-    data?: Actualizacion[] | Tipo[], 
+    data: Tipo[]
+}
+
+export interface RespuestaActualizacion{
+    error: boolean,
+    message: string,
+    data: Actualizacion[]
 }
 
 export interface Actualizacion{

@@ -90,60 +90,60 @@ export class ScheduleComponent implements OnInit {
         this.cargarData();
     }
 
-  onPaginationCalendario(event: any) {
-    this.pageCalendario = event;
-    this.cargarData();
-  }
+    onPaginationCalendario(event: any) {
+        this.pageCalendario = event;
+        this.cargarData();
+    }
 
-  onDisenoTabla(event: any): void {
-    this.tableSize = event.target.value;
-    this.page = 1;
-    this.cargarData();
-  }
+    onDisenoTabla(event: any): void {
+        this.tableSize = event.target.value;
+        this.page = 1;
+        this.cargarData();
+    }
 
-  onDisenoTabla2(event: any): void {
-    this.tableSizeCalendario = event.target.value;
-    this.pageCalendario = 1;
-    this.cargarData();
-  }
+    onDisenoTabla2(event: any): void {
+        this.tableSizeCalendario = event.target.value;
+        this.pageCalendario = 1;
+        this.cargarData();
+    }
 
-  deleteActualizacion(actualizacion_id: Actualizacion): void {
-    this.horarioService.deleteActualizacionId(actualizacion_id)
-      .subscribe(response => {
+    deleteActualizacion(actualizacion_id: Actualizacion): void {
+        this.horarioService.deleteActualizacionId(actualizacion_id)
+        .subscribe(response => {
+            this.ngOnInit();
+        },
+            error => {
+            console.log(error)
+            });
+    }
+
+    deleteScheduleById(planificacion: Data): void{
+        this.horarioService.deletePlanificacionId(planificacion)
+        .subscribe(response => {
         this.ngOnInit();
-      },
-        error => {
-          console.log(error)
-        });
-  }
+        },
+        error =>{
+        console.log(error)
+        })
+    }
 
-  deleteScheduleById(planificacion: Data): void{
-    this.horarioService.deletePlanificacionId(planificacion)
-    .subscribe(response => {
-      this.ngOnInit();
-    },
-    error =>{
-      console.log(error)
-    })
-  }
+    alertaItinerario(itinerario: Itinerario) {
+        Swal.fire({
+        title: 'Alerta encuentros de aviones',
+        html: 'Empleados faltantes: ' + + itinerario.falta + '<br>' + 'Turno del encuentro: ' + itinerario.turno_itinerario,
+        icon: 'warning',
+        })
+    }
 
-  alertaItinerario(itinerario: Itinerario) {
-    Swal.fire({
-      title: 'Alerta encuentros de aviones',
-      html: 'Empleados faltantes: ' + + itinerario.falta + '<br>' + 'Turno del encuentro: ' + itinerario.turno_itinerario,
-      icon: 'warning',
-    })
-  }
-
-  alertaComodin(comodin: string) {
-    Swal.fire({
-      title: 'Comodín',
-      text: 'Se necesita comodín, turno: ' + comodin,
-      imageUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/emojis/49908/joker-emoji-clipart-xl.png',
-      imageWidth: 200,
-      imageHeight: 200,
-      imageAlt: 'Custom image',
-    })
-  }
+    alertaComodin(comodin: string) {
+        Swal.fire({
+        title: 'Comodín',
+        text: 'Se necesita comodín, turno: ' + comodin,
+        imageUrl: 'https://creazilla-store.fra1.digitaloceanspaces.com/emojis/49908/joker-emoji-clipart-xl.png',
+        imageWidth: 200,
+        imageHeight: 200,
+        imageAlt: 'Custom image',
+        })
+    }
 
 }

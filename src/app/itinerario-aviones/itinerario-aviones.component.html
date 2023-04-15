@@ -1,177 +1,200 @@
 <div class="relative ">
-  <div id="loading"
-    class="hidden absolute left-0 right-0 top-40 mx-auto p-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700">
-    <div class="text-center pb-2">
-      <span class="text-2xl">Generando Planificación...</span>
-    </div>
-    <div class="grid justify-items-center">
-      <svg class="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101"
-        fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-          fill="currentColor" />
-        <path
-          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-          fill="currentFill" />
-      </svg>
-    </div>
-  </div>
-
-
-
-  <form (ngSubmit)="enviarDatosJSON()" #itinerarioForm="ngForm" appIdentityRevealed>
-    <div class="antialiased text-gray-900 px-6">
-      <div class="max-w-wl mx-auto py-10 md:max-w-5xl">
-        <!-- md:max-w-6xl mueve de izq a der -->
-        <h2 class="text-2xl font-sans">Generador de horario</h2>
-        <p class="mt-2 text-lg text-gray-500">Por favor, ingrese los datos solicitados:</p>
-        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-          <div class="grid grid-cols-1 gap-6">
-
-            <label class="block">
-              <span class="text-gray-700" for="anio">Ingrese el año</span>
-              <input required minlength="4" maxlength="4" id="anio" type="text" placeholder="2022" name="anio"
-                #anio="ngModel" [(ngModel)]="planificacion.anio" class="form-input mt-1 block w-full rounded-md">
-              <span class="text-rose-500 border-rose-500" *ngIf="anio.invalid && anio.touched">Este campo está
-                incompleto.</span>
-
-            </label>
-
-
-            <label class="block">
-              <span class="text-gray-700">Ingrese el mes</span>
-              <input required minlength="2" maxlength="2" type="number" placeholder="11" name="mes" #mes="ngModel"
-                [(ngModel)]="planificacion.mes" class="form-input mt-1 block w-full rounded-md">
-              <span class="text-rose-500 " *ngIf="mes.invalid && mes.touched">Este campo está incompleto.</span>
-
-            </label>
-
-            <label class="block">
-              <span class="text-gray-700">Empleados</span>
-
-              <select [(ngModel)]="ngEmpleado" (ngModelChange)="AgregarEmpleado()" name="empleado"
-                class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black-400 dark:border-green-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
-                <ng-container *ngIf="listaEmpleados?.length === 0">
-                  <option value="" disabled selected>No hay empleados disponibles</option>
-                </ng-container>
-                <ng-container *ngIf="listaEmpleados?.length > 0">
-                  <option value="" disabled selected>Escoge un empleado</option>
-                </ng-container>
-                <ng-container *ngFor="let empleado of listaEmpleados">
-                  <option [value]="empleado.rut">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
-                </ng-container>
-              </select>
-
-
-              <ng-container *ngFor="let empleado of empleadoSeleccionado">
-                <div class="grid grid-cols-10 p-2">
-                  <div class="col-span-8 border-gray-200 bg-slate-600">
-                    {{empleado.nombre_paterno}} {{empleado.apellido_paterno}}
-                  </div>
-                  <div class="col-span-2">
-                    <button type="button" (click)="EliminarEmpleado(empleado)"
-                      class="p-1.5 bg-red-500 hover:bg-red-600 text-white hover:text-white">
-                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                          clip-rule="evenodd"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </ng-container>
-
-            </label>
-
-          </div>
-
-          <div class="grid grid-cols-1 gap-6">
-
-            <label class="block">
-              <span class="text-gray-700" for="dia">Seleccione el día del encuentro de aviones</span>
-              <input type="number" min="1" max="31" id="dia" name="dia" [(ngModel)]="planificacion.itinerario[0].dia"
-                placeholder="25" class="form-input mt-1 block w-full rounded-md">
-
-            </label>
-
-            <label class="block">
-              <span class="text-gray-700">Empleados que se necesita para ese turno</span>
-              <input type="number" placeholder="2" [(ngModel)]="planificacion.itinerario[0].aviones" #aviones="ngModel"
-                name="aviones" id="aviones" class="form-input mt-1 block w-full disabled:bg-slate-100 rounded-md">
-              <span class="text-rose-500"
-                *ngIf="turno_choque_aviones && turno_choque_aviones.valid && turno_choque_aviones.touched">Este campo es
-                requerido.</span>
-            </label>
-
-            <fieldset>
-              <legend class="text-gray-700">Seleccione el turno donde hay encuentro</legend>
-              <div>
-                <label class="inline-flex items-center">
-                  <input [(ngModel)]="planificacion.itinerario[0].turno" class="form-radio" type="radio" checked
-                    name="radio-direct" value="1">
-                  <span class="ml-2">07:00 a 15:00 hrs</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input [(ngModel)]="planificacion.itinerario[0].turno" class="form-radio" type="radio" checked
-                    name="radio-direct" value="2">
-                  <span class="ml-2">15:00 a 23:00 hrs</span>
-                </label>
-              </div>
-              <div>
-                <label class="inline-flex items-center">
-                  <input [(ngModel)]="planificacion.itinerario[0].turno" class="form-radio" type="radio" checked
-                    name="radio-direct" value="3">
-                  <span class="ml-2">23:00 a 07:00 hrs</span>
-                </label>
-              </div>
-            </fieldset>
-
-
-            <button class="bg-[#d6caab] text-white py-2 px-4 rounded transition ease-in-out delay-150
-            hover:-translate-y-1 hover:scale-110 hover:bg-[#e0cd9f] duration-200" type="button"
-              (click)="agregarChoque()">
-              Agregar Itinerario
-            </button>
-
-            <input *ngIf="itinerarioForm.invalid" [disabled]="itinerarioForm.invalid" type="submit"
-              value="Enviar itinerario" class="bg-slate-200 text-white py-2 px-4 rounded">
-
-
-            <input *ngIf="itinerarioForm.valid" type="submit" value="Enviar itinerario"
-              class="bg-slate-600 text-white py-2 px-4 rounded">
-          </div>
-
-          <div class="grid grid-cols-1 gap-6">
-            <div class="BLOCK">
-              <h1 class="font-mono text-lg tracking-normal">Itinerarios registrados</h1>
-              <ng-container *ngFor="let itinerario of planificacion.itinerario; let i = index">
-                <div class="flex justify-between gap-y-10">
-                  <div class="flex justify-between gap-x-1">
-                    <div class="text-sm ">Día encuentro: </div>
-                    <input class="text-sm w-3 " [(ngModel)]="itinerario.dia" name="itinerario.dia_{{i}}">
-                  </div>
-                  <div class="flex justify-between gap-x-1">
-                    <div class="text-sm">Empleados: </div>
-                    <input class="text-sm w-3" [(ngModel)]="itinerario.aviones" name="itinerario.aviones_{{i}}">
-                  </div>
-                  <div class="flex justify-between gap-x-1">
-                    <div class="text-sm">Turno: </div>
-                    <input class="text-sm w-3" [(ngModel)]="itinerario.turno" name="itinerario.turno_{{i}}">
-                  </div>
-                  <button class=" rounded-md" (click)="eliminarItinerario(i)">
-                    <img src="assets/images/delete.png" alt="Logo Argos" width="20" height="20">
-                  </button>
-                </div>
-              </ng-container>
-            </div>
-          </div>
-
-
-
+    <div id="loading"
+        class="hidden absolute left-0 right-0 top-40 mx-auto p-8 max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:border-gray-700">
+        <div class="text-center pb-2">
+            <span class="text-2xl">Generando Planificación...</span>
         </div>
-      </div>
+        <div class="grid justify-items-center">
+            <svg class="inline mr-2 w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101"
+                fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                    fill="currentColor" />
+                <path
+                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                    fill="currentFill" />
+            </svg>
+        </div>
     </div>
-  </form>
+
+
+    <form (ngSubmit)="enviarDatosJSON()" #itinerarioForm="ngForm" appIdentityRevealed>
+        <div class="antialiased text-gray-900 px-6">
+            <div class="max-w-wl mx-auto md:max-w-5xl">
+                <div
+                    class="container mx-auto flex flex-col md:flex-row items-start md:items-center justify-between pb-2 border-b border-gray-300 p-8">
+                    <div>
+                        <div class="flex justify-between">
+                            <div>
+                                <h4 class="text-2xl font-bold leading-tight text-gray-800 dark:text-gray-500">Generar Planificación</h4>
+                            </div>
+                        </div>
+                        <ul class="flex flex-col md:flex-row items-start md:items-center text-gray-600 dark:text-gray-400 text-sm mt-3">
+                            <li class="flex items-center mr-4 mt-4 md:mt-0">
+                                <div class="mr-1">
+                                    <svg class="icon icon-tabler icon-tabler-trending-up" width="16" height="16" fill="none"
+                                        viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round"
+                                            d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                                    </svg>
+                
+                                </div>
+                                <span class="hover:text-black text-bold">ARIACA</span>
+                            </li>
+                            <li class="flex items-center mt-4 md:mt-0">
+                                <div class="mr-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plane-departure"
+                                        width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" />
+                                        <path d="M15 12h5a2 2 0 0 1 0 4h-15l-3 -6h3l2 2h3l-2 -7h3z"
+                                            transform="rotate(-15 12 12) translate(0 -1)" />
+                                        <line x1="3" y1="21" x2="21" y2="21" />
+                                    </svg>
+                                </div>
+                                <span class="hover:text-black text-bold">Hoy día es: {{today_is | date}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                    <div class="grid grid-cols-1 gap-1">
+                        <label class="block">
+                            <span class="text-gray-700" for="anio">Ingrese el año</span>
+                            <input required minlength="4" maxlength="4" id="anio" type="text" placeholder="2022" name="anio"
+                                #anio="ngModel" [(ngModel)]="planificacion.anio" class="form-input mt-1 block w-full rounded-md">
+                            <span class="text-rose-500 border-rose-500" *ngIf="anio.invalid && anio.touched">Este campo está incompleto.</span>
+                        </label>
+
+                        <label class="block">
+                            <span class="text-gray-700">Ingrese el mes</span>
+                            <input required minlength="2" maxlength="2" type="number" placeholder="11" name="mes" #mes="ngModel"
+                                [(ngModel)]="planificacion.mes" class="form-input mt-1 block w-full rounded-md">
+                            <span class="text-rose-500 " *ngIf="mes.invalid && mes.touched">Este campo está incompleto.</span>
+                        </label>
+
+                        <label class="block">
+                            <span class="text-gray-700">Empleados</span>
+
+                            <select [(ngModel)]="ngEmpleado" (ngModelChange)="AgregarEmpleado()" name="empleado"
+                                class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-black-400 dark:border-green-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer">
+                                <ng-container *ngIf="listaEmpleados?.length === 0">
+                                    <option value="" disabled selected>No hay empleados disponibles</option>
+                                </ng-container>
+                                <ng-container *ngIf="listaEmpleados?.length > 0">
+                                    <option value="" disabled selected>Escoge un empleado</option>
+                                </ng-container>
+                                <ng-container *ngFor="let empleado of listaEmpleados">
+                                    <option [value]="empleado.rut">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
+                                </ng-container>
+                            </select>
+
+                            <ng-container *ngFor="let empleado of empleadoSeleccionado">
+                                <div class="grid grid-cols-10 p-2">
+                                    <div class="col-span-8 border-gray-200 bg-slate-600">
+                                        {{empleado.nombre_paterno}} {{empleado.apellido_paterno}}
+                                    </div>
+                                    <div class="col-span-2">
+                                        <button type="button" (click)="EliminarEmpleado(empleado)"
+                                            class="p-1.5 bg-red-500 hover:bg-red-600 text-white hover:text-white">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </label>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-1">
+                        <label class="block">
+                            <span class="text-gray-700">Comodin</span>
+                        </label>
+
+                        <label class="block">
+                            <span class="text-gray-700" for="dia">Seleccione el día del encuentro de aviones</span>
+                            <input type="number" min="1" max="31" id="dia" name="dia" [(ngModel)]="planificacion.itinerario[0].dia"
+                                placeholder="25" class="form-input mt-1 block w-full rounded-md">
+                        </label>
+
+                        <label class="block">
+                            <span class="text-gray-700">Empleados que se necesita para ese turno</span>
+                            <input type="number" placeholder="2" [(ngModel)]="planificacion.itinerario[0].aviones" #aviones="ngModel"
+                                name="aviones" id="aviones" class="form-input mt-1 block w-full disabled:bg-slate-100 rounded-md">
+                            <span class="text-rose-500"
+                                *ngIf="turno_choque_aviones && turno_choque_aviones.valid && turno_choque_aviones.touched">Este campo es requerido.</span>
+                        </label>
+
+                        <fieldset>
+                            <legend class="text-gray-700">Seleccione el turno donde hay encuentro</legend>
+                            <div>
+                                <label class="inline-flex items-center">
+                                <input [(ngModel)]="planificacion.itinerario[0].turno" class="form-radio" type="radio" checked
+                                    name="radio-direct" value="1">
+                                <span class="ml-2">07:00 a 15:00 hrs</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                <input [(ngModel)]="planificacion.itinerario[0].turno" class="form-radio" type="radio" checked
+                                    name="radio-direct" value="2">
+                                <span class="ml-2">15:00 a 23:00 hrs</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                <input [(ngModel)]="planificacion.itinerario[0].turno" class="form-radio" type="radio" checked
+                                    name="radio-direct" value="3">
+                                <span class="ml-2">23:00 a 07:00 hrs</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+
+                        <button class="bg-[#d6caab] text-white py-2 px-4 rounded transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:bg-[#e0cd9f] duration-200" type="button"
+                                (click)="agregarChoque()">Agregar Itinerario
+                        </button>
+
+                        <input *ngIf="itinerarioForm.invalid" [disabled]="itinerarioForm.invalid" type="submit"
+                        value="Enviar itinerario" class="bg-slate-200 text-white py-2 px-4 rounded">
+
+                        <input *ngIf="itinerarioForm.valid" type="submit" value="Enviar itinerario"
+                        class="bg-slate-600 text-white py-2 px-4 rounded">
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="BLOCK">
+                        <h1 class="font-mono text-lg tracking-normal">Itinerarios registrados</h1>
+                        <ng-container *ngFor="let itinerario of planificacion.itinerario; let i = index">
+                            <div class="flex justify-between gap-y-10">
+                            <div class="flex justify-between gap-x-1">
+                                <div class="text-sm ">Día encuentro: </div>
+                                <input class="text-sm w-3 " [(ngModel)]="itinerario.dia" name="itinerario.dia_{{i}}">
+                            </div>
+                            <div class="flex justify-between gap-x-1">
+                                <div class="text-sm">Empleados: </div>
+                                <input class="text-sm w-3" [(ngModel)]="itinerario.aviones" name="itinerario.aviones_{{i}}">
+                            </div>
+                            <div class="flex justify-between gap-x-1">
+                                <div class="text-sm">Turno: </div>
+                                <input class="text-sm w-3" [(ngModel)]="itinerario.turno" name="itinerario.turno_{{i}}">
+                            </div>
+                            <button class=" rounded-md" (click)="eliminarItinerario(i)">
+                                <img src="assets/images/delete.png" alt="Logo Argos" width="20" height="20">
+                            </button>
+                            </div>
+                        </ng-container>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

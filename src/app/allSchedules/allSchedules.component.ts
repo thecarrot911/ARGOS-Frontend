@@ -14,12 +14,6 @@ export class AllSchedulesComponent implements OnInit {
 
     searchString : any;
 
-    pageCalendario: number = 1;
-    paginationCalendario = 1;
-    countCalendario: number = 0;
-    tableSizeCalendario: number = 7;
-    tableSizesCalendario: any = [5, 10, 15, 20]
-
     CurrentDate = new Date();
     latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
     today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
@@ -27,8 +21,12 @@ export class AllSchedulesComponent implements OnInit {
     public planificaciones: PlanificacionAnual
     public planificacioActual: Planificacion
     public anio: number;
+    
+    public CantidadPorPagina: number = 7;
+    public PaginaPlanificacion: number = 1;
+    public PaginacionPlanificacion: number = 1;
+    public ContadorCalendario: number = 0;
 
-    public asd:string;
 
     constructor(
         private allSchedulesService: AllSchedulesService,
@@ -39,7 +37,9 @@ export class AllSchedulesComponent implements OnInit {
         this.allSchedulesService.MostrarPlanificacionAnual(this.CurrentDate.getFullYear()).subscribe(
             response => {
                 console.log(response)
-                this.planificaciones = response
+                this.planificaciones = response;
+                this.planificacioActual = this.planificaciones.data[0];
+                this.planificacioActual.mostrar = true;
             },
             error => {
                 console.log(error)
@@ -52,6 +52,8 @@ export class AllSchedulesComponent implements OnInit {
         this.planificaciones.data.forEach(planificacion =>{
             if(planificacion.mes === planificacionSeleccionada.mes){
                 planificacion.mostrar = true;
+                this.planificacioActual = planificacion
+                this.PaginacionPlanificacion = 1;
             }else{
                 planificacion.mostrar = false;
             }
@@ -71,13 +73,13 @@ export class AllSchedulesComponent implements OnInit {
     }
 
     onPaginationCalendario(event: any) {
-        this.pageCalendario = event;
+        this.PaginaPlanificacion = event;
         this.buscarCalendarios();
     }
 
     onDisenoTabla(event: any): void {
-        this.tableSizeCalendario = event.target.value;
-        this.pageCalendario = 1;
+        this.CantidadPorPagina = event.target.value;
+        this.PaginaPlanificacion = 1;
         this.buscarCalendarios();
     }
 

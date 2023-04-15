@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Empleado } from '../empleados';
 import { GenerarPlanificacion, Turno_Choque } from '../generarPlanificacion';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-itinerario-aviones',
@@ -35,11 +36,15 @@ export class ItinerarioAvionesComponent implements OnInit {
     public empleadosPlanificacion: Empleado[] = [];
     public ngEmpleado: string;
 
+    CurrentDate = new Date();
+    latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
+    today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
+
     constructor(
         private horarioService: HorarioService,
         private router: Router,
         private empleadoService: AllempleadosService,
-        
+        private datePipe: DatePipe,
     ) {
     }
 

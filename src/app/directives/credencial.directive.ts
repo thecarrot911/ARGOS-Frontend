@@ -2,24 +2,24 @@ import { Directive, Input, OnChanges, SimpleChanges, TemplateRef, ViewContainerR
 import { Credencial } from '../empleados';
 
 @Directive({
-  selector: '[appCredencial]'
+    selector: '[appCredencial]'
 })
 export class CredencialDirective implements OnChanges{
 
-  @Input() appCredencial! : Credencial[];
+    @Input() appCredencial! : Credencial[];
 
-  constructor(
-    private templateRef: TemplateRef<any>,
-    private viewContainerRef: ViewContainerRef
-  )
-  {
-    this.viewContainerRef.createEmbeddedView(templateRef);
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['appCredencial']){
-      this.viewContainerRef.clear();
-      this.viewContainerRef.createEmbeddedView(this.templateRef);
+    constructor(
+        private templateRef: TemplateRef<any>,
+        private viewContainerRef: ViewContainerRef
+    )
+    {
+        this.viewContainerRef.createEmbeddedView(templateRef);
     }
-  }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['appCredencial']){
+            this.viewContainerRef.clear();
+            this.viewContainerRef.createEmbeddedView(this.templateRef);
+        }
+    }
 }

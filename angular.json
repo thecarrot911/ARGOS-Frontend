@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["moment", "file-extension"],
             "outputPath": "dist/sistema-turnos-frontend",
             "index": "src/index.html",
             "main": "src/main.ts",

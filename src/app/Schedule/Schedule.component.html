@@ -173,6 +173,8 @@
 <!-- ModalAddActualizacion -->
 <ng-container *ngIf="horarioService.modalAddActualizacion">
     <app-agregarActualizacion
-    [planificacion_id]="planificacion.data.id">
+    [planificacion_id]="planificacion.data.id"
+    (recargarPagina)="ngOnInit()"
+    >
     </app-agregarActualizacion>
 </ng-container>

@@ -1,8 +1,16 @@
+import { Empleado } from './empleados';
+
 export interface RespuestaTipo{
     error: boolean,
     message: string,
-    data: Tipo[]
+    data?: Formulario
 }
+
+interface Formulario{
+    actualizacion: Tipo[],
+    empleados: Empleado[]
+}
+
 
 export interface RespuestaActualizacion{
     error: boolean,

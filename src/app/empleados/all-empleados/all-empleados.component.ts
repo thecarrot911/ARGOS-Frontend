@@ -42,7 +42,7 @@ export class AllEmpleadosComponent implements OnInit {
     }
 
     VerPerfil(rut: string): void{
-        this.router.navigate(['/perfil/'+rut]);
+        this.router.navigate(['/perfil/', rut]);
     }
 
     // Modal para modificar empleado

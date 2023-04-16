@@ -71,12 +71,12 @@ export class ScheduleComponent implements OnInit {
         this.horarioService.getHorarios()
         .subscribe(
             response => {
-            console.log(response)
-            this.planificacion = response;
-            this.router.navigate(['/schedule'])
+                console.log(response)
+                this.planificacion = response;
+                this.router.navigate(['/schedule'])
             },
             error => {
-            console.log(error)
+                console.log(error)
             }
         )
     }

@@ -63,8 +63,9 @@ export class AllSchedulesComponent implements OnInit {
     buscarCalendarios(){
         this.allSchedulesService.MostrarPlanificacionAnual(this.anio).subscribe(
             response => {
-                console.log(response)
                 this.planificaciones = response
+                this.planificacioActual = this.planificaciones.data[0]
+                this.planificacioActual.mostrar = true;
             },
             error => {
                 console.log(error)

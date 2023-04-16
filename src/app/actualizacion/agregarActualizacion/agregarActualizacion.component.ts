@@ -2,9 +2,8 @@ import { Component, OnInit, Type, Input, EventEmitter, Output } from '@angular/c
 import { Empleado } from '../../empleados';
 import { AllempleadosService } from '../../services/allempleados.service';
 import { HorarioService } from '../../services/horario.service';
-import { DatePipe } from '@angular/common';
 import { ActualizacionService } from '../../services/actualizacion.service';
-import { RespuestaTipo, Tipo, Actualizacion } from '../../actualizacion';
+import { Tipo, Actualizacion } from '../../actualizacion';
 
 
 @Component({
@@ -21,35 +20,23 @@ export class AgregarActualizacionComponent implements OnInit {
     @Input() planificacion_id: number;
     
     // Se emite el evento para reiniciar el component schedule
-    //@Output() recargarPagina = new EventEmitter();
+    @Output() recargarPagina = new EventEmitter();
 
     public ArrayEmpleadoSolicitante: Empleado[];
     public ArrayEmpleadoReemplazante: Empleado[];
 
-    public fecha: any;
     public ArrayTipo: Tipo[];
 
     constructor(
         private horarioService: HorarioService,
-        private empleadoService: AllempleadosService,
-        private actualizacionService: ActualizacionService,
-        private datePipe: DatePipe
+        private actualizacionService: ActualizacionService
     ) {}
 
     ngOnInit(): void {
-        this.empleadoService.MostrarEmpleados().subscribe(
-            response => {
-                this.ArrayEmpleadoSolicitante = response.data;
-                this.fecha = this.datePipe.transform(new Date(), 'dd - mm - yyyy');
-            },
-            error => {
-                console.error(error)
-            }
-        )
-
-        this.actualizacionService.MostrarTipo().subscribe(
+        this.actualizacionService.MostrarFormulario().subscribe(
             response =>{
-                this.ArrayTipo = response.data
+                this.ArrayTipo = response.data.actualizacion
+                this.ArrayEmpleadoSolicitante = response.data.empleados
                 console.log(response)
             },  
             error =>{
@@ -76,7 +63,8 @@ export class AgregarActualizacionComponent implements OnInit {
         this.actualizacion.planificacion_id = this.planificacion_id;
         this.actualizacionService.RegistrarActualizacion(this.actualizacion).subscribe(
             response =>{
-
+                this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
+                this.recargarPagina.emit();
             }, 
             error =>{
 

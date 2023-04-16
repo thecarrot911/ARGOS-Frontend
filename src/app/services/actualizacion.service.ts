@@ -13,15 +13,15 @@ constructor(
     
 ) { }
     
-    private urlObtenerTipo = 'http://localhost:10975/app/actualizacion/tipo';
+    private urlObtenerTipo = 'http://localhost:10975/app/actualizacion/formulario';
     private urlRegistrarActualizacion = 'http://localhost:10975/app/actualizacion/registrar_actualizacion';
 
-    MostrarTipo(): Observable<RespuestaTipo> {
+    MostrarFormulario(): Observable<RespuestaTipo> {
         return this.http.get<RespuestaTipo>(this.urlObtenerTipo)
     }
 
-    RegistrarActualizacion(actualizacion: Actualizacion): Observable<any>{
-        return this.http.post<any>(this.urlRegistrarActualizacion,actualizacion);
+    RegistrarActualizacion(actualizacion: Actualizacion): Observable<RespuestaTipo>{
+        return this.http.post<RespuestaTipo>(this.urlRegistrarActualizacion,actualizacion);
     }
 
 }

@@ -8,7 +8,8 @@ export interface RespuestaTipo{
 
 interface Formulario{
     actualizacion: Tipo[],
-    empleados: Empleado[]
+    empleados: Empleado[],
+    solicitante: Empleado[]
 }
 
 

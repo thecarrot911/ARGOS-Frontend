@@ -1,7 +1,9 @@
+import { Actualizacion } from "./actualizacion"
+
 export interface UltimaPlanificacion {
       error: boolean,
       msg: string,
-      data: Planificacion,
+      data: Planificacion
 }
 
 export interface Planificacion{
@@ -9,6 +11,7 @@ export interface Planificacion{
       mes: string,
       id: number,
       planificacion: Dia[],
+      actualizacion: Actualizacion[],
       mostrar?: Boolean
 }
 

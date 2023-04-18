@@ -33,10 +33,11 @@ export class AgregarActualizacionComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.actualizacionService.MostrarFormulario().subscribe(
+        this.actualizacionService.MostrarFormulario(this.planificacion_id).subscribe(
             response =>{
                 this.ArrayTipo = response.data.actualizacion
-                this.ArrayEmpleadoSolicitante = response.data.empleados
+                this.ArrayEmpleadoSolicitante = response.data.solicitante
+                this.ArrayEmpleadoReemplazante = response.data.empleados
                 console.log(response)
             },  
             error =>{
@@ -55,8 +56,8 @@ export class AgregarActualizacionComponent implements OnInit {
         reemplazo: null
     }
 
-    FiltrandoSelect(): void{
-        this.ArrayEmpleadoReemplazante = this.ArrayEmpleadoSolicitante.filter( empleado => empleado.rut != this.actualizacion.rut )
+    FiltrandoSelect(){
+        this.ArrayEmpleadoReemplazante = this.ArrayEmpleadoReemplazante.filter(emp =>  emp.rut != this.actualizacion.rut)
     }
     
     EnviarActualizacion(): void{

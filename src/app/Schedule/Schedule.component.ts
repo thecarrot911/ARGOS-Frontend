@@ -72,8 +72,12 @@ export class ScheduleComponent implements OnInit {
         .subscribe(
             response => {
                 console.log(response)
-                this.planificacion = response;
-                this.router.navigate(['/schedule'])
+                if(response.error){ 
+                    console.log("hay error bro")
+                }else{
+                    console.log("entre=?")
+                    this.planificacion = response;
+                }
             },
             error => {
                 console.log(error)

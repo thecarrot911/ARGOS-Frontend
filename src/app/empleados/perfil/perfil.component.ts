@@ -10,6 +10,9 @@ export class PerfilComponent implements OnInit {
 
     constructor(private route: ActivatedRoute) { }
     public rut: string;
+    
+    public fechaActual = new Date().toLocaleDateString('es-cl');
+
 
     ngOnInit(): void {
         const empleado = this.route.params.subscribe( params => {

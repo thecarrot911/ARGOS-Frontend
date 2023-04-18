@@ -122,12 +122,12 @@
 
                 </ng-container>
             </div>
-      <div class="mx-auto m-4">
-        <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente"
-          (pageChange)="paginationCalendario = $event">
-        </pagination-controls>
-      </div>
-    </div>
+            <div class="mx-auto m-4 flex justify-center">
+                <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente"
+                (pageChange)="paginationCalendario = $event">
+                </pagination-controls>
+            </div>
+        </div>
 
     <div class="w-full lg:w-1/4 h-screen">
       <div class="bg-gradient-to-r from-white via-neutral-200 to-white p-4 rounded-md
@@ -163,9 +163,11 @@
             </div>
             <hr>
         </div>
-        <pagination-controls id="second" previousLabel="Prev" nextLabel="Next"
-          (pageChange)="paginationActualizaciones = $event">
-        </pagination-controls>
+        <div class="mx-auto m-4 flex justify-center">
+            <pagination-controls id="second" previousLabel="Prev" nextLabel="Next"
+                (pageChange)="paginationActualizaciones = $event">
+            </pagination-controls>
+        </div>
       </div>
     </div>
   </div>

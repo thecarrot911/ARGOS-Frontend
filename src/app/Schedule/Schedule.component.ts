@@ -71,13 +71,8 @@ export class ScheduleComponent implements OnInit {
         this.horarioService.getHorarios()
         .subscribe(
             response => {
-                console.log(response)
-                if(response.error){ 
-                    console.log("hay error bro")
-                }else{
-                    console.log("entre=?")
-                    this.planificacion = response;
-                }
+                this.planificacion = response;
+                
             },
             error => {
                 console.log(error)

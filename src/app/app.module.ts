@@ -74,7 +74,7 @@ import { PerfilComponent } from './empleados/perfil/perfil.component';
       { path: 'allEmpleados', component: AllEmpleadosComponent },
       { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },
       { path: 'credencial/:rut', component: CredencialComponent},
-      { path: 'perfil', component: PerfilComponent}
+      { path: 'perfil/:rut', component: PerfilComponent}
     ]),
   ],
   providers: [DatePipe],

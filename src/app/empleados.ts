@@ -1,9 +1,21 @@
+import { DatoPlanificacion } from "./UltimaPlanificacion"
+
+export interface RespuestaPerfil {
+    error: boolean,
+    msg: string,
+    data: Perfil
+}
+
+interface Perfil{
+    credencial: Empleado,
+    planificacion: DatoPlanificacion
+}
+
 export interface ListaEmpleados {
     error: boolean,
     msg: string,
     data: Empleado[]
 }
-
 export interface EmpleadoData{
     error: boolean,
     msg: string,

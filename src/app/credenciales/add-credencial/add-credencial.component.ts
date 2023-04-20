@@ -27,7 +27,7 @@ export class AddCredencialComponent implements OnInit {
   credencial: Credencial = {
     tipo: '',
     numero: 0,
-    empleado_rut: '',
+    rut: '',
     fecha_vencimiento: '',
     fecha_emision: ''
   }
@@ -36,7 +36,7 @@ export class AddCredencialComponent implements OnInit {
   }
 
   CrearCredencial(){
-    this.credencial.empleado_rut = this.rut;
+    this.credencial.rut = this.rut;
     this.credencial.numero = Number(this.numero);
     this.empleadoService.RegistrarCredencial(this.credencial).subscribe(
       response=>{
@@ -55,7 +55,6 @@ export class AddCredencialComponent implements OnInit {
           })
         }
         this.empleadoService.modalAddCredencialVisible = !this.empleadoService.modalAddCredencialVisible;
-        this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible;
         this.recargaPagina.emit();
 
       },error =>{

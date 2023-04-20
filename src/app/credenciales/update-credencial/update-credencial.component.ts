@@ -23,7 +23,7 @@ export class UpdateCredencialComponent implements OnInit {
     fecha_vencimiento: '',
     tipo: '',
     numero: 0,
-    empleado_rut: '',
+    rut: '',
     credencial_id: 0
   }
 
@@ -39,7 +39,7 @@ export class UpdateCredencialComponent implements OnInit {
     this.credencial.fecha_vencimiento = this.renovarCredencial.fecha_vencimiento;
     this.credencial.tipo = this.renovarCredencial.tipo;
     this.credencial.numero = this.renovarCredencial.numero;
-    this.credencial.empleado_rut = this.renovarCredencial.empleado_rut;
+    this.credencial.rut = this.renovarCredencial.rut;
     this.credencial.credencial_id = this.renovarCredencial.credencial_id
   }
 
@@ -54,6 +54,7 @@ export class UpdateCredencialComponent implements OnInit {
       confirmButtonText: 'Si, ¡quiero renovarla!'
     }).then((result)=>{
       if(result.isConfirmed){
+        this.credencial.numero = Number(this.credencial.numero);
         this.empleadoService.RenovarCredencial(this.credencial).subscribe(
           response =>{
             if (response.error) {

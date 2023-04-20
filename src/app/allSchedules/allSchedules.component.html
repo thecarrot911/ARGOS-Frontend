@@ -79,7 +79,7 @@
 
 <div class="container mx-auto px-10">
     <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded bg-white pt-6">
-        <div class="w-full lg:w-5/6 border border-indigo-500">
+        <div class="w-full lg:w-5/6 ">
             <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
                 <ng-container *ngFor="let dia of planificacioActual.planificacion | paginate:{
                     id:'first',
@@ -99,9 +99,14 @@
                             </div>
                         </div>
                         <ng-container *ngFor="let empleado of dia.empleados">
-                            <div class="flex justify-between m-2 text-xs">
-                                <div>{{empleado.nombre}} {{empleado.apellido}} {{empleado.rut}}</div>
-                                <div>turno: {{empleado.turno}}</div>
+                            <div class="grid grid-cols-2 text-sm m-2">
+                                <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
+                                    <div  *ngSwitchCase="1">Mañana</div>
+                                    <div  *ngSwitchCase="2">Tarde</div>
+                                    <div  *ngSwitchCase="3">Noche</div>
+                                    <div  *ngSwitchDefault>Libre</div>
+                                </div>
                             </div>
                         </ng-container>
                     </div>
@@ -113,7 +118,7 @@
                 </pagination-controls>
             </div>
         </div>
-        <div class="w-full lg:w-1/6 border border-indigo-500">
+        <div class="w-full lg:w-1/6 ">
             <ng-container>
 
             </ng-container>

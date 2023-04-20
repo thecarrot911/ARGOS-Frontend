@@ -16,6 +16,18 @@ export interface ListaEmpleados {
     msg: string,
     data: Empleado[]
 }
+
+export interface DataEmpleados{
+    error:boolean,
+    msg: string,
+    data: Data
+}
+
+interface Data{
+    credencial: Empleado[],
+    planificacion: DatoPlanificacion[]
+}
+
 export interface EmpleadoData{
     error: boolean,
     msg: string,
@@ -29,7 +41,8 @@ export interface Empleado {
     apellido_materno: string,
     rut: string,
     imagen?: any,
-    credencial?: Credencial[]
+    credencial?: Credencial[],
+    mostrar?: Boolean
 }
 
 export interface EmpleadoCredencial{
@@ -43,7 +56,7 @@ export interface Credencial{
     fecha_emision: any,
     tipo: string,
     numero: number,
-    empleado_rut: string,
+    rut: string,
     credencial_id?: number,
     vence?: boolean,
     dias_restantes?: number

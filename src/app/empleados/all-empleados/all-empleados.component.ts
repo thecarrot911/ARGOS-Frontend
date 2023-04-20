@@ -3,6 +3,9 @@ import { AllempleadosService } from '../../services/allempleados.service';
 import { Credencial, Empleado } from '../../empleados';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { DatoPlanificacion } from '../../UltimaPlanificacion';
+import { response } from 'express';
+import { C } from '@fullcalendar/core/internal-common';
 
 
 @Component({
@@ -15,7 +18,11 @@ export class AllEmpleadosComponent implements OnInit {
     CurrentDate = new Date();
     today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
 
-    listaEmpleados: Empleado[];
+    listaCredenciales: Empleado[];
+    listaPlanificacion: DatoPlanificacion[];
+
+    public credencialActual: Empleado;
+    public planificacionActual: DatoPlanificacion;
 
     // Variable para mostrar credenciales
     public cantidadCredenciales: number;
@@ -31,19 +38,41 @@ export class AllEmpleadosComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.empleadoService.MostrarEmpleados().subscribe(
-            response => {
-                this.listaEmpleados = response.data;
-            },
-            error => {
-                console.log(error);
+        this.empleadoService.MostrarPerfil().subscribe(
+            response =>{
+                this.listaCredenciales = response.data.credencial;
+                this.listaPlanificacion = response.data.planificacion;
+                this.credencialActual = response.data.credencial[0];
+                this.SeleccionEmpleado(this.credencialActual)
+
+            },error =>{
+                console.error(error)
             }
         )
     }
 
-    VerPerfil(rut: string): void{
-        this.router.navigate(['/perfil/', rut]);
-    }
+    SeleccionEmpleado(empleado: Empleado){
+        this.credencialActual = null;
+        this.planificacionActual = null;
+
+        this.listaCredenciales.forEach(emp =>{
+            if(emp.rut === empleado.rut){
+                emp.mostrar = true;
+                this.credencialActual = empleado
+            }else{
+                emp.mostrar = false; 
+            }
+        })
+
+        this.listaPlanificacion.forEach(emp =>{
+            if (emp.rut === empleado.rut) {
+                emp.mostrar = true
+                this.planificacionActual = emp;
+            }else{
+                emp.mostrar = false
+            }
+        })
+    };
 
     // Modal para modificar empleado
     mostrarModalModificarEmpleado(empleado: Empleado): void {
@@ -88,7 +117,6 @@ export class AllEmpleadosComponent implements OnInit {
     // Modal para mostrar las Credenciales 
     mostrarCredencial(credencial: Credencial[] , rut: string){
         this.credencialEmpleado = credencial;
-        this.empleadoService.modalCredencialVisible = !this.empleadoService.modalCredencialVisible
         this.rutEmpleadoSelecionado = rut
     }
 

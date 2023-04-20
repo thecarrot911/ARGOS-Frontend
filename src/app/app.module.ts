@@ -30,7 +30,7 @@ import { CredencialDirective } from './directives/credencial.directive';
 import { AddCredencialComponent } from './credenciales/add-credencial/add-credencial.component';
 import { UpdateCredencialComponent } from './credenciales/update-credencial/update-credencial.component';
 import { UpdateEmpleadoComponent } from './empleados/update-empleado/update-empleado.component';
-import { PerfilComponent } from './empleados/perfil/perfil.component';
+import { EstadisticaComponent } from './estadistica/estadistica.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,7 @@ import { PerfilComponent } from './empleados/perfil/perfil.component';
     AddCredencialComponent,
     UpdateCredencialComponent,
     UpdateEmpleadoComponent,
-    PerfilComponent
+    EstadisticaComponent
   ],
   imports: [
     BrowserModule,
@@ -73,8 +73,7 @@ import { PerfilComponent } from './empleados/perfil/perfil.component';
       { path: 'allschedules', component: AllSchedulesComponent },
       { path: 'allEmpleados', component: AllEmpleadosComponent },
       { path: 'registrar-empleado', component: RegistrarEmpleadoComponent },
-      { path: 'credencial/:rut', component: CredencialComponent},
-      { path: 'perfil/:rut', component: PerfilComponent}
+      { path: 'credencial/:rut', component: CredencialComponent}
     ]),
   ],
   providers: [DatePipe],

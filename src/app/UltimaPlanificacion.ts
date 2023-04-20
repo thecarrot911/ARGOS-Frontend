@@ -7,10 +7,11 @@ export interface DatoPlanificacion {
       apellido_materno: string,
       rut: string,
       imagen?: any,
+      mostrar?: boolean,
       planificacion: [Estadistica[]]
 }
 
-interface Estadistica{
+export interface Estadistica{
       anio: number,
       mes: string,
       planificacion_id: number,
@@ -18,7 +19,7 @@ interface Estadistica{
       libre: number,
       turno_1: number,
       turno_2: number,
-      tunro_3: number
+      turno_3: number
 }
 
 export interface UltimaPlanificacion {

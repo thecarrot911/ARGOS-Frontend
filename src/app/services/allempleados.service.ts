@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData, VencimientoCredencial, RespuestaPerfil } from '../empleados';
+import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData, VencimientoCredencial, RespuestaPerfil, DataEmpleados } from '../empleados';
 import * as fileExtension from 'file-extension';
 
 
@@ -47,9 +47,8 @@ export class AllempleadosService {
     urlModificarEmpleado = 'http://localhost:10975/app/empleado/modificar_empleado';
     urlPerfilEmpleado = 'http://localhost:10975/app/empleado/perfil';
 
-    MostrarPerfil(rut: string): Observable<RespuestaPerfil>{
-        let query = new HttpParams().set('rut', rut);
-        return this.http.get<RespuestaPerfil>(this.urlPerfilEmpleado, {params: query} )
+    MostrarPerfil(): Observable<DataEmpleados>{
+        return this.http.get<DataEmpleados>(this.urlPerfilEmpleado)
     }
 
     MostrarEmpleados(): Observable<ListaEmpleados> {

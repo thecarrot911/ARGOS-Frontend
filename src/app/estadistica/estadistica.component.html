@@ -4,22 +4,32 @@
       <ng-container *ngIf="planificacionActual != null; else SinEstadistica">
             <ng-container *ngFor="let estadistica of planificacionActual.planificacion.reverse()">
                   <ng-container *ngIf="estadistica[0]">
-                        <div class="bg-red-500">
+                        <div class="font-bold text-2xl text-slate-200 leading-4 p-2">
                               {{estadistica[0].anio}}
                         </div>
                   </ng-container>
-                  <div>
-
-                  </div>
                   <div class="grid grid-cols-3 gap-2 my-2">
                         <ng-container *ngFor="let element of estadistica">
-                              <div class="col-span-1 bg-blue-500">
-                                    <p>mes: {{element.mes}}</p>
-                                    <p>turno 1: {{element.turno_1}}</p>
-                                    <p>turno 2: {{element.turno_2}}</p>
-                                    <p>turno 3: {{element.turno_3}}</p>
-                                    <p>feriado trabajado: {{element.feriado}}</p>
-                                    <p>dias libres: {{element.libre}}</p>
+                              <div class="col-span-1 bg-gray-800 text-white p-3 rounded-lg shadow-lg">
+                                    <div class="flex justify-center uppercase font-bold">
+                                          {{element.mes}}
+                                    </div>
+                                    <div class="grid grid-cols-2">
+                                          <div class="col-span-1 ">
+                                                <p>Mañana: </p>
+                                                <p>Tarde: </p>
+                                                <p>Noche: </p>
+                                                <p>Feriado trabajados: </p>
+                                                <p>Dias libres: </p>
+                                          </div>
+                                          <div class="col-span-1 ">
+                                                <p class="text-end">{{element.turno_1}}</p>
+                                                <p class="text-end">{{element.turno_2}}</p>
+                                                <p class="text-end">{{element.turno_3}}</p>
+                                                <p class="text-end">{{element.feriado}}</p>
+                                                <p class="text-end">{{element.libre}}</p>
+                                          </div>
+                                    </div>
                               </div>
                         </ng-container>
                   </div>

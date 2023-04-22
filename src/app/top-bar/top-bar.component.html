@@ -1,31 +1,38 @@
-<div class="2xl:container 2xl:mx-auto">
-    <div class="bg-white rounded shadow-lg py-5 px-7">
+<div class="bg-gradient-to-br from-slate-800 via-slate-800 to-gray-800 border border-black drop-shadow-md">
+    <div class="rounded shadow-lg py-5 px-7">
         <nav class="flex justify-between">
-            <div class="flex items-center lg:pr-16 pr-6">
+            <div class="flex items-center ml-16">
                 <a [routerLink]="['/']">
-                    <img src="assets/images/ARGOS.png" alt="Logo Argos" width="140" height="100">
+                    <img src="assets/images/logo-white.png" alt="Logo Argos" width="140" height="100">
                 </a>
                 <h2 class="font-normal text-2xl leading-6 text-gray-800"></h2>
             </div>
-            <ul class="hidden md:flex flex-auto space-x-2">
-                <li (click)="isToggle = 1" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 1 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" 
-                    [routerLink]="['/']">Home</li>
-                <li (click)="isToggle = 2" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 2 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" 
-                    [routerLink]="['/itinerario-aviones']">Generar Horario</li>
-                <li (click)="isToggle = 3" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 3 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" 
-                    [routerLink]="['/schedule']">Horario</li>
-                <li (click)="isToggle = 4" [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 4 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')" 
-                    [routerLink]="['/allschedules']">Calendario anual</li>
-                <li (click)="isToggle = 5"
-                    [ngClass]="'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 cursor-pointer px-3 py-2.5 font-normal text-xs leading-3 shadow-md rounded ' + (isToggle === 5 ? 'text-white bg-slate-600' : 'text-gray-600 border border-white bg-gray-50')"
-                    [routerLink]="['/allEmpleados']" style="position: relative;">
-                    <span>Empleados</span>
-                    <span style="position: absolute; top: -8px; right: -8px;" *ngIf="empleadoService.vencimientoCredencial" class="flex h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                    </span>
-                </li>
-            </ul>
+            <div class="flex items-center lg:pr-16 pr-6">
+                <ul class="hidden md:flex flex-auto space-x-6">
+                    <li (click)="isToggle = 1" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
+                        [ngClass]=""
+                        [routerLink]="['/']">Home</li>
+                    <li (click)="isToggle = 2" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
+                        [ngClass]=""
+                        [routerLink]="['/itinerario-aviones']">Generar Horario</li>
+                    <li (click)="isToggle = 3" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
+                        [ngClass]=""
+                        [routerLink]="['/schedule']">Horario</li>
+                    <li (click)="isToggle = 4" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
+                        [ngClass]=""
+                        [routerLink]="['/allschedules']">Calendario anual</li>
+                    <li (click)="isToggle = 5" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
+                        [ngClass]=""
+                        [routerLink]="['/allEmpleados']" style="position: relative;">
+                        <span>Empleado</span>
+                        <span style="position: absolute; top: -8px; right: -8px;" *ngIf="empleadoService.vencimientoCredencial"
+                            class="flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </div>
 </div>

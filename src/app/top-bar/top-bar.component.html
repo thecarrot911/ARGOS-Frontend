@@ -9,20 +9,15 @@
             </div>
             <div class="flex items-center lg:pr-16 pr-6">
                 <ul class="hidden md:flex flex-auto space-x-6">
-                    <li (click)="isToggle = 1" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
-                        [ngClass]=""
+                    <li class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
                         [routerLink]="['/']">Home</li>
-                    <li (click)="isToggle = 2" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
-                        [ngClass]=""
+                    <li class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
                         [routerLink]="['/itinerario-aviones']">Generar Horario</li>
-                    <li (click)="isToggle = 3" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
-                        [ngClass]=""
+                    <li class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
                         [routerLink]="['/schedule']">Horario</li>
-                    <li (click)="isToggle = 4" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
-                        [ngClass]=""
+                    <li class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
                         [routerLink]="['/allschedules']">Calendario anual</li>
-                    <li (click)="isToggle = 5" class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
-                        [ngClass]=""
+                    <li class="rounded-lg px-3 py-2 text-white uppercase font-bold hover:bg-slate-100 shadow-md shadow-cyan-500/50 hover:text-slate-900"
                         [routerLink]="['/allEmpleados']" style="position: relative;">
                         <span>Empleado</span>
                         <span style="position: absolute; top: -8px; right: -8px;" *ngIf="empleadoService.vencimientoCredencial"

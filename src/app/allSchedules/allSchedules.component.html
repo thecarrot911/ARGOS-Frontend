@@ -49,14 +49,19 @@
     </div>
     <div class="mt-6 md:mt-0">
         <div class="flex justify-between gap-x-4">
-            <input type="number" min="2000" max="2080" name="search" [(ngModel)]="anio" placeholder="Búsqueda por año"
-                class="form-input peer rounded-md">
-            <button (click)="buscarCalendarios()" class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
-      text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">Buscar calendario</button>
-            <button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
+            
+            <form (ngSubmit)="buscarCalendarios()">
+                <input type="text" name="year" [(ngModel)]="buscarAnio.year" placeholder=" ">
+
+                <button type="submit" class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
+                    text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">Buscar calendario
+                </button>
+            </form>
+
+            <!--<button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
       text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">
                 Eliminar Planificación
-            </button>
+            </button>-->
         </div>
     </div>
 </div>
@@ -100,7 +105,7 @@
                         </div>
                         <ng-container *ngFor="let empleado of dia.empleados">
                             <div class="grid grid-cols-2 text-sm m-2">
-                                <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                <div class="grid-cols-1 flex justify-start">{{empleado.rut}} <!--{{empleado.nombre}} {{empleado.apellido}}--></div>
                                 <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
                                     <div  *ngSwitchCase="1">Mañana</div>
                                     <div  *ngSwitchCase="2">Tarde</div>

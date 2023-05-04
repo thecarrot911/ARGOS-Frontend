@@ -1,5 +1,10 @@
 import { DatoPlanificacion } from "./UltimaPlanificacion"
 
+
+export interface BuscarAnio {
+    year: string;
+}
+
 export interface RespuestaPerfil {
     error: boolean,
     msg: string,

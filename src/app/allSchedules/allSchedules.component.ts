@@ -4,6 +4,8 @@ import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { PlanificacionAnual } from '../calendarioanual';
 import { Planificacion } from '../UltimaPlanificacion';
+import { BuscarAnio } from '../empleados';
+import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-allSchedules',
@@ -12,16 +14,17 @@ import { Planificacion } from '../UltimaPlanificacion';
 })
 export class AllSchedulesComponent implements OnInit {
 
-    searchString : any;
-
     CurrentDate = new Date();
     latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
     today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
 
     public planificaciones: PlanificacionAnual
     public planificacioActual: Planificacion
-    public anio: number;
-    
+
+    buscarAnio: BuscarAnio = {
+        year: ''
+    };
+
     public CantidadPorPagina: number = 7;
     public PaginaPlanificacion: number = 1;
     public PaginacionPlanificacion: number = 1;
@@ -61,17 +64,19 @@ export class AllSchedulesComponent implements OnInit {
     }
 
     buscarCalendarios(){
-        this.allSchedulesService.MostrarPlanificacionAnual(this.anio).subscribe(
-            response => {
-                this.planificaciones = response
-                this.planificacioActual = this.planificaciones.data[0]
-                this.planificacioActual.mostrar = true;
-            },
-            error => {
-                console.log(error)
-            }
-        )
+        console.log(this.buscarAnio.year)
     }
+
+    /*this.allSchedulesService.MostrarPlanificacionAnual(this.anio).subscribe(
+        response => {
+            this.planificaciones = response
+            this.planificacioActual = this.planificaciones.data[0]
+            this.planificacioActual.mostrar = true;
+        },
+        error => {
+            console.log(error)
+        }
+    )*/
 
     onPaginationCalendario(event: any) {
         this.PaginaPlanificacion = event;

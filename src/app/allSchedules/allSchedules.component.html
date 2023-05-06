@@ -18,8 +18,8 @@
                             d="M15 7l-6.5 6.5a1.5 1.5 0 0 0 3 3l6.5 -6.5a3 3 0 0 0 -6 -6l-6.5 6.5a4.5 4.5 0 0 0 9 9 l6.5 -6.5" />
                     </svg>
                 </div>
-                <span class="hover:text-blue-600 text-bold">
-                    Planificación de {{planificacioActual.mes}} del {{planificacioActual.anio}}</span>
+                <!--<span class="hover:text-blue-600 text-bold">
+                    Planificación de {{planificacionActual.mes}} del {{planificacionActual.anio}}</span>-->
             </li>
             <li class="flex items-center mr-4 mt-4 md:mt-0">
                 <div class="mr-1">
@@ -51,7 +51,7 @@
         <div class="flex justify-between gap-x-4">
             
             <form (ngSubmit)="buscarCalendarios()">
-                <input type="text" name="year" [(ngModel)]="buscarAnio.year" placeholder=" ">
+                <input type="number" min="2000" name="anio" [(ngModel)]="anio" class="form-input peer rounded-md" placeholder=" ">
 
                 <button type="submit" class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
                     text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">Buscar calendario
@@ -59,7 +59,7 @@
             </form>
 
             <!--<button class="transition focus:outline-none duration-150 ease-in-out hover:bg-indigo-600 bg-slate-700 rounded
-      text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">
+                text-white px-8 py-2 text-sm shadow-lg shadow-cyan-500/50">
                 Eliminar Planificación
             </button>-->
         </div>
@@ -68,17 +68,23 @@
 
 <div class="container mx-auto">
     <div class="grid grid-cols-12 ">
-        <ng-container *ngFor="let planificacion of planificaciones.data">
-            <div class="max-w-full">
-                <button (click)="SeleccionMes(planificacion)" [ngClass]="{'bg-indigo-500': planificacion.mostrar,
-                    'bg-white-500': !planificacion.mostrar,
-                    'text-indigo-500': !planificacion.mostrar,
-                    'border': true,
-                    'border-indigo-500': !planificacion.mostrar}" class="w-full text-white p-4 rounded shadow-md">
-                    {{planificacion.mes}}
-                </button>
-            </div>
+        <ng-container *ngIf="planificaciones.data != null; else MostrarPlanificacion">
+            <ng-container *ngFor="let planificacion of planificaciones.data">
+                <div class="max-w-full">
+                    <button (click)="SeleccionMes(planificacion)" [ngClass]="{'bg-indigo-500': planificacion.mostrar,
+                                'bg-white-500': !planificacion.mostrar,
+                                'text-indigo-500': !planificacion.mostrar,
+                                'border': true,
+                                'border-indigo-500': !planificacion.mostrar}" class="w-full text-white p-4 rounded shadow-md">
+                        {{planificacion.mes}}
+                    </button>
+                </div>
+            </ng-container>
         </ng-container>
+        <ng-template #MostrarPlanificacion>
+            <p>xD</p>
+        </ng-template>
+
     </div>
 </div>
 
@@ -86,35 +92,40 @@
     <div class="flex flex-col lg:flex-row w-full items-start lg:items-center rounded pt-6">
         <div class="w-full lg:w-5/6 ">
             <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
-                <ng-container *ngFor="let dia of planificacioActual.planificacion | paginate:{
-                    id:'first',
-                    itemsPerPage: CantidadPorPagina,
-                    currentPage: PaginacionPlanificacion,
-                    totalItems: ContadorCalendario}; let ix = index">
-                    <div class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
-                        <div class="m-3 place-content-center relative flex">
-                            <div class="flex justify-between">
-                                <div class="flex flex-col gap-1">
-                                    <div>
-                                        {{dia.dia_numero}} {{dia.dia_semana}}
-                                    </div>
-                                    <div class="flex justify-center">
+                <ng-container *ngIf="planificacionActual != null">
+                    <ng-container *ngFor="let dia of planificacionActual.planificacion | paginate:{
+                        id:'first',
+                        itemsPerPage: CantidadPorPagina,
+                        currentPage: PaginacionPlanificacion,
+                        totalItems: ContadorCalendario}; let ix = index">
+                        <div class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
+                            <div class="m-3 place-content-center relative flex">
+                                <div class="flex justify-between">
+                                    <div class="flex flex-col gap-1">
+                                        <div>
+                                            {{dia.dia_numero}} {{dia.dia_semana}}
+                                        </div>
+                                        <div class="flex justify-center">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <ng-container *ngFor="let empleado of dia.empleados">
+                                <div class="grid grid-cols-2 text-sm m-2">
+                                    <div class="grid-cols-1 flex justify-start">
+                                        {{empleado.nombre}} {{empleado.apellido}}
+                                        <!--{{empleado.rut}}-->
+                                    </div>
+                                    <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
+                                        <div  *ngSwitchCase="1">Mañana</div>
+                                        <div  *ngSwitchCase="2">Tarde</div>
+                                        <div  *ngSwitchCase="3">Noche</div>
+                                        <div  *ngSwitchDefault>Libre</div>
+                                    </div>
+                                </div>
+                            </ng-container>
                         </div>
-                        <ng-container *ngFor="let empleado of dia.empleados">
-                            <div class="grid grid-cols-2 text-sm m-2">
-                                <div class="grid-cols-1 flex justify-start">{{empleado.rut}} <!--{{empleado.nombre}} {{empleado.apellido}}--></div>
-                                <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
-                                    <div  *ngSwitchCase="1">Mañana</div>
-                                    <div  *ngSwitchCase="2">Tarde</div>
-                                    <div  *ngSwitchCase="3">Noche</div>
-                                    <div  *ngSwitchDefault>Libre</div>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </div>
+                    </ng-container>
                 </ng-container>
             </div>
             <div class="mx-auto m-4 flex justify-center">

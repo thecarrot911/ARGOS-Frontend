@@ -4,8 +4,6 @@ import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { PlanificacionAnual } from '../calendarioanual';
 import { Planificacion } from '../UltimaPlanificacion';
-import { BuscarAnio } from '../empleados';
-import { FormsModule } from '@angular/forms'
 
 @Component({
   selector: 'app-allSchedules',
@@ -19,30 +17,38 @@ export class AllSchedulesComponent implements OnInit {
     today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
 
     public planificaciones: PlanificacionAnual
-    public planificacioActual: Planificacion
-
-    buscarAnio: BuscarAnio = {
-        year: ''
-    };
+    public planificacionActual: Planificacion
 
     public CantidadPorPagina: number = 7;
     public PaginaPlanificacion: number = 1;
     public PaginacionPlanificacion: number = 1;
     public ContadorCalendario: number = 0;
 
+    public anio: number = null;
 
     constructor(
         private allSchedulesService: AllSchedulesService,
         private datePipe: DatePipe,
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
-        this.allSchedulesService.MostrarPlanificacionAnual(this.CurrentDate.getFullYear()).subscribe(
+        //this.allSchedulesService.MostrarPlanificacionAnual(this.CurrentDate.getFullYear()).subscribe(
+        this.allSchedulesService.MostrarPlanificacionAnual(2004).subscribe(
             response => {
-                console.log(response)
-                this.planificaciones = response;
-                this.planificacioActual = this.planificaciones.data[0];
-                this.planificacioActual.mostrar = true;
+                if (response.error){
+
+                    this.planificaciones = response;
+                    this.planificacionActual = this.planificaciones.data[0];
+                    this.planificacionActual.mostrar = true;
+                
+                }else{
+
+                    console.log("xD?")
+                    this.planificaciones = null;
+                    this.planificacionActual = null;
+
+                }
             },
             error => {
                 console.log(error)
@@ -55,7 +61,7 @@ export class AllSchedulesComponent implements OnInit {
         this.planificaciones.data.forEach(planificacion =>{
             if(planificacion.mes === planificacionSeleccionada.mes){
                 planificacion.mostrar = true;
-                this.planificacioActual = planificacion
+                this.planificacionActual = planificacion
                 this.PaginacionPlanificacion = 1;
             }else{
                 planificacion.mostrar = false;
@@ -64,14 +70,25 @@ export class AllSchedulesComponent implements OnInit {
     }
 
     buscarCalendarios(){
-        console.log(this.buscarAnio.year)
+        const anioBuscado = this.anio;
+        console.log(anioBuscado)
+        this.allSchedulesService.MostrarPlanificacionAnual(anioBuscado).subscribe(
+            response => {
+                this.planificaciones = response
+                this.planificacionActual = this.planificaciones.data[0]
+                this.planificacionActual.mostrar = true;
+            },
+            error => {
+                console.log(error)
+            }
+        )
     }
 
     /*this.allSchedulesService.MostrarPlanificacionAnual(this.anio).subscribe(
         response => {
             this.planificaciones = response
-            this.planificacioActual = this.planificaciones.data[0]
-            this.planificacioActual.mostrar = true;
+            this.planificacionActual = this.planificaciones.data[0]
+            this.planificacionActual.mostrar = true;
         },
         error => {
             console.log(error)

@@ -45,7 +45,6 @@ export class TopBarComponent implements OnInit {
         this.router.events.subscribe((event) =>{
             if (event instanceof NavigationEnd){
                 this.rutaActual = event.url;
-                console.log()
             }
         })
     }

@@ -115,6 +115,11 @@ export class ItinerarioAvionesComponent implements OnInit {
 
     enviarDatosJSON(){
         this.esperandoJSON();
+
+        if (this.planificacion.itinerario[0]["dia"] == null){
+            this.planificacion.itinerario = []
+        }
+
         this.horarioService.generarHorario(this.planificacion).subscribe(
             response => {
                 this.router.navigate(['schedule'])

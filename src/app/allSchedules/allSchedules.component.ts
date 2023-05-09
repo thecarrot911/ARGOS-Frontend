@@ -34,7 +34,7 @@ export class AllSchedulesComponent implements OnInit {
 
     ngOnInit() {
         //this.allSchedulesService.MostrarPlanificacionAnual(this.CurrentDate.getFullYear()).subscribe(
-        this.allSchedulesService.MostrarPlanificacionAnual(2004).subscribe(
+        this.allSchedulesService.MostrarPlanificacionAnual(2005).subscribe(
             response => {
                 if (response.error){
 

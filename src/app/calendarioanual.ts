@@ -1,4 +1,4 @@
-import { Planificacion } from './UltimaPlanificacion';
+import { Planificacion, Estadistica } from './UltimaPlanificacion';
 
 export class PlanificacionAnual {
     error: boolean;
@@ -18,8 +18,21 @@ export interface PlanificacionMensual {
     mostrar?: boolean;
 }
 
-interface Mes{
+export interface Mes{
     month: string;
     id: number;
-    mostrar?: boolean;
+    estadistica: Informacion[];
+}
+
+export interface Informacion{
+    month: string,
+    rut: string,
+    nombre_paterno: string,
+    apellido_paterno: string,
+    imagen: string,
+    feriado: number,
+    libre: number,
+    turno1: number,
+    turno2: number,
+    turno3: number
 }

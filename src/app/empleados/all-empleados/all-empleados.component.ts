@@ -4,8 +4,6 @@ import { Credencial, Empleado } from '../../empleados';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DatoPlanificacion } from '../../UltimaPlanificacion';
-import { response } from 'express';
-import { C } from '@fullcalendar/core/internal-common';
 
 
 @Component({

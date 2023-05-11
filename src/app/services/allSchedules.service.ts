@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { PlanificacionAnual, PlanificacionesAnuales } from '../calendarioanual';
+import { CalendarioAnual } from '../calendario';
+import { PlanificacionAnios } from '../calendarioanual';
 
 @Injectable({
     providedIn: 'root'
@@ -9,8 +10,8 @@ import { PlanificacionAnual, PlanificacionesAnuales } from '../calendarioanual';
 
 export class AllSchedulesService {
 
-    urlPlanificacionesAnuales = 'http://localhost:10975/app/planificacion/planificaciones_anuales'
-    urlPlanificacionAnual = ''
+    urlPlanificacionesAnuales = 'http://localhost:10975/app/planificacion/planificaciones';
+    urlAniosPlanificaciones = 'http://localhost:10975/app/planificacion/planificaciones_anios';
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,18 +21,17 @@ export class AllSchedulesService {
     private http: HttpClient
     ) { }
 
-    MostrarPlanificacionAnual(anio: number): Observable<PlanificacionAnual>{
+    MostrarPlanificacionAnual(anio: number): Observable<CalendarioAnual>{
         let query = new HttpParams().set('anio', anio);
-        return this.http.get<PlanificacionAnual>(this.urlPlanificacionAnual, {params: query})
+        return this.http.get<CalendarioAnual>(this.urlPlanificacionesAnuales, {params: query})
     }
 
-    MostrarPlanificacionesAnuales(): Observable<PlanificacionesAnuales>{
-        return this.http.get<PlanificacionesAnuales>(this.urlPlanificacionesAnuales)
+    MostrarAniosPlanificaciones(): Observable<PlanificacionAnios>{
+        return this.http.get<PlanificacionAnios>(this.urlAniosPlanificaciones)
     }
-
 
     /*deletePlanificacionId(planificacion: Data):Observable<Data>{
         return this.http.delete<Data>(this.url_deletePlanificacionById+'/'+planificacion.planificacion_id, this.httpOptions)
     }*/
 
-    }
+}

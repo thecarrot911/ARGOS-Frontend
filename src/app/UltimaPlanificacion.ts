@@ -1,4 +1,5 @@
 import { Actualizacion } from "./actualizacion"
+import { EstadisticaPlanificacion } from './calendarioanual';
 
 export interface DatoPlanificacion {
       nombre_paterno: string,
@@ -29,15 +30,16 @@ export interface UltimaPlanificacion {
 }
 
 export interface Planificacion{
-      anio: number,
       mes: string,
-      id: number,
+      planificacion_id: number,
+      anio: number,
       planificacion: Dia[],
-      actualizacion: Actualizacion[],
+      estadistica?: EstadisticaPlanificacion;
+      actualizacion?: Actualizacion[],
       mostrar?: Boolean
 }
 
-interface Dia{
+export interface Dia{
       dia_semana: string,
       dia_numero: number,
       feriado: boolean,

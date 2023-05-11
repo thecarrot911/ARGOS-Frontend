@@ -1,10 +1,8 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'; /* a */
-import { HttpParams } from '@angular/common/http';
 import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
 import { GenerarPlanificacion } from '../generarPlanificacion';
-import { Calendario, Actualizacion, Planificacion, Data } from '../calendario';
-import { EmpleadoData } from '../empleados';
+import { Actualizacion, Data } from '../calendario';
 import { UltimaPlanificacion } from '../UltimaPlanificacion';
 
 @Injectable({

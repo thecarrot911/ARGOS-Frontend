@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
-import { Calendario, Actualizacion, Itinerario, Planificacion, Data } from '../calendario';
+import { Calendario, Actualizacion, Itinerario, Data } from '../calendario';
 import { DatePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -27,7 +27,6 @@ export class ScheduleComponent implements OnInit {
 
     horarios: Calendario;
     horariosData: Data;
-    horariosPlanificacion: Planificacion[] = [];
     horariosActualizacion: Actualizacion[] = [];
 
 
@@ -39,12 +38,17 @@ export class ScheduleComponent implements OnInit {
 
     page: number = 1;
     pageCalendario: number = 1;
-    paginationCalendario = 1;
     paginationActualizaciones = 1;
     count: number = 0;
-    countCalendario: number = 0;
     tableSize: number = 4;
+
+
     tableSizeCalendario: number = 7;
+    paginationCalendario = 1;
+    countCalendario: number = 0;
+    
+    
+    
     tableSizes: any = [5, 10, 15, 20]
     tableSizesCalendario: any = [5, 10, 15, 20]
 

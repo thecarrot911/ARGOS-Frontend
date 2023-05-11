@@ -1,4 +1,4 @@
-import { Planificacion, Estadistica } from './UltimaPlanificacion';
+import { Planificacion } from './UltimaPlanificacion';
 
 export class PlanificacionAnual {
     error: boolean;
@@ -6,26 +6,12 @@ export class PlanificacionAnual {
     data: Planificacion[];
 }
 
-export interface PlanificacionesAnuales {
-    error: boolean;
-    msg: string;
-    data: [PlanificacionMensual];
-}
-
-export interface PlanificacionMensual {
-    year: number;
-    months: Mes[];
-    mostrar?: boolean;
-}
-
-export interface Mes{
-    month: string;
-    id: number;
-    estadistica: Informacion[];
+export interface EstadisticaPlanificacion{
+    month: string,
+    empleados: Informacion[]
 }
 
 export interface Informacion{
-    month: string,
     rut: string,
     nombre_paterno: string,
     apellido_paterno: string,
@@ -35,4 +21,21 @@ export interface Informacion{
     turno1: number,
     turno2: number,
     turno3: number
+}
+
+export interface PlanificacionAnios{
+    error: boolean,
+    msg: string,
+    data: Anios[];
+}
+
+export interface Anios{
+    year: number,
+    meses: Months[],
+    mostrar?: boolean
+}
+
+export interface Months{
+    mes: string,
+    id: number
 }

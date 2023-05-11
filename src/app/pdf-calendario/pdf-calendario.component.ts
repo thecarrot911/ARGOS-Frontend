@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Calendario, Actualizacion, Itinerario, Planificacion, Data } from '../calendario';
+import { Calendario, Actualizacion, Itinerario, Data } from '../calendario';
 import { HorarioService } from '../services/horario.service';
 
 import pdfMake from "pdfmake/build/pdfmake";
@@ -36,7 +36,7 @@ export class PdfCalendarioComponent implements OnInit {
       )
   }
 
-  GeneradorTablasPlanificacion(planificacion: Planificacion[], number: any): Planificacion[] {
+  GeneradorTablasPlanificacion(planificacion: any, number: any): any[] {
     let body = new Array();
    
     let tableHeader = new Array();
@@ -182,13 +182,13 @@ export class PdfCalendarioComponent implements OnInit {
           { style: '',
           table:
             { 
-              body: this.GeneradorTablasPlanificacion(planificacion, k),
+              //body: this.GeneradorTablasPlanificacion(planificacion, k),
             }
           }
         ])
       }
       else {
-        content.push(['\n' + 'Semana ' + (indiceSemana) + '\n', { style: 'tableExample', table: { body: this.GeneradorTablasPlanificacion(planificacion, k)  } }])
+        //content.push(['\n' + 'Semana ' + (indiceSemana) + '\n', { style: 'tableExample', table: { body: this.GeneradorTablasPlanificacion(planificacion, k)  } }])
       }
       indiceSemana = indiceSemana + 1;
     }

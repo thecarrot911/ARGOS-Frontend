@@ -1,3 +1,6 @@
+import { EstadisticaPlanificacion } from "./calendarioanual";
+import { Planificacion } from "./UltimaPlanificacion";
+
 export interface Calendario {
     error: boolean,
     msg: string,
@@ -5,25 +8,22 @@ export interface Calendario {
   }
 
 export interface CalendarioAnual{
-  error: boolean,
-  msg: string,
-  data: Data[],
+    error: boolean,
+    msg: string,
+    data: Planificacion[]
 }
 
 export interface Data {
+    id?: number;
     planificacion_id: number;
     mes: string;
     anio: string;
     planificacion: Planificacion[];
+    estadistica: EstadisticaPlanificacion;
     actualizacion: Actualizacion[];
+    mostrar?: boolean;
 }
-export interface Planificacion {
-  dia_semana: string;
-  numero_dia: string;
-  empleados: Empleados[];
-  comodin: string;
-  itinerario: Itinerario[];
-}
+
 export interface Itinerario{
   turno_itinerario: string;
   falta: number;

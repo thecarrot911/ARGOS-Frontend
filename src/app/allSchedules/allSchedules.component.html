@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<div class="container mx-auto shadow-lg m-20">
+<div class="container mx-auto m-20">
     <ng-container *ngIf="existePlanificacion; else SinPlanificaciones">
         <div class="grid grid-cols-4 gap-6 grid-flow-row auto-rows-auto rounded-md bg-slate-700 p-6">
             <ng-container *ngFor="let planificacion of planificacionAnios.data">
@@ -26,10 +26,21 @@
         </div>
     </ng-container>
     <ng-template #SinPlanificaciones>
+        <div class="mx-auto flex justify-center px-10">
+            <span class="text-4xl font-bold text-gray-200"> NO HAY PLANIFICACIONES REGISTRADAS </span>
+        </div>
+        <div>
+            <button (click)="GenerarPlanificacion()"
+                class="mx-auto flex font-medium rounded-lg dark:focus:ring-gray-600 p-5 m-10
+                hover:ease-in-out
+                dark:bg-gray-900 border dark:border-gray-900 dark:text-white shadow-lg shadow-cyan-500/50">
+                <span class="text-white font-bold">GENERAR PLANIFICACIÓN</span>
+            </button>
+        </div>
     </ng-template>
 </div>
 
-<div class="container mx-auto">
+<div class="container mx-auto pb-20">
     <ng-container *ngIf="efectoCarga">
         <div aria-label="Loading..." role="status">
             <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
@@ -41,165 +52,166 @@
                 </path>
             </svg>
         </div>
-        Cargando...
+        <h1>Cargando...</h1>
     </ng-container>
+
     <ng-container *ngIf="hayPlanificacion && !efectoCarga; else SinPlanificacion">
-        <div class="grid grid-cols-12">
-            <ng-container *ngFor="let planificacion of planificacionAnual.data">
-                <div class="col-span-3">
-                    <div (click)="SeleccionMes(planificacion.planificacion_id)" 
-                        class=" text-center text-white p-4 round shadow-md"
-                        [ngClass]="{
+        <div class="grid grid-cols-12 bg-red-500">
+            <div class="col-span-9 grid grid-cols-6">
+                <ng-container *ngFor="let planificacion of planificacionAnual.data">
+                    <div class="col-span-2 p-2">
+                        <div (click)="SeleccionMes(planificacion.planificacion_id)" class=" text-center text-white p-4 round shadow-md"
+                            [ngClass]="{
                             'bg-black': planificacion.mostrar,
-                            'dark:bg-gray-800': !planificacion.mostrar
-                        }">
-                        {{planificacion.mes}}
+                            'dark:bg-gray-800': !planificacion.mostrar}">
+                            {{planificacion.mes}}
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="col-span-3 grid grid-cols-3">
+                <div class="col-span-1 flex justify-center items-center">
+                    <app-pdf-calendario></app-pdf-calendario>
+                </div>
+                <div class="col-span-1 flex justify-center items-center">
+                    <button (click)="MostrarModalActualizacion()" class="bg-orange-400 flex"> 
+                        <span>ACTUALIZACIÓN</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="col-span-1 flex justify-center items-center">
+                    <button (click)="BorrarPlanificacion()" class="bg-blue-200 flex">
+                        <span>BORRAR</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div class="grid grid-cols-12 bg-yellow-500">
+            <div class="bg-indigo-600" 
+                [ngClass]="{'col-span-9': true,
+                            'col-span-12': false}">
+                <ng-container *ngIf="planificacionActual!=null">
+                    <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
+                        <ng-container *ngFor="let dia of planificacionActual.planificacion | paginate:{
+                            id: 'first',
+                            itemsPerPage: CantidadPorPagina,
+                            currentPage: PaginacionPlanificacion,
+                            totalItems: ContadorCalendario};
+                            let ix = index">
+                            <div
+                                class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
+                                <div class="m-3 place-content-center relative flex">
+                                    <div class="flex justify-between">
+                                        <div class="flex flex-col gap-1">
+                                            <div>{{dia.dia_semana}} {{dia.dia_numero}}</div>
+                                            <div class="flex justify-center"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ng-container *ngFor="let empleado of dia.empleados">
+                                    <div class="grid grid-cols-2 text-xs m-2">
+                                        <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                        <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
+                                            <div *ngSwitchCase="1">Mañana</div>
+                                            <div *ngSwitchCase="2">Tarde</div>
+                                            <div *ngSwitchCase="3">Noche</div>
+                                            <div *ngSwitchDefault>Libre</div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="mx-auto flex justify-center">
+                        <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente"
+                            (pageChange)="PaginacionPlanificacion = $event">
+                        </pagination-controls>
+                    </div>
+                </ng-container>
+            </div>
+            <ng-container *ngIf="true">
+                <div class="bg-white col-span-3 flex flex-col">
+                    <div class="flex justify-center">
+                        <h1 class="italic text-lg font-semibold hover:text-black">Actualizaciones</h1>
+                    </div>
+                    <ng-container *ngFor="let actualizacion of planificacionActual.estadistica.empleados">
+                        <div class="flex justify-center">
+                            <p>xD</p>
+                        </div>
+                    </ng-container>
+                </div>
+            </ng-container>
+        </div>
+
+
+        <div class="flex justify-center p-3 bg-blue-500 mt-10">
+            <h1 class="font-bold p-2 uppercase text-3xl text-slate-200 leading-4"> INFORMACIÓN</h1>
+        </div>
+
+        <div class="grid grid-cols-3 bg-red-500 gap-4 p-4 ">
+            <ng-container *ngFor="let empleado of planificacionActual.estadistica.empleados">
+                <div class="col-span-1 grid grid-cols-3 flex justify-center bg-blue-500">
+                    <div class="col-span-1 p-3">
+                        <div class="bg-black mx-auto w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
+                            <img src="{{ empleado.imagen }}" class="w-full h-full object-contain object-center">
+                        </div>
+                        <div class="pt-2 text-center">
+                            <p class="font-bold text-base text-slate-200 leading-4">
+                                {{empleado.nombre_paterno}}
+                            </p>
+                            <p class="font-bold text-base text-slate-200 leading-4">
+                                {{empleado.apellido_paterno}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-span-2 p-3">
+                        <div class="border border-yellow-500 flex justify-between">
+                            <div>
+                                <p class="font-bold p-1 text-slate-200 leading-4">Mañana: </p>
+                                <p class="font-bold p-1 text-slate-200 leading-4">Tarde: </p>
+                                <p class="font-bold p-1 text-slate-200 leading-4">Noche: </p>
+                                <p class="font-bold p-1 text-slate-200 leading-4">Feriado: </p>
+                                <p class="font-bold p-1 text-slate-200 leading-4">Libre: </p>
+                            </div>
+                            <div class="text-center">
+                                <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno1}}</p>
+                                <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno2}}</p>
+                                <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno3}}</p>
+                                <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.feriado}}</p>
+                                <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.libre}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </ng-container>
         </div>
-        <ng-container *ngIf="planificacionActual!=null">
-            <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
-                <ng-container *ngFor="let dia of planificacionActual.planificacion | paginate:{
-                    id: 'first',
-                    itemsPerPage: CantidadPorPagina,
-                    currentPage: PaginacionPlanificacion,
-                    totalItems: ContadorCalendario};
-                    let ix = index">
-                    <div
-                        class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
-                        <div class="m-3 place-content-center relative flex">
-                            <div class="flex justify-between">
-                                <div class="flex flex-col gap-1">
-                                    <div>{{dia.dia_semana}} {{dia.dia_numero}}</div>
-                                    <div class="flex justify-center"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <ng-container *ngFor="let empleado of dia.empleados">
-                            <div class="grid grid-cols-2 text-xs m-2">
-                                <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
-                                <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
-                                    <div *ngSwitchCase="1">Mañana</div>
-                                    <div *ngSwitchCase="2">Tarde</div>
-                                    <div *ngSwitchCase="3">Noche</div>
-                                    <div *ngSwitchDefault>Libre</div>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </div>
-                </ng-container>
-            </div>
-            <div class="mx-auto flex justify-center">
-                <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente"
-                    (pageChange)="PaginacionPlanificacion = $event">
-                </pagination-controls>
-            </div>
-        </ng-container>
-            <div class="col-span-6">
-                <div class="flex justify-center p-3 bg-blue-500">
-                    <h1 class="font-bold p-2 uppercase text-3xl text-slate-200 leading-4"> INFORMACIÓN</h1>
-                </div>
-                <div class="grid grid-cols-3 bg-red-500 gap-4 p-4">
-                     <ng-container *ngFor="let empleado of planificacionActual.estadistica.empleados">
-                        <div class="col-span-1 grid grid-cols-3 flex justify-center bg-blue-500">
-                            <div class="col-span-1 p-3">
-                                <div class="bg-black mx-auto w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
-                                    <img src="{{ empleado.imagen }}" class="w-full h-full object-contain object-center">
-                                </div>
-                                <div class="pt-2 text-center">
-                                    <p class="font-bold text-base text-slate-200 leading-4">
-                                        {{empleado.nombre_paterno}}
-                                    </p>
-                                    <p class="font-bold text-base text-slate-200 leading-4">
-                                        {{empleado.apellido_paterno}}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-span-2 p-3">
-                                <div class="border border-yellow-500 flex justify-between">
-                                    <div>
-                                        <p class="font-bold p-1 text-slate-200 leading-4">Mañana: </p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4">Tarde: </p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4">Noche: </p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4">Feriado: </p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4">Libre: </p>
-                                    </div>
-                                    <div class="text-center">
-                                        <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno1}}</p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno2}}</p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno3}}</p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.feriado}}</p>
-                                        <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.libre}}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-container>
-                </div>
-            </div>
-        </ng-container>
+    </ng-container>
     <ng-template #SinPlanificacion>
     </ng-template>
 </div>
 
-
-
-<!--
-<ng-container *ngIf="planificacionAnualActual; else SinPlanificacionActual">
-    <div class="container mx-auto mt-10">
-        <div class="grid grid-cols-12 gap-4">
-            <ng-container *ngFor="let planificacion of planificacionAnualActual.months">
-                <div class="col-span-6">
-                    <div class="flex justify-center p-3 bg-blue-500">
-                        <h1 class="font-bold p-2 uppercase text-3xl text-slate-200 leading-4">{{planificacion.month}}</h1>
-                    </div>
-                    <div class="grid grid-cols-2 bg-red-500 gap-4 p-4">
-                        <ng-container *ngFor="let empleado of planificacion.estadistica">
-                            <div class="col-span-1 grid grid-cols-3 flex justify-center bg-blue-500">
-                                <div class="col-span-1 p-3">
-                                    <div class="bg-black mx-auto w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
-                                        <img src="{{ empleado.imagen }}" class="w-full h-full object-contain object-center">
-                                    </div>
-                                    <div class="pt-2 text-center">
-                                        <p class="font-bold text-base text-slate-200 leading-4">
-                                            {{empleado.nombre_paterno}} 
-                                        </p>
-                                        <p class="font-bold text-base text-slate-200 leading-4">
-                                            {{empleado.apellido_paterno}}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="col-span-2 p-3">
-                                    <div class="border border-yellow-500 flex justify-between">
-                                        <div>
-                                            <p class="font-bold p-1 text-slate-200 leading-4">Mañana: </p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4">Tarde: </p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4">Noche: </p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4">Feriado: </p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4">Libre: </p>
-                                        </div>
-                                        <div class="text-center">
-                                            <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno1}}</p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno2}}</p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno3}}</p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.feriado}}</p>
-                                            <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.libre}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </div>
-                </div>
-            </ng-container>
-        </div>
-    </div>
+<!-- OPACIDAD EN LA PÁGINA -->
+<ng-container 
+    *ngIf="horarioService.modalAddActualizacion || horarioService.modalAddPlanificacion">
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-70"></div>
 </ng-container>
--->
 
-<ng-template #SinPlanificacionActual>
-    <div class="container mx-auto shadow-lg my-10">
-        <p>No hay nada</p>
-    </div>
-</ng-template>
+
+<!-- MODAL ADD ACTUALIZACIÓN -->
+<ng-container *ngIf="horarioService.modalAddActualizacion">
+    <app-agregarActualizacion
+    [planificacion_id]="planificacionActual.planificacion_id"
+    (recargarPagina)="ngOnInit()"
+    >
+    </app-agregarActualizacion>
+</ng-container>
+
+<!-- MODAL ADD PLANIFICACIÓN-->
+<ng-container *ngIf="horarioService.modalAddPlanificacion">
+    <app-itinerario-aviones>
+    </app-itinerario-aviones>
+</ng-container>

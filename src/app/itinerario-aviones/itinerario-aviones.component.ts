@@ -34,17 +34,20 @@ export class ItinerarioAvionesComponent implements OnInit {
     public listaEmpleados: Empleado[];
     public empleadoSeleccionado: Empleado[] = [];
     public empleadosPlanificacion: Empleado[] = [];
-    public ngEmpleado: string;
+    
+    public comodinSeleccionado: Empleado = null;
 
-    CurrentDate = new Date();
-    latest_date = this.datePipe.transform(this.CurrentDate, 'yyyy-MM-dd');
-    today_is = this.datePipe.transform(this.CurrentDate, 'EEEE, MMMM d, y')
+    public ngEmpleado: string;
+    public comodin: string;
+    
+
+    public anioActual = new Date().getFullYear();
+    public mesActual = new Date().getMonth();
 
     constructor(
         private horarioService: HorarioService,
         private router: Router,
         private empleadoService: AllempleadosService,
-        private datePipe: DatePipe,
     ) {
     }
 
@@ -58,7 +61,16 @@ export class ItinerarioAvionesComponent implements OnInit {
         )
     }
 
-    AgregarEmpleado() {
+    AgregarComodin(){
+        if(this.comodinSeleccionado!=null){
+            this.EliminarComodin(this.comodinSeleccionado)
+        }
+        const empleado = this.listaEmpleados.find((e) => e.rut === this.comodin)
+        this.comodinSeleccionado = empleado
+        this.listaEmpleados = this.listaEmpleados.filter(empleado => empleado.rut != this.comodinSeleccionado.rut);
+    }
+
+    AgregarEmpleado(){
         const empleado = this.listaEmpleados.find((e) => e.rut === this.ngEmpleado);
         this.empleadoSeleccionado.push(empleado);
         this.planificacion.empleados.push(empleado);
@@ -69,7 +81,11 @@ export class ItinerarioAvionesComponent implements OnInit {
         this.listaEmpleados.push(empleado);
         this.empleadoSeleccionado = this.empleadoSeleccionado.filter(emp => emp.rut != empleado.rut);
         this.planificacion.empleados = this.planificacion.empleados.filter(emp => emp.rut !=  empleado.rut)
-        console.log(this.planificacion.empleados)
+    }
+
+    EliminarComodin(empleado: Empleado){
+        this.listaEmpleados.push(empleado);
+        this.comodinSeleccionado = null;
     }
 
 
@@ -113,8 +129,12 @@ export class ItinerarioAvionesComponent implements OnInit {
         }
     }
 
-    enviarDatosJSON(){
-        this.esperandoJSON();
+    Cerrar(){
+        this.horarioService.modalAddPlanificacion = !this.horarioService.modalAddPlanificacion;
+    }
+
+    GenerarPlanificacion(){
+        /*this.esperandoJSON();
 
         if (this.planificacion.itinerario[0]["dia"] == null){
             this.planificacion.itinerario = []
@@ -127,8 +147,8 @@ export class ItinerarioAvionesComponent implements OnInit {
             error => {
                 console.error(error)
             }
-        )
-        
+        )*/
+        console.log("xsadasd?")
     }
 
     agregarChoque(){

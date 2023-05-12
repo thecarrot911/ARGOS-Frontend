@@ -4,6 +4,7 @@ import { Anios, PlanificacionAnios } from '../calendarioanual';
 import { AllSchedulesService } from '../services/allSchedules.service';
 import { Planificacion } from '../UltimaPlanificacion';
 import { finalize } from 'rxjs/operators';
+import { HorarioService } from '../services/horario.service';
 
 
 @Component({
@@ -37,8 +38,13 @@ export class AllSchedulesComponent implements OnInit {
 
 
     constructor(
-        private AllSchedulesService: AllSchedulesService
+        private AllSchedulesService: AllSchedulesService,
+        public horarioService: HorarioService
     ){
+    }
+
+    BorrarPlanificacion(){
+
     }
 
     ngOnInit(){
@@ -54,6 +60,14 @@ export class AllSchedulesComponent implements OnInit {
                 console.error(error)
             }
         )
+    }
+
+    MostrarModalActualizacion(): void{
+        this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
+    }
+
+    GenerarPlanificacion(): void{
+        this.horarioService.modalAddPlanificacion = !this.horarioService.modalAddPlanificacion;
     }
 
     SeleccionPlanificacion(anio: number): void{

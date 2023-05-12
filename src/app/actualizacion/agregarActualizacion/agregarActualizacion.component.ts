@@ -38,7 +38,7 @@ export class AgregarActualizacionComponent implements OnInit {
                 this.ArrayTipo = response.data.actualizacion
                 this.ArrayEmpleadoSolicitante = response.data.solicitante
                 this.ArrayEmpleadoReemplazante = response.data.empleados
-                console.log(response)
+                console.log(this.planificacion_id)
             },  
             error =>{
                 console.error(error)

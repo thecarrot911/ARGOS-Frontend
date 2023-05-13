@@ -1,6 +1,6 @@
 <div class="container mx-auto my-2">
     <div class="overflow-x-auto flex justify-center">
-        <h1 class="mt-10 mb-5 text-center font-bold text-lg lg:text-5xl bg-gradient-to-br from-white via-white to-transparent bg-clip-text text-transparent">
+        <h1 class="mt-10 mb-5 text-center font-bold text-5xl bg-gradient-to-br from-white via-white to-transparent bg-clip-text text-transparent">
         PLANIFICACIONES DEL AÑO</h1>
     </div>
     <div
@@ -113,15 +113,28 @@
                                     </div>
                                 </div>
                                 <ng-container *ngFor="let empleado of dia.empleados">
-                                    <div class="grid grid-cols-2 text-xs m-2">
-                                        <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
-                                        <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
-                                            <div *ngSwitchCase="1">Mañana</div>
-                                            <div *ngSwitchCase="2">Tarde</div>
-                                            <div *ngSwitchCase="3">Noche</div>
-                                            <div *ngSwitchDefault>Libre</div>
+                                    <ng-container *ngIf="dia.comodin != 0 && empleado.turno == dia.comodin;else NohayComodin">
+                                        <div class="grid grid-cols-2 text-xs m-2 bg-red-500">
+                                            <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                            <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
+                                                <div *ngSwitchCase="1">Mañana</div>
+                                                <div *ngSwitchCase="2">Tarde</div>
+                                                <div *ngSwitchCase="3">Noche</div>
+                                                <div *ngSwitchDefault>Libre</div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </ng-container>
+                                    <ng-template #NohayComodin>
+                                        <div class="grid grid-cols-2 text-xs m-2">
+                                            <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                            <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
+                                                <div *ngSwitchCase="1">Mañana</div>
+                                                <div *ngSwitchCase="2">Tarde</div>
+                                                <div *ngSwitchCase="3">Noche</div>
+                                                <div *ngSwitchDefault>Libre</div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
                                 </ng-container>
                             </div>
                         </ng-container>

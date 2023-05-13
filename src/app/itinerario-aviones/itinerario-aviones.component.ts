@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Empleado } from '../empleados';
 import { GenerarPlanificacion, Turno_Choque } from '../generarPlanificacion';
-import { DatePipe } from '@angular/common';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-itinerario-aviones',
@@ -15,21 +15,13 @@ import { DatePipe } from '@angular/common';
 })
 export class ItinerarioAvionesComponent implements OnInit {
 
-    public ayuda: any;
-
-    nuevoItinerario: string = '';
-
     planificacion: GenerarPlanificacion = {
         anio: null,
         mes: null,
         empleados: [],
-        itinerario: [
-        { dia: null, turno: null, aviones: null, id: 1}
-        ]
+        itinerario: [],
+        comodin: null
     }
-
-    nuevoChoque: string = '';
-    public loading = document.getElementById('loading');
 
     public listaEmpleados: Empleado[];
     public empleadoSeleccionado: Empleado[] = [];
@@ -39,10 +31,18 @@ export class ItinerarioAvionesComponent implements OnInit {
 
     public ngEmpleado: string;
     public comodin: string;
-    
+    nuevoEncuentro: Turno_Choque = {
+        dia: null,
+        aviones: null,
+        turno: null,
+        id: null
+    };
 
     public anioActual = new Date().getFullYear();
     public mesActual = new Date().getMonth();
+    public diaActual = new Date().getDay()
+
+    public efectoCarga: boolean = false;
 
     constructor(
         private horarioService: HorarioService,
@@ -67,6 +67,7 @@ export class ItinerarioAvionesComponent implements OnInit {
         }
         const empleado = this.listaEmpleados.find((e) => e.rut === this.comodin)
         this.comodinSeleccionado = empleado
+        this.planificacion.comodin = empleado
         this.listaEmpleados = this.listaEmpleados.filter(empleado => empleado.rut != this.comodinSeleccionado.rut);
     }
 
@@ -86,6 +87,7 @@ export class ItinerarioAvionesComponent implements OnInit {
     EliminarComodin(empleado: Empleado){
         this.listaEmpleados.push(empleado);
         this.comodinSeleccionado = null;
+        this.planificacion.comodin = null;
     }
 
 
@@ -122,80 +124,44 @@ export class ItinerarioAvionesComponent implements OnInit {
         return null;
     }
 
-    esperandoJSON(){
-        this.loading = document.getElementById('loading');
-        if(this.loading != null){
-            this.loading.classList.remove('hidden')
-        }
-    }
-
-    Cerrar(){
-        this.horarioService.modalAddPlanificacion = !this.horarioService.modalAddPlanificacion;
-    }
-
     GenerarPlanificacion(){
-        /*this.esperandoJSON();
+        this.efectoCarga = true;
 
-        if (this.planificacion.itinerario[0]["dia"] == null){
-            this.planificacion.itinerario = []
-        }
-
-        this.horarioService.generarHorario(this.planificacion).subscribe(
+        this.horarioService.generarHorario(this.planificacion)
+        .pipe(
+            finalize(()=>{
+                this.efectoCarga = false;
+            })
+        ).subscribe(
             response => {
-                this.router.navigate(['schedule'])
+                console.log(response)
             },
             error => {
                 console.error(error)
             }
-        )*/
-        console.log("xsadasd?")
+        );
+        //console.log(this.planificacion,1)
     }
 
-    agregarChoque(){
+    agregarEncuentro(){
         
-        const newChoque: Turno_Choque = {
-            dia: this.planificacion.itinerario[0].dia,
-            aviones: this.planificacion.itinerario[0].aviones,
-            turno: this.planificacion.itinerario[0].turno,
+        let newChoque: Turno_Choque = {
+            dia: this.nuevoEncuentro.dia,
+            aviones: this.nuevoEncuentro.aviones,
+            turno: this.nuevoEncuentro.turno,
             id: this.planificacion.itinerario.length + 1
-        }
+        }# ARREGLAR
 
-        if(this.planificacion.itinerario[0].dia != null && this.planificacion.itinerario[0].dia != null && this.planificacion.itinerario[0].aviones != null && this.planificacion.itinerario[0].aviones != null && this.planificacion.itinerario[0].turno != null){
-        
-        this.planificacion.itinerario.push({ ...newChoque});
-        this.planificacion.itinerario[0].dia = null;
-        this.planificacion.itinerario[0].aviones = null;
-        this.planificacion.itinerario[0].turno = null;
-
-        const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-            toast.addEventListener('mouseenter', Swal.stopTimer)
-            toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-        })
-        
-        Toast.fire({
-        icon: 'success',
-        title: 'Itinerario registrado exitosamente'
-        })
-    }
-        else{
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Debes rellenar los datos!',
-        })
+        if(newChoque.dia != null && newChoque.aviones != null && newChoque.turno != null){
+            this.planificacion.itinerario.push(newChoque)
+            this.nuevoEncuentro.dia = null;
+            this.nuevoEncuentro.aviones = null;
+            this.nuevoEncuentro.turno = null;
         }
     }
 
-    eliminarItinerario(index: number ){
-        this.planificacion.itinerario.splice(index, 1);
-        this.router.navigate(['/itinerario-aviones'])
+    eliminarItinerario(id: number ){
+        this.planificacion.itinerario = this.planificacion.itinerario.filter( itinerario => itinerario.id != id)
     }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarioAnual, Data } from '../calendario';
+import { CalendarioAnual} from '../calendario';
 import { Anios, PlanificacionAnios } from '../calendarioanual';
 import { AllSchedulesService } from '../services/allSchedules.service';
 import { Planificacion } from '../UltimaPlanificacion';
@@ -106,6 +106,7 @@ export class AllSchedulesComponent implements OnInit {
                 this.planificacionActual = planificacion
                 this.planificacionActual.mostrar = true;
                 this.PaginacionPlanificacion = 0
+                console.log(this.planificacionActual)
 
             }else{
                 planificacion.mostrar = false;

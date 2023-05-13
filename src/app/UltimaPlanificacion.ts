@@ -43,7 +43,8 @@ export interface Dia{
       dia_semana: string,
       dia_numero: number,
       feriado: boolean,
-      empleados: Empleados[]
+      empleados: Empleados[],
+      comodin?: number
 }
 
 interface Empleados{

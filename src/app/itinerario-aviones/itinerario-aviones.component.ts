@@ -140,23 +140,23 @@ export class ItinerarioAvionesComponent implements OnInit {
                 console.error(error)
             }
         );
-        //console.log(this.planificacion,1)
     }
 
-    agregarEncuentro(){
-        
-        let newChoque: Turno_Choque = {
-            dia: this.nuevoEncuentro.dia,
-            aviones: this.nuevoEncuentro.aviones,
-            turno: this.nuevoEncuentro.turno,
-            id: this.planificacion.itinerario.length + 1
-        }# ARREGLAR
+    agregarEncuentro() {
+        if (this.nuevoEncuentro.dia != null && this.nuevoEncuentro.aviones != null && this.nuevoEncuentro.turno != null) {
+            this.planificacion.itinerario.push({
+                dia: this.nuevoEncuentro.dia,
+                aviones: this.nuevoEncuentro.aviones,
+                turno: this.nuevoEncuentro.turno,
+                id: this.planificacion.itinerario.length + 1
+            });
 
-        if(newChoque.dia != null && newChoque.aviones != null && newChoque.turno != null){
-            this.planificacion.itinerario.push(newChoque)
-            this.nuevoEncuentro.dia = null;
-            this.nuevoEncuentro.aviones = null;
-            this.nuevoEncuentro.turno = null;
+            this.nuevoEncuentro = {
+                dia: null,
+                aviones: null,
+                turno: null,
+                id: null
+            }
         }
     }
 

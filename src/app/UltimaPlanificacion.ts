@@ -44,7 +44,13 @@ export interface Dia{
       dia_numero: number,
       feriado: boolean,
       empleados: Empleados[],
-      comodin?: number
+      comodin?: number,
+      itinerario: Itinerario[]
+}
+
+interface Itinerario{
+      turno: number,
+      falta: number
 }
 
 interface Empleados{

@@ -24,6 +24,7 @@ export class HorarioService {
     // Modal de AgregarActualización
     modalAddActualizacion: boolean = false;
     modalAddPlanificacion: boolean = false;
+    modalItinerarioPlanificacion: boolean = false;
 
     constructor(
         private http: HttpClient) { }

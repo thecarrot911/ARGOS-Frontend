@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarioAnual} from '../calendario';
 import { Anios, PlanificacionAnios } from '../calendarioanual';
 import { AllSchedulesService } from '../services/allSchedules.service';
-import { Planificacion } from '../UltimaPlanificacion';
+import { Planificacion, Itinerario, Dia } from '../UltimaPlanificacion';
 import { finalize } from 'rxjs/operators';
 import { HorarioService } from '../services/horario.service';
 
@@ -27,6 +27,7 @@ export class AllSchedulesComponent implements OnInit {
     CantidadPorPagina: number = 7;
     PaginacionPlanificacion: number = 1;
     ContadorCalendario:number = 0;
+    itinerarioActual: Dia;
 
     public existePlanificacion: boolean = false;
     public hayPlanificacion: boolean = false;
@@ -89,6 +90,7 @@ export class AllSchedulesComponent implements OnInit {
         ).subscribe(
             response => {
                 this.planificacionAnual = response
+                
                 if (this.planificacionAnual.data.length > 0){
                     this.hayPlanificacion = true;
                     this.SeleccionMes(this.planificacionAnual.data[0].planificacion_id)
@@ -106,11 +108,15 @@ export class AllSchedulesComponent implements OnInit {
                 this.planificacionActual = planificacion
                 this.planificacionActual.mostrar = true;
                 this.PaginacionPlanificacion = 0
-                console.log(this.planificacionActual)
 
             }else{
                 planificacion.mostrar = false;
             }
         });
+    }
+
+    MostrarItinerario(itinerario: Dia):void{
+        this.horarioService.modalItinerarioPlanificacion = !this.horarioService.modalItinerarioPlanificacion;
+        this.itinerarioActual = itinerario;
     }
 }

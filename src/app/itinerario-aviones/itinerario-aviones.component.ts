@@ -5,7 +5,7 @@ import { AllempleadosService } from '../services/allempleados.service'
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Empleado } from '../empleados';
-import { GenerarPlanificacion, Turno_Choque } from '../generarPlanificacion';
+import { GenerarPlanificacion, Turno, Turno_Choque } from '../generarPlanificacion';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -20,7 +20,12 @@ export class ItinerarioAvionesComponent implements OnInit {
         mes: null,
         empleados: [],
         itinerario: [],
-        comodin: null
+        comodin: null,
+        turnos: {
+            turno1: '',
+            turno2: '',
+            turno3: ''
+        }
     }
 
     public listaEmpleados: Empleado[];
@@ -31,6 +36,7 @@ export class ItinerarioAvionesComponent implements OnInit {
 
     public ngEmpleado: string;
     public comodin: string;
+
     nuevoEncuentro: Turno_Choque = {
         dia: null,
         aviones: null,
@@ -135,6 +141,7 @@ export class ItinerarioAvionesComponent implements OnInit {
         ).subscribe(
             response => {
                 console.log(response)
+                this.router.navigate(['/allschedules']);
             },
             error => {
                 console.error(error)

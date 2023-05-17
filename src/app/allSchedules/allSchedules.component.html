@@ -105,10 +105,18 @@
                             <div
                                 class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
                                 <div class="m-3 place-content-center relative flex">
-                                    <div class="flex justify-between">
-                                        <div class="flex flex-col gap-1">
+                                    <div class="flex">
+                                        <div class="flex">
                                             <div>{{dia.dia_semana}} {{dia.dia_numero}}</div>
-                                            <div class="flex justify-center"></div>
+                                            <ng-container *ngIf="dia.itinerario != undefined && dia.itinerario.length > 0">
+                                                <button type="button" (click)="MostrarItinerario(dia)" class="top-0 right-0 inline-flex items-center absolute">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-8 h-8 fill-red-500">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                                    </svg>
+                                                </button>
+                                            </ng-container>
                                         </div>
                                     </div>
                                 </div>
@@ -116,22 +124,32 @@
                                     <ng-container *ngIf="dia.comodin != 0 && empleado.turno == dia.comodin;else NohayComodin">
                                         <div class="grid grid-cols-2 text-xs m-2 bg-red-500">
                                             <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
-                                            <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
-                                                <div *ngSwitchCase="1">Mañana</div>
-                                                <div *ngSwitchCase="2">Tarde</div>
-                                                <div *ngSwitchCase="3">Noche</div>
-                                                <div *ngSwitchDefault>Libre</div>
+                                            
+                                            <div class="grid-cols-1 flex justify-end">
+                                                <div class="grid-cols-1 flex justify-end uppercase" [ngSwitch]="empleado.turno">
+                                                    <div *ngSwitchCase="0" class="uppercase">Libre</div>
+                                                    <div *ngSwitchCase="1" class="uppercase">Mañana</div>
+                                                    <div *ngSwitchCase="2" class="uppercase">Tarde</div>
+                                                    <div *ngSwitchCase="3" class="uppercase">Noche</div>
+                                                    <div *ngSwitchCase="4" class="uppercase">Permiso</div>
+                                                    <div *ngSwitchCase="5" class="uppercase">Vacaciones</div>
+                                                    <div *ngSwitchDefault  class="uppercase">Otro</div>
+                                                </div>
+                                                    <!--{{empleado.turno}}-->
                                             </div>
                                         </div>
                                     </ng-container>
                                     <ng-template #NohayComodin>
                                         <div class="grid grid-cols-2 text-xs m-2">
-                                            <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                            <div class="grid-cols-1 flex justify-start uppercase">{{empleado.nombre}} {{empleado.apellido}}</div>
                                             <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
-                                                <div *ngSwitchCase="1">Mañana</div>
-                                                <div *ngSwitchCase="2">Tarde</div>
-                                                <div *ngSwitchCase="3">Noche</div>
-                                                <div *ngSwitchDefault>Libre</div>
+                                                <div *ngSwitchCase="0" class="uppercase">Libre</div>
+                                                <div *ngSwitchCase="1" class="uppercase">Mañana</div>
+                                                <div *ngSwitchCase="2" class="uppercase">Tarde</div>
+                                                <div *ngSwitchCase="3" class="uppercase">Noche</div>
+                                                <div *ngSwitchCase="4" class="uppercase">Permiso</div>
+                                                <div *ngSwitchCase="5" class="uppercase">Vacaciones</div>
+                                                <div *ngSwitchDefault  class="uppercase">Otro</div>
                                             </div>
                                         </div>
                                     </ng-template>
@@ -209,7 +227,7 @@
 
 <!-- OPACIDAD EN LA PÁGINA -->
 <ng-container 
-    *ngIf="horarioService.modalAddActualizacion || horarioService.modalAddPlanificacion">
+    *ngIf="horarioService.modalAddActualizacion || horarioService.modalAddPlanificacion || horarioService.modalItinerarioPlanificacion">
     <div class="fixed inset-0 bg-gray-800 bg-opacity-70"></div>
 </ng-container>
 
@@ -218,6 +236,7 @@
 <ng-container *ngIf="horarioService.modalAddActualizacion">
     <app-agregarActualizacion
     [planificacion_id]="planificacionActual.planificacion_id"
+    [diasPlanificacion]="planificacionActual"
     (recargarPagina)="ngOnInit()"
     >
     </app-agregarActualizacion>
@@ -227,4 +246,11 @@
 <ng-container *ngIf="horarioService.modalAddPlanificacion">
     <app-itinerario-aviones>
     </app-itinerario-aviones>
+</ng-container>
+
+<ng-container *ngIf="horarioService.modalItinerarioPlanificacion">
+    <app-modal-itinerario
+    [itinerario]="itinerarioActual"
+    >
+    </app-modal-itinerario>
 </ng-container>

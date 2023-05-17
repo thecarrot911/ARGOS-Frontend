@@ -1,7 +1,7 @@
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData, VencimientoCredencial, RespuestaPerfil, DataEmpleados } from '../empleados';
+import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData, VencimientoCredencial, DataEmpleados } from '../empleados';
 import * as fileExtension from 'file-extension';
 
 

@@ -1,9 +1,9 @@
 import { Component, OnInit, Type, Input, EventEmitter, Output } from '@angular/core';
 import { Empleado } from '../../empleados';
-import { AllempleadosService } from '../../services/allempleados.service';
 import { HorarioService } from '../../services/horario.service';
 import { ActualizacionService } from '../../services/actualizacion.service';
 import { Tipo, Actualizacion } from '../../actualizacion';
+import { Planificacion } from 'src/app/UltimaPlanificacion';
 
 
 @Component({
@@ -18,7 +18,8 @@ export class AgregarActualizacionComponent implements OnInit {
 
     // Variable que recibe de schedule 
     @Input() planificacion_id: number;
-    
+    @Input() diasPlanificacion: Planificacion;
+
     // Se emite el evento para reiniciar el component schedule
     @Output() recargarPagina = new EventEmitter();
 
@@ -30,7 +31,8 @@ export class AgregarActualizacionComponent implements OnInit {
     constructor(
         private horarioService: HorarioService,
         private actualizacionService: ActualizacionService
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
         this.actualizacionService.MostrarFormulario(this.planificacion_id).subscribe(
@@ -38,7 +40,7 @@ export class AgregarActualizacionComponent implements OnInit {
                 this.ArrayTipo = response.data.actualizacion
                 this.ArrayEmpleadoSolicitante = response.data.solicitante
                 this.ArrayEmpleadoReemplazante = response.data.empleados
-                console.log(this.planificacion_id)
+
             },  
             error =>{
                 console.error(error)
@@ -62,16 +64,33 @@ export class AgregarActualizacionComponent implements OnInit {
     
     EnviarActualizacion(): void{
         this.actualizacion.planificacion_id = this.planificacion_id;
+
+        const fechaInicio = new Date(this.actualizacion.fecha_inicio);
+        fechaInicio.setUTCHours(0, 0, 0, 0); // Ajustar la hora a las 00:00:00 en UTC
+        const diaInicio = fechaInicio.getUTCDate();
+
+        const fechaTermino = new Date(this.actualizacion.fecha_termino);
+        fechaTermino.setUTCHours(0, 0, 0, 0); // Ajustar la hora a las 00:00:00 en UTC
+        const diaTermino = fechaTermino.getUTCDate();
+    
+        this.actualizacion.fecha_inicio
+
+        console.log(diaInicio); // Imprime el día correctamente
+        console.log(diaTermino); // Imprime el día correctamente
+
+        //console.log(new Date(this.actualizacion.fecha_inicio).getDate())
+        //console.log(new Date(this.actualizacion.fecha_termino).getDate())
+
         this.actualizacionService.RegistrarActualizacion(this.actualizacion).subscribe(
             response =>{
                 this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
-                this.recargarPagina.emit();
+                //this.recargarPagina.emit();
+                console.log(response)
             }, 
             error =>{
-
+                console.log(error)
             }
         )
-        
     }
 
     Cerrar(): void {

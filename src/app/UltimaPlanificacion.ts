@@ -48,7 +48,7 @@ export interface Dia{
       itinerario: Itinerario[]
 }
 
-interface Itinerario{
+export interface Itinerario{
       turno: number,
       falta: number
 }

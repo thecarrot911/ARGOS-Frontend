@@ -5,7 +5,14 @@ export interface GenerarPlanificacion{
     mes: string,
     empleados: Empleado[],
     itinerario: Turno_Choque[],
-    comodin?: Empleado
+    comodin?: Empleado,
+    turnos: Turno
+}
+
+export interface Turno{
+    turno1: string,
+    turno2: string,
+    turno3: string
 }
 
 export interface Turno_Choque {

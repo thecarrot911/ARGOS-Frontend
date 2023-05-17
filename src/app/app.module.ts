@@ -31,6 +31,7 @@ import { AddCredencialComponent } from './credenciales/add-credencial/add-creden
 import { UpdateCredencialComponent } from './credenciales/update-credencial/update-credencial.component';
 import { UpdateEmpleadoComponent } from './empleados/update-empleado/update-empleado.component';
 import { EstadisticaComponent } from './estadistica/estadistica.component';
+import { ModalItinerarioComponent } from './modal-itinerario/modal-itinerario.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { EstadisticaComponent } from './estadistica/estadistica.component';
     AddCredencialComponent,
     UpdateCredencialComponent,
     UpdateEmpleadoComponent,
-    EstadisticaComponent
+    EstadisticaComponent,
+    ModalItinerarioComponent
   ],
   imports: [
     BrowserModule,

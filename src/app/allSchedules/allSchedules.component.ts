@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarioAnual} from '../calendario';
 import { Anios, PlanificacionAnios } from '../calendarioanual';
 import { AllSchedulesService } from '../services/allSchedules.service';
-import { Planificacion, Itinerario, Dia } from '../UltimaPlanificacion';
+import { Planificacion, Itinerario, Dia, ActualizacionPlani } from '../UltimaPlanificacion';
 import { finalize } from 'rxjs/operators';
 import { HorarioService } from '../services/horario.service';
+import { ActualizacionService } from '../services/actualizacion.service';
 
 
 @Component({
@@ -23,10 +24,16 @@ export class AllSchedulesComponent implements OnInit {
     planificacionActual: Planificacion = null;
     anioActual: Anios[];
 
-    // Paginación
+    // Paginación Planificacion
     CantidadPorPagina: number = 7;
     PaginacionPlanificacion: number = 1;
     ContadorCalendario:number = 0;
+
+    // Paginación Actualización
+    CantidadPorPaginaActualizacion: number = 3;
+    PaginacionActualizacion: number = 1;
+    ContadorActualizacion: number = 0;
+
     itinerarioActual: Dia;
 
     public existePlanificacion: boolean = false;
@@ -40,13 +47,25 @@ export class AllSchedulesComponent implements OnInit {
 
     constructor(
         private AllSchedulesService: AllSchedulesService,
-        public horarioService: HorarioService
+        public horarioService: HorarioService,
+        private actualizacionService: ActualizacionService
     ){
     }
 
     BorrarPlanificacion(){
 
-    }
+    };
+
+    EliminarActualizacion(id: number): void{
+        this.actualizacionService.EliminarActualizacion(id).
+        subscribe(
+            response =>{
+                this.ngOnInit();
+            }, error=>{
+                console.error(error)
+            }
+        )
+    };
 
     ngOnInit(){
         this.AllSchedulesService.MostrarAniosPlanificaciones()
@@ -65,10 +84,6 @@ export class AllSchedulesComponent implements OnInit {
 
     MostrarModalActualizacion(): void{
         this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
-    }
-
-    GenerarPlanificacion(): void{
-        this.horarioService.modalAddPlanificacion = !this.horarioService.modalAddPlanificacion;
     }
 
     SeleccionPlanificacion(anio: number): void{

@@ -30,7 +30,7 @@
             <span class="text-4xl font-bold text-gray-200"> NO HAY PLANIFICACIONES REGISTRADAS </span>
         </div>
         <div>
-            <button (click)="GenerarPlanificacion()"
+            <button routerLink="/itinerario-aviones"
                 class="mx-auto flex font-medium rounded-lg dark:focus:ring-gray-600 p-5 m-10
                 hover:ease-in-out
                 dark:bg-gray-900 border dark:border-gray-900 dark:text-white shadow-lg shadow-cyan-500/50">
@@ -92,8 +92,8 @@
         </div>
         <div class="grid grid-cols-12 bg-yellow-500">
             <div class="bg-indigo-600" 
-                [ngClass]="{'col-span-9': true,
-                            'col-span-12': false}">
+                [ngClass]="{'col-span-9': planificacionActual.actualizacion != undefined,
+                            'col-span-12': !planificacionActual.actualizacion != undefined}">
                 <ng-container *ngIf="planificacionActual!=null">
                     <div class="grid grid-cols-4 gap-4 grid-flow-row auto-rows-auto rounded-md ">
                         <ng-container *ngFor="let dia of planificacionActual.planificacion | paginate:{
@@ -164,14 +164,39 @@
                     </div>
                 </ng-container>
             </div>
-            <ng-container *ngIf="true">
+            <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
                 <div class="bg-white col-span-3 flex flex-col">
                     <div class="flex justify-center">
                         <h1 class="italic text-lg font-semibold hover:text-black">Actualizaciones</h1>
                     </div>
-                    <ng-container *ngFor="let actualizacion of planificacionActual.estadistica.empleados">
-                        <div class="flex justify-center">
-                            <p>xD</p>
+                    <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
+                        <ng-container *ngFor="let actualizacion of planificacionActual.actualizacion | paginate:{
+                        id: 'second',
+                        itemsPerPage: CantidadPorPaginaActualizacion,
+                        currentPage: PaginacionActualizacion,
+                        totalItems: ContadorActualizacion}; 
+                        let ix = index">
+                            <div class="flex flex-col justify-center border border-black p-2 m-1">
+                                <p>Solicitante: {{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}</p>
+                                <p>Tipo: {{actualizacion.tipo}}</p>
+                                <p>Descripción: {{actualizacion.descripcion}}</p>
+                                <ng-container *ngIf="actualizacion.reemplazo_nombre && actualizacion.reemplazo_apellido">
+                                    <p>Reemplazo: {{actualizacion.reemplazo_nombre}} {{actualizacion.reemplazo_apellido}}</p>
+                                </ng-container>
+                                <ng-container *ngIf="actualizacion.fecha_inicio">
+                                    <p>Fecha inicio: {{actualizacion.fecha_inicio}}</p>
+                                </ng-container>
+                                <ng-container *ngIf="actualizacion.fecha_termino">
+                                    <p>Fecha termino: {{actualizacion.fecha_termino}}</p>
+                                </ng-container>
+                                <p>{{actualizacion.fecha}}</p>
+                                <button (click)="EliminarActualizacion(actualizacion.id)" class="bg-red-500">Eliminar</button>
+                            </div>
+                        </ng-container>
+                        <div class="mx-auto flex justify-center">
+                            <pagination-controls id="second" previousLabel="Anterior" nextLabel="Siguiente"
+                                (pageChange)="PaginacionActualizacion = $event">
+                            </pagination-controls>
                         </div>
                     </ng-container>
                 </div>
@@ -227,7 +252,7 @@
 
 <!-- OPACIDAD EN LA PÁGINA -->
 <ng-container 
-    *ngIf="horarioService.modalAddActualizacion || horarioService.modalAddPlanificacion || horarioService.modalItinerarioPlanificacion">
+    *ngIf="horarioService.modalAddActualizacion || horarioService.modalItinerarioPlanificacion">
     <div class="fixed inset-0 bg-gray-800 bg-opacity-70"></div>
 </ng-container>
 

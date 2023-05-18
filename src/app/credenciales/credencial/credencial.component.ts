@@ -31,6 +31,7 @@ export class CredencialComponent implements OnInit {
 
 
     ngOnInit(): void {
+        console.log(this.empleadoService.vencimientoCredencial)
     }
 
     recargarPaginaCredencial(){
@@ -43,6 +44,7 @@ export class CredencialComponent implements OnInit {
     }
 
     renovarCredencial(credencial: Credencial){
+        this.rutEmpleadoAdd = this.rutEmpleado;
         this.credencialSeleccionado = credencial;
         this.empleadoService.modalUpdateCredencialVisible = !this.empleadoService.modalUpdateCredencialVisible;
     }

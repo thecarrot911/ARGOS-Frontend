@@ -4,6 +4,7 @@ import { HorarioService } from '../../services/horario.service';
 import { ActualizacionService } from '../../services/actualizacion.service';
 import { Tipo, Actualizacion } from '../../actualizacion';
 import { Planificacion } from 'src/app/UltimaPlanificacion';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -28,9 +29,18 @@ export class AgregarActualizacionComponent implements OnInit {
 
     public ArrayTipo: Tipo[];
 
+    fecha = new Date();
+    anio = this.fecha.getFullYear();
+    mes = this.fecha.getMonth() + 1; // Los meses se indexan desde 0, por lo que se suma 1
+    dia = this.fecha.getDate();
+
+    FormatoFecha = `${this.anio}-${this.mes}-${this.dia}`;
+
+
     constructor(
         private horarioService: HorarioService,
-        private actualizacionService: ActualizacionService
+        private actualizacionService: ActualizacionService,
+        private datePipe: DatePipe
     ) {
     }
 
@@ -52,6 +62,7 @@ export class AgregarActualizacionComponent implements OnInit {
         rut: null,
         planificacion_id: null,
         descripcion: null,
+        fecha: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
         fecha_inicio: null,
         fecha_termino: null,
         tipo_id: null,
@@ -63,28 +74,13 @@ export class AgregarActualizacionComponent implements OnInit {
     }
     
     EnviarActualizacion(): void{
+        
         this.actualizacion.planificacion_id = this.planificacion_id;
-
-        const fechaInicio = new Date(this.actualizacion.fecha_inicio);
-        fechaInicio.setUTCHours(0, 0, 0, 0); // Ajustar la hora a las 00:00:00 en UTC
-        const diaInicio = fechaInicio.getUTCDate();
-
-        const fechaTermino = new Date(this.actualizacion.fecha_termino);
-        fechaTermino.setUTCHours(0, 0, 0, 0); // Ajustar la hora a las 00:00:00 en UTC
-        const diaTermino = fechaTermino.getUTCDate();
-    
-        this.actualizacion.fecha_inicio
-
-        console.log(diaInicio); // Imprime el día correctamente
-        console.log(diaTermino); // Imprime el día correctamente
-
-        //console.log(new Date(this.actualizacion.fecha_inicio).getDate())
-        //console.log(new Date(this.actualizacion.fecha_termino).getDate())
-
+        
         this.actualizacionService.RegistrarActualizacion(this.actualizacion).subscribe(
             response =>{
                 this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
-                //this.recargarPagina.emit();
+                this.recargarPagina.emit();
                 console.log(response)
             }, 
             error =>{

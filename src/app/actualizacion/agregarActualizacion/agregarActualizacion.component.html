@@ -21,43 +21,6 @@
                     <div class="max-w-wl mx-auto pb-4 md:max-w-5xl borde">
                         <div class="mt-4 grid grid-cols-1 md:grid-cols-1 gap-6 items-start">
                             <div class="grid grid-cols-1 gap-2">
-                        
-                                <label class="block">
-                                    <span class="text-sm font-medium text-gray-500 dark:text-gray">SOLICITANTE</span>
-                                    <select required
-                                        class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
-                                        name="empleado" [(ngModel)]="actualizacion.rut" (ngModelChange)="FiltrandoSelect()">
-                                        <ng-container *ngFor="let empleado of ArrayEmpleadoSolicitante">
-                                            <option value="{{empleado.rut}}">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
-                                        </ng-container>
-                                    </select>
-                                </label>
-
-                                <label class="block">
-                                    <span class="text-sm font-medium text-gray-500 dark:text-gray">DESCRIPCIÓN</span>
-                                    <textarea required
-                                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
-                                        rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel"
-                                        [(ngModel)]="actualizacion.descripcion">
-                                                        </textarea>
-                                    <span class="text-rose-500" *ngIf="descripcion.invalid && descripcion.touched">Este campo es
-                                        requerido.</span>
-                                </label>
-
-
-                                <div>
-                                    <label for="base-input" class="block text-sm font-medium text-gray-500 dark:text-gray">
-                                        FECHA DE INICIO</label>
-                                    <input type="date" name="fecha_inicio" [(ngModel)]="actualizacion.fecha_inicio"
-                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-                                </div>
-                                
-                                <div>
-                                    <label for="base-input" class="block text-sm font-medium text-gray-500 dark:text-gray">
-                                        FECHA DE TERMINO</label>
-                                    <input type="date" name="fecha_termino" [(ngModel)]="actualizacion.fecha_termino"
-                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
-                                </div>
 
                                 <label class="block">
                                     <span class="text-sm font-medium text-gray-500 dark:text-gray">TIPO</span>
@@ -70,19 +33,95 @@
                                     </select>
                                 </label>
 
+                                <ng-container
+                                    *ngIf="actualizacion.tipo_id != undefined && actualizacion.tipo_id == 4; else Observacion">
+                                    <label class="block">
+                                        <span class="text-sm font-medium text-gray-500 dark:text-gray">RUT</span>
+                                        <select required
+                                            class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
+                                            name="empleado" [(ngModel)]="actualizacion.reemplazo">
+                                            <ng-container *ngFor="let empleado of ArrayEmpleadoReemplazante">
+                                                <option value="{{empleado.rut}}">{{empleado.nombre_paterno}}
+                                                    {{empleado.apellido_paterno}}</option>
+                                            </ng-container>
+                                        </select>
+                                    </label>
+                                    <label class="block">
+                                        <span
+                                            class="text-sm font-medium text-gray-500 dark:text-gray">DESCRIPCIÓN</span>
+                                        <textarea required
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
+                                            rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel"
+                                            [(ngModel)]="actualizacion.descripcion">
+                                                                                                                            </textarea>
+                                        <span class="text-rose-500"
+                                            *ngIf="descripcion.invalid && descripcion.touched">Este
+                                            campo es
+                                            requerido.</span>
+                                    </label>
+                                </ng-container>
+                                <ng-template #Observacion>
+                                    <label class="block">
+                                        <span
+                                            class="text-sm font-medium text-gray-500 dark:text-gray">SOLICITANTE</span>
+                                        <select required
+                                            class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
+                                            name="empleado" [(ngModel)]="actualizacion.rut"
+                                            (ngModelChange)="FiltrandoSelect()">
+                                            <ng-container *ngFor="let empleado of ArrayEmpleadoSolicitante">
+                                                <option value="{{empleado.rut}}">{{empleado.nombre_paterno}}
+                                                    {{empleado.apellido_paterno}}</option>
+                                            </ng-container>
+                                        </select>
+                                    </label>
+
+                                    <label class="block">
+                                        <span
+                                            class="text-sm font-medium text-gray-500 dark:text-gray">DESCRIPCIÓN</span>
+                                        <textarea required
+                                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-opacity-50"
+                                            rows="3" style="height: 78px;" name="descripcion" #descripcion="ngModel"
+                                            [(ngModel)]="actualizacion.descripcion">
+                                                                                        </textarea>
+                                        <span class="text-rose-500"
+                                            *ngIf="descripcion.invalid && descripcion.touched">Este
+                                            campo es
+                                            requerido.</span>
+                                    </label>
+
+
+                                    <div>
+                                        <label for="base-input"
+                                            class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                            FECHA DE INICIO</label>
+                                        <input type="date" name="fecha_inicio" [(ngModel)]="actualizacion.fecha_inicio"
+                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                    </div>
+
+                                    <div>
+                                        <label for="base-input"
+                                            class="block text-sm font-medium text-gray-500 dark:text-gray">
+                                            FECHA DE TERMINO</label>
+                                        <input type="date" name="fecha_termino"
+                                            [(ngModel)]="actualizacion.fecha_termino"
+                                            class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light">
+                                    </div>
+
                                     <label class="block">
                                         <span class="text-sm font-medium text-gray-500 dark:text-gray">REEMPLAZO</span>
                                         <select required
                                             class="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:ring focus:border-indigo-300 focus:ring-opacity-50"
                                             name="empleado" [(ngModel)]="actualizacion.reemplazo">
                                             <ng-container *ngFor="let empleado of ArrayEmpleadoReemplazante">
-                                                <option value="{{empleado.rut}}">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
+                                                <option value="{{empleado.rut}}">{{empleado.nombre_paterno}}
+                                                    {{empleado.apellido_paterno}}</option>
                                             </ng-container>
                                         </select>
                                     </label>
-                            <button type="submit" value="Guardar"
-                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
-            
+                                </ng-template>
+                                <button type="submit" value="Guardar"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Enviar</button>
+
                             </div>
                         </div>
                     </div>

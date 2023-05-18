@@ -18,7 +18,12 @@
                             class="hover:bg-black transition duration-150 ease-linear rounded-lg py-2 px-2 group">
                                 <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                                     <div class="w-15 h-15 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center">
-                                        <img [src]="empleado.imagen" class="w-10 h-10 object-cover object-center">
+                                        <ng-container *ngIf="empleado.imagen != null">
+                                            <img [src]="empleado.imagen" class="w-10 h-10 object-cover object-center">
+                                        </ng-container>
+                                        <ng-template>
+                                            <p>icon</p>
+                                        </ng-template>
                                     </div>
                                     <div>
                                         <p class="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">

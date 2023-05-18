@@ -6,6 +6,7 @@
                         <ng-container *ngFor="let credencial of empleadoCredencial">
                               <div class="col-span-1">
                                     <div class="dark:bg-gray-800 text-white rounded-lg shadow-lg p-4 text-center">
+                                          
                                           <h2 class="font-bold text-lg leading-tight mb-2">{{credencial.tipo}}</h2>
                                           <div class="grid grid-cols-3 items-center">
                                                 <div class="col-span-1">
@@ -71,6 +72,7 @@
 <!-- RENOVAR CREDENCIAL -->
 <ng-container *ngIf="empleadoService.modalUpdateCredencialVisible">
       <app-update-credencial
+      [rutInput]="rutEmpleadoAdd"
       [renovarCredencial]="credencialSeleccionado"
       (recargaCredencial)="recargarPaginaCredencial()"
       >

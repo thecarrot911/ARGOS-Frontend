@@ -38,7 +38,7 @@ export class TopBarComponent implements OnInit {
             }
         )
         
-        this.empleadoService.ejecutarFuncion$.subscribe(() => {
+        /*this.empleadoService.ejecutarFuncion$.subscribe(() => {
             this.ngOnInit();
         })
 
@@ -46,7 +46,7 @@ export class TopBarComponent implements OnInit {
             if (event instanceof NavigationEnd){
                 this.rutaActual = event.url;
             }
-        })
+        })*/
     }
 
 }

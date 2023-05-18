@@ -57,7 +57,9 @@ export class AllempleadosService {
     RegistrarEmpleados(empleado: Empleado): Observable<EmpleadoData> {
         
         const formData = new FormData();
-        formData.append('imagen', empleado.imagen, empleado.rut + '.' + fileExtension(empleado.imagen.name))
+        if(empleado.imagen != null){
+            formData.append('imagen', empleado.imagen, empleado.rut + '.' + fileExtension(empleado.imagen.name))
+        }
         formData.append('nombre_paterno',empleado.nombre_paterno)
         formData.append('nombre_materno', empleado.nombre_materno)
         formData.append('apellido_paterno', empleado.apellido_paterno)

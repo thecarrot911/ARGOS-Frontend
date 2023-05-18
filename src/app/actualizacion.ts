@@ -22,12 +22,13 @@ export interface RespuestaActualizacion{
 export interface Actualizacion{
     id?: number,
     rut: string,
-    planificacion_id: number,
-    descripcion: string,
-    fecha_inicio: Date,
-    fecha_termino: Date,
-    tipo_id: number,
     reemplazo: string
+    planificacion_id: number,
+    tipo_id: number,
+    descripcion: string,
+    fecha: string,
+    fecha_inicio: Date,
+    fecha_termino: Date
 }
 
 export interface Tipo{

@@ -35,8 +35,24 @@ export interface Planificacion{
       anio: number,
       planificacion: Dia[],
       estadistica?: EstadisticaPlanificacion;
-      actualizacion?: Actualizacion[],
+      actualizacion?: ActualizacionPlani[],
       mostrar?: Boolean
+}
+
+export interface ActualizacionPlani{
+      id: number, // No se muestra
+      solicitante_rut: string,
+      solicitante_nombre: string,
+      solicitante_apellido: string,
+      reemplazo_rut: string,
+      reemplazo_nombre: string,
+      reemplazo_apellido: string,
+      planificacion_id: number, // No se muestra
+      tipo: string,
+      fecha: Date,
+      descripcion: string,
+      fecha_inicio: Date,
+      fecha_termino: Date
 }
 
 export interface Dia{

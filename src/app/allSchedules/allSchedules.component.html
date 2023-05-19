@@ -71,7 +71,10 @@
             </div>
             <div class="col-span-3 grid grid-cols-3">
                 <div class="col-span-1 flex justify-center items-center">
-                    <app-pdf-calendario></app-pdf-calendario>
+                    <app-pdf-calendario
+                    [planificacion]="planificacionActual"
+                    >
+                    </app-pdf-calendario>
                 </div>
                 <div class="col-span-1 flex justify-center items-center">
                     <button (click)="MostrarModalActualizacion()" class="bg-orange-400 flex"> 
@@ -135,7 +138,6 @@
                                                     <div *ngSwitchCase="5" class="uppercase">Vacaciones</div>
                                                     <div *ngSwitchDefault  class="uppercase">Otro</div>
                                                 </div>
-                                                    <!--{{empleado.turno}}-->
                                             </div>
                                         </div>
                                     </ng-container>

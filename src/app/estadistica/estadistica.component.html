@@ -1,5 +1,5 @@
 <div class="px-5">
-      <h1 class="my-2 text-left font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent py-2">ESTADÍSTICAS</h1>
+      <h1 class="text-left font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent py-2">ESTADÍSTICAS</h1>
       <hr class="my-2 border border-black-700">
       <ng-container *ngIf="planificacionActual != null; else SinEstadistica">
             <ng-container *ngFor="let estadistica of planificacionActual.planificacion.reverse()">
@@ -37,6 +37,8 @@
             </ng-container>
       </ng-container>
       <ng-template #SinEstadistica>
-            <p> Este empleado no tiene registro de planificación</p>
+            <div class="flex justify-center p-10 text-white text-xl text-center font-medium">
+                  <span>NO HAY REGISTRO DE PLANIFICACIÓN</span>
+            </div>
       </ng-template>
 </div>

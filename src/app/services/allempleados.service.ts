@@ -57,8 +57,12 @@ export class AllempleadosService {
     RegistrarEmpleados(empleado: Empleado): Observable<EmpleadoData> {
         
         const formData = new FormData();
-        if(empleado.imagen != null){
+        if(empleado.imagen != null && empleado.imagen != 'null'){
+            // Con imágen
             formData.append('imagen', empleado.imagen, empleado.rut + '.' + fileExtension(empleado.imagen.name))
+        }else{
+            // Sin imágen
+            formData.append('imagen',null);
         }
         formData.append('nombre_paterno',empleado.nombre_paterno)
         formData.append('nombre_materno', empleado.nombre_materno)
@@ -67,10 +71,24 @@ export class AllempleadosService {
         formData.append('rut', empleado.rut)
         return this.http.post<EmpleadoData>(this.urlRegistrarEmpleado, formData);
     }
+    
     ModificarEmpleado(empleado: Empleado): Observable<EmpleadoData>{
-        let params = JSON.stringify(empleado);
-        return this.http.put<EmpleadoData>(this.urlModificarEmpleado + '/' + empleado.rut, params, this.httpOptions);
+        const formData = new FormData();
+        if(empleado.imagen != 'null'){
+            // Con imágen
+            formData.append('imagen', empleado.imagen, empleado.rut + '.' + fileExtension(empleado.imagen.name));
+        }else{
+            // Sin imáagen
+            formData.append('imagen',null);
+        }
+        formData.append('nombre_paterno', empleado.nombre_paterno)
+        formData.append('nombre_materno', empleado.nombre_materno)
+        formData.append('apellido_paterno', empleado.apellido_paterno)
+        formData.append('apellido_materno', empleado.apellido_materno)
+        formData.append('rut', empleado.rut)
+        return this.http.put<EmpleadoData>(this.urlModificarEmpleado, formData);
     }
+
     EliminarEmpleado(empleado: Empleado): Observable<EmpleadoData> {
         let queryRut = new HttpParams().set('rut', empleado.rut)
         return this.http.put<EmpleadoData>(this.urlEliminarEmpleado, empleado ,{params: queryRut});

@@ -18,11 +18,15 @@
                             class="hover:bg-black transition duration-150 ease-linear rounded-lg py-2 px-2 group">
                                 <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                                     <div class="w-15 h-15 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center">
-                                        <ng-container *ngIf="empleado.imagen != null">
+                                        <ng-container *ngIf="empleado.imagen != 'null'; else NoHayImagenLista">
                                             <img [src]="empleado.imagen" class="w-10 h-10 object-cover object-center">
                                         </ng-container>
-                                        <ng-template>
-                                            <p>icon</p>
+                                        <ng-template #NoHayImagenLista>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="w-10 h-10 text-white">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
                                         </ng-template>
                                     </div>
                                     <div>
@@ -46,8 +50,8 @@
                         </button>
                     </div>
                 </div>
-                <div class="bg-slate-700 col-span-9 rounded-lg p-6">
-                    <div>
+                <div class="bg-slate-700 col-span-9 rounded-lg p-6 flex flex-col gap-y-5">
+                    <div class="px-5">
                         <h1 class="my-2 text-left font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent py-2">INFORMACIÓN PERSONAL</h1>
                         <hr class="my-2 border border-black-700">
                         <div class="grid grid-cols-2">
@@ -57,12 +61,21 @@
                                     <p class="font-bold text-base lg:text-lg text-slate-200 leading-4">Apellidos: {{credencialActual.apellido_paterno}} {{credencialActual.apellido_materno}}</p>
                                     <p class="font-bold text-base lg:text-lg text-slate-200 leading-4">RUT: {{credencialActual.rut}}</p>
                                 </div>
-                                <div class="bg-black col-span-1 w-20 h-20 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center">
-                                    <img src="{{ credencialActual.imagen }}" class="h-full object-contain object-center">
+                                <div [ngClass]="{'bg-black':credencialActual.imagen != 'null'}" class="mx-auto bg-black col-span-1 w-20 h-20 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center">
+                                    <ng-container *ngIf="credencialActual.imagen != 'null'; else NoHayImagenCredencial">
+                                        <img src="{{ credencialActual.imagen }}" class="h-full object-contain object-center">
+                                    </ng-container>
+                                    <ng-template #NoHayImagenCredencial>
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                            class="h-full text-white">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </ng-template>
                                 </div>
 
                             </div>
-                            <div class="mr-10 col-span-1 flex justify-end gap-10">
+                            <div class="mx-auto col-span-1 flex justify-end gap-10">
                                 <button type="button" (click)="mostrarModalModificarEmpleado(credencialActual)"
                                     class="my-auto shadow-md text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none 
                                         focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-600 
@@ -74,7 +87,7 @@
                                             <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
                                             <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                                         </svg>
-                                        <span>Modificar</span>
+                                        <span>MODIFICAR</span>
                                     </div>
                                 </button>
                                 <button type="button" (click)="borrarEmpleado(credencialActual)"
@@ -87,7 +100,7 @@
                                             <line x1="10" y1="11" x2="10" y2="17" />
                                             <line x1="14" y1="11" x2="14" y2="17" />
                                         </svg>
-                                        <span>Eliminar</span>
+                                        <span>ELIMINAR</span>
                                     </div>
                                 </button>
                             </div>

@@ -15,6 +15,8 @@ export class UpdateEmpleadoComponent implements OnInit {
     
     @Output() recargaEmpleadoPagina = new EventEmitter();
 
+    public imageURL:any;
+
     // Variable boleanas de Empleados
     public boolPrimerNombre: boolean = true;
     public boolSegundoNombre: boolean = true;
@@ -42,7 +44,16 @@ export class UpdateEmpleadoComponent implements OnInit {
         this.empleado.apellido_paterno = this.updateEmpleado.apellido_paterno;
         this.empleado.apellido_materno = this.updateEmpleado.apellido_materno;
         this.empleado.rut = this.updateEmpleado.rut;
-        this.empleado.imagen = this.updateEmpleado.imagen;
+        this.imageURL = this.updateEmpleado.imagen;
+    }
+
+    onFileSelected(event: any) {
+        this.empleado.imagen = event.target.files[0];
+        const file = new FileReader();
+        file.readAsDataURL(this.empleado.imagen);
+        file.onload = () => {
+            this.imageURL = file.result;
+        }
     }
 
     editPrimerNombre(){
@@ -61,7 +72,6 @@ export class UpdateEmpleadoComponent implements OnInit {
     }
 
     modificar(): void {
-        console.log(this.empleado)
         Swal.fire({
             title: '¿Estás seguro?',
             text: "Estas modificando los datos del empleado",

@@ -36,7 +36,15 @@ export interface Planificacion{
       planificacion: Dia[],
       estadistica?: EstadisticaPlanificacion;
       actualizacion?: ActualizacionPlani[],
+      horario?: Horario,
       mostrar?: Boolean
+}
+
+export interface Horario{
+      turno1: string,
+      turno2: string,
+      turno3: string,
+      id: number
 }
 
 export interface ActualizacionPlani{

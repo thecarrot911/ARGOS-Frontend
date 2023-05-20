@@ -86,7 +86,7 @@
                     </button>
                 </div>
                 <div class="col-span-1 flex justify-center items-center">
-                    <button (click)="BorrarPlanificacion()" class="bg-blue-200 flex">
+                    <button (click)="BorrarPlanificacion(planificacionActual)" class="bg-blue-200 flex">
                         <span>BORRAR</span>
                     </button>
                 </div>
@@ -131,9 +131,9 @@
                                             <div class="grid-cols-1 flex justify-end">
                                                 <div class="grid-cols-1 flex justify-end uppercase" [ngSwitch]="empleado.turno">
                                                     <div *ngSwitchCase="0" class="uppercase">Libre</div>
-                                                    <div *ngSwitchCase="1" class="uppercase">Mañana</div>
-                                                    <div *ngSwitchCase="2" class="uppercase">Tarde</div>
-                                                    <div *ngSwitchCase="3" class="uppercase">Noche</div>
+                                                    <div *ngSwitchCase="1" class="uppercase">{{planificacionActual.horario.turno1}}</div>
+                                                    <div *ngSwitchCase="2" class="uppercase">{{planificacionActual.horario.turno2}}</div>
+                                                    <div *ngSwitchCase="3" class="uppercase">{{planificacionActual.horario.turno3}}</div>
                                                     <div *ngSwitchCase="4" class="uppercase">Permiso</div>
                                                     <div *ngSwitchCase="5" class="uppercase">Vacaciones</div>
                                                     <div *ngSwitchDefault  class="uppercase">Otro</div>
@@ -146,9 +146,9 @@
                                             <div class="grid-cols-1 flex justify-start uppercase">{{empleado.nombre}} {{empleado.apellido}}</div>
                                             <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
                                                 <div *ngSwitchCase="0" class="uppercase">Libre</div>
-                                                <div *ngSwitchCase="1" class="uppercase">Mañana</div>
-                                                <div *ngSwitchCase="2" class="uppercase">Tarde</div>
-                                                <div *ngSwitchCase="3" class="uppercase">Noche</div>
+                                                <div *ngSwitchCase="1" class="uppercase">{{planificacionActual.horario.turno1}}</div>
+                                                <div *ngSwitchCase="2" class="uppercase">{{planificacionActual.horario.turno2}}</div>
+                                                <div *ngSwitchCase="3" class="uppercase">{{planificacionActual.horario.turno3}}</div>
                                                 <div *ngSwitchCase="4" class="uppercase">Permiso</div>
                                                 <div *ngSwitchCase="5" class="uppercase">Vacaciones</div>
                                                 <div *ngSwitchDefault  class="uppercase">Otro</div>
@@ -229,9 +229,9 @@
                     <div class="col-span-2 p-3">
                         <div class="border border-yellow-500 flex justify-between">
                             <div>
-                                <p class="font-bold p-1 text-slate-200 leading-4">Mañana: </p>
-                                <p class="font-bold p-1 text-slate-200 leading-4">Tarde: </p>
-                                <p class="font-bold p-1 text-slate-200 leading-4">Noche: </p>
+                                <p class="font-bold p-1 text-slate-200 leading-4">{{planificacionActual.horario.turno1}}: </p>
+                                <p class="font-bold p-1 text-slate-200 leading-4">{{planificacionActual.horario.turno2}}: </p>
+                                <p class="font-bold p-1 text-slate-200 leading-4">{{planificacionActual.horario.turno3}}: </p>
                                 <p class="font-bold p-1 text-slate-200 leading-4">Feriado: </p>
                                 <p class="font-bold p-1 text-slate-200 leading-4">Libre: </p>
                             </div>

@@ -6,6 +6,8 @@ import { Planificacion, Itinerario, Dia, ActualizacionPlani } from '../UltimaPla
 import { finalize } from 'rxjs/operators';
 import { HorarioService } from '../services/horario.service';
 import { ActualizacionService } from '../services/actualizacion.service';
+import { response } from 'express';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -48,12 +50,25 @@ export class AllSchedulesComponent implements OnInit {
     constructor(
         private AllSchedulesService: AllSchedulesService,
         public horarioService: HorarioService,
-        private actualizacionService: ActualizacionService
-    ){
+        private actualizacionService: ActualizacionService,
+
+        ){
     }
 
-    BorrarPlanificacion(){
+    BorrarPlanificacion(planificacion: Planificacion): void{
 
+        this.AllSchedulesService.BorrarPlanificacion(planificacion)
+        .pipe(
+            finalize(()=>{
+
+            })
+        ).subscribe(
+            response =>{
+                this.ngOnInit();
+            },error =>{
+                console.error(error)
+            }
+        )
     };
 
     EliminarActualizacion(id: number): void{
@@ -121,6 +136,7 @@ export class AllSchedulesComponent implements OnInit {
         this.planificacionAnual.data.forEach( planificacion => {
             if(planificacion.planificacion_id === id){
                 this.planificacionActual = planificacion
+                console.log(this.planificacionActual)
                 this.planificacionActual.mostrar = true;
                 this.PaginacionPlanificacion = 0
 

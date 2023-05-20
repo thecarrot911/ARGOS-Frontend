@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
-import { ScheduleComponent } from './Schedule/Schedule.component';
 import { NavbarsComponent } from './Navbars/Navbars.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -37,7 +36,6 @@ import { ModalItinerarioComponent } from './modal-itinerario/modal-itinerario.co
   declarations: [
     AppComponent,
     TopBarComponent,
-    ScheduleComponent,
     NavbarsComponent,
     FooterComponent,
     AgregarActualizacionComponent,
@@ -69,7 +67,6 @@ import { ModalItinerarioComponent } from './modal-itinerario/modal-itinerario.co
     }),
     RouterModule.forRoot([
       { path: '', component: NavbarsComponent },
-      { path: 'schedule', component: ScheduleComponent },
       { path: 'agregaractualizacion/:planificacion_id', component: AgregarActualizacionComponent },
       { path: 'itinerario-aviones', component: ItinerarioAvionesComponent },
       { path: 'allschedules', component: AllSchedulesComponent },

@@ -4,18 +4,19 @@ import { Observable, pipe, of, throwError } from 'rxjs'; /* a */
 import { GenerarPlanificacion } from '../generarPlanificacion';
 import { Actualizacion, Data } from '../calendario';
 import { UltimaPlanificacion } from '../UltimaPlanificacion';
+import { environment } from '../../environments/environment'
 
 @Injectable({
     providedIn: 'root'
 })
 export class HorarioService {
 
-    dataUrl = 'http://localhost:10975/app/planificacion/generar';
-    urlUltimaPlanificacion = 'http://localhost:10975/app/planificacion';
-    deleteActualizacionURL = 'http://localhost:10975/app/actualizacion/eliminar_actualizacion';
-    updateActualizacionURL = 'http://localhost:10975/app/actualizacion/modificar_actualizacion';
-    url_actualizacion = 'http://localhost:10975/app/actualizacion/crear_actualizacion';
-    url_deletePlanificacionById = 'http://localhost:10975/app/planificacion/eliminar_planificacion/'
+    dataUrl = environment.apiDeploy+'app/planificacion/generar';
+    urlUltimaPlanificacion = environment.apiDeploy+'app/planificacion';
+    deleteActualizacionURL = environment.apiDeploy+'app/actualizacion/eliminar_actualizacion';
+    updateActualizacionURL = environment.apiDeploy+'app/actualizacion/modificar_actualizacion';
+    url_actualizacion = environment.apiDeploy+'app/actualizacion/crear_actualizacion';
+    url_deletePlanificacionById = environment.apiDeploy+'app/planificacion/eliminar_planificacion/'
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })

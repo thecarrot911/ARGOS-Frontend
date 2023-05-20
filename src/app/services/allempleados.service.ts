@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { ListaEmpleados, Empleado, Credencial, EmpleadoCredencial, EmpleadoData, VencimientoCredencial, DataEmpleados } from '../empleados';
 import * as fileExtension from 'file-extension';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -41,11 +42,11 @@ export class AllempleadosService {
     ) { }
     
     // Empleado
-    urlEmpleados = 'http://localhost:10975/app/empleado';
-    urlRegistrarEmpleado = 'http://localhost:10975/app/empleado/registrar_empleado';
-    urlEliminarEmpleado = 'http://localhost:10975/app/empleado/eliminar_empleado';
-    urlModificarEmpleado = 'http://localhost:10975/app/empleado/modificar_empleado';
-    urlPerfilEmpleado = 'http://localhost:10975/app/empleado/perfil';
+    urlEmpleados = environment.apiDeploy+'app/empleado';
+    urlRegistrarEmpleado = environment.apiDeploy+'app/empleado/registrar_empleado';
+    urlEliminarEmpleado = environment.apiDeploy+'app/empleado/eliminar_empleado';
+    urlModificarEmpleado = environment.apiDeploy+'app/empleado/modificar_empleado';
+    urlPerfilEmpleado = environment.apiDeploy+'app/empleado/perfil';
 
     MostrarPerfil(): Observable<DataEmpleados>{
         return this.http.get<DataEmpleados>(this.urlPerfilEmpleado)
@@ -95,11 +96,11 @@ export class AllempleadosService {
     }
 
     // Credenciales 
-    urlRegistrarCredencial = 'http://localhost:10975/app/credencial/registrar'
-    urlMostrarCredencial = 'http://localhost:10975/app/credencial/mostrar'
-    urlEliminarCredencial = 'http://localhost:10975/app/credencial/eliminar'
-    urlRenovarCredencial = 'http://localhost:10975/app/credencial/renovar'
-    urlFechaVencimientoCredencial = 'http://localhost:10975/app/credencial/vencidas'
+    urlRegistrarCredencial = environment.apiDeploy+'app/credencial/registrar'
+    urlMostrarCredencial = environment.apiDeploy+'app/credencial/mostrar'
+    urlEliminarCredencial = environment.apiDeploy+'app/credencial/eliminar'
+    urlRenovarCredencial = environment.apiDeploy+'app/credencial/renovar'
+    urlFechaVencimientoCredencial = environment.apiDeploy+'app/credencial/vencidas'
 
     MostrarCredenciales(rut: string): Observable<EmpleadoCredencial>{
         let paramsCredencial  = new HttpParams().set('rut',rut)

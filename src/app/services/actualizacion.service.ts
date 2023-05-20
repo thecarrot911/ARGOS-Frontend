@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { RespuestaTipo, Actualizacion } from '../actualizacion';
-import { Planificacion } from '../UltimaPlanificacion';
+import { environment } from '../../environments/environment'
 
 @Injectable({
     providedIn: 'root'
@@ -14,9 +14,9 @@ constructor(
     
 ) { }
     
-    private urlObtenerTipo = 'http://localhost:10975/app/actualizacion/formulario';
-    private urlRegistrarActualizacion = 'http://localhost:10975/app/actualizacion/registrar_actualizacion';
-    private urlEliminarActualizacion = 'http://localhost:10975/app/actualizacion/eliminar';
+    private urlObtenerTipo = environment.apiDeploy+'app/actualizacion/formulario';
+    private urlRegistrarActualizacion = environment.apiDeploy+'app/actualizacion/registrar_actualizacion';
+    private urlEliminarActualizacion = environment.apiDeploy+'app/actualizacion/eliminar';
 
     MostrarFormulario(planificacion_id: number): Observable<RespuestaTipo> {
         let paramsPlanificacionId = new HttpParams().set('planificacion_id', planificacion_id)

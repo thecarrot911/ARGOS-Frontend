@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiDeploy: 'https://sistema-de-gestion-de-turno-thecarrot911.vercel.app',
+  apiLocal: 'http://localhost:10975/'
+
 };
 
 /*

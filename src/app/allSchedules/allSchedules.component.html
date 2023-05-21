@@ -9,7 +9,7 @@
 </div>
 
 <div>
-    <div class="container mx-auto m-20">
+    <div class="container mx-auto my-10">
         <ng-container *ngIf="existePlanificacion; else SinPlanificaciones">
             <div class=" grid grid-cols-4 gap-6 grid-flow-row auto-rows-auto rounded-md bg-gray-900 p-6">
                 <ng-container *ngFor="let planificacion of planificacionAnios.data">
@@ -44,7 +44,7 @@
 
 <div class="container mx-auto pb-20">
     <ng-container *ngIf="efectoCarga">
-        <div class="flex flex-col justifify-center">
+        <div class="py-10 flex flex-col justifify-center bg-gray-900">
             <div class="mx-auto" aria-label="Loading..." role="status">
                 <svg class="h-2/5 w-2/5 mx-auto animate-spin" viewBox="3 3 18 18">
                     <path class="fill-gray-200"
@@ -69,12 +69,12 @@
             </div>
             <ng-container *ngIf="planificacionAnual.data.length > 6; else HayMenosDeSeis">
 
-                <div class="grid grid-cols-6 gap-y-1 grid-flow-row gap-x-3 pb-10"
+                <div class="mx-6 grid grid-cols-6 gap-y-1 grid-flow-row gap-x-3 pb-3"
                     [style.grid-template-columns]="'repeat(6, 1fr)'">
                     <ng-container *ngFor="let planificacion of planificacionAnual.data; let i = index">
                         <div class="col-span-1">
                             <button (click)="SeleccionMes(planificacion.planificacion_id)"
-                                class="w-full h-full py-4 tracking-wider text-center text-white uppercase font-medium rounded-md shadow-inner"
+                                class="w-full h-full text-2xl py-4 tracking-wider text-center text-white uppercase font-medium rounded-md shadow-inner"
                                 [ngClass]="{'bg-black': planificacion.mostrar,'dark:bg-gray-800': !planificacion.mostrar}">
                                 {{planificacion.mes}}
                             </button>
@@ -86,12 +86,12 @@
 
             </ng-container>
             <ng-template #HayMenosDeSeis>
-                    <div class="grid grid-auto-rows-auto gap-x-3 pb-10"
+                    <div class="grid grid-auto-rows-auto gap-x-3 pb-3"
                         [style.grid-template-columns]="'repeat(' + planificacionAnual.data.length + ', 1fr)'">
                         <ng-container *ngFor="let planificacion of planificacionAnual.data">
                             <div class="col-span-1">
                                 <button (click)="SeleccionMes(planificacion.planificacion_id)"
-                                    class="w-full h-full py-4 tracking-wider text-center text-white  py-4 px-10 uppercase font-medium rounded shadow-inner" [ngClass]="{
+                                    class="w-full h-full text-2xl py-4 tracking-wider text-center text-white  py-4 px-10 uppercase font-medium rounded shadow-inner" [ngClass]="{
                                             'bg-black': planificacion.mostrar,'dark:bg-gray-800': !planificacion.mostrar}">
                                     {{planificacion.mes}}
                                 </button>
@@ -99,13 +99,33 @@
                         </ng-container>
                     </div>
             </ng-template>
-            <div class="grid grid-cols-12">
-                <div class="col-span-11 grid grid-cols-12 bg-yellow-500">
-                <div class="bg-indigo-600" 
-                    [ngClass]="{'col-span-9': planificacionActual.actualizacion != undefined,
+            <div class="flex justify-end gap-x-3 text-white font-medium">
+                <div>
+                    <app-pdf-calendario [planificacion]="planificacionActual">
+                    </app-pdf-calendario>
+                </div>
+                <div>
+                    <button (click)="MostrarModalActualizacion()" class="bg-green-600 flex">
+                        <span>ACTUALIZACIÓN</span>
+                        <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>-->
+                    </button>
+                </div>
+                <div>
+                    <button (click)="BorrarPlanificacion(planificacionActual)" class="bg-red-800 flex">
+                        <span>BORRAR PLANIFICACIÓN</span>
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-12 ">
+                <div [ngClass]="{'col-span-9': planificacionActual.actualizacion != undefined,
                                 'col-span-12': !planificacionActual.actualizacion != undefined}">
                     <ng-container *ngIf="planificacionActual!=null">
-                        <div class="grid grid-cols-3 gap-3 grid-flow-row auto-rows-auto rounded-md ">
+                        <div [ngClass]="{'grid-cols-3': planificacionActual.actualizacion != undefined,'grid-cols-4': planificacionActual.actualizacion == undefined}" 
+                            class="grid gap-6 grid-flow-row auto-rows-auto rounded-lg p-6">
                             <ng-container *ngFor="let dia of planificacionActual.planificacion | paginate:{
                                 id: 'first',
                                 itemsPerPage: CantidadPorPagina,
@@ -113,31 +133,27 @@
                                 totalItems: ContadorCalendario};
                                 let ix = index">
 
-                                <div
-                                    class="grid grid-cols-1 gap-2 bg-slate-600 rounded-md m-2 text-white hover:bg-slate-800 hover:scale-110 hover:duration-300 shadow-lg shadow-slate-500/50">
-                                    <div class="m-3 place-content-center relative flex">
+                                <div class="p-3 grid grid-cols-1 gap-2 bg-gray-800 rounded-lg text-white shadow-inner uppercase">
+                                    <div class="p-3 place-content-center relative flex">
                                         <div class="flex">
-                                            <div class="flex">
-                                                <div>{{dia.dia_semana}} {{dia.dia_numero}}</div>
-                                                <ng-container *ngIf="dia.itinerario != undefined && dia.itinerario.length > 0">
-                                                    <button type="button" (click)="MostrarItinerario(dia)" class="top-0 right-0 inline-flex items-center absolute">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="w-8 h-8 fill-red-500">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                                                        </svg>
-                                                    </button>
-                                                </ng-container>
-                                            </div>
+                                            <div class="text-xl font-bold">{{dia.dia_semana}} {{dia.dia_numero}}</div>
+                                            <ng-container *ngIf="dia.itinerario != undefined && dia.itinerario.length > 0">
+                                                <button type="button" (click)="MostrarItinerario(dia)" class="top-0 right-0 inline-flex items-center absolute">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-10 h-10 fill-red-600">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                                    </svg>
+                                                </button>
+                                            </ng-container>
                                         </div>
                                     </div>
                                     <ng-container *ngFor="let empleado of dia.empleados">
                                         <ng-container *ngIf="dia.comodin != 0 && empleado.turno == dia.comodin;else NohayComodin">
-                                            <div class="grid grid-cols-2 text-xs m-2 bg-red-500">
-                                                <div class="grid-cols-1 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
-                                                
-                                                <div class="grid-cols-1 flex justify-end">
-                                                    <div class="grid-cols-1 flex justify-end uppercase" [ngSwitch]="empleado.turno">
+                                            <div class="grid grid-cols-5 px-3 py-1 text-sm font-semibold bg-red-800">
+                                                <div class="col-span-3 flex justify-start">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                                <div class="col-span-2 flex justify-end">
+                                                    <div class="grid-cols-2 flex justify-end uppercase" [ngSwitch]="empleado.turno">
                                                         <div *ngSwitchCase="0" class="uppercase">Libre</div>
                                                         <div *ngSwitchCase="1" class="uppercase">{{planificacionActual.horario.turno1}}</div>
                                                         <div *ngSwitchCase="2" class="uppercase">{{planificacionActual.horario.turno2}}</div>
@@ -150,9 +166,9 @@
                                             </div>
                                         </ng-container>
                                         <ng-template #NohayComodin>
-                                            <div class="grid grid-cols-2 text-xs m-2">
-                                                <div class="grid-cols-1 flex justify-start uppercase">{{empleado.nombre}} {{empleado.apellido}}</div>
-                                                <div class="grid-cols-1 flex justify-end" [ngSwitch]="empleado.turno">
+                                            <div class="grid grid-cols-5 px-3 py-1 text-sm font-semibold ">
+                                                <div class="col-span-3 flex justify-start uppercase">{{empleado.nombre}} {{empleado.apellido}}</div>
+                                                <div class="col-span-2 flex justify-end" [ngSwitch]="empleado.turno">
                                                     <div *ngSwitchCase="0" class="uppercase">Libre</div>
                                                     <div *ngSwitchCase="1" class="uppercase">{{planificacionActual.horario.turno1}}</div>
                                                     <div *ngSwitchCase="2" class="uppercase">{{planificacionActual.horario.turno2}}</div>
@@ -168,72 +184,51 @@
                             </ng-container>
                         </div>
                         <div class="mx-auto flex justify-center">
-                            <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente"
+                            <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente" class="pt-3 px-2 bg-gray-800 rounded-lg"
                                 (pageChange)="PaginacionPlanificacion = $event">
                             </pagination-controls>
                         </div>
                     </ng-container>
                 </div>
-                <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
-                    <div class="bg-white col-span-3 flex flex-col">
-                        <div class="flex justify-center">
-                            <h1 class="italic text-lg font-semibold hover:text-black">Actualizaciones</h1>
-                        </div>
-                        <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
-                            <ng-container *ngFor="let actualizacion of planificacionActual.actualizacion | paginate:{
-                            id: 'second',
-                            itemsPerPage: CantidadPorPaginaActualizacion,
-                            currentPage: PaginacionActualizacion,
-                            totalItems: ContadorActualizacion}; 
-                            let ix = index">
-                                <div class="flex flex-col justify-center border border-black p-2 m-1">
-                                    <p>Solicitante: {{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}</p>
-                                    <p>Tipo: {{actualizacion.tipo}}</p>
-                                    <p>Descripción: {{actualizacion.descripcion}}</p>
-                                    <ng-container *ngIf="actualizacion.reemplazo_nombre && actualizacion.reemplazo_apellido">
-                                        <p>Reemplazo: {{actualizacion.reemplazo_nombre}} {{actualizacion.reemplazo_apellido}}</p>
-                                    </ng-container>
-                                    <ng-container *ngIf="actualizacion.fecha_inicio">
-                                        <p>Fecha inicio: {{actualizacion.fecha_inicio}}</p>
-                                    </ng-container>
-                                    <ng-container *ngIf="actualizacion.fecha_termino">
-                                        <p>Fecha termino: {{actualizacion.fecha_termino}}</p>
-                                    </ng-container>
-                                    <p>{{actualizacion.fecha}}</p>
-                                    <button (click)="EliminarActualizacion(actualizacion.id)" class="bg-red-500">Eliminar</button>
-                                </div>
-                            </ng-container>
-                            <div class="mx-auto flex justify-center">
-                                <pagination-controls id="second" previousLabel="Anterior" nextLabel="Siguiente"
-                                    (pageChange)="PaginacionActualizacion = $event">
-                                </pagination-controls>
+            <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
+                <div class="bg-white col-span-3 flex flex-col">
+                    <div class="flex justify-center">
+                        <h1 class="italic text-lg font-semibold hover:text-black">Actualizaciones</h1>
+                    </div>
+                    <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
+                        <ng-container *ngFor="let actualizacion of planificacionActual.actualizacion | paginate:{
+                        id: 'second',
+                        itemsPerPage: CantidadPorPaginaActualizacion,
+                        currentPage: PaginacionActualizacion,
+                        totalItems: ContadorActualizacion}; 
+                        let ix = index">
+                            <div class="flex flex-col justify-center border border-black p-2 m-1">
+                                <p>Solicitante: {{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}</p>
+                                <p>Tipo: {{actualizacion.tipo}}</p>
+                                <p>Descripción: {{actualizacion.descripcion}}</p>
+                                <ng-container *ngIf="actualizacion.reemplazo_nombre && actualizacion.reemplazo_apellido">
+                                    <p>Reemplazo: {{actualizacion.reemplazo_nombre}} {{actualizacion.reemplazo_apellido}}</p>
+                                </ng-container>
+                                <ng-container *ngIf="actualizacion.fecha_inicio">
+                                    <p>Fecha inicio: {{actualizacion.fecha_inicio}}</p>
+                                </ng-container>
+                                <ng-container *ngIf="actualizacion.fecha_termino">
+                                    <p>Fecha termino: {{actualizacion.fecha_termino}}</p>
+                                </ng-container>
+                                <p>{{actualizacion.fecha}}</p>
+                                <button (click)="EliminarActualizacion(actualizacion.id)" class="bg-red-500">Eliminar</button>
                             </div>
                         </ng-container>
-                    </div>
-                </ng-container>
+                        <div class="mx-auto flex justify-center">
+                            <pagination-controls id="second" previousLabel="Anterior" nextLabel="Siguiente"
+                                (pageChange)="PaginacionActualizacion = $event">
+                            </pagination-controls>
+                        </div>
+                    </ng-container>
                 </div>
-                <div class="col-span-1 flex flex-col">
-                    <div>
-                        <app-pdf-calendario [planificacion]="planificacionActual">
-                        </app-pdf-calendario>
-                    </div>
-                    <div>
-                        <button (click)="MostrarModalActualizacion()" class="bg-orange-400 flex">
-                            <span>ACTUALIZACIÓN</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div>
-                        <button (click)="BorrarPlanificacion(planificacionActual)" class="bg-blue-200 flex">
-                            <span>BORRAR</span>
-                        </button>
-                    </div>
-                </div>
-
+            </ng-container>
             </div>
+
 
             <div class="flex justify-center p-3 bg-blue-500 mt-10">
                 <h1 class="font-bold p-2 uppercase text-3xl text-slate-200 leading-4"> INFORMACIÓN</h1>

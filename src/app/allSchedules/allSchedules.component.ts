@@ -54,7 +54,7 @@ export class AllSchedulesComponent implements OnInit {
     }
 
     BorrarPlanificacion(planificacion: Planificacion): void{
-
+        /*
         this.AllSchedulesService.BorrarPlanificacion(planificacion)
         .pipe(
             finalize(()=>{
@@ -67,6 +67,7 @@ export class AllSchedulesComponent implements OnInit {
                 console.error(error)
             }
         )
+        */
     };
 
     EliminarActualizacion(id: number): void{

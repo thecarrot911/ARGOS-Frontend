@@ -99,40 +99,33 @@
                         </ng-container>
                     </div>
             </ng-template>
-            <div class="flex justify-end gap-x-3 text-white font-medium">
+            <div class="flex justify-end gap-x-5 text-white font-medium pr-6 pt-10">
                 <div>
                     <app-pdf-calendario [planificacion]="planificacionActual">
                     </app-pdf-calendario>
                 </div>
                 <div>
-                    <button (click)="MostrarModalActualizacion()" class="bg-green-600 flex">
+                    <button (click)="MostrarModalActualizacion()" class="bg-green-600 flex px-3 py-2 rounded-lg">
                         <span>ACTUALIZACIÓN</span>
-                        <!--<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>-->
                     </button>
                 </div>
                 <div>
-                    <button (click)="BorrarPlanificacion(planificacionActual)" class="bg-red-800 flex">
+                    <button (click)="BorrarPlanificacion(planificacionActual)" class="bg-red-800 flex px-3 py-2 rounded-lg">
                         <span>BORRAR PLANIFICACIÓN</span>
                     </button>
                 </div>
             </div>
-            <div class="grid grid-cols-12 ">
-                <div [ngClass]="{'col-span-9': planificacionActual.actualizacion != undefined,
-                                'col-span-12': !planificacionActual.actualizacion != undefined}">
-                    <ng-container *ngIf="planificacionActual!=null">
+            <div class="grid grid-cols-12">
+                <div [ngClass]="{'col-span-9': planificacionActual.actualizacion != undefined,'col-span-12': !planificacionActual.actualizacion != undefined}">
+                    <ng-container *ngIf="planificacionActual != null">
                         <div [ngClass]="{'grid-cols-3': planificacionActual.actualizacion != undefined,'grid-cols-4': planificacionActual.actualizacion == undefined}" 
-                            class="grid gap-6 grid-flow-row auto-rows-auto rounded-lg p-6">
+                            class="grid gap-6 grid-flow-row auto-rows-auto rounded-lg px-6 pb-6 pt-4">
                             <ng-container *ngFor="let dia of planificacionActual.planificacion | paginate:{
                                 id: 'first',
                                 itemsPerPage: CantidadPorPagina,
                                 currentPage: PaginacionPlanificacion,
                                 totalItems: ContadorCalendario};
                                 let ix = index">
-
                                 <div class="p-3 grid grid-cols-1 gap-2 bg-gray-800 rounded-lg text-white shadow-inner uppercase">
                                     <div class="p-3 place-content-center relative flex">
                                         <div class="flex">
@@ -183,52 +176,52 @@
                                 </div>
                             </ng-container>
                         </div>
-                        <div class="mx-auto flex justify-center">
-                            <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente" class="pt-3 px-2 bg-gray-800 rounded-lg"
-                                (pageChange)="PaginacionPlanificacion = $event">
-                            </pagination-controls>
-                        </div>
                     </ng-container>
                 </div>
-            <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
-                <div class="bg-white col-span-3 flex flex-col">
-                    <div class="flex justify-center">
-                        <h1 class="italic text-lg font-semibold hover:text-black">Actualizaciones</h1>
-                    </div>
-                    <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
-                        <ng-container *ngFor="let actualizacion of planificacionActual.actualizacion | paginate:{
-                        id: 'second',
-                        itemsPerPage: CantidadPorPaginaActualizacion,
-                        currentPage: PaginacionActualizacion,
-                        totalItems: ContadorActualizacion}; 
-                        let ix = index">
-                            <div class="flex flex-col justify-center border border-black p-2 m-1">
-                                <p>Solicitante: {{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}</p>
-                                <p>Tipo: {{actualizacion.tipo}}</p>
-                                <p>Descripción: {{actualizacion.descripcion}}</p>
-                                <ng-container *ngIf="actualizacion.reemplazo_nombre && actualizacion.reemplazo_apellido">
-                                    <p>Reemplazo: {{actualizacion.reemplazo_nombre}} {{actualizacion.reemplazo_apellido}}</p>
-                                </ng-container>
-                                <ng-container *ngIf="actualizacion.fecha_inicio">
-                                    <p>Fecha inicio: {{actualizacion.fecha_inicio}}</p>
-                                </ng-container>
-                                <ng-container *ngIf="actualizacion.fecha_termino">
-                                    <p>Fecha termino: {{actualizacion.fecha_termino}}</p>
-                                </ng-container>
-                                <p>{{actualizacion.fecha}}</p>
-                                <button (click)="EliminarActualizacion(actualizacion.id)" class="bg-red-500">Eliminar</button>
+                <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
+                    <div class="mt-4 col-span-3 flex flex-col bg-gray-800 rounded-lg p-3">
+                        <div class="flex justify-center ">
+                            <h1 class="text-white text-2xl font-semibold uppercase">Comentarios</h1>
+                        </div>
+                        <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
+                            <ng-container *ngFor="let actualizacion of planificacionActual.actualizacion | paginate:{
+                            id: 'second',
+                            itemsPerPage: CantidadPorPaginaActualizacion,
+                            currentPage: PaginacionActualizacion,
+                            totalItems: ContadorActualizacion}; 
+                            let ix = index">
+                                <div class="flex flex-col justify-center border border-black p-2 m-1">
+                                    <p>Solicitante: {{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}</p>
+                                    <p>Tipo: {{actualizacion.tipo}}</p>
+                                    <p>Descripción: {{actualizacion.descripcion}}</p>
+                                    <ng-container *ngIf="actualizacion.reemplazo_nombre && actualizacion.reemplazo_apellido">
+                                        <p>Reemplazo: {{actualizacion.reemplazo_nombre}} {{actualizacion.reemplazo_apellido}}</p>
+                                    </ng-container>
+                                    <ng-container *ngIf="actualizacion.fecha_inicio">
+                                        <p>Fecha inicio: {{actualizacion.fecha_inicio}}</p>
+                                    </ng-container>
+                                    <ng-container *ngIf="actualizacion.fecha_termino">
+                                        <p>Fecha termino: {{actualizacion.fecha_termino}}</p>
+                                    </ng-container>
+                                    <p>{{actualizacion.fecha}}</p>
+                                    <button (click)="EliminarActualizacion(actualizacion.id)" class="bg-red-500">Eliminar</button>
+                                </div>
+                            </ng-container>
+                            
+                            <div class="mx-auto flex justify-center">
+                                <pagination-controls id="second" previousLabel="Anterior" nextLabel="Siguiente"
+                                    (pageChange)="PaginacionActualizacion = $event">
+                                </pagination-controls>
                             </div>
                         </ng-container>
-                        <div class="mx-auto flex justify-center">
-                            <pagination-controls id="second" previousLabel="Anterior" nextLabel="Siguiente"
-                                (pageChange)="PaginacionActualizacion = $event">
-                            </pagination-controls>
-                        </div>
-                    </ng-container>
-                </div>
-            </ng-container>
+                    </div>
+                </ng-container>
             </div>
-
+            <div class="mx-auto flex justify-center">
+                <pagination-controls id="first" previousLabel="Anterior" nextLabel="Siguiente"
+                    class="pt-3 px-2 bg-gray-800 rounded-lg" (pageChange)="PaginacionPlanificacion = $event">
+                </pagination-controls>
+            </div>
 
             <div class="flex justify-center p-3 bg-blue-500 mt-10">
                 <h1 class="font-bold p-2 uppercase text-3xl text-slate-200 leading-4"> INFORMACIÓN</h1>

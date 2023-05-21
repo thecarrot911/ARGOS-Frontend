@@ -1,3 +1,21 @@
 .ng-valid[required], .ng-valid.required  {
     border-left: 5px solid #42A948; /* green */
-  }
+}
+
+::ng-deep ul>li:not(.active)>a {
+    border-color: black !important;
+    color: white !important;
+}
+
+
+::ng-deep ul>li.active>a {
+    border-color: white !important;
+}
+
+
+
+::ng-deep ul>li:not(.active)>a:hover {
+    /* Estilos para el estado de hover */
+    background: black !important;
+    color: white !important;
+}

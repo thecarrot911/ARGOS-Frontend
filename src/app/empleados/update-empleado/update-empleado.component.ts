@@ -44,6 +44,7 @@ export class UpdateEmpleadoComponent implements OnInit {
         this.empleado.apellido_paterno = this.updateEmpleado.apellido_paterno;
         this.empleado.apellido_materno = this.updateEmpleado.apellido_materno;
         this.empleado.rut = this.updateEmpleado.rut;
+        this.empleado.imagen = this.updateEmpleado.imagen;
         this.imageURL = this.updateEmpleado.imagen;
     }
 
@@ -81,8 +82,9 @@ export class UpdateEmpleadoComponent implements OnInit {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Si, quiero modificarlo!'
         }).then((result)=>{
+
             if(result.isConfirmed){
-                this.empleadoService.ModificarEmpleado(this.empleado).subscribe(
+                this.empleadoService.ModificarEmpleado(this.empleado, this.imageURL).subscribe(
                     response => {
                         Swal.fire(
                         '¡Modificado!',

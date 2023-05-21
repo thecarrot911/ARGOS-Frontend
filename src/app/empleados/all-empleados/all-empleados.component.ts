@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DatoPlanificacion } from '../../UltimaPlanificacion';
 import { environment } from '../../../environments/environment';
+import  Carousel from '../../carousel';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class AllEmpleadosComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        console.log(environment.apiDeploy)
+
         this.empleadoService.MostrarPerfil().subscribe(
             response =>{
                 this.listaCredenciales = response.data.credencial;
@@ -121,4 +122,5 @@ export class AllEmpleadosComponent implements OnInit {
         this.rutEmpleadoSelecionado = rut
     }
 
+    
 }

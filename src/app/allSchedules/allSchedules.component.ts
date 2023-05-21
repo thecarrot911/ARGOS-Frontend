@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarioAnual} from '../calendario';
 import { Anios, PlanificacionAnios } from '../calendarioanual';
 import { AllSchedulesService } from '../services/allSchedules.service';
-import { Planificacion, Itinerario, Dia, ActualizacionPlani } from '../UltimaPlanificacion';
+import { Planificacion, Dia } from '../UltimaPlanificacion';
 import { finalize } from 'rxjs/operators';
 import { HorarioService } from '../services/horario.service';
 import { ActualizacionService } from '../services/actualizacion.service';
-import { response } from 'express';
-import { Router } from '@angular/router';
 
 
 @Component({

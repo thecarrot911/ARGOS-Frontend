@@ -73,13 +73,20 @@ export class AllempleadosService {
         return this.http.post<EmpleadoData>(this.urlRegistrarEmpleado, formData);
     }
     
-    ModificarEmpleado(empleado: Empleado): Observable<EmpleadoData>{
+    ModificarEmpleado(empleado: Empleado, imageURL:string): Observable<EmpleadoData>{
         const formData = new FormData();
-        if(empleado.imagen != 'null'){
+        if (empleado.imagen != 'null'){
             // Con imágen
-            formData.append('imagen', empleado.imagen, empleado.rut + '.' + fileExtension(empleado.imagen.name));
+            if (imageURL == empleado.imagen){
+
+                formData.append('imagenURL',empleado.imagen);
+            }else{
+
+                formData.append('imagen', empleado.imagen, empleado.rut + '.' + fileExtension(empleado.imagen.name));
+            }
         }else{
-            // Sin imáagen
+            // Sin imágen
+
             formData.append('imagen',null);
         }
         formData.append('nombre_paterno', empleado.nombre_paterno)

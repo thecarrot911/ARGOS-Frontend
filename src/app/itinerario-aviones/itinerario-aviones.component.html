@@ -1,55 +1,72 @@
-<div class="container bg-slate-700 mx-auto p-5 rounded-lg  w-4/5">
-    <div class="overflow-x-auto flex justify-center">
+<div class="container mx-auto bg-slate-900">
+    <div class="text-center">
         <h1
-            class="mt-10 mb-5 text-center font-bold text-4xl bg-gradient-to-br from-white via-white to-transparent bg-clip-text text-transparent">
-            GENERAR PLANIFICACIÓN</h1>
+            class="p-10 font-bold text-4xl bg-gradient-to-br from-white via-white to-transparent bg-clip-text text-transparent">
+            GENERAR PLANIFICACIÓN
+        </h1>
     </div>
-    <form class="text-gray-200 font-bold p-8">
-        <div class="grid grid-cols-3 gap-4 mt-5">
-            <div class="mx-auto col-span-1 flex flex-col justify-center">
-                <div class="flex flex-col my-2">
-                    <label>Ingrese el año</label>
-                    <input class="text-gray-600" type="text" minlength="4" maxlength="4" autocomplete="off" 
-                    placeholder='{{anioActual}}' name="anio" [(ngModel)]="planificacion.anio" required />
-                </div>
-                <div class="flex flex-col my-2">
-                    <label>Ingrese el mes</label>
-                    <input class="text-gray-600" type="text" minlength="2" maxlength="2" autocomplete="off" 
-                    placeholder="{{mesActual}}" name="mes" [(ngModel)]="planificacion.mes" required>
-                </div>
-                <div class="flex flex-col my-2">
-                    <label>Ingrese el comodín</label>
-                    <select class="text-gray-600" [(ngModel)]="comodin" (ngModelChange)="AgregarComodin()" name="comodin">
-                        <ng-container *ngIf="listaEmpleados?.length === 0">
-                            <option value="" disabled selected>No hay empleados disponibles
-                            </option>
-                        </ng-container>
-                        <ng-container *ngIf="listaEmpleados?.length > 0">
-                            <option value="" disabled selected>Escoge un empleado</option>
-                        </ng-container>
-                        <ng-container *ngFor="let empleado of listaEmpleados">
-                            <option [value]="empleado.rut">{{empleado.nombre_paterno}}
-                                {{empleado.apellido_paterno}}</option>
-                        </ng-container>
-                    </select>
-
-                    <ng-container *ngIf="comodinSeleccionado != null">
-                        <div class="flex justify-between mx-2 border border-black my-2">
-                            <div class="text-black p-2">
-                                {{comodinSeleccionado.nombre_paterno}} {{comodinSeleccionado.apellido_paterno}}
+    <div>
+        <form class="text-gray-200 font-medium uppercase">
+            <div class="grid gap-y-10" [ngClass]="{'grid-cols-2': !boolItinerario,'grid-cols-3':boolItinerario}">
+                <div class="col-span-1 flex flex-col items-end gap-y-3">
+                    <div class="grid grid-cols-2 gap-x-5">
+                        <div class="col-span-1 flex flex-col">
+                            <label>Ingrese el año</label>
+                            <input type="text" class="rounded-md text-gray-900" minlength="4" maxlength="4" autocomplete="off"
+                                placeholder='{{anioActual}}' name="anio" [(ngModel)]="planificacion.anio" required />
+                        </div>
+                        <div class="col-span-1 flex flex-col">
+                            <label>Ingrese el mes</label>
+                            <input type="text" class="rounded-md text-gray-900" minlength="2" maxlength="2" autocomplete="off"
+                                placeholder="{{mesActual}}" name="mes" [(ngModel)]="planificacion.mes" required>
+                        </div>
+                    </div>
+                    <ng-container>
+                        <div class="grid grid-cols-2 gap-x-5 gap-y-3">
+                            <div class="flex flex-col col-span-1">
+                                <label>Turno 1</label>
+                                <input type="text" class="rounded-md text-gray-900" name="turno1"
+                                    [(ngModel)]="planificacion.turnos.turno1">
                             </div>
-                            <button type="button" (click)="EliminarComodin(comodinSeleccionado)" class="p-1 m-1 bg-red-500 ">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
+                            <div class="flex flex-col col-span-1">
+                                <label>Turno 2</label>
+                                <input type="text" class="rounded-md text-gray-900" name="turno2"
+                                    [(ngModel)]="planificacion.turnos.turno2">
+                            </div>
+                            <div class="flex flex-col col-span-1">
+                                <label>Turno 3</label>
+                                <input type="text" class="rounded-md text-gray-900" name="turno3"
+                                    [(ngModel)]="planificacion.turnos.turno3">
+                            </div>
+                            <div class="flex flex-col col-span-1">
+                                <label>Comodín</label>
+                                <select class="rounded-md text-gray-900" [(ngModel)]="comodin" (ngModelChange)="AgregarComodin()" name="comodin">
+                                    <ng-container *ngIf="listaEmpleados?.length === 0">
+                                        <option value="" disabled selected>No hay empleados disponibles
+                                        </option>
+                                    </ng-container>
+                                    <ng-container *ngIf="listaEmpleados?.length > 0">
+                                        <option value="" disabled selected>Escoge un empleado</option>
+                                    </ng-container>
+                                    <ng-container *ngFor="let empleado of listaEmpleados">
+                                        <option class="text-gray-900" [value]="empleado.rut">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
+                                    </ng-container>
+                                </select>
+                                <!--<button (click)="FormularioItinerario()"
+                                    class="bg-blue-600 hover:bg-blue-800 rounded-md py-2.5 mt-6 uppercase">
+                                    Encuentro de aviones
+                                </button>-->
+                            </div>
                         </div>
                     </ng-container>
+                </div>
+
+                
+                <div class="bg-green-500 mx-auto col-span-1 flex flex-col justify-center">
                     <div class="flex flex-col my-2">
-                        <label>Ingrese los empleados (mínimo 5)</label>
-                        <select class="text-gray-600" [(ngModel)]="ngEmpleado" (ngModelChange)="AgregarEmpleado()" name="empleado">
+                        <!--
+                        <label>Ingrese el comodín</label>
+                        <select class="text-gray-600" [(ngModel)]="comodin" (ngModelChange)="AgregarComodin()" name="comodin">
                             <ng-container *ngIf="listaEmpleados?.length === 0">
                                 <option value="" disabled selected>No hay empleados disponibles
                                 </option>
@@ -62,42 +79,58 @@
                                     {{empleado.apellido_paterno}}</option>
                             </ng-container>
                         </select>
-                    
-                        <div class="flex flex-col justify-center gap-y-2 my-2">
-                            <ng-container *ngFor="let empleado of empleadoSeleccionado">
-                                <div class="flex justify-between mx-2 border border-black">
-                                    <div class="text-black p-2">
-                                        {{empleado.nombre_paterno}} {{empleado.apellido_paterno}}
-                                    </div>
-                                    <button type="button" (click)="EliminarEmpleado(empleado)" class="p-1 m-1 bg-red-500 ">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
+                        
+                        <ng-container *ngIf="comodinSeleccionado != null">
+                            <div class="flex justify-between mx-2 border border-black my-2">
+                                <div class="text-black p-2">
+                                    {{comodinSeleccionado.nombre_paterno}} {{comodinSeleccionado.apellido_paterno}}
                                 </div>
-                            </ng-container>
+                                <button type="button" (click)="EliminarComodin(comodinSeleccionado)" class="p-1 m-1 bg-red-500 ">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </ng-container>
+                        -->
+                        <div class="flex flex-col my-2">
+                            <label>Ingrese los empleados (mínimo 5)</label>
+                            <select  class="text-gray-600" [(ngModel)]="ngEmpleado" (ngModelChange)="AgregarEmpleado()" name="empleado">
+                                <ng-container *ngIf="listaEmpleados?.length === 0">
+                                    <option value="" disabled selected>No hay empleados disponibles
+                                    </option>
+                                </ng-container>
+                                <ng-container *ngIf="listaEmpleados?.length > 0">
+                                    <option value="" disabled selected>Escoge un empleado</option>
+                                </ng-container>
+                                <ng-container *ngFor="let empleado of listaEmpleados">
+                                    <option [value]="empleado.rut">{{empleado.nombre_paterno}}
+                                        {{empleado.apellido_paterno}}</option>
+                                </ng-container>
+                            </select>
+                    
+                            <div class="flex flex-col justify-center gap-y-2 my-2">
+                                <ng-container *ngFor="let empleado of empleadoSeleccionado">
+                                    <div class="flex justify-between mx-2 border border-black">
+                                        <div class="text-black p-2">
+                                            {{empleado.nombre_paterno}} {{empleado.apellido_paterno}}
+                                        </div>
+                                        <button type="button" (click)="EliminarEmpleado(empleado)" class="p-1 m-1 bg-red-500 ">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </ng-container>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="mx-auto col-span-1 flex flex-col justify-center">
-                
-                <div>
-                    <span class="text-white">HORARIO DEL TURNO 1</span>
-                    <input type="text" class="w-full text-black mt-1 block rounded-lg" placeholder="07:00 a 15:00"
-                        name="turno1" [(ngModel)]="planificacion.turnos.turno1">
-                    
-                    <span class="text-white">HORARIO DEL TURNO 2</span>
-                    <input type="text" class="w-full text-black mt-1 block rounded-lg" placeholder="15:00 a 23:00"
-                        name="turno2" [(ngModel)]="planificacion.turnos.turno2">
-                    
-                    <span class="text-white">HORARIO DEL TURNO 3</span>
-                    <input type="text" class="w-full text-black mt-1 block rounded-lg" placeholder="23:00 a 07:00"
-                        name="turno3" [(ngModel)]="planificacion.turnos.turno3">
-                </div>
-                
+                <!--
                 <div>
                     <span class="text-white" for="dia">Seleccione el día del encuentro de aviones</span>
                     <input type="number" min="1" max="31" id="dia" name="dia" [(ngModel)]="nuevoEncuentro.dia"
@@ -121,37 +154,38 @@
                 <button (click)="agregarEncuentro()"  class="bg-blue-500" >
                     Agregar Día de encuentro
                 </button>
-            </div>
-            <div class="mx-auto col-span-1 flex flex-col justify-center">
-                <h1 class="font-mono text-lg tracking-normal">Itinerarios registrados</h1>
-                <ng-container *ngFor="let itinerario of planificacion.itinerario; let i = index">
-                    <div class="flex justify-between gap-y-10">
-                        <div class="flex justify-between gap-x-1">
-                            <div class="text-sm ">Día: </div>
-                            <input class="text-sm w-3 text-gray-600 " [(ngModel)]="itinerario.dia" name="itinerario.dia_{{i}}">
-                        </div>
-                        <div class="flex justify-between gap-x-1">
-                            <div class="text-sm">Cantidad: </div>
-                            <input class="text-sm w-3 text-gray-600" [(ngModel)]="itinerario.aviones" name="itinerario.aviones_{{i}}">
-                        </div>
-                        <div class="flex justify-between gap-x-1">
-                            <div class="text-sm">Turno: </div>
-                            <input class="text-sm w-3 text-gray-600" [(ngModel)]="itinerario.turno" name="itinerario.turno_{{i}}">
-                        </div>
-                        <button type="button" class="rounded-md" (click)="eliminarItinerario(itinerario.id)">
-                            <img src="assets/images/delete.png" alt="Logo Argos" width="20" height="20">
-                        </button>
-                    </div>
-                </ng-container>
-            </div>
-        </div>
-        <div class="flex justify-center">
-            <button type="submit" (click)="GenerarPlanificacion()" class="bg-blue-500">
-                Generar Planificación
-            </button>
 
-        </div>
-    </form>
+                <div class="mx-auto col-span-1 flex flex-col justify-center">
+                    <h1 class="font-mono text-lg tracking-normal">Itinerarios registrados</h1>
+                    <ng-container *ngFor="let itinerario of planificacion.itinerario; let i = index">
+                        <div class="flex justify-between gap-y-10">
+                            <div class="flex justify-between gap-x-1">
+                                <div class="text-sm ">Día: </div>
+                                <input class="text-sm w-3 text-gray-600 " [(ngModel)]="itinerario.dia" name="itinerario.dia_{{i}}">
+                            </div>
+                            <div class="flex justify-between gap-x-1">
+                                <div class="text-sm">Cantidad: </div>
+                                <input class="text-sm w-3 text-gray-600" [(ngModel)]="itinerario.aviones" name="itinerario.aviones_{{i}}">
+                            </div>
+                            <div class="flex justify-between gap-x-1">
+                                <div class="text-sm">Turno: </div>
+                                <input class="text-sm w-3 text-gray-600" [(ngModel)]="itinerario.turno" name="itinerario.turno_{{i}}">
+                            </div>
+                            <button type="button" class="rounded-md" (click)="eliminarItinerario(itinerario.id)">
+                                <img src="assets/images/delete.png" alt="Logo Argos" width="20" height="20">
+                            </button>
+                        </div>
+                    </ng-container>
+                </div>
+                -->
+            </div>
+            <div class="flex justify-center p-10">
+                <button type="submit" (click)="GenerarPlanificacion()" class="bg-red-500">
+                    Generar Planificación
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 <ng-container *ngIf="efectoCarga">
     <div aria-label="Cargando..." role="status">

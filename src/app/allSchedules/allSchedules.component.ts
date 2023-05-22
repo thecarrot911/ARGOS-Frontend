@@ -6,6 +6,7 @@ import { Planificacion, Dia } from '../UltimaPlanificacion';
 import { finalize } from 'rxjs/operators';
 import { HorarioService } from '../services/horario.service';
 import { ActualizacionService } from '../services/actualizacion.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -70,15 +71,31 @@ export class AllSchedulesComponent implements OnInit {
         */
     };
 
-    EliminarActualizacion(id: number): void{
-        this.actualizacionService.EliminarActualizacion(id).
-        subscribe(
-            response =>{
-                this.ngOnInit();
-            }, error=>{
-                console.error(error)
+    EliminarActualizacion(id: number, tipo: string): void{
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, borralo!'
+        }).then((result) =>{
+            if(result.isConfirmed){
+                this.actualizacionService.EliminarActualizacion(id, tipo).subscribe(
+                    response => {
+                        Swal.fire(
+                            'Eliminado!',
+                            response.msg,
+                            'success'
+                        )
+                        this.ngOnInit();
+                    }, error => {
+                        console.error(error)
+                    }
+                )
             }
-        )
+        });
     };
 
     ngOnInit(){

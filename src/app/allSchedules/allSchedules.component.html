@@ -86,7 +86,7 @@
 
             </ng-container>
             <ng-template #HayMenosDeSeis>
-                    <div class="grid grid-auto-rows-auto gap-x-3 pb-3"
+                    <div class="grid grid-auto-rows-auto gap-x-3 pb-3 justify-items-center"
                         [style.grid-template-columns]="'repeat(' + planificacionAnual.data.length + ', 1fr)'">
                         <ng-container *ngFor="let planificacion of planificacionAnual.data">
                             <div class="col-span-1">
@@ -179,41 +179,71 @@
                     </ng-container>
                 </div>
                 <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
-                    <div class="mt-4 col-span-3 flex flex-col bg-gray-800 rounded-lg p-3">
-                        <div class="flex justify-center ">
-                            <h1 class="text-white text-2xl font-semibold uppercase">Comentarios</h1>
+                    <div class="mt-4 col-span-3 flex flex-col bg-gray-800 rounded-lg px-3 py-3">
+                        <div class="flex justify-center bg-gray-900 py-2 rounded-lg mx-1">
+                            <h1 class="text-white text-2xl font-bold uppercase">Comentarios</h1>
                         </div>
                         <ng-container *ngIf="planificacionActual.actualizacion!= undefined">
+                            <div class="flex flex-col gap-y-4 mt-5">
                             <ng-container *ngFor="let actualizacion of planificacionActual.actualizacion | paginate:{
                             id: 'second',
                             itemsPerPage: CantidadPorPaginaActualizacion,
                             currentPage: PaginacionActualizacion,
                             totalItems: ContadorActualizacion}; 
                             let ix = index">
-                                <div class="flex flex-col justify-center border border-black p-2 m-1">
-                                    <p>Solicitante: {{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}</p>
-                                    <p>Tipo: {{actualizacion.tipo}}</p>
-                                    <p>Descripción: {{actualizacion.descripcion}}</p>
-                                    <ng-container *ngIf="actualizacion.reemplazo_nombre && actualizacion.reemplazo_apellido">
-                                        <p>Reemplazo: {{actualizacion.reemplazo_nombre}} {{actualizacion.reemplazo_apellido}}</p>
+                                <div class="flex flex-col justify-center py-4 m-1 bg-gray-900 px-3 shadow-inner rounded-md drop-shadow-2xl">
+                                    <div class="flex justify-between">
+                                        <div>
+                                            <p class="font-bold text-lg text-yellow-500 uppercase">{{actualizacion.tipo}}</p>
+                                        </div>
+                                        <div>
+                                            <button (click)="EliminarActualizacion(actualizacion.id, actualizacion.tipo)">
+                                                <svg class="h-5 w-5 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="3 6 5 6 21 6" />
+                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                                                    <line x1="10" y1="11" x2="10" y2="17" />
+                                                    <line x1="14" y1="11" x2="14" y2="17" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex py-1 text-white text-base font-semibold">
+                                        <ng-container *ngIf="actualizacion.reemplazo_nombre && actualizacion.reemplazo_apellido;else NoEsObservacion">
+                                            <div>
+                                                <p>{{actualizacion.reemplazo_nombre}} {{actualizacion.reemplazo_apellido}} releva a
+                                                    {{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}
+                                                </p>
+                                            </div>
+                                        </ng-container>
+                                        <ng-template #NoEsObservacion>
+                                            <div>
+                                                <p>{{actualizacion.solicitante_nombre}} {{actualizacion.solicitante_apellido}}</p>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                    <ng-container *ngIf="actualizacion.fecha_inicio && actualizacion.fecha_termino">
+                                        <div class="flex py-1 text-gray-300">
+                                            <p class="tracking-normal">De {{actualizacion.fecha_inicio}} hasta {{actualizacion.fecha_termino}}</p>
+                                        </div>
                                     </ng-container>
-                                    <ng-container *ngIf="actualizacion.fecha_inicio">
-                                        <p>Fecha inicio: {{actualizacion.fecha_inicio}}</p>
-                                    </ng-container>
-                                    <ng-container *ngIf="actualizacion.fecha_termino">
-                                        <p>Fecha termino: {{actualizacion.fecha_termino}}</p>
-                                    </ng-container>
-                                    <p>{{actualizacion.fecha}}</p>
-                                    <button (click)="EliminarActualizacion(actualizacion.id)" class="bg-red-500">Eliminar</button>
+
+                                    <div class="py-1">
+                                        <p class="text-base text-justify text-gray-300">{{actualizacion.descripcion}}</p>
+                                    </div>
+                                    <div class="flex justify-end text-gray-300 mt-2">
+                                        <p class="tracking-widest">{{actualizacion.fecha}}</p>
+                                    </div>
                                 </div>
                             </ng-container>
-                            
-                            <div class="mx-auto flex justify-center">
-                                <pagination-controls id="second" previousLabel="Anterior" nextLabel="Siguiente"
-                                    (pageChange)="PaginacionActualizacion = $event">
-                                </pagination-controls>
                             </div>
                         </ng-container>
+                        <div *ngIf="planificacionActual.actualizacion.length > CantidadPorPaginaActualizacion" class="mt-auto flex mx-auto">
+                            <pagination-controls id="second" previousLabel="Anterior" nextLabel="Siguiente"
+                                (pageChange)="PaginacionActualizacion = $event">
+                            </pagination-controls>
+                        </div>
                     </div>
                 </ng-container>
             </div>
@@ -222,42 +252,45 @@
                     class="pt-3 px-2 bg-gray-800 rounded-lg" (pageChange)="PaginacionPlanificacion = $event">
                 </pagination-controls>
             </div>
-
-            <div class="flex justify-center p-3 bg-blue-500 mt-10">
-                <h1 class="font-bold p-2 uppercase text-3xl text-slate-200 leading-4"> INFORMACIÓN</h1>
+        </div>
+        
+        <div class="bg-gray-900 p-5 rounded-lg mt-10">
+            <div class="flex justify-center p-3">
+                <h1 class="font-bold p-2 uppercase text-3xl text-slate-200 leading-4"> INFORMACIÓN DE LA PLANIFACIÓN DE {{planificacionActual.estadistica.month}}</h1>
             </div>
-
-            <div class="grid grid-cols-3 bg-red-500 gap-4 p-4 ">
+            <div class="grid grid-cols-3 gap-4 p-4 ">
                 <ng-container *ngFor="let empleado of planificacionActual.estadistica.empleados">
-                    <div class="col-span-1 grid grid-cols-3 flex justify-center bg-blue-500">
-                        <div class="col-span-1 p-3">
+                    <div class="col-span-1 grid grid-cols-3 flex justify-center bg-gray-800 rounded-md border">
+                        <div class="col-span-1 px-3 py-5">
                             <div class="bg-black mx-auto w-20 h-20 rounded-full overflow-hidden flex-shrink-0">
                                 <img src="{{ empleado.imagen }}" class="w-full h-full object-contain object-center">
                             </div>
                             <div class="pt-2 text-center">
-                                <p class="font-bold text-base text-slate-200 leading-4">
+                                <p class="font-medium uppercase text-slate-200 leading-4">
                                     {{empleado.nombre_paterno}}
                                 </p>
-                                <p class="font-bold text-base text-slate-200 leading-4">
+                                <p class="font-medium uppercase text-slate-200 leading-4">
                                     {{empleado.apellido_paterno}}
                                 </p>
                             </div>
                         </div>
                         <div class="col-span-2 p-3">
-                            <div class="border border-yellow-500 flex justify-between">
-                                <div>
-                                    <p class="font-bold p-1 text-slate-200 leading-4">{{planificacionActual.horario.turno1}}: </p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4">{{planificacionActual.horario.turno2}}: </p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4">{{planificacionActual.horario.turno3}}: </p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4">Feriado: </p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4">Libre: </p>
+                            <div class="grid grid-cols-5 flex">
+                                <div class="col-span-3 py-3 pl-8">
+                                    <p class="font-bold underline pb-3 px-1 text-slate-200 leading-3">TURNO</p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3">{{planificacionActual.horario.turno1}} </p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3">{{planificacionActual.horario.turno2}} </p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3">{{planificacionActual.horario.turno3}} </p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3">Feriado </p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3">Libre </p>
                                 </div>
-                                <div class="text-center">
-                                    <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno1}}</p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno2}}</p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.turno3}}</p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.feriado}}</p>
-                                    <p class="font-bold p-1 text-slate-200 leading-4"> {{empleado.libre}}</p>
+                                <div class="col-span-2 py-3 pr-8 text-center">
+                                    <p class="font-bold underline pb-3 px-1 text-slate-200 leading-3">CANTIDAD</p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3"> {{empleado.turno1}}</p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3"> {{empleado.turno2}}</p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3"> {{empleado.turno3}}</p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3"> {{empleado.feriado}}</p>
+                                    <p class="font-medium  p-1 text-slate-200 leading-3"> {{empleado.libre}}</p>
                                 </div>
                             </div>
                         </div>

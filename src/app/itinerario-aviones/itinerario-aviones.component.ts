@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { HorarioService } from '../services/horario.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AllempleadosService } from '../services/allempleados.service'
@@ -13,6 +13,7 @@ import { finalize } from 'rxjs/operators';
   templateUrl: './itinerario-aviones.component.html',
   styleUrls: ['./itinerario-aviones.component.css'],
 })
+
 export class ItinerarioAvionesComponent implements OnInit {
 
     planificacion: GenerarPlanificacion = {
@@ -22,9 +23,9 @@ export class ItinerarioAvionesComponent implements OnInit {
         itinerario: [],
         comodin: null,
         turnos: {
-            turno1: '',
-            turno2: '',
-            turno3: ''
+            turno1: '07:00 a 15:00',
+            turno2: '15:00 a 23:00',
+            turno3: '23:00 a 07:00'
         }
     }
 
@@ -35,7 +36,7 @@ export class ItinerarioAvionesComponent implements OnInit {
     public comodinSeleccionado: Empleado = null;
 
     public ngEmpleado: string;
-    public comodin: string;
+    public comodin: string = "";
 
     nuevoEncuentro: Turno_Choque = {
         dia: null,
@@ -49,6 +50,7 @@ export class ItinerarioAvionesComponent implements OnInit {
     public diaActual = new Date().getDay()
 
     public efectoCarga: boolean = false;
+    public boolItinerario: boolean = false
 
     constructor(
         private horarioService: HorarioService,
@@ -61,20 +63,31 @@ export class ItinerarioAvionesComponent implements OnInit {
         this.empleadoService.MostrarEmpleados().subscribe(
             response => {
                 this.listaEmpleados = response.data
+                for(const empleado of this.listaEmpleados){
+                    empleado.mostrar = true;
+                }
             }, error =>{
                 console.error(error)
             }
         )
     }
 
+    FormularioItinerario(){
+        this.boolItinerario = !this.boolItinerario
+    }
+
     AgregarComodin(){
         if(this.comodinSeleccionado!=null){
             this.EliminarComodin(this.comodinSeleccionado)
         }
-        const empleado = this.listaEmpleados.find((e) => e.rut === this.comodin)
+        let empleado = this.listaEmpleados.find((e) => e.rut === this.comodin)
         this.comodinSeleccionado = empleado
         this.planificacion.comodin = empleado
-        this.listaEmpleados = this.listaEmpleados.filter(empleado => empleado.rut != this.comodinSeleccionado.rut);
+        this.listaEmpleados.forEach(emp =>{
+            if(emp.rut == this.comodinSeleccionado.rut){
+                emp.mostrar = false;
+            }
+        });
     }
 
     AgregarEmpleado(){
@@ -91,7 +104,11 @@ export class ItinerarioAvionesComponent implements OnInit {
     }
 
     EliminarComodin(empleado: Empleado){
-        this.listaEmpleados.push(empleado);
+        for(const emp of this.listaEmpleados){
+            if(emp.rut == empleado.rut){
+                emp.mostrar = true;
+            }
+        }
         this.comodinSeleccionado = null;
         this.planificacion.comodin = null;
     }
@@ -132,7 +149,8 @@ export class ItinerarioAvionesComponent implements OnInit {
 
     GenerarPlanificacion(){
         this.efectoCarga = true;
-
+        console.log(this.planificacion);
+        /*
         this.horarioService.generarHorario(this.planificacion)
         .pipe(
             finalize(()=>{
@@ -147,6 +165,7 @@ export class ItinerarioAvionesComponent implements OnInit {
                 console.error(error)
             }
         );
+        */
     }
 
     agregarEncuentro() {

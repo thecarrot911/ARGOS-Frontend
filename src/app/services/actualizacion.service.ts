@@ -27,9 +27,9 @@ constructor(
         return this.http.post<RespuestaTipo>(this.urlRegistrarActualizacion,actualizacion);
     }
 
-    EliminarActualizacion(id: number): Observable<any>{
-        const queryId = new HttpParams().set('id', id)
-        return this.http.delete<any>(this.urlEliminarActualizacion, {params: queryId});
+    EliminarActualizacion(id: number, tipo: string): Observable<any>{
+        let query = new HttpParams().set('id', id).set('tipo', tipo)
+        return this.http.delete<any>(this.urlEliminarActualizacion, {params: query});
     }
 
 }

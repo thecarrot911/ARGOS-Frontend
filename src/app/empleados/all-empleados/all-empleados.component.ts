@@ -4,8 +4,7 @@ import { Credencial, Empleado } from '../../empleados';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DatoPlanificacion } from '../../UltimaPlanificacion';
-import { environment } from '../../../environments/environment';
-import  Carousel from '../../carousel';
+
 
 
 @Component({
@@ -44,7 +43,6 @@ export class AllEmpleadosComponent implements OnInit {
                 this.listaCredenciales = response.data.credencial;
                 this.listaPlanificacion = response.data.planificacion;
                 this.credencialActual = response.data.credencial[0];
-                console.log(this.credencialActual)
                 this.SeleccionEmpleado(this.credencialActual)
 
             },error =>{

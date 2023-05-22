@@ -86,7 +86,7 @@ export class ItinerarioAvionesComponent implements OnInit {
         this.listaEmpleados.forEach(emp =>{
             if(emp.rut == this.comodinSeleccionado.rut){
                 emp.mostrar = false;
-            }
+            }else emp.mostrar = true;
         });
     }
 

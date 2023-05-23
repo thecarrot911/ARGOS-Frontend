@@ -17,8 +17,8 @@ export class AllEmpleadosComponent implements OnInit {
     CurrentDate = new Date();
     today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
 
-    listaCredenciales: Empleado[];
-    listaPlanificacion: DatoPlanificacion[];
+    public listaCredenciales: Empleado[];
+    public listaPlanificacion: DatoPlanificacion[];
 
     public credencialActual: Empleado;
     public planificacionActual: DatoPlanificacion;
@@ -40,10 +40,16 @@ export class AllEmpleadosComponent implements OnInit {
 
         this.empleadoService.MostrarPerfil().subscribe(
             response =>{
-                this.listaCredenciales = response.data.credencial;
-                this.listaPlanificacion = response.data.planificacion;
-                this.credencialActual = response.data.credencial[0];
-                this.SeleccionEmpleado(this.credencialActual)
+                this.listaCredenciales = response.data.credencial || [];
+                this.listaPlanificacion = response.data.planificacion || [];
+                if(this.listaCredenciales.length != 0){
+                    this.credencialActual = response.data.credencial[0];
+                    this.SeleccionEmpleado(this.credencialActual)
+                }else{
+                    console.log(this.listaCredenciales);
+                    console.log(this.listaPlanificacion);
+                    console.log(this.credencialActual);
+                }
 
             },error =>{
                 console.error(error)

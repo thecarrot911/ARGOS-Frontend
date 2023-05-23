@@ -26,8 +26,6 @@ export class RegistrarEmpleadoComponent implements OnInit {
     public boolInputRut: boolean = false;
     public imageURL: any = null;
         
-    formEmpleado: FormGroup;
-
     constructor(
         private empleadoService: AllempleadosService
     ){ 
@@ -37,6 +35,32 @@ export class RegistrarEmpleadoComponent implements OnInit {
     @Output() recargaPaginaEmpleado = new EventEmitter();
 
     ngOnInit(): void {
+    }
+
+    ValidarRut(rut: any) {
+        if (!/^[0-9]+-[0-9kK]{1}$/.test(rut)) return false;
+        var tmp = rut.split("-");
+        var digv = tmp[1];
+        var rut = tmp[0];
+
+        if (digv == "K") digv = "k";
+
+        var suma = 0;
+        var factor = 2;
+
+        for (var i = rut.length - 1; i >= 0; i--) {
+            suma += factor * rut.charAt(i);
+            factor = factor == 7 ? 2 : factor + 1;
+        }
+
+        var dv = 11 - (suma % 11);
+        if (dv == 10) {
+            return digv == "k" || digv == "K";
+        } else if (dv == 11) {
+            return digv == "0";
+        } else {
+            return dv == parseInt(digv);
+        }
     }
 
     formatoRut() {
@@ -52,13 +76,14 @@ export class RegistrarEmpleadoComponent implements OnInit {
 
 
         // Actualizar el valor del campo de entrada en la propiedad empleado.rut
-        this.boolInputRut = !validateRUT(rut)
-        //console.log(validateRUT(rut))
-        //console.log(getCheckDigit(rut))
+        let rutSinPuntos = rut.replace(/\./g, '')
+        this.boolInputRut = !this.ValidarRut(rutSinPuntos)
+
         this.empleado.rut = rut;
         }
     };
-
+    
+    
 
     onFileSelected(event: any){
         this.empleado.imagen = event.target.files[0];
@@ -69,7 +94,16 @@ export class RegistrarEmpleadoComponent implements OnInit {
         }
     }
 
+    ConvertirMayuscula(empleado: Empleado){
+        empleado.nombre_paterno = empleado.nombre_paterno.charAt(0).toUpperCase() + empleado.nombre_paterno.slice(1).toLowerCase();
+        empleado.nombre_materno = empleado.nombre_materno.charAt(0).toUpperCase() + empleado.nombre_materno.slice(1).toLowerCase();
+        empleado.apellido_paterno = empleado.apellido_paterno.charAt(0).toUpperCase() + empleado.apellido_paterno.slice(1).toLowerCase();
+        empleado.apellido_materno = empleado.apellido_materno.charAt(0).toUpperCase() + empleado.apellido_materno.slice(1).toLowerCase();
+    }
+
     registrarEmpleado() {
+        this.ConvertirMayuscula(this.empleado);
+
         this.empleadoService.RegistrarEmpleados(this.empleado).subscribe(
         response => {
 
@@ -99,6 +133,7 @@ export class RegistrarEmpleadoComponent implements OnInit {
                 })
             }
         )
+        
     }
     
     cerrar(): void{

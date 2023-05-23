@@ -33,8 +33,7 @@
             <div>
                 <button routerLink="/itinerario-aviones"
                     class="mx-auto flex font-medium rounded-lg dark:focus:ring-gray-600 p-5 m-10
-                    hover:ease-in-out
-                    dark:bg-gray-900 border dark:border-gray-900 dark:text-white shadow-lg shadow-cyan-500/50">
+                    hover:ease-in-out dark:bg-gray-900 border dark:border-gray-900 dark:text-white shadow-lg shadow-cyan-500/50">
                     <span class="text-white font-bold">GENERAR PLANIFICACIÓN</span>
                 </button>
             </div>
@@ -79,7 +78,7 @@
                                 {{planificacion.mes}}
                             </button>
                         </div>
-                        <!-- Si es el séptimo elemento, crear una nueva fila -->
+
                         <div *ngIf="i === 5" class="col-span-6"></div>
                     </ng-container>
                 </div>

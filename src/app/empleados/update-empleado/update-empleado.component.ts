@@ -72,7 +72,16 @@ export class UpdateEmpleadoComponent implements OnInit {
         this.boolSegundoApellido = !this.boolSegundoApellido
     }
 
+    ConvertirMayuscula(empleado: Empleado) {
+        empleado.nombre_paterno = empleado.nombre_paterno.charAt(0).toUpperCase() + empleado.nombre_paterno.slice(1).toLowerCase();
+        empleado.nombre_materno = empleado.nombre_materno.charAt(0).toUpperCase() + empleado.nombre_materno.slice(1).toLowerCase();
+        empleado.apellido_paterno = empleado.apellido_paterno.charAt(0).toUpperCase() + empleado.apellido_paterno.slice(1).toLowerCase();
+        empleado.apellido_materno = empleado.apellido_materno.charAt(0).toUpperCase() + empleado.apellido_materno.slice(1).toLowerCase();
+    }
+
     modificar(): void {
+        this.ConvertirMayuscula(this.empleado);
+
         Swal.fire({
             title: '¿Estás seguro?',
             text: "Estas modificando los datos del empleado",

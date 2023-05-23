@@ -6,11 +6,11 @@
 <div class="container mx-auto">
     <div class="overflow-x-auto"> <!--shadow-md sm:rounded-lg-->
         <div class="grid grid-cols-12 gap-2 my-10 ">
-            <ng-container *ngIf="listaCredenciales; else sinEmpleados">
+            <ng-container *ngIf="listaCredenciales.length != 0; else sinEmpleados">
                 <div class="col-span-3 rounded-lg">
-                    <div class="bg-slate-700 flex flex-col space-y-2 mb-5 rounded-lg p-4">
+                    <div class="bg-gray-900 flex flex-col space-y-2 mb-5 rounded-lg p-4">
                         <h1
-                            class="my-2 text-center font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent">
+                            class="my-2 text-center font-bold text-lg lg:text-2xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent">
                             EMPLEADOS</h1>
                         <hr class="my-2 border border-black-700">
                         <ng-container *ngFor="let empleado of listaCredenciales">
@@ -30,7 +30,7 @@
                                         </ng-template>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
+                                        <p class="font-bold text-base text-slate-200 leading-4 group-hover:text-indigo-400">
                                             {{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</p>
                                         <p class="text-slate-400 text-sm hidden md:block">
                                             {{empleado.nombre_materno}} {{empleado.apellido_materno}}</p>
@@ -38,9 +38,9 @@
                                 </div>
                             </a>
                         </ng-container>
-                        <button class="text-gray-900 shadow-md hover:bg-gray-100 focus:ring-4 focus:outline-none 
-                                focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex dark:focus:ring-gray-600 
-                                dark:bg-gray-800 border dark:border-gray-900 dark:text-white dark:hover:bg-gray-900 p-2 flex justify-center items-center" 
+                        <button class="text-gray-900 shadow-md bg-gray-800 text-white
+                                font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex 
+                                border dark:border-gray-900 hover:bg-gray-900 p-2 flex justify-center items-center" 
                                 (click)="mostrarRegistroEmpleado()">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                 class="text-green-500 w-10 h-10">
@@ -50,16 +50,16 @@
                         </button>
                     </div>
                 </div>
-                <div class="bg-slate-700 col-span-9 rounded-lg p-6 flex flex-col">
+                <div class="bg-gray-900 col-span-9 rounded-lg py-2 px-6 flex flex-col">
                     <div class="px-5">
-                        <h1 class="my-2 text-left font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent py-2">INFORMACIÓN PERSONAL</h1>
+                        <h1 class="my-2 text-left font-bold text-lg lg:text-2xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent py-2">INFORMACIÓN PERSONAL</h1>
                         <hr class="my-2 border border-black-700">
                         <div class="grid grid-cols-2">
                             <div class="col-span-1 grid grid-cols-2 pt-2">
                                 <div class="col-span-1">
-                                    <p class="font-bold text-base lg:text-lg text-slate-200 leading-4">Nombres: {{credencialActual.nombre_paterno}} {{credencialActual.nombre_materno}}</p>
-                                    <p class="font-bold text-base lg:text-lg text-slate-200 leading-4">Apellidos: {{credencialActual.apellido_paterno}} {{credencialActual.apellido_materno}}</p>
-                                    <p class="font-bold text-base lg:text-lg text-slate-200 leading-4">RUT: {{credencialActual.rut}}</p>
+                                    <p class="font-medium text-base py-1 text-slate-200 leading-4">Nombres: {{credencialActual.nombre_paterno}} {{credencialActual.nombre_materno}}</p>
+                                    <p class="font-medium text-base py-1 text-slate-200 leading-4">Apellidos: {{credencialActual.apellido_paterno}} {{credencialActual.apellido_materno}}</p>
+                                    <p class="font-medium text-base py-1 text-slate-200 leading-4">RUT: {{credencialActual.rut}}</p>
                                 </div>
                                 <div [ngClass]="{'bg-black':credencialActual.imagen != 'null'}" class="mx-auto bg-black col-span-1 w-20 h-20 rounded-full overflow-hidden flex-shrink-0 flex justify-center items-center">
                                     <ng-container *ngIf="credencialActual.imagen != 'null'; else NoHayImagenCredencial">
@@ -119,6 +119,23 @@
                 </div>
             </ng-container>
             <ng-template #sinEmpleados>
+            <div class="col-span-12">
+                <div class="mx-auto flex justify-center px-10">
+                    <span class="mt-40 text-4xl font-bold text-gray-200"> NO HAY EMPLEADOS REGISTRADOS </span>
+                </div>
+                <div>
+                    <button
+                        class="col-span-12 mx-auto flex font-medium rounded-lg dark:focus:ring-gray-600 p-5 m-10
+                            hover:ease-in-out dark:bg-gray-900 border dark:border-gray-900 dark:text-white shadow-lg shadow-cyan-500/50"
+                        (click)="mostrarRegistroEmpleado()">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                            class="text-green-500 w-10 h-10">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="ml-2 flex my-auto">NUEVO EMPLEADO</span>
+                    </button>
+                </div>
+            </div>
             </ng-template>
         </div>
     </div>

@@ -1,4 +1,4 @@
-<div class="container mx-auto bg-slate-900">
+<div class="container mx-auto bg-slate-900 rounded-lg">
     <div class="text-center">
         <h1
             class="p-10 font-bold text-4xl bg-gradient-to-br from-white via-white to-transparent bg-clip-text text-transparent">
@@ -7,182 +7,187 @@
     </div>
     <div>
         <form class="text-gray-200 font-medium uppercase">
-            <div class="grid gap-y-10" [ngClass]="{'grid-cols-2': !boolItinerario,'grid-cols-3':boolItinerario}">
-                <div class="col-span-1 flex flex-col justifify-center gap-y-3">
-                    <div class="grid grid-cols-2 gap-x-5">
-                        <div class="col-span-1 flex flex-col">
-                            <label>Ingrese el año</label>
-                            <input type="text" class="rounded-md text-gray-900" minlength="4" maxlength="4" autocomplete="off"
-                                placeholder='{{anioActual}}' name="anio" [(ngModel)]="planificacion.anio" required />
-                        </div>
-                        <div class="col-span-1 flex flex-col">
-                            <label>Ingrese el mes</label>
-                            <input type="text" class="rounded-md text-gray-900" minlength="2" maxlength="2" autocomplete="off"
-                                placeholder="{{mesActual}}" name="mes" [(ngModel)]="planificacion.mes" required>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2 gap-x-5 gap-y-3">
-                        <div class="flex flex-col col-span-1">
-                            <label>Turno 1</label>
-                            <input type="text" class="rounded-md text-gray-900" name="turno1"
-                                [(ngModel)]="planificacion.turnos.turno1">
-                        </div>
-                        <div class="flex flex-col col-span-1">
-                            <label>Turno 2</label>
-                            <input type="text" class="rounded-md text-gray-900" name="turno2"
-                                [(ngModel)]="planificacion.turnos.turno2">
-                        </div>
-                        <div class="flex flex-col col-span-1">
-                            <label>Turno 3</label>
-                            <input type="text" class="rounded-md text-gray-900" name="turno3"
-                                [(ngModel)]="planificacion.turnos.turno3">
-                        </div>
-                        <div class="flex flex-col col-span-1">
-                            <label>Comodín</label>
-                            <select class="rounded-md text-gray-900" [(ngModel)]="comodin" (ngModelChange)="AgregarComodin()" name="comodin">
-                                <ng-container *ngIf="listaEmpleados?.length === 0">
-                                    <option value="" disabled selected>No hay empleados disponibles
-                                    </option>
+            <div class="grid gap-y-10" [ngClass]="{'grid-cols-1': !boolItinerario,'grid-cols-2':boolItinerario}">
+                <div class=" col-span-1 grid grid-cols-2 flex-col gap-y-3" [ngClass]="{'mx-auto': !boolItinerario}">
+                    <div class="col-span-2">
+                        <div class="grid grid-cols-2 flex flex-col rounded-md">
+                            <div class="mx-auto col-span-1 flex flex-col gap-y-2" [ngClass]="{'w-4/5 mr-0': boolItinerario,'p-4': !boolItinerario}">
+                                <div class="flex flex-col">
+                                    <label class="text-xs font-semibold">AÑO</label>
+                                    <input type="number" (input)="ValidarAnio()" class="rounded-md text-xs text-gray-900" autocomplete="off" min="2000" minlength="1" maxlength="4"
+                                        placeholder='{{anioActual}}' name="planificacion.anio" [(ngModel)]="planificacion.anio"
+                                        [ngClass]="{'border-l-8 border-green-500':validateAnio}"/>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-xs font-semibold">MES</label>
+                                    <input type="number" class="rounded-md text-xs text-gray-900" minlength="2" maxlength="2" autocomplete="off"
+                                        placeholder="{{mesActual}}" [pattern]="patronNumero" name="mes" [(ngModel)]="planificacion.mes"
+                                        (input)="ValidarMes()" [ngClass]="{'border-l-8 border-green-500':validateMes}">
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-xs font-semibold">COMODÍN</label>
+                                    <select class="rounded-md text-xs text-gray-900" [(ngModel)]="comodin" (ngModelChange)="AgregarComodin()" name="comodin"
+                                        required>
+                                        <ng-container *ngIf="listaEmpleados?.length === 0">
+                                            <option value="" disabled selected>No hay empleados disponibles
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="listaEmpleados?.length > 0">
+                                            <option value="" disabled selected>Elige un comodín</option>
+                                        </ng-container>
+                                        <ng-container *ngFor="let empleado of listaEmpleados">
+                                            <option class="text-gray-900" [value]="empleado.rut">{{empleado.nombre_paterno}}
+                                                {{empleado.apellido_paterno}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                                <div class="flex flex-col">
+                                    <label class="text-xs font-semibold">SELECCIONE (MÁX 5)</label>
+                                    <select class="text-gray-900 text-xs rounded-md" [(ngModel)]="ngEmpleado" (ngModelChange)="AgregarEmpleado()"
+                                        name="empleado">
+                                        <ng-container *ngIf="listaEmpleados?.length === 0">
+                                            <option value="" disabled selected>No hay empleados disponibles
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="listaEmpleados?.length > 0">
+                                            <option value="" disabled selected>Escoge un empleado</option>
+                                        </ng-container>
+                                        <ng-container *ngFor="let empleado of listaEmpleados">
+                                            <option *ngIf="empleado.mostrar" [value]="empleado.rut">{{empleado.nombre_paterno}}
+                                                {{empleado.apellido_paterno}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                            </div>
+                        
+                            <div class="mx-auto col-span-1 flex justifify-center flex-col gap-y-2" [ngClass]="{'w-3/5': boolItinerario,'p-4': !boolItinerario}">
+                                <div class="flex flex-col col-span-1">
+                                    <label class="font-semibold text-xs ">Turno 1</label>
+                                    <input type="text" class="rounded-md text-xs text-gray-900" name="turno1" [(ngModel)]="planificacion.turnos.turno1" required>
+                                </div>
+                                <div class="flex flex-col col-span-1">
+                                    <label class="font-semibold text-xs ">Turno 2</label>
+                                    <input type="text" class="rounded-md text-xs text-gray-900" name="turno2" [(ngModel)]="planificacion.turnos.turno2" required>
+                                </div>
+                                <div class="flex flex-col col-span-1">
+                                    <label class="font-semibold text-xs ">Turno 3</label>
+                                    <input type="text" class="rounded-md text-xs text-gray-900" name="turno3" [(ngModel)]="planificacion.turnos.turno3" required>
+                                </div>
+                                <div class="flex flex-col col-span-1 mt-3.5">
+                                    <button (click)="FormularioItinerario()" class="p-1.5 bg-blue-600 hover:bg-blue-800 w-full rounded-md">
+                                        ITINERARIO
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-span-2 grid grid-cols-2 flex justify-center gap-y-2 pt-2" [ngClass]="{'p-4 gap-x-8':!boolItinerario}">
+                                <ng-container *ngFor="let empleado of empleadoSeleccionado">
+                                    <div class="mx-auto col-span-1 bg-white flex justify-between border border-black" [ngClass]="{'w-4/5': boolItinerario, 'w-full': !boolItinerario}">
+                                        <label class="text-gray-900 text-xs font-semibold p-2"> {{empleado.nombre_paterno}}
+                                            {{empleado.apellido_paterno}}</label>
+                                        <button type="button" (click)="EliminarEmpleado(empleado)" class="bg-red-500 text-xs px-1">
+                                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </ng-container>
-                                <ng-container *ngIf="listaEmpleados?.length > 0">
-                                    <option value="" disabled selected>Escoge un empleado</option>
-                                </ng-container>
-                                <ng-container *ngFor="let empleado of listaEmpleados">
-                                    <option class="text-gray-900" [value]="empleado.rut">{{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</option>
-                                </ng-container>
-                            </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex justifify-center text-center mt-5">
-                        <button (click)="FormularioItinerario()" class="p-3 mx-auto bg-blue-600 hover:bg-blue-800">
-                            Encuentro de Aviones
-                        </button>
+
                     </div>
                 </div>
 
-                
-                <div class="mx-auto col-span-1 flex flex-col justify-center mb-auto gap-y-3 ">
-                    <div class="flex flex-col">
-                        <label>SELECCIONE LOS EMPLEADOS (MÁX 5)</label>
-                        <select class="text-gray-900 rounded-md" [(ngModel)]="ngEmpleado" (ngModelChange)="AgregarEmpleado()" name="empleado">
-                            <ng-container *ngIf="listaEmpleados?.length === 0">
-                                <option value="" disabled selected>No hay empleados disponibles
-                                </option>
-                            </ng-container>
-                            <ng-container *ngIf="listaEmpleados?.length > 0">
-                                <option value="" disabled selected>Escoge un empleado</option>
-                            </ng-container>
-                            <ng-container *ngFor="let empleado of listaEmpleados">
-                                <option *ngIf="empleado.mostrar" [value]="empleado.rut">{{empleado.nombre_paterno}}
-                                    {{empleado.apellido_paterno}}</option>
-                            </ng-container>
-                        </select>
-                
-                        <div class="flex flex-col justify-center gap-y-2 mt-2">
-                            <ng-container *ngFor="let empleado of empleadoSeleccionado">
-                                <div class="bg-white flex justify-between mx-1 border border-black">
-                                    <label class="text-gray-900 text-sm font-medium p-2"> {{empleado.nombre_paterno}} {{empleado.apellido_paterno}}</label>
-                                    <button type="button" (click)="EliminarEmpleado(empleado)" class="p-1 m-1 bg-red-500 ">
-                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
+                <ng-container *ngIf="boolItinerario">
+                    <div class=" col-span-1 grid grid-cols-2 flex flex-col justify-center gap-y-3">
+                        <div class="mx-auto flex flex-col gap-y-2 col-span-1" [ngClass]="{'ml-0':boolItinerario}">
+                            <div class="flex flex-col">
+                                <label class="text-xs font-semibold">Día</label>
+                                <input class="rounded-md text-xs font-semibold text-gray-900" type="text" minlength="1" maxlength="2" id="dia" name="dia"
+                                    [(ngModel)]="nuevoEncuentro.dia" autocomplete="off">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-xs font-semibold">Empleados</label>
+                                <input type="text" minlength="1" maxlength="1" [(ngModel)]="nuevoEncuentro.aviones" #aviones="ngModel"
+                                    name="aviones" id="aviones" class="text-xs font-semibold text-gray-900 rounded-md" autocomplete="off">
+                            </div>
+                            <div class="flex flex-col">
+                                <label class="text-xs font-semibold ">Turno</label>
+                                <select class="text-xs font-bold text-gray-900 rounded-md" [(ngModel)]="nuevoEncuentro.turno" name="turno">
+                                    <option value="1">TURNO 1</option>
+                                    <option value="2">TURNO 2</option>
+                                    <option value="3">TURNO 3</option>
+                                </select>
+                            </div>
+                            <div class="flex justify-center mt-3.5">
+                                <button (click)="agregarEncuentro()" class="p-1.5 bg-blue-600 hover:bg-blue-800 w-full rounded-md">
+                                    AGREGAR
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-span-1 flex flex-col">
+                            <h1 class="flex flex-col gap-y-3 text-center pb-6 font-bold text-lg tracking-normal">ITINERARIOS</h1>
+                            <ng-container *ngFor="let itinerario of planificacion.itinerario; let i = index">
+                                <div class="flex justify-center gap-x-2 bg-gray-900">
+                                    <div class="flex gap-x-1">
+                                        <div class="text-xs font-medium ">DÍA: </div>
+                                        <label class="text-xs font-medium w-3 text-white " >{{itinerario.dia}}</label>
+                                    </div>
+                                    <div class="flex gap-x-1">
+                                        <div class="text-xs font-medium">EMPLEADO: </div>
+                                        <label class="text-xs font-medium w-3 text-white">{{itinerario.aviones}}</label>
+                                    </div>
+                                    <div class="flex gap-x-1">
+                                        <div class="text-xs font-medium">TURNO: </div>
+                                        <label class="text-xs font-medium w-3 text-white">{{itinerario.turno}}</label>
+                                    </div>
+                                    <div class="flex">
+                                        <button type="button" class="rounded-md" (click)="eliminarItinerario(itinerario.id)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="w-4 h-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                            </svg>
+                                        </button>
+                                    </div>
                                 </div>
                             </ng-container>
                         </div>
                     </div>
-                </div>
-                <ng-container *ngIf="boolItinerario">
-                    <div class="col-span-1 flex flex-col gay-3">
-                        <div class="flex flex-col">
-                            <label>Ingrese el día del encuentro</label>
-                            <input class="rounded-md text-gray-900" type="text" minlength="1" maxlength="2" id="dia" name="dia"
-                                [(ngModel)]="nuevoEncuentro.dia" autocomplete="off">
-                        </div>
-                        <div class="flex flex-col">
-                            <label>Empleados que se necesitan</label>
-                            <input type="text" minlength="1" maxlength="1" [(ngModel)]="nuevoEncuentro.aviones" #aviones="ngModel"
-                                name="aviones" id="aviones" class="text-gray-900 rounded-md" autocomplete="off">
-                        </div>
-                        <div class="flex flex-col">
-                            <label>Seleccione el turno donde ocurre el encuentro</label>
-                            <select class="text-black" [(ngModel)]="nuevoEncuentro.turno" name="turno">
-                                <option value="1">TURNO 1</option>
-                                <option value="2">TURNO 2</option>
-                                <option value="3">TURNO 3</option>
-                            </select>
-                        </div>
-                    </div>
                 </ng-container>
-                <!--
-                <div>
-                    <span class="text-white" for="dia">Seleccione el día del encuentro de aviones</span>
-                    <input type="number" min="1" max="31" id="dia" name="dia" [(ngModel)]="nuevoEncuentro.dia"
-                        placeholder="25" class="text-black mt-1 block w-full rounded-md">
-                </div>
-                
-                <div>
-                    <span class="text-white">Empleados que se necesita para ese turno</span>
-                    <input type="number" placeholder="2" [(ngModel)]="nuevoEncuentro.aviones" #aviones="ngModel"
-                        name="aviones" id="aviones" class="text-black mt-1 block w-full disabled:bg-slate-100 rounded-md">
-                </div>
-                
-                <span class="text-white">Seleccione el turno donde hay encuentro</span>
-                <select class="text-black" [(ngModel)]="nuevoEncuentro.turno" name="turno">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-
-                </select>
-
-                <button (click)="agregarEncuentro()"  class="bg-blue-500" >
-                    Agregar Día de encuentro
-                </button>
-
-                <div class="mx-auto col-span-1 flex flex-col justify-center">
-                    <h1 class="font-mono text-lg tracking-normal">Itinerarios registrados</h1>
-                    <ng-container *ngFor="let itinerario of planificacion.itinerario; let i = index">
-                        <div class="flex justify-between gap-y-10">
-                            <div class="flex justify-between gap-x-1">
-                                <div class="text-sm ">Día: </div>
-                                <input class="text-sm w-3 text-gray-600 " [(ngModel)]="itinerario.dia" name="itinerario.dia_{{i}}">
-                            </div>
-                            <div class="flex justify-between gap-x-1">
-                                <div class="text-sm">Cantidad: </div>
-                                <input class="text-sm w-3 text-gray-600" [(ngModel)]="itinerario.aviones" name="itinerario.aviones_{{i}}">
-                            </div>
-                            <div class="flex justify-between gap-x-1">
-                                <div class="text-sm">Turno: </div>
-                                <input class="text-sm w-3 text-gray-600" [(ngModel)]="itinerario.turno" name="itinerario.turno_{{i}}">
-                            </div>
-                            <button type="button" class="rounded-md" (click)="eliminarItinerario(itinerario.id)">
-                                <img src="assets/images/delete.png" alt="Logo Argos" width="20" height="20">
-                            </button>
-                        </div>
-                    </ng-container>
-                </div>
-                -->
             </div>
-            <div class="flex justify-center p-10">
-                <button type="submit" (click)="GenerarPlanificacion()" class="bg-red-500">
-                    Generar Planificación
+            <div class="flex justify-center p-10 ">
+                <button type="submit" (click)="GenerarPlanificacion()" 
+                class="font-bold rounded-lg dark:focus:ring-gray-600 hover:ease-in-out dark:bg-slate-900 border dark:border-gray-900 dark:text-white shadow-lg shadow-cyan-500/50 p-5 ">
+                GENERAR PLANIFICACIÓN
                 </button>
             </div>
         </form>
     </div>
 </div>
 <ng-container *ngIf="efectoCarga">
-    <div aria-label="Cargando..." role="status">
-        <svg class="h-6 w-6 animate-spin" viewBox="3 3 18 18">
-            <path class="fill-gray-200"
-                d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z">
-            </path>
-            <path class="fill-gray-800"
-                d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z">
-            </path>
-        </svg>
+    <div class="fixed inset-0 bg-gray-800 bg-opacity-70"></div>
+</ng-container>
+
+<ng-container *ngIf="efectoCarga">
+    <div class="fixed top-0 left-0 flex items-center justifify-center w-full h-full">
+        <div class="relative w-full h-full max-w-lg  md:h-auto mx-auto">
+            <div class="py-10 flex flex-col justifify-center bg-gray-900 rounded-lg">
+                <div class="mx-auto" aria-label="Loading..." role="status">
+                    <svg class="h-2/5 w-2/5 mx-auto animate-spin" viewBox="3 3 18 18">
+                        <path class="fill-gray-200"
+                            d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z">
+                        </path>
+                        <path class="fill-gray-800"
+                            d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="p-10 text-3xl text-center text-white font-medium">
+                    <span>CARGANDO PLANIFICACIONES</span>
+                </div>
+            </div>
+        </div>
     </div>
-    <h1>Cargando...</h1>
 </ng-container>

@@ -45,11 +45,15 @@ export class AgregarActualizacionComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.planificacion_id)
+
         this.actualizacionService.MostrarFormulario(this.planificacion_id).subscribe(
             response =>{
                 this.ArrayTipo = response.data.actualizacion
                 this.ArrayEmpleadoSolicitante = response.data.solicitante
                 this.ArrayEmpleadoReemplazante = response.data.empleados
+                console.log(this.ArrayTipo)
+
 
             },  
             error =>{

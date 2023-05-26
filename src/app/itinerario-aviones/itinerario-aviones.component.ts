@@ -3,7 +3,7 @@ import { HorarioService } from '../services/horario.service';
 import { AllempleadosService } from '../services/allempleados.service'
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Empleado } from '../empleados';
+import { Empleado, ListaEmpleados } from '../empleados';
 import { GenerarPlanificacion, Turno, Turno_Choque } from '../generarPlanificacion';
 import { finalize } from 'rxjs/operators';
 
@@ -49,7 +49,7 @@ export class ItinerarioAvionesComponent implements OnInit {
     public diaActual = new Date().getDay()
 
     public efectoCarga: boolean = false;
-    public boolItinerario: boolean = true;
+    public boolItinerario: boolean = false;
 
     public patronNumero = /^(1[0-2]|[1-9])$/;
     

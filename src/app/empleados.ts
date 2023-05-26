@@ -42,7 +42,8 @@ export interface Empleado {
     rut: string,
     imagen?: any,
     credencial?: Credencial[],
-    mostrar?: Boolean
+    mostrar?: Boolean,
+    vence?: Boolean
 }
 
 export interface EmpleadoCredencial{
@@ -53,7 +54,6 @@ export interface EmpleadoCredencial{
 
 export interface Credencial{
     fecha_vencimiento: any,
-    fecha_emision: any,
     tipo: string,
     numero: number,
     rut: string,

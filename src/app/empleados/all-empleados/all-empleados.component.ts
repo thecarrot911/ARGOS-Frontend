@@ -17,7 +17,7 @@ export class AllEmpleadosComponent implements OnInit {
     CurrentDate = new Date();
     today_is_chile = this.CurrentDate.toLocaleDateString('es-cl');
 
-    public listaCredenciales: Empleado[];
+    public listaCredenciales: Empleado[] = [];
     public listaPlanificacion: DatoPlanificacion[];
 
     public credencialActual: Empleado;
@@ -41,20 +41,28 @@ export class AllEmpleadosComponent implements OnInit {
         this.empleadoService.MostrarPerfil().subscribe(
             response =>{
                 this.listaCredenciales = response.data.credencial || [];
+                this.BuscandoVencimiento();
                 this.listaPlanificacion = response.data.planificacion || [];
-                if(this.listaCredenciales.length != 0){
-                    this.credencialActual = response.data.credencial[0];
-                    this.SeleccionEmpleado(this.credencialActual)
-                }else{
-                    console.log(this.listaCredenciales);
-                    console.log(this.listaPlanificacion);
-                    console.log(this.credencialActual);
-                }
+                this.credencialActual = response.data.credencial[0];
+                this.SeleccionEmpleado(this.credencialActual)
 
             },error =>{
                 console.error(error)
             }
         )
+    }
+
+    BuscandoVencimiento(){
+        for (const empleado of this.listaCredenciales){
+            if(empleado.credencial != undefined){
+                for(const credencial of empleado.credencial){
+                    if(credencial.vence == true){ 
+                        empleado.vence = true;
+                    }
+                    else empleado.vence = false;
+                }
+            }
+        };
     }
 
     SeleccionEmpleado(empleado: Empleado){
@@ -65,6 +73,7 @@ export class AllEmpleadosComponent implements OnInit {
             if(emp.rut === empleado.rut){
                 emp.mostrar = true;
                 this.credencialActual = empleado
+                console.log(this.credencialActual)
             }else{
                 emp.mostrar = false; 
             }

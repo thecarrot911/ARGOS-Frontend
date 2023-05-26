@@ -82,8 +82,6 @@ export class RegistrarEmpleadoComponent implements OnInit {
         this.empleado.rut = rut;
         }
     };
-    
-    
 
     onFileSelected(event: any){
         this.empleado.imagen = event.target.files[0];
@@ -101,43 +99,81 @@ export class RegistrarEmpleadoComponent implements OnInit {
         empleado.apellido_materno = empleado.apellido_materno.charAt(0).toUpperCase() + empleado.apellido_materno.slice(1).toLowerCase();
     }
 
+    ValidacionPrimerNombre(){
+        if(this.empleado.nombre_paterno == ''){
+            throw new TypeError("No ha ingresado el Primer nombre");
+        }
+    }
+    ValidacionSegundoNombre(){
+        if (this.empleado.nombre_materno == '') {
+            throw new TypeError("No ha ingresado el Segundo nombre");
+        }
+    }
+    ValidacionPrimerApellido(){
+        if (this.empleado.apellido_paterno == '') {
+            throw new TypeError("No ha ingresado el Primer apellido");
+        }
+    }
+    ValidacionSegundoApellido(){
+        if (this.empleado.apellido_materno == '') {
+            throw new TypeError("No ha ingresado el Segundo apellido");
+        }
+    }
+    ValidacionRut(){
+        if(this.empleado.rut == '' || this.boolInputRut){
+            throw new TypeError("No ha ingresado un rut válido");
+        }
+    }
+
+
     registrarEmpleado() {
-        this.ConvertirMayuscula(this.empleado);
-
-        this.empleadoService.RegistrarEmpleados(this.empleado).subscribe(
-        response => {
-
-            if(response.error){
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Ha ocurrido un error',
-                    text: response.msg
-                })
-            }else{
-                Swal.fire({
-                    icon: 'success',
-                    title: response.msg,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-            this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible;
-            this.recargaPaginaEmpleado.emit();
-        },
-        error => {
-            console.error(error);
+        try{
+            this.ValidacionPrimerNombre();
+            this.ValidacionSegundoNombre();
+            this.ValidacionPrimerApellido();
+            this.ValidacionSegundoApellido();
+            this.ValidacionRut();
+            this.ConvertirMayuscula(this.empleado);
+            this.empleadoService.RegistrarEmpleados(this.empleado)
+            .subscribe(
+                response => {
+                    if(response.error){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Ha ocurrido un error',
+                            text: response.msg
+                        })
+                    }else{
+                        Swal.fire({
+                            icon: 'success',
+                            title: response.msg,
+                            showConfirmButton: false,
+                            timer: 1500
+                        })
+                    }
+                    this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible;
+                    this.recargaPaginaEmpleado.emit();
+                },
+                error => {
+                    console.error(error);
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Ha ocurrido un error',
+                            text: error.error.msg
+                        })
+                    }
+                )
+        }catch(error){
+            console.error(error)
             Swal.fire({
                 icon: 'error',
                 title: 'Ha ocurrido un error',
-                text: error.error.msg
-                })
-            }
-        )
-        
+                text: error.message
+            })
+        }
     }
     
     cerrar(): void{
         this.empleadoService.modalAddEmpleadoVisible = !this.empleadoService.modalAddEmpleadoVisible
     }
-
 }

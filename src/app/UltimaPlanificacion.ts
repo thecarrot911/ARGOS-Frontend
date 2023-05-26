@@ -20,7 +20,10 @@ export interface Estadistica{
       libre: number,
       turno_1: number,
       turno_2: number,
-      turno_3: number
+      turno_3: number,
+      horario1: number,
+      horario2: number,
+      horario3: number
 }
 
 export interface UltimaPlanificacion {

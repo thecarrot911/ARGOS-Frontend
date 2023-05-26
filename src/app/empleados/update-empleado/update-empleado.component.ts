@@ -57,19 +57,26 @@ export class UpdateEmpleadoComponent implements OnInit {
         }
     }
 
-    editPrimerNombre(){
-        this.boolPrimerNombre = !this.boolPrimerNombre;
-    }
 
-    editSegundoNombre(){
-        this.boolSegundoNombre = !this.boolSegundoNombre;
+    ValidacionPrimerNombre() {
+        if (this.empleado.nombre_paterno == '') {
+            throw new TypeError("No ha ingresado el Primer nombre");
+        }
     }
-
-    editPrimerApellido(){
-        this.boolPrimerApellido = !this.boolPrimerApellido
+    ValidacionSegundoNombre() {
+        if (this.empleado.nombre_materno == '') {
+            throw new TypeError("No ha ingresado el Segundo nombre");
+        }
     }
-    editSegundoApellido(){
-        this.boolSegundoApellido = !this.boolSegundoApellido
+    ValidacionPrimerApellido() {
+        if (this.empleado.apellido_paterno == '') {
+            throw new TypeError("No ha ingresado el Primer apellido");
+        }
+    }
+    ValidacionSegundoApellido() {
+        if (this.empleado.apellido_materno == '') {
+            throw new TypeError("No ha ingresado el Segundo apellido");
+        }
     }
 
     ConvertirMayuscula(empleado: Empleado) {
@@ -80,34 +87,46 @@ export class UpdateEmpleadoComponent implements OnInit {
     }
 
     modificar(): void {
-        this.ConvertirMayuscula(this.empleado);
+        try{
+            this.ValidacionPrimerNombre();
+            this.ValidacionSegundoNombre();
+            this.ValidacionPrimerApellido();
+            this.ValidacionSegundoApellido();
+            this.ConvertirMayuscula(this.empleado);
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Estas modificando los datos del empleado",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, quiero modificarlo!'
+            }).then((result)=>{
+                if(result.isConfirmed){
+                    this.empleadoService.ModificarEmpleado(this.empleado, this.imageURL).subscribe(
+                        response => {
+                            Swal.fire(
+                            '¡Modificado!',
+                            response.msg,
+                            'success'
+                            )
+                            this.recargaEmpleadoPagina.emit();
+                            this.empleadoService.modalUpdateEmpleadoVisible = !this.empleadoService.modalUpdateEmpleadoVisible
+                        }, error => {
+                            console.error(error)
+                        }
+                    )
+                }
+            })
+        }catch(error){
+            console.error(error),
+            Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error',
+                text: error.message
+            })
+        }
 
-        Swal.fire({
-            title: '¿Estás seguro?',
-            text: "Estas modificando los datos del empleado",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, quiero modificarlo!'
-        }).then((result)=>{
-
-            if(result.isConfirmed){
-                this.empleadoService.ModificarEmpleado(this.empleado, this.imageURL).subscribe(
-                    response => {
-                        Swal.fire(
-                        '¡Modificado!',
-                        response.msg,
-                        'success'
-                        )
-                        this.recargaEmpleadoPagina.emit();
-                        this.empleadoService.modalUpdateEmpleadoVisible = !this.empleadoService.modalUpdateEmpleadoVisible
-                    }, error => {
-                        console.error(error)
-                    }
-                )
-            }
-        })
     }
 
     cerrar(): void{

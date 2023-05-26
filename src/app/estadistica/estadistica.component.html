@@ -14,12 +14,33 @@
                                     <div class="flex justify-center uppercase font-bold">
                                           {{element.mes}}
                                     </div>
+                                    <div class="flex justify-between">
+                                          <div>{{element.horario1}}</div> 
+                                          <div>{{element.turno_1}}</div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                          <div>{{element.horario2}}</div>
+                                          <div>{{element.turno_2}}</div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                          <div>{{element.horario3}}</div>
+                                          <div>{{element.turno_3}}</div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                          <div>Feriado trabajados</div>
+                                          <div>{{element.feriado}}</div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                          <div>Días Libre</div>
+                                          <div>{{element.turno_1}}</div>
+                                    </div>
+                                    <!--
                                     <div class="grid grid-cols-2">
                                           <div class="col-span-1 ">
-                                                <p>Mañana: </p>
-                                                <p>Tarde: </p>
-                                                <p>Noche: </p>
-                                                <p>Feriado trabajados: </p>
+                                                <p>{{element.horario1}} </p>
+                                                <p>{{element.horario2}} </p>
+                                                <p>{{element.horario3}} </p>
+                                                <p>Feriado trabajados </p>
                                                 <p>Dias libres: </p>
                                           </div>
                                           <div class="col-span-1 ">
@@ -30,6 +51,7 @@
                                                 <p class="text-end">{{element.libre}}</p>
                                           </div>
                                     </div>
+                                    -->
                               </div>
                         </ng-container>
                   </div>

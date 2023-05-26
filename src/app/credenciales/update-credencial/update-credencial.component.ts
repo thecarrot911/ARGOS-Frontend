@@ -20,7 +20,6 @@ export class UpdateCredencialComponent implements OnInit {
     @Output() recargaCredencial = new EventEmitter()
 
     public credencial: Credencial = {
-        fecha_emision: '',
         fecha_vencimiento: '',
         tipo: '',
         numero: 0,
@@ -28,6 +27,10 @@ export class UpdateCredencialComponent implements OnInit {
         credencial_id: 0
     }
 
+    fechaAxuiliar: any;
+    diaAux: any;
+    mesAux: any;
+    anioAux: any;
 
     constructor(
         public empleadoService: AllempleadosService
@@ -36,8 +39,13 @@ export class UpdateCredencialComponent implements OnInit {
     @Input() credencialEmpleado: Credencial;
 
     ngOnInit(): void {
-        this.credencial.fecha_emision = this.renovarCredencial.fecha_emision;
-        this.credencial.fecha_vencimiento = this.renovarCredencial.fecha_vencimiento;
+        this.fechaAxuiliar = this.renovarCredencial.fecha_vencimiento.split("-");
+        this.diaAux = this.fechaAxuiliar[0]
+        this.mesAux = this.fechaAxuiliar[1]
+        this.anioAux = this.fechaAxuiliar[2]
+        this.credencial.fecha_vencimiento = this.anioAux + "-" + this.mesAux + "-" + this.diaAux;
+
+        //this.credencial.fecha_vencimiento = this.renovarCredencial.fecha_vencimiento;
         this.credencial.tipo = this.renovarCredencial.tipo;
         this.credencial.numero = this.renovarCredencial.numero;
         this.credencial.credencial_id = this.renovarCredencial.credencial_id

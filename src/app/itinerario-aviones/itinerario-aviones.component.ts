@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Empleado, ListaEmpleados } from '../empleados';
 import { GenerarPlanificacion, Turno, Turno_Choque } from '../generarPlanificacion';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-itinerario-aviones',
@@ -163,8 +162,11 @@ export class ItinerarioAvionesComponent implements OnInit {
 
     GenerarPlanificacion(){
         if(this.validateAnio && this.validateMes && this.validateComodin && this.ValidarEmpleado){
-            this.efectoCarga = true;
-            this.horarioService.generarHorario(this.planificacion)
+            for(let i = 0; i < this.planificacion.itinerario.length; i++){
+                this.planificacion.itinerario[i].aviones = this.planificacion.itinerario[i].aviones - 1
+            }
+            //this.efectoCarga = true;
+            /*this.horarioService.generarHorario(this.planificacion)
             .pipe(
                 finalize(()=>{
                     this.efectoCarga = false;
@@ -177,7 +179,7 @@ export class ItinerarioAvionesComponent implements OnInit {
                 error => {
                     console.error(error)
                 }
-            );
+            );*/
         }else{
             Swal.fire({
                 icon: 'error',

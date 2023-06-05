@@ -41,6 +41,7 @@ export class AllSchedulesComponent implements OnInit {
     public hayPlanificacion: boolean = false;
 
     public efectoCarga: boolean = false;
+    public efectoBorrar: boolean = false;
 
     
     hoyEnChile = new Date().toLocaleDateString('es-cl');
@@ -55,20 +56,24 @@ export class AllSchedulesComponent implements OnInit {
     }
 
     BorrarPlanificacion(planificacion: Planificacion): void{
-
+        this.efectoBorrar = true;
         this.AllSchedulesService.BorrarPlanificacion(planificacion)
         .pipe(
             finalize(()=>{
-
+                this.efectoBorrar = false;
             })
         ).subscribe(
             response =>{
+                Swal.fire(
+                    'Eliminado!',
+                    response.msg,
+                    'success'
+                )
                 this.ngOnInit();
             },error =>{
                 console.error(error)
             }
         )
-        
     };
 
     EliminarActualizacion(id: number, tipo: string): void{

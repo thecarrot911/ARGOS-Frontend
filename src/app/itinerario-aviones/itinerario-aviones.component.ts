@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Empleado, ListaEmpleados } from '../empleados';
 import { GenerarPlanificacion, Turno, Turno_Choque } from '../generarPlanificacion';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-itinerario-aviones',
@@ -35,6 +36,8 @@ export class ItinerarioAvionesComponent implements OnInit {
 
     public ngEmpleado: string;
     public comodin: string = "";
+
+    public listaItinerario: Turno_Choque[] = [];
 
     nuevoEncuentro: Turno_Choque = {
         dia: null,
@@ -161,12 +164,15 @@ export class ItinerarioAvionesComponent implements OnInit {
     }
 
     GenerarPlanificacion(){
+        this.planificacion.itinerario = []
         if(this.validateAnio && this.validateMes && this.validateComodin && this.ValidarEmpleado){
-            for(let i = 0; i < this.planificacion.itinerario.length; i++){
-                this.planificacion.itinerario[i].aviones = this.planificacion.itinerario[i].aviones - 1
+            for(let i = 0; i < this.listaItinerario.length; i++){
+                let itinerario = {...this.listaItinerario[i]}
+                itinerario.aviones = itinerario.aviones - 1
+                this.planificacion.itinerario.push(itinerario)
             }
-            //this.efectoCarga = true;
-            /*this.horarioService.generarHorario(this.planificacion)
+            this.efectoCarga = true;
+            this.horarioService.generarHorario(this.planificacion)
             .pipe(
                 finalize(()=>{
                     this.efectoCarga = false;
@@ -179,7 +185,7 @@ export class ItinerarioAvionesComponent implements OnInit {
                 error => {
                     console.error(error)
                 }
-            );*/
+            );
         }else{
             Swal.fire({
                 icon: 'error',
@@ -192,11 +198,11 @@ export class ItinerarioAvionesComponent implements OnInit {
 
     agregarEncuentro() {
         if (this.nuevoEncuentro.dia != null && this.nuevoEncuentro.aviones != null && this.nuevoEncuentro.turno != null) {
-            this.planificacion.itinerario.push({
+            this.listaItinerario.push({
                 dia: this.nuevoEncuentro.dia,
                 aviones: this.nuevoEncuentro.aviones,
                 turno: this.nuevoEncuentro.turno,
-                id: this.planificacion.itinerario.length + 1
+                id: this.listaItinerario.length + 1
             });
 
             this.nuevoEncuentro = {
@@ -209,7 +215,7 @@ export class ItinerarioAvionesComponent implements OnInit {
     }
 
     eliminarItinerario(id: number ){
-        this.planificacion.itinerario = this.planificacion.itinerario.filter( itinerario => itinerario.id != id)
+        this.listaItinerario = this.listaItinerario.filter( itinerario => itinerario.id != id)
     }
 
 }

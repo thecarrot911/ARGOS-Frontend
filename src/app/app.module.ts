@@ -8,7 +8,6 @@ import { NavbarsComponent } from './Navbars/Navbars.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { FooterComponent } from './footer/footer.component';
 import { AgregarActualizacionComponent } from './actualizacion/agregarActualizacion/agregarActualizacion.component';
 import { ItinerarioAvionesComponent } from './itinerario-aviones/itinerario-aviones.component';
 import { AllEmpleadosComponent } from './empleados/all-empleados/all-empleados.component';
@@ -25,7 +24,6 @@ import { AllSchedulesComponent } from './allSchedules/allSchedules.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { RegistrarEmpleadoComponent } from './empleados/registrar-empleado/registrar-empleado.component';
 import { CredencialComponent } from './credenciales/credencial/credencial.component';
-import { CredencialDirective } from './directives/credencial.directive';
 import { AddCredencialComponent } from './credenciales/add-credencial/add-credencial.component';
 import { UpdateCredencialComponent } from './credenciales/update-credencial/update-credencial.component';
 import { UpdateEmpleadoComponent } from './empleados/update-empleado/update-empleado.component';
@@ -37,7 +35,6 @@ import { ModalItinerarioComponent } from './modal-itinerario/modal-itinerario.co
     AppComponent,
     TopBarComponent,
     NavbarsComponent,
-    FooterComponent,
     AgregarActualizacionComponent,
     ItinerarioAvionesComponent,
     PdfCalendarioComponent,
@@ -45,7 +42,6 @@ import { ModalItinerarioComponent } from './modal-itinerario/modal-itinerario.co
     AllEmpleadosComponent,
     RegistrarEmpleadoComponent,
     CredencialComponent,
-    CredencialDirective,
     AddCredencialComponent,
     UpdateCredencialComponent,
     UpdateEmpleadoComponent,

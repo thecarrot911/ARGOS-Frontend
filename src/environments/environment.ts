@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiDeploy: 'http://152.173.155.173:11000/',
+  apiDeploy: 'sistema-de-gestion-de-turno-i2ppvvyev-thecarrot911-s-team.vercel.app/',
   apiLocal: 'http://152.173.155.173:11000/'
 
 };

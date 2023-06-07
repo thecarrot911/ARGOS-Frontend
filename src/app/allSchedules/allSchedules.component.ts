@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarioAnual} from '../calendario';
 import { Anios, PlanificacionAnios } from '../calendarioanual';
 import { AllSchedulesService } from '../services/allSchedules.service';
-import { Planificacion, Dia } from '../UltimaPlanificacion';
+import { Planificacion, Dia, Horario } from '../UltimaPlanificacion';
 import { finalize } from 'rxjs/operators';
 import { HorarioService } from '../services/horario.service';
 import { ActualizacionService } from '../services/actualizacion.service';
@@ -36,6 +36,7 @@ export class AllSchedulesComponent implements OnInit {
     ContadorActualizacion: number = 0;
 
     itinerarioActual: Dia;
+    horarioActual: Horario;
 
     public existePlanificacion: boolean = false;
     public hayPlanificacion: boolean = false;
@@ -170,5 +171,6 @@ export class AllSchedulesComponent implements OnInit {
     MostrarItinerario(itinerario: Dia):void{
         this.horarioService.modalItinerarioPlanificacion = !this.horarioService.modalItinerarioPlanificacion;
         this.itinerarioActual = itinerario;
+        this.horarioActual = this.planificacionActual.horario
     }
 }

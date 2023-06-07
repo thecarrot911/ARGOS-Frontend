@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Dia } from '../UltimaPlanificacion';
+import { Dia, Horario } from '../UltimaPlanificacion';
 import { HorarioService } from '../services/horario.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { HorarioService } from '../services/horario.service';
 export class ModalItinerarioComponent implements OnInit {
 
     @Input() itinerario: Dia;
+    @Input() horario: Horario;
 
     constructor(
         public horarioService: HorarioService

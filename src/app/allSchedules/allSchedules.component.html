@@ -365,9 +365,11 @@
     </app-itinerario-aviones>
 </ng-container>
 
+<!-- MODAL SHOW ITINERAARIO-->
 <ng-container *ngIf="horarioService.modalItinerarioPlanificacion">
     <app-modal-itinerario
     [itinerario]="itinerarioActual"
+    [horario]="horarioActual"
     >
     </app-modal-itinerario>
 </ng-container>

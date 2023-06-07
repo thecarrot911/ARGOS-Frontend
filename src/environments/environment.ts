@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiDeploy: 'http://152.173.155.173:11000/',
-  apiLocal: 'http://localhost:10975/'
+  apiLocal: 'http://152.173.155.173:11000/'
 
 };
 

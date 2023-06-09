@@ -16,8 +16,6 @@ export class CredencialComponent implements OnInit {
     @Input() rutEmpleado: string;
     
     // Variables emitidas al componente [all-empleados]
-    //@Output() reload  = new EventEmitter();
-    //@Output() renovar = new EventEmitter();
     @Output() recargarCredencial = new EventEmitter();
 
     public rutEmpleadoAdd:  string

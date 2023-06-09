@@ -5,6 +5,7 @@ import { ActualizacionService } from '../../services/actualizacion.service';
 import { Tipo, Actualizacion } from '../../actualizacion';
 import { Planificacion } from 'src/app/UltimaPlanificacion';
 import { DatePipe } from '@angular/common';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -36,6 +37,13 @@ export class AgregarActualizacionComponent implements OnInit {
 
     FormatoFecha = `${this.anio}-${this.mes}-${this.dia}`;
 
+    public meses: any = {
+        "Enero": '01',"Febrero": '02',"Marzo": '03',"Abril": '04',"Mayo": '05',"Junio": '06',
+        "Julio": '07',"Agosto": '08',"Septiembre": '09',"Octubre": '10',"Noviembre": '11',"Diciembre": '12'
+    };
+
+    fechaMin: string;
+    fechaMax: string;
 
     constructor(
         private horarioService: HorarioService,
@@ -45,7 +53,11 @@ export class AgregarActualizacionComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.planificacion_id)
+        const mes = this.meses[this.diasPlanificacion.mes]
+        const year = new Date().getFullYear();
+        
+        this.fechaMin = `${year}-${mes}-01`
+        this.fechaMax = `${year}-${mes}-${this.UltimoDiaDelMes(mes,year)}`
 
         this.actualizacionService.MostrarFormulario(this.planificacion_id).subscribe(
             response =>{
@@ -53,8 +65,6 @@ export class AgregarActualizacionComponent implements OnInit {
                 this.ArrayEmpleadoSolicitante = response.data.solicitante
                 this.ArrayEmpleadoReemplazante = response.data.empleados
                 console.log(this.ArrayTipo)
-
-
             },  
             error =>{
                 console.error(error)
@@ -72,25 +82,82 @@ export class AgregarActualizacionComponent implements OnInit {
         tipo_id: null,
         reemplazo: null
     }
+    UltimoDiaDelMes(mes:string, year: number): number{
+        return new Date(year, parseInt(mes,10),0).getDate();
+    }
 
     FiltrandoSelect(){
         this.ArrayEmpleadoReemplazante = this.ArrayEmpleadoReemplazante.filter(emp =>  emp.rut != this.actualizacion.rut)
     }
-    
+    ValidarTipoId(){
+        if(this.actualizacion.tipo_id == null){
+            throw new TypeError("No ha seleccionado el tipo de comentario que va crear")
+        }
+    }
+    ValidarDescripcion(){
+        if(this.actualizacion.descripcion == null || this.actualizacion.descripcion == ''){
+            throw new TypeError("No ha ingresado una descripción del comentario")
+        }
+    }
+    ValidarFechaInicio(){
+        if(this.actualizacion.fecha_inicio == null){
+            throw new TypeError("No ha seleccionado una fecha de inicio")
+        }
+    }
+    ValidarFechaTermino(){
+        if(this.actualizacion.fecha_termino == null){
+            throw new TypeError("No ha seleccionado una fecha de termino")
+        }
+    }
+    ValidarReemplazo(){
+        if(this.actualizacion.reemplazo == null){
+            throw new TypeError("No ha seleccionado el empleado que va reemplazar")
+        }
+    }
+    ValidarReemplazoObservacion() {
+        if (this.actualizacion.reemplazo == null) {
+            throw new TypeError("No ha seleccionado el empleado")
+        }
+    }
+
     EnviarActualizacion(): void{
-        
-        this.actualizacion.planificacion_id = this.planificacion_id;
-        
-        this.actualizacionService.RegistrarActualizacion(this.actualizacion).subscribe(
-            response =>{
-                this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
-                this.recargarPagina.emit();
-                console.log(response)
-            }, 
-            error =>{
-                console.log(error)
+        //console.log(this.actualizacion.tipo_id)
+        try{
+            this.ValidarTipoId();
+            this.ValidarDescripcion();
+
+            // Los comentarios que no sean del tipo 4, no requieren de las demas campos.
+            if (this.actualizacion.tipo_id != 4){
+                this.ValidarFechaInicio();
+                this.ValidarFechaTermino();
+                this.ValidarReemplazo();
+            }else{
+                this.ValidarReemplazoObservacion();
             }
-        )
+            this.actualizacion.planificacion_id = this.planificacion_id;
+            this.actualizacionService.RegistrarActualizacion(this.actualizacion).subscribe(
+                response => {
+                    this.horarioService.modalAddActualizacion = !this.horarioService.modalAddActualizacion;
+                    this.recargarPagina.emit();
+                },
+                error => {
+                    console.error(error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ha ocurrido un error',
+                        text: error.message
+                    })
+                }
+            )
+
+        }catch(error){
+            console.error(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'Ha ocurrido un error',
+                text: error.message
+            })
+        }
     }
 
     Cerrar(): void {

@@ -9,7 +9,19 @@
                         </div>
                         <div class="flex flex-col px-20">
                               <div *ngFor="let iti of itinerario.itinerario" class="flex justify-between font-bold">
-                                    <p>FALTA {{iti.falta}} EMPLEADOS PARA EL TURNO {{iti.turno}}</p>
+                                    <ng-container [ngSwitch]="iti.turno">
+                                          <ng-container *ngIf="iti.falta > 1; else faltaUnEmpleado">
+                                                <p *ngSwitchCase="1">Faltan {{iti.falta}} empleados para el turno de las {{horario.turno1}}</p>
+                                                <p *ngSwitchCase="2">Faltan {{iti.falta}} empleados para el turno de las {{horario.turno2}}</p>
+                                                <p *ngSwitchCase="3">Faltan {{iti.falta}} empleados para el turno de las {{horario.turno3}}</p>
+                                          </ng-container>
+                                          <ng-template #faltaUnEmpleado>
+                                                <p *ngSwitchCase="1">Falta {{iti.falta}} empleado para el turno de las {{horario.turno1}}</p>
+                                                <p *ngSwitchCase="2">Falta {{iti.falta}} empleado para el turno de las {{horario.turno2}}</p>
+                                                <p *ngSwitchCase="3">Falta {{iti.falta}} empleado para el turno de las {{horario.turno3}}</p>
+                                          </ng-template>
+                                    </ng-container>
+                                    <!--<p>FALTA {{iti.falta}} EMPLEADOS PARA EL TURNO {{iti.turno}}</p>-->
                               </div>
                         </div>
                         <div class="flex justify-center pb-2">

@@ -4,8 +4,7 @@ import { Credencial, Empleado } from '../../empleados';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { DatoPlanificacion } from '../../UltimaPlanificacion';
-
-
+import { finalize } from 'rxjs/operators';
 
 @Component({
     selector: 'app-all-empleados',
@@ -31,21 +30,28 @@ export class AllEmpleadosComponent implements OnInit {
     // Variable para modificar empleado
     public modificarEmpleado: Empleado;
 
+    // Carga de empleados
+    public cargarEmpleado: boolean;
+
     constructor(
         public empleadoService: AllempleadosService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
-
-        this.empleadoService.MostrarPerfil().subscribe(
+        this.cargarEmpleado = true;
+        this.empleadoService.MostrarPerfil()
+        .pipe(
+            finalize(()=>{
+                this.cargarEmpleado = false
+            })
+        ).subscribe(
             response =>{
                 this.listaCredenciales = response.data.credencial || [];
                 this.BuscandoVencimiento();
                 this.listaPlanificacion = response.data.planificacion || [];
                 this.credencialActual = response.data.credencial[0];
                 this.SeleccionEmpleado(this.credencialActual)
-
             },error =>{
                 console.error(error)
             }
@@ -94,6 +100,7 @@ export class AllEmpleadosComponent implements OnInit {
         this.modificarEmpleado = empleado;
         this.empleadoService.modalUpdateEmpleadoVisible = !this.empleadoService.modalUpdateEmpleadoVisible
     }
+    
     // Borrar empleado
     borrarEmpleado(empleado: Empleado): void {
         Swal.fire({
@@ -134,6 +141,4 @@ export class AllEmpleadosComponent implements OnInit {
         this.credencialEmpleado = credencial;
         this.rutEmpleadoSelecionado = rut
     }
-
-    
 }

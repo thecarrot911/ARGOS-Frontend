@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, Type } from '@angular/core';
 import { Credencial} from '../../empleados';
 import { AllempleadosService } from '../../services/allempleados.service';
 import Swal from 'sweetalert2';
@@ -34,23 +34,29 @@ constructor(
     }
 
     ValidacionTipo(){
-
+        if(this.credencial.tipo == ''){
+            throw new TypeError("No ha seleccionado el tipo de la credencial");
+        }
     }
     ValidacionNumero(){
-
+        if(this.credencial.numero == 0){
+            throw new TypeError("No ha ingresado el número de la credencial");
+        }
     }
     ValidacionFechaVencimiento(){
-
+        if(this.credencial.fecha_vencimiento == ''){
+            throw new TypeError("No ha seleccionado la fecha de vencimiento")
+        }
     }
 
 
     CrearCredencial(){
         this.credencial.rut = this.rut;
         this.credencial.numero = Number(this.numero);
-        this.ValidacionNumero();
-        this.ValidacionTipo();
-        this.ValidacionFechaVencimiento();
         try{
+            this.ValidacionTipo();
+            this.ValidacionNumero();
+            this.ValidacionFechaVencimiento();
             this.empleadoService.RegistrarCredencial(this.credencial).subscribe(
                 response => {
                     if (response.error) {

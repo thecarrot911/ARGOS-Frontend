@@ -17,7 +17,7 @@ export class ModalItinerarioComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        console.log(this.itinerario)
+
     }
 
     prueba():void{}
